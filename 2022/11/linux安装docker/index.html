@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>ssh |  Outsrkem</title>
+      <title>linux安装docker |  Outsrkem</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -52,58 +52,134 @@
       
     <main class="content on">
       <section class="outer">
-  
-  
-  <article class="articles">
+  <article
+  id="post-linux安装docker"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
     
-    
-    <h1 class="page-type-title">ssh</h1>
-    
-    
-  
-  
-  
-  
-  
-  
-  <div class="archives-wrap">
-    <div class="archive-year-wrap">
-      <a href="/archives/2021" class="archive-year">2021</a>
-    </div>
-    <div class="archives">
-      
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/05/Linux-%E9%87%87%E7%94%A8-SSH-CA-%E7%99%BB%E9%99%86%E9%AA%8C%E8%AF%81/index.html" class="archive-article-date">
-  <time datetime="2021-05-23T07:55:52.000Z" itemprop="datePublished">05/23</time>
-</a>
+    <header class="article-header">
        
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2021/05/Linux-%E9%87%87%E7%94%A8-SSH-CA-%E7%99%BB%E9%99%86%E9%AA%8C%E8%AF%81/index.html"
-    >Linux 采用 SSH CA 登陆验证</a> 
-</h2>
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  linux安装docker
+</h1>
  
 
+      
     </header>
-    
-      
+     
+    <div class="article-meta">
+      <a href="/2022/11/linux%E5%AE%89%E8%A3%85docker/index.html" class="article-date">
+  <time datetime="2022-11-18T12:27:22.000Z" itemprop="datePublished">2022-11-18</time>
+</a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/ssh/">ssh</a>
+    <a class="article-category-link" href="/categories/%E6%9C%8D%E5%8A%A1/">服务</a> / <a class="article-category-link" href="/categories/%E6%9C%8D%E5%8A%A1/docker/">docker</a>
   </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">212</span>
+        </span>
+    </span>
 
-    
-    
-  </div>
-</article>
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">1 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
       
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="docker-安装">Docker 安装</h2>
+<h3 id="安装要求的软件包">安装要求的软件包</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install yum-utils device-mapper-persistent-data lvm2 -y</span><br></pre></td></tr></table></figure>
+<h3 id="添加docker-repository，这里改为国内repo">添加Docker repository，这里改为国内repo</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager --add-repo http://mirrors.163.com/.help/CentOS7-Base-163.repo</span><br><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+<h3 id="安装docker">安装docker</h3>
+<ul>
+<li>查询docker版本</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list docker-ce --showduplicates</span><br></pre></td></tr></table></figure>
+<ul>
+<li>安装指定版本</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install docker-ce-18.09.8 -y  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>创建daemon.json配置文件，注意，这里这指定了cgroupdriver=systemd，另外由于国内拉取镜像较慢，最后追加了阿里云镜像加速配置。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mkdir /etc/docker</span><br><span class="line">cat &lt;&lt; EOF &gt; /etc/docker/daemon.json </span><br><span class="line">&#123;</span><br><span class="line">  &quot;exec-opts&quot;: [&quot;native.cgroupdriver=systemd&quot;],</span><br><span class="line">  &quot;log-driver&quot;: &quot;json-file&quot;,</span><br><span class="line">  &quot;log-opts&quot;: &#123;</span><br><span class="line">    &quot;max-size&quot;: &quot;100m&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;storage-driver&quot;: &quot;overlay2&quot;,</span><br><span class="line">  &quot;storage-opts&quot;: [</span><br><span class="line">    &quot;overlay2.override_kernel_check=true&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;registry-mirrors&quot;: [&quot;https://uyah70su.mirror.aliyuncs.com&quot;]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<h3 id="启动docker服务">启动docker服务</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable --now docker</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
       
     </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
+
+    </footer>
   </div>
-  
-  
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2022/11/Hexo%E4%BD%BF%E7%94%A8gulp%E5%8E%8B%E7%BC%A9%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90/index.html" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Hexo使用gulp压缩静态资源</div>
+      </a>
+    
+  </nav>
 
   
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
 </section>
       <footer class="footer">
   <div class="outer">
