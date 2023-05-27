@@ -84,7 +84,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">850</span>
+            <span class="post-count">863</span>
         </span>
     </span>
 
@@ -123,7 +123,7 @@
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install docker-ce-20.10.10 docker-ce-cli-20.10.10</span><br></pre></td></tr></table></figure>
 <ul>
-<li>创建daemon.json配置文件，注意，这里这指定了cgroupdriver=systemd，另外由于国内拉取镜像较慢，最后追加了阿里云镜像加速配置。</li>
+<li>创建daemon.json配置文件，注意，这里这指定了cgroupdriver=systemd，另外由于国内拉取镜像较慢，最后追加了华为云镜像加速配置（阿里云的镜像加速感觉是假的）。</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">mkdir /etc/docker</span><br><span class="line">cat &lt;&lt; EOF &gt; /etc/docker/daemon.json </span><br><span class="line">&#123;</span><br><span class="line">    &quot;exec-opts&quot;: [</span><br><span class="line">        &quot;native.cgroupdriver=systemd&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;log-driver&quot;: &quot;json-file&quot;,</span><br><span class="line">    &quot;log-opts&quot;: &#123;</span><br><span class="line">        &quot;max-size&quot;: &quot;100m&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;storage-driver&quot;: &quot;overlay2&quot;,</span><br><span class="line">    &quot;storage-opts&quot;: [</span><br><span class="line">        &quot;overlay2.override_kernel_check=true&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;registry-mirrors&quot;: [</span><br><span class="line">        &quot;https://0bdb6151bd80f5e50fc8c013fdff71e0.mirror.swr.myhuaweicloud.com&quot;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
 <h3 id="启动docker服务">启动docker服务</h3>
