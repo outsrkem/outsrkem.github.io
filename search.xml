@@ -1179,30 +1179,6 @@ net<span class="hljs-selector-class">.ipv4</span><span class="hljs-selector-clas
 ]]></content>
   </entry>
   <entry>
-    <title>VIM编辑器</title>
-    <url>/2019/05/VIM%E7%BC%96%E8%BE%91%E5%99%A8/index.html</url>
-    <content><![CDATA[<h2 id="vim编辑器">vim编辑器</h2>
-<span id="more"></span>
-<h4 id="配置介绍">配置介绍</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-rw-r--r--. 1 root root 1982 8月   2 2017 /etc/virc        vi 配置文件</span><br><span class="line">-rw-r--r--. 1 root root 1982 8月   2 2017 /etc/vimrc       vim 全局配置文件</span><br><span class="line">-rw-r--r--. 1 root root 1982 8月   2 2017 ~/.vimrc         vim 用户配置文件，默认没有，需要手工建立</span><br><span class="line">source ~/.vimrc 让配置文件立即生效，source 可用（.）代替，如 . /etc/vimrc</span><br><span class="line">:q!   放弃修改，所用用户可用</span><br><span class="line">:wq!  当没有写入权限时强制写入，只有 root 可用。</span><br><span class="line">:wq   保存退出</span><br><span class="line">ZZ    保存退出</span><br></pre></td></tr></table></figure>
-<h4 id="插入快捷键">插入快捷键</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">a  在光标所在字符后插入</span><br><span class="line">A  插入光标所在行行尾</span><br><span class="line">i  在光标所在字符前插入</span><br><span class="line">I  插入光标所在行行首</span><br><span class="line">o  在光标下插入新行</span><br><span class="line">O  在光标上插入新行</span><br></pre></td></tr></table></figure>
-<h4 id="光标移动快捷键">光标移动快捷键</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">H  向左     gg 移动到文件头</span><br><span class="line">L  向右     G  移动到文件尾</span><br><span class="line">J  向下     ^  移到行首</span><br><span class="line">K  向上     $  移到行尾</span><br></pre></td></tr></table></figure>
-<h4 id="删除操作">删除操作</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">x      删除单个字符</span><br><span class="line">nx     删除 n 个字符 dw 删除光标后一个字符串</span><br><span class="line">dd     删除单行 D  光标后删除到行尾</span><br><span class="line">ndd    删除单行</span><br><span class="line">:m,nd  从 m 行删除到 n 行</span><br><span class="line">dG     从光标所在行删除到文件尾</span><br><span class="line">C      当前位置删除到行尾，且打开编辑模式</span><br><span class="line">dw     当前位置删除一个字符串</span><br></pre></td></tr></table></figure>
-<h4 id="粘贴复制">粘贴复制</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yy         复制</span><br><span class="line">nyy        复制 n 行</span><br><span class="line">p          粘贴到光标下一行</span><br><span class="line">P          粘贴到光标上一行</span><br><span class="line">u          撤销</span><br><span class="line">ctrl+r     反撤销</span><br><span class="line">r          替换当前光标位置字符</span><br><span class="line">R          从光标位置开始替换，ESC 键结束</span><br><span class="line">/          查找，n 下一个，N 上一个，</span><br><span class="line">:noh       取消查找后的高亮</span><br><span class="line">:r! 命令   把命令结果写在光标所在行</span><br><span class="line">:r /etc/passwd 把/etc/passwd 文件内容载入到当前编辑的文件中</span><br></pre></td></tr></table></figure>
-<h4 id="替换">替换</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">:1,10s/old/new/g      把 1 到 10 行的 old 替换为 new</span><br><span class="line">:%s/old/new/g         把全文的 old 替换为 new（%代表全文）</span><br><span class="line">:1,10s/^/#/g          在 1 到 10 行的行首加入#</span><br></pre></td></tr></table></figure>
-<h4 id="辅助操作">辅助操作</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1) 显示行号  :set nu</span><br><span class="line">:set nonu</span><br><span class="line">2) 颜色开关 :syntax off</span><br><span class="line">:syntax on</span><br><span class="line">3) 快捷键 :map ^P I#&lt;ESC&gt; 当按下 ctrl+p，在行首加入“#” “^P”需要 ctrl+V+P 输入</span><br><span class="line">:map ^B ^x 当按下 ctrl+b，删除行首的一个字母，用于删除注释</span><br><span class="line">4) 替换</span><br><span class="line">:ab 原字符  目标字符</span><br><span class="line">:ab abc ABC1234@qq.com</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>系统</category>
-      </categories>
-  </entry>
-  <entry>
     <title>TCP血案</title>
     <url>/2019/08/TCP%E8%A1%80%E6%A1%88/index.html</url>
     <content><![CDATA[<h2 id="tcp血案">TCP血案</h2>
@@ -1228,6 +1204,30 @@ TCP旨在适应支持多网络应用的分层协议层次结构。 连接到不�
       <tags>
         <tag>Linux</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>VIM编辑器</title>
+    <url>/2019/05/VIM%E7%BC%96%E8%BE%91%E5%99%A8/index.html</url>
+    <content><![CDATA[<h2 id="vim编辑器">vim编辑器</h2>
+<span id="more"></span>
+<h4 id="配置介绍">配置介绍</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-rw-r--r--. 1 root root 1982 8月   2 2017 /etc/virc        vi 配置文件</span><br><span class="line">-rw-r--r--. 1 root root 1982 8月   2 2017 /etc/vimrc       vim 全局配置文件</span><br><span class="line">-rw-r--r--. 1 root root 1982 8月   2 2017 ~/.vimrc         vim 用户配置文件，默认没有，需要手工建立</span><br><span class="line">source ~/.vimrc 让配置文件立即生效，source 可用（.）代替，如 . /etc/vimrc</span><br><span class="line">:q!   放弃修改，所用用户可用</span><br><span class="line">:wq!  当没有写入权限时强制写入，只有 root 可用。</span><br><span class="line">:wq   保存退出</span><br><span class="line">ZZ    保存退出</span><br></pre></td></tr></table></figure>
+<h4 id="插入快捷键">插入快捷键</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">a  在光标所在字符后插入</span><br><span class="line">A  插入光标所在行行尾</span><br><span class="line">i  在光标所在字符前插入</span><br><span class="line">I  插入光标所在行行首</span><br><span class="line">o  在光标下插入新行</span><br><span class="line">O  在光标上插入新行</span><br></pre></td></tr></table></figure>
+<h4 id="光标移动快捷键">光标移动快捷键</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">H  向左     gg 移动到文件头</span><br><span class="line">L  向右     G  移动到文件尾</span><br><span class="line">J  向下     ^  移到行首</span><br><span class="line">K  向上     $  移到行尾</span><br></pre></td></tr></table></figure>
+<h4 id="删除操作">删除操作</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">x      删除单个字符</span><br><span class="line">nx     删除 n 个字符 dw 删除光标后一个字符串</span><br><span class="line">dd     删除单行 D  光标后删除到行尾</span><br><span class="line">ndd    删除单行</span><br><span class="line">:m,nd  从 m 行删除到 n 行</span><br><span class="line">dG     从光标所在行删除到文件尾</span><br><span class="line">C      当前位置删除到行尾，且打开编辑模式</span><br><span class="line">dw     当前位置删除一个字符串</span><br></pre></td></tr></table></figure>
+<h4 id="粘贴复制">粘贴复制</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yy         复制</span><br><span class="line">nyy        复制 n 行</span><br><span class="line">p          粘贴到光标下一行</span><br><span class="line">P          粘贴到光标上一行</span><br><span class="line">u          撤销</span><br><span class="line">ctrl+r     反撤销</span><br><span class="line">r          替换当前光标位置字符</span><br><span class="line">R          从光标位置开始替换，ESC 键结束</span><br><span class="line">/          查找，n 下一个，N 上一个，</span><br><span class="line">:noh       取消查找后的高亮</span><br><span class="line">:r! 命令   把命令结果写在光标所在行</span><br><span class="line">:r /etc/passwd 把/etc/passwd 文件内容载入到当前编辑的文件中</span><br></pre></td></tr></table></figure>
+<h4 id="替换">替换</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">:1,10s/old/new/g      把 1 到 10 行的 old 替换为 new</span><br><span class="line">:%s/old/new/g         把全文的 old 替换为 new（%代表全文）</span><br><span class="line">:1,10s/^/#/g          在 1 到 10 行的行首加入#</span><br></pre></td></tr></table></figure>
+<h4 id="辅助操作">辅助操作</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1) 显示行号  :set nu</span><br><span class="line">:set nonu</span><br><span class="line">2) 颜色开关 :syntax off</span><br><span class="line">:syntax on</span><br><span class="line">3) 快捷键 :map ^P I#&lt;ESC&gt; 当按下 ctrl+p，在行首加入“#” “^P”需要 ctrl+V+P 输入</span><br><span class="line">:map ^B ^x 当按下 ctrl+b，删除行首的一个字母，用于删除注释</span><br><span class="line">4) 替换</span><br><span class="line">:ab 原字符  目标字符</span><br><span class="line">:ab abc ABC1234@qq.com</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>系统</category>
+      </categories>
   </entry>
   <entry>
     <title>Zabbix监控搭建</title>
@@ -1961,6 +1961,58 @@ RUN 指令最常见的用法是安装包用的<code> apt-get</code>。因为 <co
       </tags>
   </entry>
   <entry>
+    <title>Git 源码编译安装</title>
+    <url>/2020/07/%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/index.html</url>
+    <content><![CDATA[<h2 id="git-源码编译安装">Git 源码编译安装</h2>
+<ul>
+<li>Git官网：<a href="https://git-scm.com">https://git-scm.com</a></li>
+<li>淘宝镜像网站：<a href="https://npm.taobao.org/mirrors/git-for-windows">https://npm.taobao.org/mirrors/git-for-windows</a></li>
+<li>仓库地址：<a href="https://github.com/git/git/tags">https://github.com/git/git/tags</a></li>
+</ul>
+<h3 id="git-依赖的库">Git 依赖的库</h3>
+<blockquote>
+<p>依赖库：autotools、curl、zlib、openssl、expat 和 libiconv</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install dh-autoreconf curl-devel expat-devel gettext-devel  openssl-devel perl-devel zlib-devel</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>为了添加文档的多种格式（doc、html、info），按需要以下附加的依赖</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install asciidoc xmlto docbook2X</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="编译安装">编译安装</h3>
+<blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">./configure --prefix=/usr/local/git</span><br><span class="line">make -j$(nproc)</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="配置环境变量">配置环境变量</h3>
+<blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vi /etc/profile </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在底部加上</span></span><br><span class="line">export PATH=$PATH:/usr/local/git/bin</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="刷新环境变量">刷新环境变量</h3>
+<blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">. /etc/profile</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="卸载旧版git">卸载旧版Git</h3>
+<blockquote>
+<p>安装编译源码所需依赖(gettext-devel)的时候，yum自动帮你安装了git，这时候你需要先卸载这个旧版的git。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum -y remove git</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="查看git是否安装完成">查看Git是否安装完成</h3>
+<blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="附：">附：</h3>
+<blockquote>
+<p><a href="/2020/07/Linux-%E9%85%8D%E7%BD%AE-Git-%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6/index.html">Git优化配置：Linux 配置 Git 命令提示符</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>服务</category>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>尚硅谷最新Git教程全套完整版(12h带你深入掌握git)</title>
     <url>/2020/05/%E5%B0%9A%E7%A1%85%E8%B0%B7%E6%9C%80%E6%96%B0Git%E6%95%99%E7%A8%8B%E5%85%A8%E5%A5%97%E5%AE%8C%E6%95%B4%E7%89%88(12h%E5%B8%A6%E4%BD%A0%E6%B7%B1%E5%85%A5%E6%8E%8C%E6%8F%A1git)/index.html</url>
     <content><![CDATA[<h2 id=""></h2>
@@ -2231,58 +2283,6 @@ RUN 指令最常见的用法是安装包用的<code> apt-get</code>。因为 <co
       </tags>
   </entry>
   <entry>
-    <title>Git 源码编译安装</title>
-    <url>/2020/07/%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/index.html</url>
-    <content><![CDATA[<h2 id="git-源码编译安装">Git 源码编译安装</h2>
-<ul>
-<li>Git官网：<a href="https://git-scm.com">https://git-scm.com</a></li>
-<li>淘宝镜像网站：<a href="https://npm.taobao.org/mirrors/git-for-windows">https://npm.taobao.org/mirrors/git-for-windows</a></li>
-<li>仓库地址：<a href="https://github.com/git/git/tags">https://github.com/git/git/tags</a></li>
-</ul>
-<h3 id="git-依赖的库">Git 依赖的库</h3>
-<blockquote>
-<p>依赖库：autotools、curl、zlib、openssl、expat 和 libiconv</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install dh-autoreconf curl-devel expat-devel gettext-devel  openssl-devel perl-devel zlib-devel</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p>为了添加文档的多种格式（doc、html、info），按需要以下附加的依赖</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install asciidoc xmlto docbook2X</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="编译安装">编译安装</h3>
-<blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">./configure --prefix=/usr/local/git</span><br><span class="line">make -j$(nproc)</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="配置环境变量">配置环境变量</h3>
-<blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vi /etc/profile </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在底部加上</span></span><br><span class="line">export PATH=$PATH:/usr/local/git/bin</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="刷新环境变量">刷新环境变量</h3>
-<blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">. /etc/profile</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="卸载旧版git">卸载旧版Git</h3>
-<blockquote>
-<p>安装编译源码所需依赖(gettext-devel)的时候，yum自动帮你安装了git，这时候你需要先卸载这个旧版的git。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum -y remove git</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="查看git是否安装完成">查看Git是否安装完成</h3>
-<blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="附：">附：</h3>
-<blockquote>
-<p><a href="/2020/07/Linux-%E9%85%8D%E7%BD%AE-Git-%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6/index.html">Git优化配置：Linux 配置 Git 命令提示符</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>服务</category>
-        <category>Git</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>脚本常用逻辑和表达式</title>
     <url>/2020/05/%E8%84%9A%E6%9C%AC%E5%B8%B8%E7%94%A8%E9%80%BB%E8%BE%91%E5%92%8C%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html</url>
     <content><![CDATA[<p>用[[]]替代[]</p>
@@ -2377,6 +2377,86 @@ RUN 指令最常见的用法是安装包用的<code> apt-get</code>。因为 <co
       </categories>
       <tags>
         <tag>kubernetes</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Nginx配置之proxy_pass</title>
+    <url>/2021/05/Nginx%E9%85%8D%E7%BD%AE%E4%B9%8Bproxy-pass/index.html</url>
+    <content><![CDATA[<h2 id="nginx配置之proxy_pass">Nginx配置之proxy_pass</h2>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen      80;</span><br><span class="line">    server_name www.test.com;</span><br><span class="line"> </span><br><span class="line">    # 情形A</span><br><span class="line">    # 访问 http://www.test.com/testa/aaaa</span><br><span class="line">    # 后端的request_uri为: /testa/aaaa</span><br><span class="line">    location ^~ /testa/ &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    # 情形B</span><br><span class="line">    # 访问 http://www.test.com/testb/bbbb</span><br><span class="line">    # 后端的request_uri为: /bbbb</span><br><span class="line">    location ^~ /testb/ &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801/;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    # 情形C</span><br><span class="line">    # 下面这段location是正确的</span><br><span class="line">    location ~ /testc &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    # 情形D</span><br><span class="line">    # 下面这段location是错误的</span><br><span class="line">    #</span><br><span class="line">    # nginx -t 时，会报如下错误: </span><br><span class="line">    #</span><br><span class="line">    # nginx: [emerg] &quot;proxy_pass&quot; cannot have URI part in location given by regular </span><br><span class="line">    # expression, or inside named location, or inside &quot;if&quot; statement, or inside </span><br><span class="line">    # &quot;limit_except&quot; block in /opt/app/nginx/conf/vhost/test.conf:17</span><br><span class="line">    # </span><br><span class="line">    # 当location为正则表达式时，proxy_pass 不能包含URI部分。本例中包含了&quot;/&quot;</span><br><span class="line">    location ~ /testd &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801/;   # 记住，location为正则表达式时，最后不能有斜杠，不能这样写！！！</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    # 情形E</span><br><span class="line">    # 访问 http://www.test.com/ccc/bbbb</span><br><span class="line">    # 后端的request_uri为: /aaa/ccc/bbbb</span><br><span class="line">    location /ccc/ &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801/aaa$request_uri;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    # 情形F</span><br><span class="line">    # 访问 http://www.test.com/namea/ddd</span><br><span class="line">    # 后端的request_uri为: /yongfu?namea=ddd</span><br><span class="line">    location /namea/ &#123;</span><br><span class="line">        rewrite    /namea/([^/]+) /yongfu?namea=$1 break;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    # 情形G</span><br><span class="line">    # 访问 http://www.test.com/nameb/eee</span><br><span class="line">    # 后端的request_uri为: /yongfu?nameb=eee</span><br><span class="line">    location /nameb/ &#123;</span><br><span class="line">        rewrite    /nameb/([^/]+) /yongfu?nameb=$1 break;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801/;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>服务</category>
+      </categories>
+      <tags>
+        <tag>Nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux 采用 SSH CA 登陆验证</title>
+    <url>/2021/05/Linux-%E9%87%87%E7%94%A8-SSH-CA-%E7%99%BB%E9%99%86%E9%AA%8C%E8%AF%81/index.html</url>
+    <content><![CDATA[<h2 id="linux-采用 ssh ca 登陆验证">Linux 采用 SSH CA 登陆验证</h2>
+<p>当配置大量的服务器有很多用户，保持SSH访问在线的基础设施可以变得复杂，SSH实际上具有使用证书颁发机构来验证服务器和客户端的功能。</p>
+<p>这样的好处就是：</p>
+<ul>
+<li>可以控制登录的源ip</li>
+<li>限制登录的用户</li>
+<li>有新用户的时候不需要把客户机的pub公钥放到服务器上</li>
+</ul>
+<h2 id="步骤">步骤</h2>
+<ul>
+<li>生成 CA 证书</li>
+<li>为目标服务端配置 SSH 服务的 CA 公钥信任</li>
+<li>生产客户端 SSH 密钥对</li>
+<li>给客户端SSH公钥进行签名</li>
+<li>客户端采用客户端 SSH 私钥和签名公钥登陆目标主机</li>
+</ul>
+<h2 id="生成-ca 证书">生成 CA 证书</h2>
+<p>目的：配置客户端认证服务器的证书，该证书允许我们的客户端连接到我们的服务器，而不需要质疑服务器的真实性。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir ca</span><br><span class="line">ssh-keygen -C &quot;ssh_server_ca&quot; -b 4096 -f ca/server_ca</span><br></pre></td></tr></table></figure>
+<h2 id="为目标服务端配置-ssh 服务的 ca 公钥信任">为目标服务端配置 SSH 服务的 CA 公钥信任</h2>
+<p>修改目标机的/etc/ssh/sshd_config文件，添加刚生产的server_ca.pub信任</p>
+<p>将server_ca.pub复制到目标服务器的/etc/ssh/目录下，并修改sshd服务配置重启sshd</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp ca/server_ca.pub /etc/ssh/</span><br><span class="line">echo &quot;TrustedUserCAKeys /etc/ssh/server_ca.pub&quot; &gt;&gt;/etc/ssh/sshd_config</span><br><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
+<h2 id="生产客户端-ssh 密钥对">生产客户端 SSH 密钥对</h2>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir rsa</span><br><span class="line">ssh-keygen -t rsa -b 4096 -f rsa/id_rsa -C host_cert</span><br></pre></td></tr></table></figure>
+<h2 id="用刚才的ca给客户端ssh公钥进行签名">用刚才的ca给客户端SSH公钥进行签名</h2>
+<p>生成id_rsa-cert.pub公钥签名文件。这里只需要客户机的公钥文件，所以也可以直接签署客户机提供的公钥。签名时需要使用ca的私钥。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd rsa</span><br><span class="line">ssh-keygen -s ../ca/server_ca -I client  -O source-address=10.10.10.11,10.10.10.12 -n root,develop -V +52w id_rsa.pub</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>说明：</p>
+<ul>
+<li>-s：CA 证书私钥</li>
+<li>-I：识别证书的名称，相当于注释。 当证书用于认证时，它用于日志记录</li>
+<li>-n：识别与此证书关联的名称（用户或主机），表示证书仅对该域名有效。如果有多个，则使用逗号分隔。上例中只有root和develop用户能够登录到目标服务器。</li>
+<li>-V：指定证书的有效期。 在这种情况下，我们指定证书将在一年（52周）过期，默认情况下，证书是永远有效的。建议使用该参数指定有效期，并且有效期最好短一点，最长不超过 52 周。</li>
+<li>-O option：source-address=address_list ：允许用户证书使用的客户端的地址，多个地址用逗号分隔，可以时候CIDR， 我们将设置这个来限制用户证书的使用范围。如： -O source-address=10.10.10.11,10.10.10.12</li>
+</ul>
+</blockquote>
+<p>生成证书以后，可以使用下面的命令，查看证书的细节。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh-keygen -L -f id_rsa-cert.pub</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">大概如下</span></span><br><span class="line">id_rsa-cert.pub:</span><br><span class="line">        Type: ssh-rsa-cert-v01@openssh.com user certificate</span><br><span class="line">        Public key: RSA-CERT SHA256:HP71SBszAWUOgg1uOjkZCEkoeEaNgWU3eF9oCV0bctc</span><br><span class="line">        Signing CA: RSA SHA256:PpwLGScb0WQLDar94WyOD5DKkdTjzJohQS76wNRJQQg</span><br><span class="line">        Key ID: &quot;client&quot; # 此处则是 -I 指定的值</span><br><span class="line">        Serial: 0</span><br><span class="line">        Valid: from 2020-12-09T22:11:00 to 2021-12-08T22:12:27</span><br><span class="line">        Principals: # 此处则是 -n 指定的值</span><br><span class="line">                root</span><br><span class="line">                develop</span><br><span class="line">        Critical Options:  # 此处则是 -O 指定的值</span><br><span class="line">                source-address 10.10.10.11,10.10.10.12</span><br><span class="line">        Extensions: </span><br><span class="line">                permit-X11-forwarding</span><br><span class="line">                permit-agent-forwarding</span><br><span class="line">                permit-port-forwarding</span><br><span class="line">                permit-pty</span><br><span class="line">                permit-user-rc</span><br><span class="line">               </span><br></pre></td></tr></table></figure>
+<h2 id="登陆">登陆</h2>
+<p>将id_rsa、id_rsa-cert.pub、id_rsa.pub 全部上传到客户机</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh -i id_dsa root@ip  #即可登陆，默认会加载：id_dsa + id_dsa-cert.pub登陆测试机器</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>说明：</p>
+<ul>
+<li>-i 指定自己的私钥文件，默认会加载：id_dsa + id_dsa-cert.pub两个文件，默认读取 /root/.ssh/id_rsa</li>
+</ul>
+</blockquote>
+<h2 id="python-实现">Python 实现</h2>
+<p>依赖 paramiko&gt;=2.3.0 版本</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">cat test_paramiko_cert_key.py</span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">依赖：</span></span><br><span class="line"><span class="string">    paramiko==2.3.3</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> paramiko</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> StringIO <span class="keyword">import</span> StringIO</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test_ssh_ca_key</span>():</span><br><span class="line">    key_file = <span class="string">&quot;&quot;&quot;&lt;PRIVATE KEY&gt;&quot;&quot;&quot;</span></span><br><span class="line">    cert_pub_file = <span class="string">&quot;&quot;&quot;&lt;*-cert.pub&gt;&quot;&quot;&quot;</span></span><br><span class="line">    ip = <span class="string">&quot;&lt;ip&gt;&quot;</span></span><br><span class="line">    port = <span class="number">22</span></span><br><span class="line">    pkey = paramiko.DSSKey.from_private_key(StringIO(key_file))</span><br><span class="line">    pkey.load_certificate(cert_pub_file)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Client setup</span></span><br><span class="line">    ssh = paramiko.SSHClient()</span><br><span class="line">    ssh.load_system_host_keys()</span><br><span class="line">    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())</span><br><span class="line">    ssh.connect(hostname=ip, port=port, username=<span class="string">&#x27;root&#x27;</span>, pkey=pkey)</span><br><span class="line"></span><br><span class="line">    stdin, stdout, stderr = ssh.exec_command(<span class="string">&quot;pwd&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span> stdin, stdout, stderr</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    test_ssh_ca_key()</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><a href="https://www.xiexianbin.cn/linux/ssh/2018-04-30-linux-ssh-ca-key-validate-hosts-and-clients/index.html">https://www.xiexianbin.cn/linux/ssh/2018-04-30-linux-ssh-ca-key-validate-hosts-and-clients/index.html</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>ssh</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>ssh</tag>
       </tags>
   </entry>
   <entry>
@@ -7570,83 +7650,23 @@ style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font
       </tags>
   </entry>
   <entry>
-    <title>Linux 采用 SSH CA 登陆验证</title>
-    <url>/2021/05/Linux-%E9%87%87%E7%94%A8-SSH-CA-%E7%99%BB%E9%99%86%E9%AA%8C%E8%AF%81/index.html</url>
-    <content><![CDATA[<h2 id="linux-采用 ssh ca 登陆验证">Linux 采用 SSH CA 登陆验证</h2>
-<p>当配置大量的服务器有很多用户，保持SSH访问在线的基础设施可以变得复杂，SSH实际上具有使用证书颁发机构来验证服务器和客户端的功能。</p>
-<p>这样的好处就是：</p>
-<ul>
-<li>可以控制登录的源ip</li>
-<li>限制登录的用户</li>
-<li>有新用户的时候不需要把客户机的pub公钥放到服务器上</li>
-</ul>
-<h2 id="步骤">步骤</h2>
-<ul>
-<li>生成 CA 证书</li>
-<li>为目标服务端配置 SSH 服务的 CA 公钥信任</li>
-<li>生产客户端 SSH 密钥对</li>
-<li>给客户端SSH公钥进行签名</li>
-<li>客户端采用客户端 SSH 私钥和签名公钥登陆目标主机</li>
-</ul>
-<h2 id="生成-ca 证书">生成 CA 证书</h2>
-<p>目的：配置客户端认证服务器的证书，该证书允许我们的客户端连接到我们的服务器，而不需要质疑服务器的真实性。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir ca</span><br><span class="line">ssh-keygen -C &quot;ssh_server_ca&quot; -b 4096 -f ca/server_ca</span><br></pre></td></tr></table></figure>
-<h2 id="为目标服务端配置-ssh 服务的 ca 公钥信任">为目标服务端配置 SSH 服务的 CA 公钥信任</h2>
-<p>修改目标机的/etc/ssh/sshd_config文件，添加刚生产的server_ca.pub信任</p>
-<p>将server_ca.pub复制到目标服务器的/etc/ssh/目录下，并修改sshd服务配置重启sshd</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp ca/server_ca.pub /etc/ssh/</span><br><span class="line">echo &quot;TrustedUserCAKeys /etc/ssh/server_ca.pub&quot; &gt;&gt;/etc/ssh/sshd_config</span><br><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
-<h2 id="生产客户端-ssh 密钥对">生产客户端 SSH 密钥对</h2>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir rsa</span><br><span class="line">ssh-keygen -t rsa -b 4096 -f rsa/id_rsa -C host_cert</span><br></pre></td></tr></table></figure>
-<h2 id="用刚才的ca给客户端ssh公钥进行签名">用刚才的ca给客户端SSH公钥进行签名</h2>
-<p>生成id_rsa-cert.pub公钥签名文件。这里只需要客户机的公钥文件，所以也可以直接签署客户机提供的公钥。签名时需要使用ca的私钥。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd rsa</span><br><span class="line">ssh-keygen -s ../ca/server_ca -I client  -O source-address=10.10.10.11,10.10.10.12 -n root,develop -V +52w id_rsa.pub</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>说明：</p>
-<ul>
-<li>-s：CA 证书私钥</li>
-<li>-I：识别证书的名称，相当于注释。 当证书用于认证时，它用于日志记录</li>
-<li>-n：识别与此证书关联的名称（用户或主机），表示证书仅对该域名有效。如果有多个，则使用逗号分隔。上例中只有root和develop用户能够登录到目标服务器。</li>
-<li>-V：指定证书的有效期。 在这种情况下，我们指定证书将在一年（52周）过期，默认情况下，证书是永远有效的。建议使用该参数指定有效期，并且有效期最好短一点，最长不超过 52 周。</li>
-<li>-O option：source-address=address_list ：允许用户证书使用的客户端的地址，多个地址用逗号分隔，可以时候CIDR， 我们将设置这个来限制用户证书的使用范围。如： -O source-address=10.10.10.11,10.10.10.12</li>
-</ul>
-</blockquote>
-<p>生成证书以后，可以使用下面的命令，查看证书的细节。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh-keygen -L -f id_rsa-cert.pub</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">大概如下</span></span><br><span class="line">id_rsa-cert.pub:</span><br><span class="line">        Type: ssh-rsa-cert-v01@openssh.com user certificate</span><br><span class="line">        Public key: RSA-CERT SHA256:HP71SBszAWUOgg1uOjkZCEkoeEaNgWU3eF9oCV0bctc</span><br><span class="line">        Signing CA: RSA SHA256:PpwLGScb0WQLDar94WyOD5DKkdTjzJohQS76wNRJQQg</span><br><span class="line">        Key ID: &quot;client&quot; # 此处则是 -I 指定的值</span><br><span class="line">        Serial: 0</span><br><span class="line">        Valid: from 2020-12-09T22:11:00 to 2021-12-08T22:12:27</span><br><span class="line">        Principals: # 此处则是 -n 指定的值</span><br><span class="line">                root</span><br><span class="line">                develop</span><br><span class="line">        Critical Options:  # 此处则是 -O 指定的值</span><br><span class="line">                source-address 10.10.10.11,10.10.10.12</span><br><span class="line">        Extensions: </span><br><span class="line">                permit-X11-forwarding</span><br><span class="line">                permit-agent-forwarding</span><br><span class="line">                permit-port-forwarding</span><br><span class="line">                permit-pty</span><br><span class="line">                permit-user-rc</span><br><span class="line">               </span><br></pre></td></tr></table></figure>
-<h2 id="登陆">登陆</h2>
-<p>将id_rsa、id_rsa-cert.pub、id_rsa.pub 全部上传到客户机</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh -i id_dsa root@ip  #即可登陆，默认会加载：id_dsa + id_dsa-cert.pub登陆测试机器</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>说明：</p>
-<ul>
-<li>-i 指定自己的私钥文件，默认会加载：id_dsa + id_dsa-cert.pub两个文件，默认读取 /root/.ssh/id_rsa</li>
-</ul>
-</blockquote>
-<h2 id="python-实现">Python 实现</h2>
-<p>依赖 paramiko&gt;=2.3.0 版本</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">cat test_paramiko_cert_key.py</span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">依赖：</span></span><br><span class="line"><span class="string">    paramiko==2.3.3</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> paramiko</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> StringIO <span class="keyword">import</span> StringIO</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test_ssh_ca_key</span>():</span><br><span class="line">    key_file = <span class="string">&quot;&quot;&quot;&lt;PRIVATE KEY&gt;&quot;&quot;&quot;</span></span><br><span class="line">    cert_pub_file = <span class="string">&quot;&quot;&quot;&lt;*-cert.pub&gt;&quot;&quot;&quot;</span></span><br><span class="line">    ip = <span class="string">&quot;&lt;ip&gt;&quot;</span></span><br><span class="line">    port = <span class="number">22</span></span><br><span class="line">    pkey = paramiko.DSSKey.from_private_key(StringIO(key_file))</span><br><span class="line">    pkey.load_certificate(cert_pub_file)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Client setup</span></span><br><span class="line">    ssh = paramiko.SSHClient()</span><br><span class="line">    ssh.load_system_host_keys()</span><br><span class="line">    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())</span><br><span class="line">    ssh.connect(hostname=ip, port=port, username=<span class="string">&#x27;root&#x27;</span>, pkey=pkey)</span><br><span class="line"></span><br><span class="line">    stdin, stdout, stderr = ssh.exec_command(<span class="string">&quot;pwd&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span> stdin, stdout, stderr</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    test_ssh_ca_key()</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><a href="https://www.xiexianbin.cn/linux/ssh/2018-04-30-linux-ssh-ca-key-validate-hosts-and-clients/index.html">https://www.xiexianbin.cn/linux/ssh/2018-04-30-linux-ssh-ca-key-validate-hosts-and-clients/index.html</a></p>
-</blockquote>
+    <title>Typecho免插件实现文章浏览次数统计(Cookie Enabled)</title>
+    <url>/2021/05/Typecho%E5%85%8D%E6%8F%92%E4%BB%B6%E5%AE%9E%E7%8E%B0%E6%96%87%E7%AB%A0%E6%B5%8F%E8%A7%88%E6%AC%A1%E6%95%B0%E7%BB%9F%E8%AE%A1(Cookie%20Enabled)/index.html</url>
+    <content><![CDATA[<h2 id="typecho免插件实现文章浏览次数统计(cookie-enabled)">Typecho免插件实现文章浏览次数统计(Cookie Enabled)</h2>
+<p>最近在打造新主题，想给主题增加统计功能，为了不使用Views插件，撸了下面的代码，使用自定义字段保存数据，不会改动数据库结构</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 获取浏览次数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getViewsStr</span>(<span class="params"><span class="variable">$widget</span>, <span class="variable">$format</span> = <span class="string">&quot;&#123;views&#125; 次浏览&quot;</span></span>) </span>&#123;</span><br><span class="line">    <span class="variable">$fields</span> = <span class="title function_ invoke__">unserialize</span>(<span class="variable">$widget</span>-&gt;fields);</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">array_key_exists</span>(<span class="string">&#x27;views&#x27;</span>,<span class="variable">$fields</span>))</span><br><span class="line">        <span class="variable">$views</span> = (!<span class="keyword">empty</span>(<span class="variable">$fields</span>[<span class="string">&#x27;views&#x27;</span>])) ? <span class="title function_ invoke__">intval</span>(<span class="variable">$fields</span>[<span class="string">&#x27;views&#x27;</span>]) : <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="variable">$views</span> = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//增加浏览次数</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$widget</span>-&gt;<span class="title function_ invoke__">is</span>(<span class="string">&#x27;single&#x27;</span>)) &#123;</span><br><span class="line">        <span class="variable">$views</span> = <span class="variable">$views</span> + <span class="number">1</span>;</span><br><span class="line">        <span class="variable">$widget</span>-&gt;<span class="title function_ invoke__">setField</span>(<span class="string">&#x27;views&#x27;</span>, <span class="string">&#x27;str&#x27;</span>, <span class="title function_ invoke__">strval</span>(<span class="variable">$views</span>), <span class="variable">$widget</span>-&gt;cid);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;&#123;views&#125;&quot;</span>, <span class="variable">$views</span>, <span class="variable">$format</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>把以上代码放到functions.php最后，然后就可以在各个页面通过</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="title function_ invoke__">_e</span>(<span class="title function_ invoke__">getViewsStr</span>(<span class="variable">$this</span>)); <span class="comment">/* $this 是 Widget_Archive 对象 */</span> <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>输出统计次数。<br>
+应用到主题后发现不太好，每刷新一次都会重复统计浏览次数，数字大了没什么用。<br>
+所以我就通过Cookies“记住”浏览过的文章，下次再访问就部统计了，以下的代码也是放到functions.php最后</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 获取浏览次数(改进版)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getViewsStr</span>(<span class="params"><span class="variable">$widget</span>, <span class="variable">$format</span> = <span class="string">&quot;&#123;views&#125; 次浏览&quot;</span></span>) </span>&#123;</span><br><span class="line">    <span class="variable">$fields</span> = <span class="title function_ invoke__">unserialize</span>(<span class="variable">$widget</span>-&gt;fields);</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">array_key_exists</span>(<span class="string">&#x27;views&#x27;</span>, <span class="variable">$fields</span>))</span><br><span class="line">        <span class="variable">$views</span> = (!<span class="keyword">empty</span>(<span class="variable">$fields</span>[<span class="string">&#x27;views&#x27;</span>])) ? <span class="title function_ invoke__">intval</span>(<span class="variable">$fields</span>[<span class="string">&#x27;views&#x27;</span>]) : <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="variable">$views</span> = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//增加浏览次数</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$widget</span>-&gt;<span class="title function_ invoke__">is</span>(<span class="string">&#x27;single&#x27;</span>)) &#123;</span><br><span class="line">        <span class="variable">$vieweds</span> = <span class="title class_">Typecho_Cookie</span>::<span class="title function_ invoke__">get</span>(<span class="string">&#x27;contents_viewed&#x27;</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">empty</span>(<span class="variable">$vieweds</span>))</span><br><span class="line">            <span class="variable">$vieweds</span> = <span class="keyword">array</span>();</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="variable">$vieweds</span> = <span class="title function_ invoke__">explode</span>(<span class="string">&#x27;,&#x27;</span>, <span class="variable">$vieweds</span>);</span><br><span class="line">        <span class="keyword">if</span> (!<span class="title function_ invoke__">in_array</span>(<span class="variable">$widget</span>-&gt;cid, <span class="variable">$vieweds</span>)) &#123;</span><br><span class="line">            <span class="variable">$views</span> = <span class="variable">$views</span> + <span class="number">1</span>;</span><br><span class="line">            <span class="variable">$widget</span>-&gt;<span class="title function_ invoke__">setField</span>(<span class="string">&#x27;views&#x27;</span>, <span class="string">&#x27;str&#x27;</span>, <span class="title function_ invoke__">strval</span>(<span class="variable">$views</span>), <span class="variable">$widget</span>-&gt;cid);</span><br><span class="line">            <span class="variable">$vieweds</span>[] = <span class="variable">$widget</span>-&gt;cid;</span><br><span class="line">            <span class="variable">$vieweds</span> = <span class="title function_ invoke__">implode</span>(<span class="string">&#x27;,&#x27;</span>, <span class="variable">$vieweds</span>);</span><br><span class="line">            <span class="title class_">Typecho_Cookie</span>::<span class="title function_ invoke__">set</span>(<span class="string">&quot;contents_viewed&quot;</span>,<span class="variable">$vieweds</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;&#123;views&#125;&quot;</span>, <span class="variable">$views</span>, <span class="variable">$format</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>ssh</category>
+        <category>系统</category>
       </categories>
       <tags>
-        <tag>linux</tag>
-        <tag>ssh</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Nginx配置之proxy_pass</title>
-    <url>/2021/05/Nginx%E9%85%8D%E7%BD%AE%E4%B9%8Bproxy-pass/index.html</url>
-    <content><![CDATA[<h2 id="nginx配置之proxy_pass">Nginx配置之proxy_pass</h2>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen      80;</span><br><span class="line">    server_name www.test.com;</span><br><span class="line"> </span><br><span class="line">    # 情形A</span><br><span class="line">    # 访问 http://www.test.com/testa/aaaa</span><br><span class="line">    # 后端的request_uri为: /testa/aaaa</span><br><span class="line">    location ^~ /testa/ &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    # 情形B</span><br><span class="line">    # 访问 http://www.test.com/testb/bbbb</span><br><span class="line">    # 后端的request_uri为: /bbbb</span><br><span class="line">    location ^~ /testb/ &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801/;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    # 情形C</span><br><span class="line">    # 下面这段location是正确的</span><br><span class="line">    location ~ /testc &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    # 情形D</span><br><span class="line">    # 下面这段location是错误的</span><br><span class="line">    #</span><br><span class="line">    # nginx -t 时，会报如下错误: </span><br><span class="line">    #</span><br><span class="line">    # nginx: [emerg] &quot;proxy_pass&quot; cannot have URI part in location given by regular </span><br><span class="line">    # expression, or inside named location, or inside &quot;if&quot; statement, or inside </span><br><span class="line">    # &quot;limit_except&quot; block in /opt/app/nginx/conf/vhost/test.conf:17</span><br><span class="line">    # </span><br><span class="line">    # 当location为正则表达式时，proxy_pass 不能包含URI部分。本例中包含了&quot;/&quot;</span><br><span class="line">    location ~ /testd &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801/;   # 记住，location为正则表达式时，最后不能有斜杠，不能这样写！！！</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    # 情形E</span><br><span class="line">    # 访问 http://www.test.com/ccc/bbbb</span><br><span class="line">    # 后端的request_uri为: /aaa/ccc/bbbb</span><br><span class="line">    location /ccc/ &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801/aaa$request_uri;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    # 情形F</span><br><span class="line">    # 访问 http://www.test.com/namea/ddd</span><br><span class="line">    # 后端的request_uri为: /yongfu?namea=ddd</span><br><span class="line">    location /namea/ &#123;</span><br><span class="line">        rewrite    /namea/([^/]+) /yongfu?namea=$1 break;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    # 情形G</span><br><span class="line">    # 访问 http://www.test.com/nameb/eee</span><br><span class="line">    # 后端的request_uri为: /yongfu?nameb=eee</span><br><span class="line">    location /nameb/ &#123;</span><br><span class="line">        rewrite    /nameb/([^/]+) /yongfu?nameb=$1 break;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801/;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>服务</category>
-      </categories>
-      <tags>
-        <tag>Nginx</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -7731,26 +7751,6 @@ style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font
       <tags>
         <tag>Linux</tag>
         <tag>CentOS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Typecho免插件实现文章浏览次数统计(Cookie Enabled)</title>
-    <url>/2021/05/Typecho%E5%85%8D%E6%8F%92%E4%BB%B6%E5%AE%9E%E7%8E%B0%E6%96%87%E7%AB%A0%E6%B5%8F%E8%A7%88%E6%AC%A1%E6%95%B0%E7%BB%9F%E8%AE%A1(Cookie%20Enabled)/index.html</url>
-    <content><![CDATA[<h2 id="typecho免插件实现文章浏览次数统计(cookie-enabled)">Typecho免插件实现文章浏览次数统计(Cookie Enabled)</h2>
-<p>最近在打造新主题，想给主题增加统计功能，为了不使用Views插件，撸了下面的代码，使用自定义字段保存数据，不会改动数据库结构</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 获取浏览次数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getViewsStr</span>(<span class="params"><span class="variable">$widget</span>, <span class="variable">$format</span> = <span class="string">&quot;&#123;views&#125; 次浏览&quot;</span></span>) </span>&#123;</span><br><span class="line">    <span class="variable">$fields</span> = <span class="title function_ invoke__">unserialize</span>(<span class="variable">$widget</span>-&gt;fields);</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">array_key_exists</span>(<span class="string">&#x27;views&#x27;</span>,<span class="variable">$fields</span>))</span><br><span class="line">        <span class="variable">$views</span> = (!<span class="keyword">empty</span>(<span class="variable">$fields</span>[<span class="string">&#x27;views&#x27;</span>])) ? <span class="title function_ invoke__">intval</span>(<span class="variable">$fields</span>[<span class="string">&#x27;views&#x27;</span>]) : <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="variable">$views</span> = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//增加浏览次数</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$widget</span>-&gt;<span class="title function_ invoke__">is</span>(<span class="string">&#x27;single&#x27;</span>)) &#123;</span><br><span class="line">        <span class="variable">$views</span> = <span class="variable">$views</span> + <span class="number">1</span>;</span><br><span class="line">        <span class="variable">$widget</span>-&gt;<span class="title function_ invoke__">setField</span>(<span class="string">&#x27;views&#x27;</span>, <span class="string">&#x27;str&#x27;</span>, <span class="title function_ invoke__">strval</span>(<span class="variable">$views</span>), <span class="variable">$widget</span>-&gt;cid);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;&#123;views&#125;&quot;</span>, <span class="variable">$views</span>, <span class="variable">$format</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>把以上代码放到functions.php最后，然后就可以在各个页面通过</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="title function_ invoke__">_e</span>(<span class="title function_ invoke__">getViewsStr</span>(<span class="variable">$this</span>)); <span class="comment">/* $this 是 Widget_Archive 对象 */</span> <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>输出统计次数。<br>
-应用到主题后发现不太好，每刷新一次都会重复统计浏览次数，数字大了没什么用。<br>
-所以我就通过Cookies“记住”浏览过的文章，下次再访问就部统计了，以下的代码也是放到functions.php最后</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 获取浏览次数(改进版)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getViewsStr</span>(<span class="params"><span class="variable">$widget</span>, <span class="variable">$format</span> = <span class="string">&quot;&#123;views&#125; 次浏览&quot;</span></span>) </span>&#123;</span><br><span class="line">    <span class="variable">$fields</span> = <span class="title function_ invoke__">unserialize</span>(<span class="variable">$widget</span>-&gt;fields);</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">array_key_exists</span>(<span class="string">&#x27;views&#x27;</span>, <span class="variable">$fields</span>))</span><br><span class="line">        <span class="variable">$views</span> = (!<span class="keyword">empty</span>(<span class="variable">$fields</span>[<span class="string">&#x27;views&#x27;</span>])) ? <span class="title function_ invoke__">intval</span>(<span class="variable">$fields</span>[<span class="string">&#x27;views&#x27;</span>]) : <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="variable">$views</span> = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//增加浏览次数</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$widget</span>-&gt;<span class="title function_ invoke__">is</span>(<span class="string">&#x27;single&#x27;</span>)) &#123;</span><br><span class="line">        <span class="variable">$vieweds</span> = <span class="title class_">Typecho_Cookie</span>::<span class="title function_ invoke__">get</span>(<span class="string">&#x27;contents_viewed&#x27;</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">empty</span>(<span class="variable">$vieweds</span>))</span><br><span class="line">            <span class="variable">$vieweds</span> = <span class="keyword">array</span>();</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="variable">$vieweds</span> = <span class="title function_ invoke__">explode</span>(<span class="string">&#x27;,&#x27;</span>, <span class="variable">$vieweds</span>);</span><br><span class="line">        <span class="keyword">if</span> (!<span class="title function_ invoke__">in_array</span>(<span class="variable">$widget</span>-&gt;cid, <span class="variable">$vieweds</span>)) &#123;</span><br><span class="line">            <span class="variable">$views</span> = <span class="variable">$views</span> + <span class="number">1</span>;</span><br><span class="line">            <span class="variable">$widget</span>-&gt;<span class="title function_ invoke__">setField</span>(<span class="string">&#x27;views&#x27;</span>, <span class="string">&#x27;str&#x27;</span>, <span class="title function_ invoke__">strval</span>(<span class="variable">$views</span>), <span class="variable">$widget</span>-&gt;cid);</span><br><span class="line">            <span class="variable">$vieweds</span>[] = <span class="variable">$widget</span>-&gt;cid;</span><br><span class="line">            <span class="variable">$vieweds</span> = <span class="title function_ invoke__">implode</span>(<span class="string">&#x27;,&#x27;</span>, <span class="variable">$vieweds</span>);</span><br><span class="line">            <span class="title class_">Typecho_Cookie</span>::<span class="title function_ invoke__">set</span>(<span class="string">&quot;contents_viewed&quot;</span>,<span class="variable">$vieweds</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;&#123;views&#125;&quot;</span>, <span class="variable">$views</span>, <span class="variable">$format</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>系统</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -8536,6 +8536,39 @@ ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2</p>
       </tags>
   </entry>
   <entry>
+    <title>Nginx 反向代理之神奇的斜线</title>
+    <url>/2023/06/Nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B9%8B%E7%A5%9E%E5%A5%87%E7%9A%84%E6%96%9C%E7%BA%BF/index.html</url>
+    <content><![CDATA[<h1 id="nginx-反向代理之神奇的斜线">Nginx 反向代理之神奇的斜线</h1>
+<h3 id="**代理模式**"><strong>代理模式</strong></h3>
+<p>在客户端中请求服务器A，反向代理到服务器B，对于如下4组配置的代理效果如下。</p>
+<blockquote>
+<p>效果1</p>
+</blockquote>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="comment"># A实际发起的请求路劲 -&gt; B收到的请求</span></span><br><span class="line"><span class="comment"># localhost/v1/api -&gt; /api</span></span><br><span class="line"><span class="section">location</span> /v1/ &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12/;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># localhost/v2/api -&gt; //api</span></span><br><span class="line"><span class="section">location</span> /v2 &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>效果2</p>
+</blockquote>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="comment"># localhost/v3/api -&gt; /v3/api</span></span><br><span class="line"><span class="section">location</span> /v3/ &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># localhost/v5/api -&gt; /v3/api</span></span><br><span class="line"><span class="section">location</span> /v4 &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>效果3</p>
+</blockquote>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="comment"># localhost/v5/api -&gt; /on/api</span></span><br><span class="line"><span class="section">location</span> /v5/ &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12/on/;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># localhost/v6/api -&gt; /on//api</span></span><br><span class="line"><span class="section">location</span> /v6 &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12/on/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>效果4</p>
+</blockquote>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="comment"># localhost/v7/api -&gt; /onapi</span></span><br><span class="line"><span class="section">location</span> /v7/ &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12/on;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># localhost/v8/api -&gt; /on/api</span></span><br><span class="line"><span class="section">location</span> /v8 &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12/on;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="**本地资源模式**"><strong>本地资源模式</strong></h4>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">location</span> / &#123;</span><br><span class="line">    <span class="attribute">root</span>   /usr/share/nginx/html;</span><br><span class="line">    <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># curl localhost/s1/api/index.html  -&gt; /usr/local/s1/api/index.html</span></span><br><span class="line"><span class="section">location</span> /s1/ &#123;</span><br><span class="line">  <span class="attribute">root</span> /usr/local/;</span><br><span class="line">  <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># curl localhost/s2/api/index.html  -&gt; /usr/local/s2/api/index.html</span></span><br><span class="line"><span class="section">location</span> /s2/ &#123;</span><br><span class="line">  <span class="attribute">root</span> /usr/local;</span><br><span class="line">  <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># curl localhost/s3/api/index.html  -&gt; /usr/local/s3/api/index.html</span></span><br><span class="line"><span class="section">location</span> /s3 &#123;</span><br><span class="line">  <span class="attribute">root</span> /usr/local/;</span><br><span class="line">  <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># curl localhost/s4/api/index.html  -&gt; /usr/local/s4/api/index.html</span></span><br><span class="line"><span class="section">location</span> /s4 &#123;</span><br><span class="line">  <span class="attribute">root</span> /usr/local;</span><br><span class="line">  <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># curl localhost/a1/api/index.html  -&gt; /usr/local/api/index.html</span></span><br><span class="line"><span class="section">location</span> /a1/ &#123;</span><br><span class="line">  <span class="attribute">alias</span> /usr/local/;</span><br><span class="line">  <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># curl localhost/a2/api/index.html  -&gt; /usr/local//api/index.html</span></span><br><span class="line"><span class="section">location</span> /a2 &#123;</span><br><span class="line">  <span class="attribute">alias</span> /usr/local/;</span><br><span class="line">  <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># curl localhost/hostname/  -&gt; /etc/hostname</span></span><br><span class="line"><span class="section">location</span> /hostname &#123;</span><br><span class="line">  <span class="attribute">alias</span> /etc;</span><br><span class="line">  <span class="attribute">index</span> hostname;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>服务</category>
+        <category>Nginx</category>
+      </categories>
+      <tags>
+        <tag>Nginx</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>git log 中文乱码的解决方案</title>
     <url>/2023/05/git-log-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.html</url>
     <content><![CDATA[<p>设置 Git 支持 utf-8 编码<br>
@@ -8853,34 +8886,6 @@ ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2</p>
       </tags>
   </entry>
   <entry>
-    <title>使用yum安装nginx</title>
-    <url>/2023/04/%E4%BD%BF%E7%94%A8yum%E5%AE%89%E8%A3%85nginx/index.html</url>
-    <content><![CDATA[<ul>
-<li><strong>添加CentOS 7 Nginx yum资源库</strong></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rpm -Uvh  http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>安装nginx</strong></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum -y install nginx</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>启动nginx</strong></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl start nginx</span><br></pre></td></tr></table></figure>
-<ul>
-<li>rpm方式升级并安装某个版本的Nginx</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rpm -Uvh http://nginx.org/packages/centos/7/x86_64/RPMS/nginx-1.18.0-1.el7.ngx.x86_64.rpm</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>服务</category>
-        <category>Nginx</category>
-      </categories>
-      <tags>
-        <tag>Nginx</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>普通x509证书转p12格式</title>
     <url>/2023/04/%E6%99%AE%E9%80%9Ax509%E8%AF%81%E4%B9%A6%E8%BD%ACp12%E6%A0%BC%E5%BC%8F/index.html</url>
     <content><![CDATA[<blockquote>
@@ -8908,6 +8913,34 @@ ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2</p>
       <tags>
         <tag>SSL</tag>
         <tag>TLS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用yum安装nginx</title>
+    <url>/2023/04/%E4%BD%BF%E7%94%A8yum%E5%AE%89%E8%A3%85nginx/index.html</url>
+    <content><![CDATA[<ul>
+<li><strong>添加CentOS 7 Nginx yum资源库</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rpm -Uvh  http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>安装nginx</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum -y install nginx</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>启动nginx</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl start nginx</span><br></pre></td></tr></table></figure>
+<ul>
+<li>rpm方式升级并安装某个版本的Nginx</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rpm -Uvh http://nginx.org/packages/centos/7/x86_64/RPMS/nginx-1.18.0-1.el7.ngx.x86_64.rpm</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>服务</category>
+        <category>Nginx</category>
+      </categories>
+      <tags>
+        <tag>Nginx</tag>
       </tags>
   </entry>
 </search>
