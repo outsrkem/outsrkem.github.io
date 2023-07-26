@@ -1011,6 +1011,46 @@ net<span class="hljs-selector-class">.ipv4</span><span class="hljs-selector-clas
       </categories>
   </entry>
   <entry>
+    <title>Linux常用命令记录</title>
+    <url>/2019/04/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/index.html</url>
+    <content><![CDATA[<h2 id="记录linux常用命令">记录Linux常用命令</h2>
+<span id="more"></span>
+<p>路径赋值变量</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">DIR=/usr/local &amp;&amp; cd $DIR</span><br></pre></td></tr></table></figure>
+<p>时间相关命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo &#x27;0 */2 * * * root /usr/sbin/ntpdate -u cn.pool.ntp.org &amp;&gt;/dev/null&#x27; &gt;&gt; /etc/crontab </span><br><span class="line">echo `date +%Y/%m/%d-%H:%M:%S`			//获取当天年月日时分秒</span><br><span class="line">echo `date +%Y%m%d`				//获取当前日期</span><br><span class="line">echo `date -d yesterday +%Y%m%d`	//获取昨天日期</span><br><span class="line">echo `date -d -2day +%Y%m%d`		//获取前两天的日期</span><br><span class="line">echo `date -d -3day +%Y%m%d`		//获取前三天的日期</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>查看所有用户创建的进程数,使用命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ps h -Led -o user | sort | uniq -c | sort -n</span><br></pre></td></tr></table></figure>
+<p>查看CPU核心数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#物理 CPU 个数：</span><br><span class="line">cat /proc/cpuinfo | grep &quot;physical id&quot; | sort -u | wc -l</span><br><span class="line">#每个物理 CPU 中核心（Core）的个数：</span><br><span class="line">cat /proc/cpuinfo | grep &quot;cpu cores&quot; | uniq | awk -F: &#x27;&#123;print $2&#125;&#x27; |sed &#x27;s/ //g&#x27;</span><br><span class="line">#逻辑 CPU 个数(线程数目)</span><br><span class="line">cat /proc/cpuinfo | grep &quot;processor&quot; | wc -l</span><br><span class="line">#查看 core id 的数量,即为所有物理 CPU 上的核心（Core）的个数（查看总线程数）</span><br><span class="line">cat /proc/cpuinfo | grep &quot;core id&quot; | uniq | wc -l</span><br></pre></td></tr></table></figure>
+<p>Centos7：改主机名（当前环境并量并永久生效）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hostnamectl set-hostname  xx.xx.xx    //这种方法大写会变小写</span><br><span class="line">还有一种方法，直接修改 /etc/hostname文件，这个可以保证大写不变</span><br><span class="line">注意，最好在 /etc/hosts 中增加 </span><br><span class="line">127.0.0.1 [yourhostname]</span><br><span class="line">否则可能导致各种问题。</span><br><span class="line">重启后生效</span><br></pre></td></tr></table></figure>
+<p>查看打开文件的个数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ulimit -a </span><br></pre></td></tr></table></figure>
+<p>句柄数修改，即open files值修改</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat &lt;&lt; EFO &gt;&gt; /etc/security/limits.conf</span><br><span class="line">* soft nofile 65530</span><br><span class="line">* hard nofile 65530</span><br><span class="line">EFO</span><br></pre></td></tr></table></figure>
+<p>备份数据库</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqldump -uroot -ppasswd --databases  databases &gt; data.sql</span><br></pre></td></tr></table></figure>
+<p>yum下载二进制包方法</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum -y install yum-utils    //安装下载工具</span><br><span class="line">yumdownloader httpd --resolve --destdir=/root/package/httpd   //下载httpd包，包括依赖包。</span><br></pre></td></tr></table></figure>
+<p>查看是否插网线，1表示有，0表示无</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat /sys/class/net/eth0/carrier</span><br></pre></td></tr></table></figure>
+<p>修改docker目录，centos7，在ExecStart项后面添加–graph /home/docker，即可指定到/home/docker</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /usr/lib/systemd/system/docker.service</span><br><span class="line">ExecStart=/usr/bin/dockerd-current --graph /home/docker \</span><br><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure>
+<p>关闭防火墙及selinux</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sed -i &quot;s/SELINUX=.*/SELINUX=disabled/g&quot; /etc/selinux/config</span><br><span class="line">iptables -F &amp;&amp; service iptables stop &amp;&amp; chkconfig iptables off</span><br><span class="line">chkconfig  | grep iptab &amp;&amp; shutdown -r now</span><br></pre></td></tr></table></figure>
+<p>设置时区</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">timedatectl set-timezone &quot;Asia/Shanghai&quot; &amp;&amp; timedatectl</span><br></pre></td></tr></table></figure>
+<p>IP过滤</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">grep -E &quot;^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.)&#123;3&#125;([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$&quot; ip.txt</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>脚本</category>
+      </categories>
+      <tags>
+        <tag>shell</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Markdown语法</title>
     <url>/2019/04/Markdown%E8%AF%AD%E6%B3%95/index.html</url>
     <content><![CDATA[<p>我们理解您需要更便捷更高效的工具记录思想，整理笔记、知识，并将其中承载的价值传播给他人，<strong>Cmd Markdown</strong> 是我们给出的答案 —— 我们为记录思想和分享知识提供更专业的工具。 您可以使用 Cmd Markdown：</p>
@@ -1139,44 +1179,28 @@ net<span class="hljs-selector-class">.ipv4</span><span class="hljs-selector-clas
 ]]></content>
   </entry>
   <entry>
-    <title>Linux常用命令记录</title>
-    <url>/2019/04/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E8%AE%B0%E5%BD%95/index.html</url>
-    <content><![CDATA[<h2 id="记录linux常用命令">记录Linux常用命令</h2>
+    <title>VIM编辑器</title>
+    <url>/2019/05/VIM%E7%BC%96%E8%BE%91%E5%99%A8/index.html</url>
+    <content><![CDATA[<h2 id="vim编辑器">vim编辑器</h2>
 <span id="more"></span>
-<p>路径赋值变量</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">DIR=/usr/local &amp;&amp; cd $DIR</span><br></pre></td></tr></table></figure>
-<p>时间相关命令</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo &#x27;0 */2 * * * root /usr/sbin/ntpdate -u cn.pool.ntp.org &amp;&gt;/dev/null&#x27; &gt;&gt; /etc/crontab </span><br><span class="line">echo `date +%Y/%m/%d-%H:%M:%S`			//获取当天年月日时分秒</span><br><span class="line">echo `date +%Y%m%d`				//获取当前日期</span><br><span class="line">echo `date -d yesterday +%Y%m%d`	//获取昨天日期</span><br><span class="line">echo `date -d -2day +%Y%m%d`		//获取前两天的日期</span><br><span class="line">echo `date -d -3day +%Y%m%d`		//获取前三天的日期</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>查看所有用户创建的进程数,使用命令</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ps h -Led -o user | sort | uniq -c | sort -n</span><br></pre></td></tr></table></figure>
-<p>查看CPU核心数</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#物理 CPU 个数：</span><br><span class="line">cat /proc/cpuinfo | grep &quot;physical id&quot; | sort -u | wc -l</span><br><span class="line">#每个物理 CPU 中核心（Core）的个数：</span><br><span class="line">cat /proc/cpuinfo | grep &quot;cpu cores&quot; | uniq | awk -F: &#x27;&#123;print $2&#125;&#x27; |sed &#x27;s/ //g&#x27;</span><br><span class="line">#逻辑 CPU 个数(线程数目)</span><br><span class="line">cat /proc/cpuinfo | grep &quot;processor&quot; | wc -l</span><br><span class="line">#查看 core id 的数量,即为所有物理 CPU 上的核心（Core）的个数（查看总线程数）</span><br><span class="line">cat /proc/cpuinfo | grep &quot;core id&quot; | uniq | wc -l</span><br></pre></td></tr></table></figure>
-<p>Centos7：改主机名（当前环境并量并永久生效）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hostnamectl set-hostname  xx.xx.xx    //这种方法大写会变小写</span><br><span class="line">还有一种方法，直接修改 /etc/hostname文件，这个可以保证大写不变</span><br><span class="line">注意，最好在 /etc/hosts 中增加 </span><br><span class="line">127.0.0.1 [yourhostname]</span><br><span class="line">否则可能导致各种问题。</span><br><span class="line">重启后生效</span><br></pre></td></tr></table></figure>
-<p>查看打开文件的个数</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ulimit -a </span><br></pre></td></tr></table></figure>
-<p>句柄数修改，即open files值修改</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat &lt;&lt; EFO &gt;&gt; /etc/security/limits.conf</span><br><span class="line">* soft nofile 65530</span><br><span class="line">* hard nofile 65530</span><br><span class="line">EFO</span><br></pre></td></tr></table></figure>
-<p>备份数据库</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqldump -uroot -ppasswd --databases  databases &gt; data.sql</span><br></pre></td></tr></table></figure>
-<p>yum下载二进制包方法</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum -y install yum-utils    //安装下载工具</span><br><span class="line">yumdownloader httpd --resolve --destdir=/root/package/httpd   //下载httpd包，包括依赖包。</span><br></pre></td></tr></table></figure>
-<p>查看是否插网线，1表示有，0表示无</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat /sys/class/net/eth0/carrier</span><br></pre></td></tr></table></figure>
-<p>修改docker目录，centos7，在ExecStart项后面添加–graph /home/docker，即可指定到/home/docker</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /usr/lib/systemd/system/docker.service</span><br><span class="line">ExecStart=/usr/bin/dockerd-current --graph /home/docker \</span><br><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure>
-<p>关闭防火墙及selinux</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sed -i &quot;s/SELINUX=.*/SELINUX=disabled/g&quot; /etc/selinux/config</span><br><span class="line">iptables -F &amp;&amp; service iptables stop &amp;&amp; chkconfig iptables off</span><br><span class="line">chkconfig  | grep iptab &amp;&amp; shutdown -r now</span><br></pre></td></tr></table></figure>
-<p>设置时区</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">timedatectl set-timezone &quot;Asia/Shanghai&quot; &amp;&amp; timedatectl</span><br></pre></td></tr></table></figure>
-<p>IP过滤</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">grep -E &quot;^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.)&#123;3&#125;([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$&quot; ip.txt</span><br></pre></td></tr></table></figure>]]></content>
+<h4 id="配置介绍">配置介绍</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-rw-r--r--. 1 root root 1982 8月   2 2017 /etc/virc        vi 配置文件</span><br><span class="line">-rw-r--r--. 1 root root 1982 8月   2 2017 /etc/vimrc       vim 全局配置文件</span><br><span class="line">-rw-r--r--. 1 root root 1982 8月   2 2017 ~/.vimrc         vim 用户配置文件，默认没有，需要手工建立</span><br><span class="line">source ~/.vimrc 让配置文件立即生效，source 可用（.）代替，如 . /etc/vimrc</span><br><span class="line">:q!   放弃修改，所用用户可用</span><br><span class="line">:wq!  当没有写入权限时强制写入，只有 root 可用。</span><br><span class="line">:wq   保存退出</span><br><span class="line">ZZ    保存退出</span><br></pre></td></tr></table></figure>
+<h4 id="插入快捷键">插入快捷键</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">a  在光标所在字符后插入</span><br><span class="line">A  插入光标所在行行尾</span><br><span class="line">i  在光标所在字符前插入</span><br><span class="line">I  插入光标所在行行首</span><br><span class="line">o  在光标下插入新行</span><br><span class="line">O  在光标上插入新行</span><br></pre></td></tr></table></figure>
+<h4 id="光标移动快捷键">光标移动快捷键</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">H  向左     gg 移动到文件头</span><br><span class="line">L  向右     G  移动到文件尾</span><br><span class="line">J  向下     ^  移到行首</span><br><span class="line">K  向上     $  移到行尾</span><br></pre></td></tr></table></figure>
+<h4 id="删除操作">删除操作</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">x      删除单个字符</span><br><span class="line">nx     删除 n 个字符 dw 删除光标后一个字符串</span><br><span class="line">dd     删除单行 D  光标后删除到行尾</span><br><span class="line">ndd    删除单行</span><br><span class="line">:m,nd  从 m 行删除到 n 行</span><br><span class="line">dG     从光标所在行删除到文件尾</span><br><span class="line">C      当前位置删除到行尾，且打开编辑模式</span><br><span class="line">dw     当前位置删除一个字符串</span><br></pre></td></tr></table></figure>
+<h4 id="粘贴复制">粘贴复制</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yy         复制</span><br><span class="line">nyy        复制 n 行</span><br><span class="line">p          粘贴到光标下一行</span><br><span class="line">P          粘贴到光标上一行</span><br><span class="line">u          撤销</span><br><span class="line">ctrl+r     反撤销</span><br><span class="line">r          替换当前光标位置字符</span><br><span class="line">R          从光标位置开始替换，ESC 键结束</span><br><span class="line">/          查找，n 下一个，N 上一个，</span><br><span class="line">:noh       取消查找后的高亮</span><br><span class="line">:r! 命令   把命令结果写在光标所在行</span><br><span class="line">:r /etc/passwd 把/etc/passwd 文件内容载入到当前编辑的文件中</span><br></pre></td></tr></table></figure>
+<h4 id="替换">替换</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">:1,10s/old/new/g      把 1 到 10 行的 old 替换为 new</span><br><span class="line">:%s/old/new/g         把全文的 old 替换为 new（%代表全文）</span><br><span class="line">:1,10s/^/#/g          在 1 到 10 行的行首加入#</span><br></pre></td></tr></table></figure>
+<h4 id="辅助操作">辅助操作</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1) 显示行号  :set nu</span><br><span class="line">:set nonu</span><br><span class="line">2) 颜色开关 :syntax off</span><br><span class="line">:syntax on</span><br><span class="line">3) 快捷键 :map ^P I#&lt;ESC&gt; 当按下 ctrl+p，在行首加入“#” “^P”需要 ctrl+V+P 输入</span><br><span class="line">:map ^B ^x 当按下 ctrl+b，删除行首的一个字母，用于删除注释</span><br><span class="line">4) 替换</span><br><span class="line">:ab 原字符  目标字符</span><br><span class="line">:ab abc ABC1234@qq.com</span><br></pre></td></tr></table></figure>
+]]></content>
       <categories>
-        <category>脚本</category>
+        <category>系统</category>
       </categories>
-      <tags>
-        <tag>shell</tag>
-      </tags>
   </entry>
   <entry>
     <title>TCP血案</title>
@@ -1433,45 +1457,6 @@ b 、Zabbix 配置文件中查找”Alert”查看告警脚本存放路径：</p
       </tags>
   </entry>
   <entry>
-    <title>浏览器导入p12证书</title>
-    <url>/2023/04/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AF%BC%E5%85%A5p12%E8%AF%81%E4%B9%A6/index.html</url>
-    <content><![CDATA[<h2 id="浏览器导入p12证书">浏览器导入p12证书</h2>
-<p><a href="https://blog.csdn.net/u011285281/article/details/127111816">https://blog.csdn.net/u011285281/article/details/127111816</a></p>
-<p><a href="https://www.lmlphp.com/user/58195/article/item/787940/">https://www.lmlphp.com/user/58195/article/item/787940/</a></p>
-]]></content>
-      <categories>
-        <category>系统</category>
-      </categories>
-      <tags>
-        <tag>SSL</tag>
-        <tag>TLS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>VIM编辑器</title>
-    <url>/2019/05/VIM%E7%BC%96%E8%BE%91%E5%99%A8/index.html</url>
-    <content><![CDATA[<h2 id="vim编辑器">vim编辑器</h2>
-<span id="more"></span>
-<h4 id="配置介绍">配置介绍</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-rw-r--r--. 1 root root 1982 8月   2 2017 /etc/virc        vi 配置文件</span><br><span class="line">-rw-r--r--. 1 root root 1982 8月   2 2017 /etc/vimrc       vim 全局配置文件</span><br><span class="line">-rw-r--r--. 1 root root 1982 8月   2 2017 ~/.vimrc         vim 用户配置文件，默认没有，需要手工建立</span><br><span class="line">source ~/.vimrc 让配置文件立即生效，source 可用（.）代替，如 . /etc/vimrc</span><br><span class="line">:q!   放弃修改，所用用户可用</span><br><span class="line">:wq!  当没有写入权限时强制写入，只有 root 可用。</span><br><span class="line">:wq   保存退出</span><br><span class="line">ZZ    保存退出</span><br></pre></td></tr></table></figure>
-<h4 id="插入快捷键">插入快捷键</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">a  在光标所在字符后插入</span><br><span class="line">A  插入光标所在行行尾</span><br><span class="line">i  在光标所在字符前插入</span><br><span class="line">I  插入光标所在行行首</span><br><span class="line">o  在光标下插入新行</span><br><span class="line">O  在光标上插入新行</span><br></pre></td></tr></table></figure>
-<h4 id="光标移动快捷键">光标移动快捷键</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">H  向左     gg 移动到文件头</span><br><span class="line">L  向右     G  移动到文件尾</span><br><span class="line">J  向下     ^  移到行首</span><br><span class="line">K  向上     $  移到行尾</span><br></pre></td></tr></table></figure>
-<h4 id="删除操作">删除操作</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">x      删除单个字符</span><br><span class="line">nx     删除 n 个字符 dw 删除光标后一个字符串</span><br><span class="line">dd     删除单行 D  光标后删除到行尾</span><br><span class="line">ndd    删除单行</span><br><span class="line">:m,nd  从 m 行删除到 n 行</span><br><span class="line">dG     从光标所在行删除到文件尾</span><br><span class="line">C      当前位置删除到行尾，且打开编辑模式</span><br><span class="line">dw     当前位置删除一个字符串</span><br></pre></td></tr></table></figure>
-<h4 id="粘贴复制">粘贴复制</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yy         复制</span><br><span class="line">nyy        复制 n 行</span><br><span class="line">p          粘贴到光标下一行</span><br><span class="line">P          粘贴到光标上一行</span><br><span class="line">u          撤销</span><br><span class="line">ctrl+r     反撤销</span><br><span class="line">r          替换当前光标位置字符</span><br><span class="line">R          从光标位置开始替换，ESC 键结束</span><br><span class="line">/          查找，n 下一个，N 上一个，</span><br><span class="line">:noh       取消查找后的高亮</span><br><span class="line">:r! 命令   把命令结果写在光标所在行</span><br><span class="line">:r /etc/passwd 把/etc/passwd 文件内容载入到当前编辑的文件中</span><br></pre></td></tr></table></figure>
-<h4 id="替换">替换</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">:1,10s/old/new/g      把 1 到 10 行的 old 替换为 new</span><br><span class="line">:%s/old/new/g         把全文的 old 替换为 new（%代表全文）</span><br><span class="line">:1,10s/^/#/g          在 1 到 10 行的行首加入#</span><br></pre></td></tr></table></figure>
-<h4 id="辅助操作">辅助操作</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1) 显示行号  :set nu</span><br><span class="line">:set nonu</span><br><span class="line">2) 颜色开关 :syntax off</span><br><span class="line">:syntax on</span><br><span class="line">3) 快捷键 :map ^P I#&lt;ESC&gt; 当按下 ctrl+p，在行首加入“#” “^P”需要 ctrl+V+P 输入</span><br><span class="line">:map ^B ^x 当按下 ctrl+b，删除行首的一个字母，用于删除注释</span><br><span class="line">4) 替换</span><br><span class="line">:ab 原字符  目标字符</span><br><span class="line">:ab abc ABC1234@qq.com</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>系统</category>
-      </categories>
-  </entry>
-  <entry>
     <title>时间同步服务器NTP搭建</title>
     <url>/2019/05/%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1%E5%99%A8NTP%E6%90%AD%E5%BB%BA/index.html</url>
     <content><![CDATA[<h4 id="ntp服务器">NTP服务器</h4>
@@ -1517,42 +1502,18 @@ UTC/GMT =03/17/2011  1:30am and 7:00am</p>
       </tags>
   </entry>
   <entry>
-    <title>Linux 配置 Git 命令提示符</title>
-    <url>/2020/07/Linux-%E9%85%8D%E7%BD%AE-Git-%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6/index.html</url>
-    <content><![CDATA[<h2 id="linux-配置 git 命令提示符">Linux 配置 Git 命令提示符</h2>
-<h3 id="git-命令补全设置">Git 命令补全设置</h3>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这个目录是源码包解压后的目录</span></span><br><span class="line">cd ./contrib/completion</span><br><span class="line">cp git-completion.bash git-prompt.sh /etc/profile.d/</span><br><span class="line">cd /etc/profile.d/ &amp;&amp; ln -s git-completion.bash git-completion.sh</span><br></pre></td></tr></table></figure>
-<h3 id="定制git命令提示符">定制git命令提示符</h3>
-<blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat &lt;&lt; &#x27;EOF&#x27; &gt; /etc/profile.d/git.sh</span><br><span class="line">export GIT_PS1_SHOWDIRTYSTATE=1</span><br><span class="line">export GIT_PS1_SHOWSTASHSTATE=1</span><br><span class="line">export GIT_PS1_SHOWUNTRACKEDFILES=1</span><br><span class="line">export GIT_PS1_SHOWUPSTREAM=&quot;verbose git svn&quot;</span><br><span class="line">export GIT_HOME=/usr/local/git</span><br><span class="line">export PATH=$PATH:$GIT_HOME/bin</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-<p>主要是 $(__git_ps1 “(%s)”)</p>
-<p>写法一</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat &lt;&lt; &#x27;EOF&#x27; &gt;&gt; /etc/bashrc</span><br><span class="line">export PS1=&#x27;\[\e[1;32m\][\u@\h \W\[\033[1;31m\]$(__git_ps1 &quot;(%s)&quot;)\[\e[1;32m\]]\$ \[\e[0m\]&#x27;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-<p><img src="/images/2022-07/1.png" alt=""></p>
-<p>写法二</p>
-<p>最好自定义的这些参数都写在if里面，避免非登陆时的bash中变量多次叠加。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if shopt -q login_shell ; then</span><br><span class="line">    export PS1=&#x27;\[\e[1;32m\][\u@\h \W]\$ \[\e[0m\]&#x27;</span><br><span class="line">    export PS1=&#x27;$(__git_ps1 &quot;(%s)&quot;)&#x27;$PS1</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<p>这个每次执行bash都会叠加命令提示符号<br>
-<img src="/images/2022-07/2.png" alt=""><br>
-这个便不会，主要是写在了if里面 ：if shopt -q login_shell ; then<br>
-<img src="/images/2022-07/3.png" alt=""><br>
-写法三</p>
-<p>个人更喜欢这种写法，有git和无git按个人环境配置即可</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if shopt -q login_shell ; then</span><br><span class="line">    # export PS1=&#x27;\[\e[1;32m\][\u@\h \W]\$ \[\e[0m\]&#x27;  # 无Git环境</span><br><span class="line">    export PS1=&#x27;\[\e[1;32m\][\u@\h \W\[\033[1;31m\]$(__git_ps1 &quot;(%s)&quot;)\[\e[1;32m\]]\$ \[\e[0m\]&#x27;  # 有Git环境</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<p><img src="/images/2022-07/4.png" alt=""></p>
-</blockquote>
-<h4 id="附：">附：</h4>
-<blockquote>
-<p>CentOS 默认PS1变量</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">PS1=[\u@\h \W]\$</span><br></pre></td></tr></table></figure>
-</blockquote>
+    <title>浏览器导入p12证书</title>
+    <url>/2023/04/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AF%BC%E5%85%A5p12%E8%AF%81%E4%B9%A6/index.html</url>
+    <content><![CDATA[<h2 id="浏览器导入p12证书">浏览器导入p12证书</h2>
+<p><a href="https://blog.csdn.net/u011285281/article/details/127111816">https://blog.csdn.net/u011285281/article/details/127111816</a></p>
+<p><a href="https://www.lmlphp.com/user/58195/article/item/787940/">https://www.lmlphp.com/user/58195/article/item/787940/</a></p>
 ]]></content>
       <categories>
-        <category>服务</category>
-        <category>Git</category>
+        <category>系统</category>
       </categories>
       <tags>
-        <tag>Git</tag>
+        <tag>SSL</tag>
+        <tag>TLS</tag>
       </tags>
   </entry>
   <entry>
@@ -1636,6 +1597,45 @@ RUN 指令最常见的用法是安装包用的<code> apt-get</code>。因为 <co
       </categories>
       <tags>
         <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux 配置 Git 命令提示符</title>
+    <url>/2020/07/Linux-%E9%85%8D%E7%BD%AE-Git-%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6/index.html</url>
+    <content><![CDATA[<h2 id="linux-配置 git 命令提示符">Linux 配置 Git 命令提示符</h2>
+<h3 id="git-命令补全设置">Git 命令补全设置</h3>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这个目录是源码包解压后的目录</span></span><br><span class="line">cd ./contrib/completion</span><br><span class="line">cp git-completion.bash git-prompt.sh /etc/profile.d/</span><br><span class="line">cd /etc/profile.d/ &amp;&amp; ln -s git-completion.bash git-completion.sh</span><br></pre></td></tr></table></figure>
+<h3 id="定制git命令提示符">定制git命令提示符</h3>
+<blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat &lt;&lt; &#x27;EOF&#x27; &gt; /etc/profile.d/git.sh</span><br><span class="line">export GIT_PS1_SHOWDIRTYSTATE=1</span><br><span class="line">export GIT_PS1_SHOWSTASHSTATE=1</span><br><span class="line">export GIT_PS1_SHOWUNTRACKEDFILES=1</span><br><span class="line">export GIT_PS1_SHOWUPSTREAM=&quot;verbose git svn&quot;</span><br><span class="line">export GIT_HOME=/usr/local/git</span><br><span class="line">export PATH=$PATH:$GIT_HOME/bin</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<p>主要是 $(__git_ps1 “(%s)”)</p>
+<p>写法一</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat &lt;&lt; &#x27;EOF&#x27; &gt;&gt; /etc/bashrc</span><br><span class="line">export PS1=&#x27;\[\e[1;32m\][\u@\h \W\[\033[1;31m\]$(__git_ps1 &quot;(%s)&quot;)\[\e[1;32m\]]\$ \[\e[0m\]&#x27;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2022-07/1.png" alt=""></p>
+<p>写法二</p>
+<p>最好自定义的这些参数都写在if里面，避免非登陆时的bash中变量多次叠加。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if shopt -q login_shell ; then</span><br><span class="line">    export PS1=&#x27;\[\e[1;32m\][\u@\h \W]\$ \[\e[0m\]&#x27;</span><br><span class="line">    export PS1=&#x27;$(__git_ps1 &quot;(%s)&quot;)&#x27;$PS1</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>这个每次执行bash都会叠加命令提示符号<br>
+<img src="/images/2022-07/2.png" alt=""><br>
+这个便不会，主要是写在了if里面 ：if shopt -q login_shell ; then<br>
+<img src="/images/2022-07/3.png" alt=""><br>
+写法三</p>
+<p>个人更喜欢这种写法，有git和无git按个人环境配置即可</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if shopt -q login_shell ; then</span><br><span class="line">    # export PS1=&#x27;\[\e[1;32m\][\u@\h \W]\$ \[\e[0m\]&#x27;  # 无Git环境</span><br><span class="line">    export PS1=&#x27;\[\e[1;32m\][\u@\h \W\[\033[1;31m\]$(__git_ps1 &quot;(%s)&quot;)\[\e[1;32m\]]\$ \[\e[0m\]&#x27;  # 有Git环境</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2022-07/4.png" alt=""></p>
+</blockquote>
+<h4 id="附：">附：</h4>
+<blockquote>
+<p>CentOS 默认PS1变量</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">PS1=[\u@\h \W]\$</span><br></pre></td></tr></table></figure>
+</blockquote>
+]]></content>
+      <categories>
+        <category>服务</category>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
@@ -1728,61 +1728,6 @@ RUN 指令最常见的用法是安装包用的<code> apt-get</code>。因为 <co
       </tags>
   </entry>
   <entry>
-    <title>iptablse服务管理</title>
-    <url>/2020/07/iptables%E6%93%8D%E4%BD%9C/index.html</url>
-    <content><![CDATA[<p>iptablse服务管理</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">service iptables start|stop|restart|status</span><br><span class="line">service iptables save   //定义的所有内容，在重启时都会失效。调用save命令可以把规则保存到文件/etc/sysconfig/iptables中。</span><br><span class="line">iptables-save           //保存规则</span><br><span class="line">iptables-restore        //加载规则。开机的时候，会自动加载/etc/sysconfig/iptables</span><br><span class="line">iptables-restore &lt; /etc/sysconfig/iptables2     //加载自定义的规则文件</span><br><span class="line">//iptables服务配置文件：   /etc/sysconfig/iptables-config</span><br><span class="line">//iptables规则文件：       /etc/sysconfig/iptables</span><br><span class="line">echo &quot;1&quot;&gt;/proc/sys/net/ipv4/ip_forward   //打开iptables转发：</span><br></pre></td></tr></table></figure>
-<p>COMMAND 命令选项</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-A|--append  CHAIN                                 //链尾添加新规则</span><br><span class="line">-D|--delete  CHAIN [RULENUM]                       //删除链中规则，按需序号或内容确定要删除的规则</span><br><span class="line">-I|--insert  CHAIN [RULENUM]                       //在链中插入一条新的规则，默认插在开头</span><br><span class="line">-R|--replace CHAIN  RULENUM                        //替换、修改一条规则，按序号或内容确定</span><br><span class="line">-L|--list   [CHAIN [RULENUM]]                      //列出指定链或所有链中指定规则或所有规则</span><br><span class="line">-S|--list-urles [CHAIN [RULENUM]]                  //显示链中规则</span><br><span class="line">-F|--flush [CHAIN]                                 //清空指定链或所有链中规则</span><br><span class="line">-Z|--zero [CHAIN [RULENUM]]                        //重置指定链或所有链的计数器(匹配的数据包数和流量字节数)</span><br><span class="line">-N|--new-chain CHAIN                               //新建自定义规则链</span><br><span class="line">-X|--delete-cahin [CHAIN]                          //删除指定表中用户自定义的规则链</span><br><span class="line">-E|--rename-chain OLDCHAIN NEWCHAIN                //重命名链，移动任何引用</span><br><span class="line">-P|-policy CHAIN TARGET                            //设置链的默认策略，数据包未匹配任意一条规则就按此策略处理</span><br></pre></td></tr></table></figure>
-<p>CRETIRIA 条件匹配</p>
-<p>分为基本匹配和扩展匹配，扩展匹配又分为隐式匹配和显示匹配</p>
-<p>基本匹配</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-p|--proto  PROTO                      //按协议匹配，如tcp、udp、icmp，all表示所有协议。 （/etc/protocols中的协议名）</span><br><span class="line">-s|--source ADDRESS[/mask]...          //按数据包的源地址匹配，可使用IP地址、网络地址、主机名、域名</span><br><span class="line">-d|--destination ADDRESS[/mask]...     //按目标地址匹配，可使用IP地址、网络地址、主机名、域名</span><br><span class="line">-i|--in-interface INPUTNAME[ +]        //按入站接口(网卡)名匹配，+用于通配。如 eth0, eth+ 。一般用在INPUT和PREROUTING链</span><br><span class="line">-o|--out-interface OUTPUTNAME[+]       //按出站接口(网卡)名匹配，+用于通配。如 eth0, eth+ 。一般用在OUTPUT和POSTROUTING链</span><br><span class="line">可使用 ! 可以否定一个子句，如-p !tcp</span><br></pre></td></tr></table></figure>
-<p>扩展匹配</p>
-<p>-m|–match MATCHTYPE  EXTENSIONMATCH…    //扩展匹配，可能加载extension</p>
-<p>如: -p tcp  -m tcp  --dport 80</p>
-<p>隐式扩展匹配(对-p PROTO的扩展，或者说是-p PROTO的附加匹配条件)</p>
-<p>-m PROTO 可以省略，所以叫隐式</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-m tcp   //-p tcp的扩展</span><br><span class="line">　　　　--sport  [!]N[:M]                      //源端口, 服务名、端口、端口范围。</span><br><span class="line">　　　　--dport  [!]N[:M]                      //目标端口，服务名、端口、端口范围</span><br><span class="line">　　　　--tcp-flags CHECKFLAGS FLAGSOFTRUE  //TCP标志位:SYN(同步),ACK(应答),RST(重置),FIN(结束),URG(紧急),PSH(强迫推送)。多个标志位逗号分隔。</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　　//CHECKFLAGS为要检查的标志位，FLAGSOFTRUE为必须为1的标志位（其余的应该为0）</span><br><span class="line">　　　　--syn                               //第一次握手。 等效于 --tcpflags syn,ack,fin,rst syn   四个标志中只有syn为1</span><br><span class="line">-m udp   //-p udp的扩展</span><br><span class="line">　　　　--sport N[-M] </span><br><span class="line">　　　　--dport N[-M]</span><br><span class="line">-m icmp  //隐含条件为-p icmp</span><br><span class="line">　　　　--icmp-type  N             //8:echo-request  0:echo-reply</span><br></pre></td></tr></table></figure>
-<p>显示扩展匹配</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-m state</span><br><span class="line">　　　　--state    //连接状态检测，NEW,ESTABLISHED,RELATED,INVALID</span><br><span class="line">-m multiport </span><br><span class="line">　　　　--source-ports   PORT[,PORT]...|N:M            //多个源端口，多个端口用逗号分隔，</span><br><span class="line">　　　　--destination-ports PORT[,PORT]...|N:M         //多个目的端口</span><br><span class="line">　　　　--ports     　　　　　　　　　　　　　　　　　　　　 //多个端口，每个包的源端口和目的端口相同才会匹配</span><br><span class="line">-m limit</span><br><span class="line">　　　　--limit   N/UNIT    //速率，如3/minute, 1/s, n/second , n/day</span><br><span class="line">　　　　--limit-burst N     //峰值速率，如100，表示最大不能超过100个数据包</span><br><span class="line">-m connlimit</span><br><span class="line">　　　　--connlimit-above N  //多于n个，前面加!取反</span><br><span class="line">-m iprange</span><br><span class="line">　　　　--src-range IP-IP</span><br><span class="line">　　　　--dst-range IP-IP</span><br><span class="line">-m mac                    </span><br><span class="line">　　　　--mac-source         //mac地址限制，不能用在OUTPUT和POSTROUTING规则链上，因为封包要送到网卡后，才能由网卡驱动程序透过ARP 通讯协议查出目的地的MAC 地址</span><br><span class="line">-m string</span><br><span class="line">　　　　--algo [bm|kmp]      //匹配算法</span><br><span class="line">　　　　--string &quot;PATTERN&quot;   //匹配字符模式</span><br><span class="line">-m recent</span><br><span class="line">　　　　--name               //设定列表名称，默认为DEFAULT</span><br><span class="line">　　　　--rsource            //源地址</span><br><span class="line">　　　　--rdest              //目的地址</span><br><span class="line">　　　　--set                //添加源地址的包到列表中</span><br><span class="line">　　　　--update             //每次建立连接都更新列表</span><br><span class="line">　　　　--rcheck             //检查地址是否在列表</span><br><span class="line">　　　　--seconds            //指定时间。必须与--rcheck或--update配合使用</span><br><span class="line">　　　　--hitcount           //命中次数。必须和--rcheck或--update配合使用</span><br><span class="line">　　　　--remove             //在列表中删除地址</span><br><span class="line">-m time</span><br><span class="line">　　　　--timestart h:mm</span><br><span class="line">　　　　--timestop  hh:mm</span><br><span class="line">　　　　--days DAYS          //Mon,Tue,Wed,Thu,Fri,Sat,Sun; 逗号分隔</span><br><span class="line">-m mark</span><br><span class="line">　　　　--mark N            //是否包含标记号N</span><br><span class="line">-m owner </span><br><span class="line">　　　　--uid-owner 500   //用来匹配来自本机的封包，是否为某特定使用者所产生的,可以避免服务器使用root或其它身分将敏感数据传送出</span><br><span class="line">　　　　--gid-owner O     //用来匹配来自本机的封包，是否为某特定使用者群组所产生的</span><br><span class="line">　　　　--pid-owner 78    //用来匹配来自本机的封包，是否为某特定进程所产生的</span><br><span class="line">　　　　--sid-owner 100   //用来匹配来自本机的封包，是否为某特定连接（Session ID）的响应封包</span><br></pre></td></tr></table></figure>
-<p>ACTION 目标策略(TARGET)</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-j|--jump TARGET                //跳转到目标规则，可能加载target extension</span><br><span class="line">-g|--goto  CHAIN                //跳转到指定链，不再返回</span><br><span class="line">ACCEPT             规则验证通过，不再检查当前链的后续规则，直接跳到下一个规则链。</span><br><span class="line">DROP                直接丢弃数据包，不给任何回应。中断过滤。</span><br><span class="line">REJECT             拒绝数据包通过，会返回响应信息。中断过滤。</span><br><span class="line">--reject-with  tcp-reset|port-unreachable|echo-reply</span><br><span class="line">LOG                  在/var/log/messages文件中记录日志，然后将数据包传递给下一条规则。详细位置可查看/etc/syslog.conf配置文件</span><br><span class="line">--log-prefix &quot;INPUT packets&quot;</span><br><span class="line">ULOG                更广范围的日志记录信息</span><br><span class="line">QUEUE              防火墙将数据包移交到用户空间，通过一个内核模块把包交给本地用户程序。中断过滤。</span><br><span class="line">RETURN            防火墙停止执行当前链中的后续规则，并返回到调用链。主要用在自定义链中。</span><br><span class="line">custom_chain    转向自定义规则链</span><br><span class="line">DNAT                目标地址转换，改变数据包的目标地址。外网访问内网资源，主要用在PREROUTING。完成后跳到下一个规则链</span><br><span class="line">--to-destination ADDRESS[-ADDRESS][:PORT[-PORT]]</span><br><span class="line">SNAT                源地址转换，改变数据包的源地址。内网访问外网资源。主机的IP地址必须是静态的，主要用在POSTROUTING。完成后跳到下一个规则链。</span><br><span class="line">--to-source ADDRESS[-ADDRESS][:PORT[-PORT]]</span><br><span class="line">MASQUERADE   源地址伪装，用于主机IP是ISP动态分配的情况，会从网卡读取主机IP。直接跳到下一个规则链。</span><br><span class="line">--to-ports 1024-31000</span><br><span class="line">REDIRECT        数据包重定向，主要是端口重定向，把包分流。处理完成后继续匹配其他规则。能会用这个功能来迫使站点上的所有Web流量都通过一个Web高速缓存，比如Squid。</span><br><span class="line">--to-ports 8080</span><br><span class="line">MARK                 打防火墙标记。继续匹配规则。</span><br><span class="line">--set-mark 2</span><br><span class="line">MIRROR           发送包之前交换IP源和目的地址，将数据包返回。中断过滤。</span><br></pre></td></tr></table></figure>
-<p>辅助选项</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-t|--table TABLE     //指定操作的表，默认的表为filter</span><br><span class="line">-n|--numeric         //用数字形式显示地址和端口，显示主机IP地址而不是主机名</span><br><span class="line">-x|--exact           //计数器显示精确值，不做单位换算</span><br><span class="line">-v|--verbose  (x3)   //查看规则列表时，显示更详细的信息</span><br><span class="line">-line-numbers        //查看规则表时，显示在链中的序号</span><br><span class="line">-V|--version </span><br><span class="line">-h|--help   </span><br><span class="line">[option]  --help     //查看特定选项的帮助，如iptables -p icmp --help</span><br><span class="line">--fragment -f               //match second or further fragments only</span><br><span class="line">--modprobe=&lt;command&gt;        //try to insert modules using this command</span><br><span class="line">--set-counters PKTS BYTES   //set the counter during insert/append</span><br></pre></td></tr></table></figure>
-<p>state  TCP链接状态</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">NEW                 第一次握手，要起始一个连接（重设连接或将连接重导向） </span><br><span class="line">ESTABLISHED   数据包属于某个已经建立的连接。第二次和第三次握手   (ack=1)</span><br><span class="line">INVALID           数据包的连接编号（Session ID）无法辨识或编号不正确。如SYN=1 ACK=1 RST=1   </span><br><span class="line">RELATED          表示该封包是属于某个已经建立的连接，所建立的新连接。如有些服务使用两个相关的端口，如FTP，21和20端口一去一回，FTP数据传输(上传/下载)还会使用特殊的端口</span><br><span class="line">只允许NEW和ESTABLISHED进，只允许ESTABLISHED出可以阻止反弹式木马。</span><br></pre></td></tr></table></figure>
-<p>使用示例</p>
-<h2 id=""><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">iptables -F           //删除iptables现有规则</span><br><span class="line">iptables -L [-v[vv] -n]   //查看iptables规则</span><br><span class="line">iptables -A INPUT -i eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT       //在INPUT链尾添加一条规则</span><br><span class="line">iptables -I INPUT 2 -i eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT     //在INPUT链中插入为第2条规则</span><br><span class="line">iptables -D  INPUT 2      //删除INPUT链中第2条规则</span><br><span class="line">iptables -R INPUT 3 -i eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT    //替换修改第三条规则</span><br><span class="line">iptables -P INPUT DROP    //设置INPUT链的默认策略为DROP</span><br><span class="line">//允许远程主机进行SSH连接</span><br><span class="line">iptables -A INPUT -i eth0 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT </span><br><span class="line">iptables -A OUTPUT -o eth0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT </span><br><span class="line">//允许本地主机进行SSH连接</span><br><span class="line">iptables -A OUTPUT -o eth0 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT </span><br><span class="line">iptables -A INTPUT -i eth0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT </span><br><span class="line">//允许HTTP请求</span><br><span class="line">iptables -A INPUT -i eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT </span><br><span class="line">iptables -A OUTPUT -o eth0 -p tcp --sport 80 -m state --state ESTABLISHED -j ACCEPT </span><br><span class="line">//限制ping 192.168.146.3主机的数据包数，平均2/s个，最多不能超过3个</span><br><span class="line">iptables -A INPUT -i eth0 -d 192.168.146.3 -p icmp --icmp-type 8 -m limit --limit 2/second --limit-burst 3 -j ACCEPT </span><br><span class="line">//限制SSH连接速率（默认策略是DROP）</span><br><span class="line">iptables -I INPUT 1 -p tcp --dport 22 -d 192.168.146.3 -m state --state ESTABLISHED -j ACCEPT  </span><br><span class="line">iptables -I INPUT 2 -p tcp --dport 22 -d 192.168.146.3 -m limit --limit 2/minute --limit-burst 2 -m state --state NEW -j ACCEPT </span><br><span class="line"> </span><br><span class="line">//防止syn攻击（限制syn的请求速度）</span><br><span class="line">iptables -N syn-flood </span><br><span class="line">iptables -A INPUT -p tcp --syn -j syn-flood </span><br><span class="line">iptables -A syn-flood -m limit --limit 1/s --limit-burst 4 -j RETURN </span><br><span class="line">iptables -A syn-flood -j DROP </span><br><span class="line">//防止syn攻击（限制单个ip的最大syn连接数）</span><br><span class="line">iptables –A INPUT –i eth0 –p tcp --syn -m connlimit --connlimit-above 15 -j DROP </span><br><span class="line"> </span><br><span class="line">iptables -I INPUT -p tcp -dport 22 -m connlimit --connlimit-above 3 -j DROP   //利用recent模块抵御DOS攻击</span><br><span class="line">iptables -I INPUT -p tcp --dport 22 -m state --state NEW -m recent --set --name SSH   //单个IP最多连接3个会话</span><br><span class="line">Iptables -I INPUT -p tcp --dport 22 -m state NEW -m recent --update --seconds 300 --hitcount 3 --name SSH -j DROP  //只要是新的连接请求，就把它加入到SSH列表中。5分钟内你的尝试次数达到3次，就拒绝提供SSH列表中的这个IP服务。被限制5分钟后即可恢复访问。</span><br><span class="line"> </span><br><span class="line">iptables -I INPUT -p tcp --dport 80 -m connlimit --connlimit-above 30 -j DROP    //防止单个IP访问量过大</span><br><span class="line">iptables –A OUTPUT –m state --state NEW –j DROP  //阻止反弹木马</span><br><span class="line">iptables -A INPUT -p icmp --icmp-type echo-request -m limit --limit 1/m -j ACCEPT   //防止ping攻击</span><br><span class="line"> </span><br><span class="line">//只允许自己ping别人，不允许别人ping自己</span><br><span class="line">iptables -A OUTPUT -p icmp --icmp-type 8 -j ACCEPT</span><br><span class="line">iptables -A INPUT -p icmp --icmp-type 0 -j ACCEPT</span><br><span class="line">//对于127.0.0.1比较特殊，我们需要明确定义它</span><br><span class="line">iptables -A INPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT</span><br><span class="line"> </span><br><span class="line">//SNAT 基于原地址转换。许多内网用户通过一个外网 口上网的情况。将我们内网的地址转换为一个外网的IP，共用外网IP访问外网资源。</span><br><span class="line">iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -j SNAT --to-source 172.16.100.1</span><br><span class="line">//当外网地址不是固定的时候。将外网地址换成 MASQUERADE(动态伪装):它可以实现自动读取外网网卡获取的IP地址。</span><br><span class="line">iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -j MASQUERADE</span><br><span class="line">//DNAT 目标地址转换。目标地址转换要做在到达网卡之前进行转换,所以要做在PREROUTING这个位置上</span><br><span class="line">iptables -t nat -A PREROUTING -d 192.168.10.18 -p tcp --dport 80 -j DNAT --to-destination 172.16.100.2</span><br></pre></td></tr></table></figure></h2>
-<h3 id="linux-开启独立iptables日志">linux 开启独立iptables日志</h3>
-<ul>
-<li>在rsyslog.conf 添加配置，添加不同的日志级别（默认warn(=4））</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi /etc/rsyslog.conf</span><br><span class="line">kern.warning     /var/log/iptables.log</span><br><span class="line">kern.debug       /var/log/iptables.log</span><br><span class="line">kern.info        /var/log/iptables.log</span><br><span class="line">不过推荐全部日志都记录：  kern.*     /var/log/iptables.log</span><br></pre></td></tr></table></figure>
-<ul>
-<li>重启日志配置：</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/etc/init.d/rsyslogd restart</span><br></pre></td></tr></table></figure>
-<ul>
-<li>让日志滚动，这一步是可选的</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/logrotate.d/syslog</span><br><span class="line">加入/var/log/iptables</span><br></pre></td></tr></table></figure>
-<ul>
-<li>在iptables添加日志选项</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">记录所有的记录了，只要通过了防火墙都会记录到日志里</span><br><span class="line">iptables -A INPUT  -j LOG --log-prefix &quot;iptables&quot;</span><br><span class="line">只记录tcp日志</span><br><span class="line">iptables -A INPUT  -p tcp -j LOG --log-prefix &quot;iptables icmp warn&quot;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>然后保存并重启防火墙配置</li>
-</ul>
-]]></content>
-      <categories>
-        <category>系统</category>
-      </categories>
-      <tags>
-        <tag>iptables</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Python优雅写法</title>
     <url>/2020/05/Python%E4%BC%98%E9%9B%85%E5%86%99%E6%B3%95/index.html</url>
     <content><![CDATA[<h2 id="python优雅写法">Python优雅写法</h2>
@@ -1854,33 +1799,70 @@ RUN 指令最常见的用法是安装包用的<code> apt-get</code>。因为 <co
       </tags>
   </entry>
   <entry>
-    <title>shell 命令行处理时间(date)</title>
-    <url>/2020/06/shell-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%A4%84%E7%90%86%E6%97%B6%E9%97%B4-date/index.html</url>
-    <content><![CDATA[<h6 id="获取时间戳">获取时间戳</h6>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 纳秒</span></span><br><span class="line"><span class="built_in">date</span> +%s%N</span><br><span class="line"><span class="comment"># 毫秒</span></span><br><span class="line"><span class="built_in">echo</span> $[$(<span class="built_in">date</span> +%s%N)/1000000]</span><br><span class="line"><span class="comment"># 秒</span></span><br><span class="line"><span class="built_in">date</span> +%s</span><br></pre></td></tr></table></figure>
-<h6 id="获取当前时间">获取当前时间</h6>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">date</span>                          <span class="comment"># Tue Jun  9 18:54:00 CST 2020</span></span><br><span class="line"><span class="built_in">date</span> <span class="string">&quot;+%Y-%m-%d %H:%M:%S&quot;</span>     <span class="comment"># 2020-06-09 18:54:15</span></span><br><span class="line"><span class="built_in">date</span> <span class="string">&quot;+%Y-%m-%d %H:%M:%S %Z&quot;</span>  <span class="comment"># 2020-06-09 19:01:43 CST</span></span><br><span class="line"><span class="built_in">date</span> <span class="string">&quot;+%F %T %z&quot;</span>              <span class="comment"># 2020-06-09 19:02:40 +0800  # 使用小&quot;z&quot;,显示的时区更直观一些</span></span><br></pre></td></tr></table></figure>
-<h6 id="获取过去的时间">获取过去的时间</h6>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 获取昨天时间</span></span><br><span class="line"><span class="built_in">date</span> -d yesterday <span class="string">&quot;+%Y-%m-%d %H:%M:%S&quot;</span>  <span class="comment">#  2020-06-08 18:58:19</span></span><br><span class="line"><span class="comment"># 获取前三天的时间</span></span><br><span class="line"><span class="built_in">date</span> -d -3day <span class="string">&quot;+%Y-%m-%d %H:%M:%S&quot;</span>      <span class="comment"># 2020-06-06 18:59:12</span></span><br></pre></td></tr></table></figure>
-<h6 id="时间转时间戳">时间转时间戳</h6>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">date</span> -d <span class="string">&quot;2019-04-24T05:49:10Z&quot;</span> +%s           <span class="comment"># 1556084950</span></span><br><span class="line"><span class="built_in">date</span> -d <span class="string">&quot;Tue Jun  9 18:54:10 CST 2020&quot;</span> +%s   <span class="comment"># 1591700050</span></span><br><span class="line"><span class="comment"># 时间里面没有时区信息的会以当前系统的时区为标准</span></span><br><span class="line"><span class="built_in">date</span> -d <span class="string">&quot;2020-06-09 18:54:15&quot;</span> +%s            <span class="comment"># 1591700055</span></span><br></pre></td></tr></table></figure>
-<h6 id="时间戳转时间">时间戳转时间</h6>
-<blockquote>
-<p>TZ 如果没有指定，则使用 /etc/localtime 中的设置</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">TZ=UTC-0 <span class="built_in">date</span> --<span class="built_in">date</span>=<span class="string">&#x27;@1591700055&#x27;</span> <span class="string">&quot;+%Y-%m-%d %H:%M:%S %z&quot;</span>  <span class="comment"># 2020-06-09 10:54:15 +0000</span></span><br><span class="line"><span class="built_in">date</span> --<span class="built_in">date</span>=<span class="string">&#x27;@1591700055&#x27;</span> <span class="string">&quot;+%Y-%m-%d %H:%M:%S %z&quot;</span>           <span class="comment"># 2020-06-09 18:54:15 +0800</span></span><br></pre></td></tr></table></figure>
-<h6 id="时区转换">时区转换</h6>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 默认转换为当前系统的时区</span></span><br><span class="line"><span class="built_in">date</span> -d<span class="string">&quot;2019-04-24T05:49:10Z&quot;</span> +<span class="string">&quot;%Y-%m-%d %H:%M:%S %z&quot;</span>  <span class="comment"># 2019-04-24 13:49:10 +0800</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果设置了TZ=UTC-0，则输出的时间为UTC-0时间，“+8 hour”相当于在原本的时间基础上加了8小时</span></span><br><span class="line">TZ=UTC-0 <span class="built_in">date</span> --<span class="built_in">date</span>=<span class="string">&quot;2019-04-24T05:49:10Z +8 hour&quot;</span> +<span class="string">&quot;%Y-%m-%d %H:%M:%S %Z&quot;</span>  <span class="comment"># 2019-04-24 13:49:10 UTC</span></span><br></pre></td></tr></table></figure>
-<h6 id="时区设置（tz）">时区设置（TZ）</h6>
-<p><code>TZ</code>变量只会影响系统时钟，不会更改整个系统的时区设置。要更改整个系统的时区，需要使用其他工具，例如 <code>timedatectl</code>命令或 <code>tzselect</code>命令。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 以下是如何将 TZ变量设置为不同时区的几个示例</span></span><br><span class="line">TZ=UTC-0</span><br><span class="line">TZ=UTC-8</span><br><span class="line">TZ=Asia/Shanghai</span><br><span class="line"><span class="comment"># 直接按时区设置更方便</span></span><br><span class="line"><span class="comment"># 中时区 UTC-0</span></span><br><span class="line"><span class="comment"># 西1—12区 UTC+1 ... UTC+12</span></span><br><span class="line"><span class="comment"># 东1—12区 UTC-1 ... UTC-12</span></span><br><span class="line"><span class="comment"># 比如北京时间东八区 TZ=UTC-8</span></span><br><span class="line">TZ=UTC-8 <span class="built_in">date</span> +<span class="string">&quot;%Y-%m-%d %H:%M:%S %z&quot;</span>  <span class="comment"># 2020-06-09 21:02:40 +0800</span></span><br></pre></td></tr></table></figure>
+    <title>iptablse服务管理</title>
+    <url>/2020/07/iptables%E6%93%8D%E4%BD%9C/index.html</url>
+    <content><![CDATA[<p>iptablse服务管理</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">service iptables start|stop|restart|status</span><br><span class="line">service iptables save   //定义的所有内容，在重启时都会失效。调用save命令可以把规则保存到文件/etc/sysconfig/iptables中。</span><br><span class="line">iptables-save           //保存规则</span><br><span class="line">iptables-restore        //加载规则。开机的时候，会自动加载/etc/sysconfig/iptables</span><br><span class="line">iptables-restore &lt; /etc/sysconfig/iptables2     //加载自定义的规则文件</span><br><span class="line">//iptables服务配置文件：   /etc/sysconfig/iptables-config</span><br><span class="line">//iptables规则文件：       /etc/sysconfig/iptables</span><br><span class="line">echo &quot;1&quot;&gt;/proc/sys/net/ipv4/ip_forward   //打开iptables转发：</span><br></pre></td></tr></table></figure>
+<p>COMMAND 命令选项</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-A|--append  CHAIN                                 //链尾添加新规则</span><br><span class="line">-D|--delete  CHAIN [RULENUM]                       //删除链中规则，按需序号或内容确定要删除的规则</span><br><span class="line">-I|--insert  CHAIN [RULENUM]                       //在链中插入一条新的规则，默认插在开头</span><br><span class="line">-R|--replace CHAIN  RULENUM                        //替换、修改一条规则，按序号或内容确定</span><br><span class="line">-L|--list   [CHAIN [RULENUM]]                      //列出指定链或所有链中指定规则或所有规则</span><br><span class="line">-S|--list-urles [CHAIN [RULENUM]]                  //显示链中规则</span><br><span class="line">-F|--flush [CHAIN]                                 //清空指定链或所有链中规则</span><br><span class="line">-Z|--zero [CHAIN [RULENUM]]                        //重置指定链或所有链的计数器(匹配的数据包数和流量字节数)</span><br><span class="line">-N|--new-chain CHAIN                               //新建自定义规则链</span><br><span class="line">-X|--delete-cahin [CHAIN]                          //删除指定表中用户自定义的规则链</span><br><span class="line">-E|--rename-chain OLDCHAIN NEWCHAIN                //重命名链，移动任何引用</span><br><span class="line">-P|-policy CHAIN TARGET                            //设置链的默认策略，数据包未匹配任意一条规则就按此策略处理</span><br></pre></td></tr></table></figure>
+<p>CRETIRIA 条件匹配</p>
+<p>分为基本匹配和扩展匹配，扩展匹配又分为隐式匹配和显示匹配</p>
+<p>基本匹配</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-p|--proto  PROTO                      //按协议匹配，如tcp、udp、icmp，all表示所有协议。 （/etc/protocols中的协议名）</span><br><span class="line">-s|--source ADDRESS[/mask]...          //按数据包的源地址匹配，可使用IP地址、网络地址、主机名、域名</span><br><span class="line">-d|--destination ADDRESS[/mask]...     //按目标地址匹配，可使用IP地址、网络地址、主机名、域名</span><br><span class="line">-i|--in-interface INPUTNAME[ +]        //按入站接口(网卡)名匹配，+用于通配。如 eth0, eth+ 。一般用在INPUT和PREROUTING链</span><br><span class="line">-o|--out-interface OUTPUTNAME[+]       //按出站接口(网卡)名匹配，+用于通配。如 eth0, eth+ 。一般用在OUTPUT和POSTROUTING链</span><br><span class="line">可使用 ! 可以否定一个子句，如-p !tcp</span><br></pre></td></tr></table></figure>
+<p>扩展匹配</p>
+<p>-m|–match MATCHTYPE  EXTENSIONMATCH…    //扩展匹配，可能加载extension</p>
+<p>如: -p tcp  -m tcp  --dport 80</p>
+<p>隐式扩展匹配(对-p PROTO的扩展，或者说是-p PROTO的附加匹配条件)</p>
+<p>-m PROTO 可以省略，所以叫隐式</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-m tcp   //-p tcp的扩展</span><br><span class="line">　　　　--sport  [!]N[:M]                      //源端口, 服务名、端口、端口范围。</span><br><span class="line">　　　　--dport  [!]N[:M]                      //目标端口，服务名、端口、端口范围</span><br><span class="line">　　　　--tcp-flags CHECKFLAGS FLAGSOFTRUE  //TCP标志位:SYN(同步),ACK(应答),RST(重置),FIN(结束),URG(紧急),PSH(强迫推送)。多个标志位逗号分隔。</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　　//CHECKFLAGS为要检查的标志位，FLAGSOFTRUE为必须为1的标志位（其余的应该为0）</span><br><span class="line">　　　　--syn                               //第一次握手。 等效于 --tcpflags syn,ack,fin,rst syn   四个标志中只有syn为1</span><br><span class="line">-m udp   //-p udp的扩展</span><br><span class="line">　　　　--sport N[-M] </span><br><span class="line">　　　　--dport N[-M]</span><br><span class="line">-m icmp  //隐含条件为-p icmp</span><br><span class="line">　　　　--icmp-type  N             //8:echo-request  0:echo-reply</span><br></pre></td></tr></table></figure>
+<p>显示扩展匹配</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-m state</span><br><span class="line">　　　　--state    //连接状态检测，NEW,ESTABLISHED,RELATED,INVALID</span><br><span class="line">-m multiport </span><br><span class="line">　　　　--source-ports   PORT[,PORT]...|N:M            //多个源端口，多个端口用逗号分隔，</span><br><span class="line">　　　　--destination-ports PORT[,PORT]...|N:M         //多个目的端口</span><br><span class="line">　　　　--ports     　　　　　　　　　　　　　　　　　　　　 //多个端口，每个包的源端口和目的端口相同才会匹配</span><br><span class="line">-m limit</span><br><span class="line">　　　　--limit   N/UNIT    //速率，如3/minute, 1/s, n/second , n/day</span><br><span class="line">　　　　--limit-burst N     //峰值速率，如100，表示最大不能超过100个数据包</span><br><span class="line">-m connlimit</span><br><span class="line">　　　　--connlimit-above N  //多于n个，前面加!取反</span><br><span class="line">-m iprange</span><br><span class="line">　　　　--src-range IP-IP</span><br><span class="line">　　　　--dst-range IP-IP</span><br><span class="line">-m mac                    </span><br><span class="line">　　　　--mac-source         //mac地址限制，不能用在OUTPUT和POSTROUTING规则链上，因为封包要送到网卡后，才能由网卡驱动程序透过ARP 通讯协议查出目的地的MAC 地址</span><br><span class="line">-m string</span><br><span class="line">　　　　--algo [bm|kmp]      //匹配算法</span><br><span class="line">　　　　--string &quot;PATTERN&quot;   //匹配字符模式</span><br><span class="line">-m recent</span><br><span class="line">　　　　--name               //设定列表名称，默认为DEFAULT</span><br><span class="line">　　　　--rsource            //源地址</span><br><span class="line">　　　　--rdest              //目的地址</span><br><span class="line">　　　　--set                //添加源地址的包到列表中</span><br><span class="line">　　　　--update             //每次建立连接都更新列表</span><br><span class="line">　　　　--rcheck             //检查地址是否在列表</span><br><span class="line">　　　　--seconds            //指定时间。必须与--rcheck或--update配合使用</span><br><span class="line">　　　　--hitcount           //命中次数。必须和--rcheck或--update配合使用</span><br><span class="line">　　　　--remove             //在列表中删除地址</span><br><span class="line">-m time</span><br><span class="line">　　　　--timestart h:mm</span><br><span class="line">　　　　--timestop  hh:mm</span><br><span class="line">　　　　--days DAYS          //Mon,Tue,Wed,Thu,Fri,Sat,Sun; 逗号分隔</span><br><span class="line">-m mark</span><br><span class="line">　　　　--mark N            //是否包含标记号N</span><br><span class="line">-m owner </span><br><span class="line">　　　　--uid-owner 500   //用来匹配来自本机的封包，是否为某特定使用者所产生的,可以避免服务器使用root或其它身分将敏感数据传送出</span><br><span class="line">　　　　--gid-owner O     //用来匹配来自本机的封包，是否为某特定使用者群组所产生的</span><br><span class="line">　　　　--pid-owner 78    //用来匹配来自本机的封包，是否为某特定进程所产生的</span><br><span class="line">　　　　--sid-owner 100   //用来匹配来自本机的封包，是否为某特定连接（Session ID）的响应封包</span><br></pre></td></tr></table></figure>
+<p>ACTION 目标策略(TARGET)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-j|--jump TARGET                //跳转到目标规则，可能加载target extension</span><br><span class="line">-g|--goto  CHAIN                //跳转到指定链，不再返回</span><br><span class="line">ACCEPT             规则验证通过，不再检查当前链的后续规则，直接跳到下一个规则链。</span><br><span class="line">DROP                直接丢弃数据包，不给任何回应。中断过滤。</span><br><span class="line">REJECT             拒绝数据包通过，会返回响应信息。中断过滤。</span><br><span class="line">--reject-with  tcp-reset|port-unreachable|echo-reply</span><br><span class="line">LOG                  在/var/log/messages文件中记录日志，然后将数据包传递给下一条规则。详细位置可查看/etc/syslog.conf配置文件</span><br><span class="line">--log-prefix &quot;INPUT packets&quot;</span><br><span class="line">ULOG                更广范围的日志记录信息</span><br><span class="line">QUEUE              防火墙将数据包移交到用户空间，通过一个内核模块把包交给本地用户程序。中断过滤。</span><br><span class="line">RETURN            防火墙停止执行当前链中的后续规则，并返回到调用链。主要用在自定义链中。</span><br><span class="line">custom_chain    转向自定义规则链</span><br><span class="line">DNAT                目标地址转换，改变数据包的目标地址。外网访问内网资源，主要用在PREROUTING。完成后跳到下一个规则链</span><br><span class="line">--to-destination ADDRESS[-ADDRESS][:PORT[-PORT]]</span><br><span class="line">SNAT                源地址转换，改变数据包的源地址。内网访问外网资源。主机的IP地址必须是静态的，主要用在POSTROUTING。完成后跳到下一个规则链。</span><br><span class="line">--to-source ADDRESS[-ADDRESS][:PORT[-PORT]]</span><br><span class="line">MASQUERADE   源地址伪装，用于主机IP是ISP动态分配的情况，会从网卡读取主机IP。直接跳到下一个规则链。</span><br><span class="line">--to-ports 1024-31000</span><br><span class="line">REDIRECT        数据包重定向，主要是端口重定向，把包分流。处理完成后继续匹配其他规则。能会用这个功能来迫使站点上的所有Web流量都通过一个Web高速缓存，比如Squid。</span><br><span class="line">--to-ports 8080</span><br><span class="line">MARK                 打防火墙标记。继续匹配规则。</span><br><span class="line">--set-mark 2</span><br><span class="line">MIRROR           发送包之前交换IP源和目的地址，将数据包返回。中断过滤。</span><br></pre></td></tr></table></figure>
+<p>辅助选项</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-t|--table TABLE     //指定操作的表，默认的表为filter</span><br><span class="line">-n|--numeric         //用数字形式显示地址和端口，显示主机IP地址而不是主机名</span><br><span class="line">-x|--exact           //计数器显示精确值，不做单位换算</span><br><span class="line">-v|--verbose  (x3)   //查看规则列表时，显示更详细的信息</span><br><span class="line">-line-numbers        //查看规则表时，显示在链中的序号</span><br><span class="line">-V|--version </span><br><span class="line">-h|--help   </span><br><span class="line">[option]  --help     //查看特定选项的帮助，如iptables -p icmp --help</span><br><span class="line">--fragment -f               //match second or further fragments only</span><br><span class="line">--modprobe=&lt;command&gt;        //try to insert modules using this command</span><br><span class="line">--set-counters PKTS BYTES   //set the counter during insert/append</span><br></pre></td></tr></table></figure>
+<p>state  TCP链接状态</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">NEW                 第一次握手，要起始一个连接（重设连接或将连接重导向） </span><br><span class="line">ESTABLISHED   数据包属于某个已经建立的连接。第二次和第三次握手   (ack=1)</span><br><span class="line">INVALID           数据包的连接编号（Session ID）无法辨识或编号不正确。如SYN=1 ACK=1 RST=1   </span><br><span class="line">RELATED          表示该封包是属于某个已经建立的连接，所建立的新连接。如有些服务使用两个相关的端口，如FTP，21和20端口一去一回，FTP数据传输(上传/下载)还会使用特殊的端口</span><br><span class="line">只允许NEW和ESTABLISHED进，只允许ESTABLISHED出可以阻止反弹式木马。</span><br></pre></td></tr></table></figure>
+<p>使用示例</p>
+<h2 id=""><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">iptables -F           //删除iptables现有规则</span><br><span class="line">iptables -L [-v[vv] -n]   //查看iptables规则</span><br><span class="line">iptables -A INPUT -i eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT       //在INPUT链尾添加一条规则</span><br><span class="line">iptables -I INPUT 2 -i eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT     //在INPUT链中插入为第2条规则</span><br><span class="line">iptables -D  INPUT 2      //删除INPUT链中第2条规则</span><br><span class="line">iptables -R INPUT 3 -i eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT    //替换修改第三条规则</span><br><span class="line">iptables -P INPUT DROP    //设置INPUT链的默认策略为DROP</span><br><span class="line">//允许远程主机进行SSH连接</span><br><span class="line">iptables -A INPUT -i eth0 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT </span><br><span class="line">iptables -A OUTPUT -o eth0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT </span><br><span class="line">//允许本地主机进行SSH连接</span><br><span class="line">iptables -A OUTPUT -o eth0 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT </span><br><span class="line">iptables -A INTPUT -i eth0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT </span><br><span class="line">//允许HTTP请求</span><br><span class="line">iptables -A INPUT -i eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT </span><br><span class="line">iptables -A OUTPUT -o eth0 -p tcp --sport 80 -m state --state ESTABLISHED -j ACCEPT </span><br><span class="line">//限制ping 192.168.146.3主机的数据包数，平均2/s个，最多不能超过3个</span><br><span class="line">iptables -A INPUT -i eth0 -d 192.168.146.3 -p icmp --icmp-type 8 -m limit --limit 2/second --limit-burst 3 -j ACCEPT </span><br><span class="line">//限制SSH连接速率（默认策略是DROP）</span><br><span class="line">iptables -I INPUT 1 -p tcp --dport 22 -d 192.168.146.3 -m state --state ESTABLISHED -j ACCEPT  </span><br><span class="line">iptables -I INPUT 2 -p tcp --dport 22 -d 192.168.146.3 -m limit --limit 2/minute --limit-burst 2 -m state --state NEW -j ACCEPT </span><br><span class="line"> </span><br><span class="line">//防止syn攻击（限制syn的请求速度）</span><br><span class="line">iptables -N syn-flood </span><br><span class="line">iptables -A INPUT -p tcp --syn -j syn-flood </span><br><span class="line">iptables -A syn-flood -m limit --limit 1/s --limit-burst 4 -j RETURN </span><br><span class="line">iptables -A syn-flood -j DROP </span><br><span class="line">//防止syn攻击（限制单个ip的最大syn连接数）</span><br><span class="line">iptables –A INPUT –i eth0 –p tcp --syn -m connlimit --connlimit-above 15 -j DROP </span><br><span class="line"> </span><br><span class="line">iptables -I INPUT -p tcp -dport 22 -m connlimit --connlimit-above 3 -j DROP   //利用recent模块抵御DOS攻击</span><br><span class="line">iptables -I INPUT -p tcp --dport 22 -m state --state NEW -m recent --set --name SSH   //单个IP最多连接3个会话</span><br><span class="line">Iptables -I INPUT -p tcp --dport 22 -m state NEW -m recent --update --seconds 300 --hitcount 3 --name SSH -j DROP  //只要是新的连接请求，就把它加入到SSH列表中。5分钟内你的尝试次数达到3次，就拒绝提供SSH列表中的这个IP服务。被限制5分钟后即可恢复访问。</span><br><span class="line"> </span><br><span class="line">iptables -I INPUT -p tcp --dport 80 -m connlimit --connlimit-above 30 -j DROP    //防止单个IP访问量过大</span><br><span class="line">iptables –A OUTPUT –m state --state NEW –j DROP  //阻止反弹木马</span><br><span class="line">iptables -A INPUT -p icmp --icmp-type echo-request -m limit --limit 1/m -j ACCEPT   //防止ping攻击</span><br><span class="line"> </span><br><span class="line">//只允许自己ping别人，不允许别人ping自己</span><br><span class="line">iptables -A OUTPUT -p icmp --icmp-type 8 -j ACCEPT</span><br><span class="line">iptables -A INPUT -p icmp --icmp-type 0 -j ACCEPT</span><br><span class="line">//对于127.0.0.1比较特殊，我们需要明确定义它</span><br><span class="line">iptables -A INPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT</span><br><span class="line"> </span><br><span class="line">//SNAT 基于原地址转换。许多内网用户通过一个外网 口上网的情况。将我们内网的地址转换为一个外网的IP，共用外网IP访问外网资源。</span><br><span class="line">iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -j SNAT --to-source 172.16.100.1</span><br><span class="line">//当外网地址不是固定的时候。将外网地址换成 MASQUERADE(动态伪装):它可以实现自动读取外网网卡获取的IP地址。</span><br><span class="line">iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -j MASQUERADE</span><br><span class="line">//DNAT 目标地址转换。目标地址转换要做在到达网卡之前进行转换,所以要做在PREROUTING这个位置上</span><br><span class="line">iptables -t nat -A PREROUTING -d 192.168.10.18 -p tcp --dport 80 -j DNAT --to-destination 172.16.100.2</span><br></pre></td></tr></table></figure></h2>
+<h3 id="linux-开启独立iptables日志">linux 开启独立iptables日志</h3>
+<ul>
+<li>在rsyslog.conf 添加配置，添加不同的日志级别（默认warn(=4））</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi /etc/rsyslog.conf</span><br><span class="line">kern.warning     /var/log/iptables.log</span><br><span class="line">kern.debug       /var/log/iptables.log</span><br><span class="line">kern.info        /var/log/iptables.log</span><br><span class="line">不过推荐全部日志都记录：  kern.*     /var/log/iptables.log</span><br></pre></td></tr></table></figure>
+<ul>
+<li>重启日志配置：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/etc/init.d/rsyslogd restart</span><br></pre></td></tr></table></figure>
+<ul>
+<li>让日志滚动，这一步是可选的</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/logrotate.d/syslog</span><br><span class="line">加入/var/log/iptables</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在iptables添加日志选项</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">记录所有的记录了，只要通过了防火墙都会记录到日志里</span><br><span class="line">iptables -A INPUT  -j LOG --log-prefix &quot;iptables&quot;</span><br><span class="line">只记录tcp日志</span><br><span class="line">iptables -A INPUT  -p tcp -j LOG --log-prefix &quot;iptables icmp warn&quot;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>然后保存并重启防火墙配置</li>
+</ul>
 ]]></content>
       <categories>
         <category>系统</category>
-        <category>常用命令</category>
       </categories>
       <tags>
-        <tag>shell</tag>
+        <tag>iptables</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>keepalived 常用配置</title>
+    <url>/2020/12/keepalived/index.html</url>
+    <content><![CDATA[<h2 id="keepalived-常用配置">keepalived 常用配置</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">! Configuration File for keepalived</span><br><span class="line">global_defs &#123;</span><br><span class="line">    router_id R1</span><br><span class="line">&#125;</span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state BACKUP</span><br><span class="line">    interface eth0</span><br><span class="line">    virtual_router_id 51</span><br><span class="line">    priority 100</span><br><span class="line">    advert_int 1</span><br><span class="line">    nopreempt</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 1111</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        10.10.10.100 dev eth0</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">virtual_server 10.10.10.100 6443 &#123;</span><br><span class="line">    delay_loop 3</span><br><span class="line">    lb_algo rr</span><br><span class="line">    lb_kind DR # NAT|DR|TUN</span><br><span class="line">    protocol TCP</span><br><span class="line"></span><br><span class="line">    real_server 10.10.10.31 6443 &#123;</span><br><span class="line">       weight 1</span><br><span class="line">       inhibit_on_failure</span><br><span class="line">       TCP_CHECK &#123;</span><br><span class="line">           connect_timeout 3</span><br><span class="line">           nb_get_retry 3</span><br><span class="line">           delay_before_retry 3</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    real_server 10.10.10.32 6443 &#123;</span><br><span class="line">       weight 1</span><br><span class="line">       inhibit_on_failure</span><br><span class="line">       TCP_CHECK &#123;</span><br><span class="line">           connect_timeout 3</span><br><span class="line">           nb_get_retry 3</span><br><span class="line">           delay_before_retry 3</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># real_server 分别执行</span><br><span class="line">echo &quot;1&quot; &gt;/proc/sys/net/ipv4/conf/lo/arp_ignore</span><br><span class="line">echo &quot;2&quot; &gt;/proc/sys/net/ipv4/conf/lo/arp_announce</span><br><span class="line">echo &quot;1&quot; &gt;/proc/sys/net/ipv4/conf/all/arp_ignore</span><br><span class="line">echo &quot;2&quot; &gt;/proc/sys/net/ipv4/conf/all/arp_announce</span><br><span class="line"></span><br><span class="line">ip addr add 10.10.10.100/32 dev lo:0 broadcast 10.10.10.100</span><br><span class="line">ip route add 10.10.10.100 dev lo:0</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>系统</category>
+      </categories>
+      <tags>
+        <tag>keepalived</tag>
       </tags>
   </entry>
   <entry>
@@ -1949,15 +1931,33 @@ RUN 指令最常见的用法是安装包用的<code> apt-get</code>。因为 <co
       </tags>
   </entry>
   <entry>
-    <title>keepalived 常用配置</title>
-    <url>/2020/12/keepalived/index.html</url>
-    <content><![CDATA[<h2 id="keepalived-常用配置">keepalived 常用配置</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">! Configuration File for keepalived</span><br><span class="line">global_defs &#123;</span><br><span class="line">    router_id R1</span><br><span class="line">&#125;</span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state BACKUP</span><br><span class="line">    interface eth0</span><br><span class="line">    virtual_router_id 51</span><br><span class="line">    priority 100</span><br><span class="line">    advert_int 1</span><br><span class="line">    nopreempt</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 1111</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        10.10.10.100 dev eth0</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">virtual_server 10.10.10.100 6443 &#123;</span><br><span class="line">    delay_loop 3</span><br><span class="line">    lb_algo rr</span><br><span class="line">    lb_kind DR # NAT|DR|TUN</span><br><span class="line">    protocol TCP</span><br><span class="line"></span><br><span class="line">    real_server 10.10.10.31 6443 &#123;</span><br><span class="line">       weight 1</span><br><span class="line">       inhibit_on_failure</span><br><span class="line">       TCP_CHECK &#123;</span><br><span class="line">           connect_timeout 3</span><br><span class="line">           nb_get_retry 3</span><br><span class="line">           delay_before_retry 3</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    real_server 10.10.10.32 6443 &#123;</span><br><span class="line">       weight 1</span><br><span class="line">       inhibit_on_failure</span><br><span class="line">       TCP_CHECK &#123;</span><br><span class="line">           connect_timeout 3</span><br><span class="line">           nb_get_retry 3</span><br><span class="line">           delay_before_retry 3</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># real_server 分别执行</span><br><span class="line">echo &quot;1&quot; &gt;/proc/sys/net/ipv4/conf/lo/arp_ignore</span><br><span class="line">echo &quot;2&quot; &gt;/proc/sys/net/ipv4/conf/lo/arp_announce</span><br><span class="line">echo &quot;1&quot; &gt;/proc/sys/net/ipv4/conf/all/arp_ignore</span><br><span class="line">echo &quot;2&quot; &gt;/proc/sys/net/ipv4/conf/all/arp_announce</span><br><span class="line"></span><br><span class="line">ip addr add 10.10.10.100/32 dev lo:0 broadcast 10.10.10.100</span><br><span class="line">ip route add 10.10.10.100 dev lo:0</span><br></pre></td></tr></table></figure>]]></content>
+    <title>shell 命令行处理时间(date)</title>
+    <url>/2020/06/shell-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%A4%84%E7%90%86%E6%97%B6%E9%97%B4-date/index.html</url>
+    <content><![CDATA[<h6 id="获取时间戳">获取时间戳</h6>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 纳秒</span></span><br><span class="line"><span class="built_in">date</span> +%s%N</span><br><span class="line"><span class="comment"># 毫秒</span></span><br><span class="line"><span class="built_in">echo</span> $[$(<span class="built_in">date</span> +%s%N)/1000000]</span><br><span class="line"><span class="comment"># 秒</span></span><br><span class="line"><span class="built_in">date</span> +%s</span><br></pre></td></tr></table></figure>
+<h6 id="获取当前时间">获取当前时间</h6>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">date</span>                          <span class="comment"># Tue Jun  9 18:54:00 CST 2020</span></span><br><span class="line"><span class="built_in">date</span> <span class="string">&quot;+%Y-%m-%d %H:%M:%S&quot;</span>     <span class="comment"># 2020-06-09 18:54:15</span></span><br><span class="line"><span class="built_in">date</span> <span class="string">&quot;+%Y-%m-%d %H:%M:%S %Z&quot;</span>  <span class="comment"># 2020-06-09 19:01:43 CST</span></span><br><span class="line"><span class="built_in">date</span> <span class="string">&quot;+%F %T %z&quot;</span>              <span class="comment"># 2020-06-09 19:02:40 +0800  # 使用小&quot;z&quot;,显示的时区更直观一些</span></span><br></pre></td></tr></table></figure>
+<h6 id="获取过去的时间">获取过去的时间</h6>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 获取昨天时间</span></span><br><span class="line"><span class="built_in">date</span> -d yesterday <span class="string">&quot;+%Y-%m-%d %H:%M:%S&quot;</span>  <span class="comment">#  2020-06-08 18:58:19</span></span><br><span class="line"><span class="comment"># 获取前三天的时间</span></span><br><span class="line"><span class="built_in">date</span> -d -3day <span class="string">&quot;+%Y-%m-%d %H:%M:%S&quot;</span>      <span class="comment"># 2020-06-06 18:59:12</span></span><br></pre></td></tr></table></figure>
+<h6 id="时间转时间戳">时间转时间戳</h6>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">date</span> -d <span class="string">&quot;2019-04-24T05:49:10Z&quot;</span> +%s           <span class="comment"># 1556084950</span></span><br><span class="line"><span class="built_in">date</span> -d <span class="string">&quot;Tue Jun  9 18:54:10 CST 2020&quot;</span> +%s   <span class="comment"># 1591700050</span></span><br><span class="line"><span class="comment"># 时间里面没有时区信息的会以当前系统的时区为标准</span></span><br><span class="line"><span class="built_in">date</span> -d <span class="string">&quot;2020-06-09 18:54:15&quot;</span> +%s            <span class="comment"># 1591700055</span></span><br></pre></td></tr></table></figure>
+<h6 id="时间戳转时间">时间戳转时间</h6>
+<blockquote>
+<p>TZ 如果没有指定，则使用 /etc/localtime 中的设置</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">TZ=UTC-0 <span class="built_in">date</span> --<span class="built_in">date</span>=<span class="string">&#x27;@1591700055&#x27;</span> <span class="string">&quot;+%Y-%m-%d %H:%M:%S %z&quot;</span>  <span class="comment"># 2020-06-09 10:54:15 +0000</span></span><br><span class="line"><span class="built_in">date</span> --<span class="built_in">date</span>=<span class="string">&#x27;@1591700055&#x27;</span> <span class="string">&quot;+%Y-%m-%d %H:%M:%S %z&quot;</span>           <span class="comment"># 2020-06-09 18:54:15 +0800</span></span><br></pre></td></tr></table></figure>
+<h6 id="时区转换">时区转换</h6>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 默认转换为当前系统的时区</span></span><br><span class="line"><span class="built_in">date</span> -d<span class="string">&quot;2019-04-24T05:49:10Z&quot;</span> +<span class="string">&quot;%Y-%m-%d %H:%M:%S %z&quot;</span>  <span class="comment"># 2019-04-24 13:49:10 +0800</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果设置了TZ=UTC-0，则输出的时间为UTC-0时间，“+8 hour”相当于在原本的时间基础上加了8小时</span></span><br><span class="line">TZ=UTC-0 <span class="built_in">date</span> --<span class="built_in">date</span>=<span class="string">&quot;2019-04-24T05:49:10Z +8 hour&quot;</span> +<span class="string">&quot;%Y-%m-%d %H:%M:%S %Z&quot;</span>  <span class="comment"># 2019-04-24 13:49:10 UTC</span></span><br></pre></td></tr></table></figure>
+<h6 id="时区设置（tz）">时区设置（TZ）</h6>
+<p><code>TZ</code>变量只会影响系统时钟，不会更改整个系统的时区设置。要更改整个系统的时区，需要使用其他工具，例如 <code>timedatectl</code>命令或 <code>tzselect</code>命令。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 以下是如何将 TZ变量设置为不同时区的几个示例</span></span><br><span class="line">TZ=UTC-0</span><br><span class="line">TZ=UTC-8</span><br><span class="line">TZ=Asia/Shanghai</span><br><span class="line"><span class="comment"># 直接按时区设置更方便</span></span><br><span class="line"><span class="comment"># 中时区 UTC-0</span></span><br><span class="line"><span class="comment"># 西1—12区 UTC+1 ... UTC+12</span></span><br><span class="line"><span class="comment"># 东1—12区 UTC-1 ... UTC-12</span></span><br><span class="line"><span class="comment"># 比如北京时间东八区 TZ=UTC-8</span></span><br><span class="line">TZ=UTC-8 <span class="built_in">date</span> +<span class="string">&quot;%Y-%m-%d %H:%M:%S %z&quot;</span>  <span class="comment"># 2020-06-09 21:02:40 +0800</span></span><br></pre></td></tr></table></figure>
+]]></content>
       <categories>
         <category>系统</category>
+        <category>常用命令</category>
       </categories>
       <tags>
-        <tag>keepalived</tag>
+        <tag>shell</tag>
       </tags>
   </entry>
   <entry>
@@ -2471,6 +2471,73 @@ RUN 指令最常见的用法是安装包用的<code> apt-get</code>。因为 <co
       </categories>
       <tags>
         <tag>kubernetes</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux 采用 SSH CA 登陆验证</title>
+    <url>/2021/05/Linux-%E9%87%87%E7%94%A8-SSH-CA-%E7%99%BB%E9%99%86%E9%AA%8C%E8%AF%81/index.html</url>
+    <content><![CDATA[<h2 id="linux-采用 ssh ca 登陆验证">Linux 采用 SSH CA 登陆验证</h2>
+<p>当配置大量的服务器有很多用户，保持SSH访问在线的基础设施可以变得复杂，SSH实际上具有使用证书颁发机构来验证服务器和客户端的功能。</p>
+<p>这样的好处就是：</p>
+<ul>
+<li>可以控制登录的源ip</li>
+<li>限制登录的用户</li>
+<li>有新用户的时候不需要把客户机的pub公钥放到服务器上</li>
+</ul>
+<h2 id="步骤">步骤</h2>
+<ul>
+<li>生成 CA 证书</li>
+<li>为目标服务端配置 SSH 服务的 CA 公钥信任</li>
+<li>生产客户端 SSH 密钥对</li>
+<li>给客户端SSH公钥进行签名</li>
+<li>客户端采用客户端 SSH 私钥和签名公钥登陆目标主机</li>
+</ul>
+<h2 id="生成-ca 证书">生成 CA 证书</h2>
+<p>目的：配置客户端认证服务器的证书，该证书允许我们的客户端连接到我们的服务器，而不需要质疑服务器的真实性。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir ca</span><br><span class="line">ssh-keygen -C &quot;ssh_server_ca&quot; -b 4096 -f ca/server_ca</span><br></pre></td></tr></table></figure>
+<h2 id="为目标服务端配置-ssh 服务的 ca 公钥信任">为目标服务端配置 SSH 服务的 CA 公钥信任</h2>
+<p>修改目标机的/etc/ssh/sshd_config文件，添加刚生产的server_ca.pub信任</p>
+<p>将server_ca.pub复制到目标服务器的/etc/ssh/目录下，并修改sshd服务配置重启sshd</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp ca/server_ca.pub /etc/ssh/</span><br><span class="line">echo &quot;TrustedUserCAKeys /etc/ssh/server_ca.pub&quot; &gt;&gt;/etc/ssh/sshd_config</span><br><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
+<h2 id="生产客户端-ssh 密钥对">生产客户端 SSH 密钥对</h2>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir rsa</span><br><span class="line">ssh-keygen -t rsa -b 4096 -f rsa/id_rsa -C host_cert</span><br></pre></td></tr></table></figure>
+<h2 id="用刚才的ca给客户端ssh公钥进行签名">用刚才的ca给客户端SSH公钥进行签名</h2>
+<p>生成id_rsa-cert.pub公钥签名文件。这里只需要客户机的公钥文件，所以也可以直接签署客户机提供的公钥。签名时需要使用ca的私钥。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd rsa</span><br><span class="line">ssh-keygen -s ../ca/server_ca -I client  -O source-address=10.10.10.11,10.10.10.12 -n root,develop -V +52w id_rsa.pub</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>说明：</p>
+<ul>
+<li>-s：CA 证书私钥</li>
+<li>-I：识别证书的名称，相当于注释。 当证书用于认证时，它用于日志记录</li>
+<li>-n：识别与此证书关联的名称（用户或主机），表示证书仅对该域名有效。如果有多个，则使用逗号分隔。上例中只有root和develop用户能够登录到目标服务器。</li>
+<li>-V：指定证书的有效期。 在这种情况下，我们指定证书将在一年（52周）过期，默认情况下，证书是永远有效的。建议使用该参数指定有效期，并且有效期最好短一点，最长不超过 52 周。</li>
+<li>-O option：source-address=address_list ：允许用户证书使用的客户端的地址，多个地址用逗号分隔，可以时候CIDR， 我们将设置这个来限制用户证书的使用范围。如： -O source-address=10.10.10.11,10.10.10.12</li>
+</ul>
+</blockquote>
+<p>生成证书以后，可以使用下面的命令，查看证书的细节。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh-keygen -L -f id_rsa-cert.pub</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">大概如下</span></span><br><span class="line">id_rsa-cert.pub:</span><br><span class="line">        Type: ssh-rsa-cert-v01@openssh.com user certificate</span><br><span class="line">        Public key: RSA-CERT SHA256:HP71SBszAWUOgg1uOjkZCEkoeEaNgWU3eF9oCV0bctc</span><br><span class="line">        Signing CA: RSA SHA256:PpwLGScb0WQLDar94WyOD5DKkdTjzJohQS76wNRJQQg</span><br><span class="line">        Key ID: &quot;client&quot; # 此处则是 -I 指定的值</span><br><span class="line">        Serial: 0</span><br><span class="line">        Valid: from 2020-12-09T22:11:00 to 2021-12-08T22:12:27</span><br><span class="line">        Principals: # 此处则是 -n 指定的值</span><br><span class="line">                root</span><br><span class="line">                develop</span><br><span class="line">        Critical Options:  # 此处则是 -O 指定的值</span><br><span class="line">                source-address 10.10.10.11,10.10.10.12</span><br><span class="line">        Extensions: </span><br><span class="line">                permit-X11-forwarding</span><br><span class="line">                permit-agent-forwarding</span><br><span class="line">                permit-port-forwarding</span><br><span class="line">                permit-pty</span><br><span class="line">                permit-user-rc</span><br><span class="line">               </span><br></pre></td></tr></table></figure>
+<h2 id="登陆">登陆</h2>
+<p>将id_rsa、id_rsa-cert.pub、id_rsa.pub 全部上传到客户机</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh -i id_dsa root@ip  #即可登陆，默认会加载：id_dsa + id_dsa-cert.pub登陆测试机器</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>说明：</p>
+<ul>
+<li>-i 指定自己的私钥文件，默认会加载：id_dsa + id_dsa-cert.pub两个文件，默认读取 /root/.ssh/id_rsa</li>
+</ul>
+</blockquote>
+<h2 id="python-实现">Python 实现</h2>
+<p>依赖 paramiko&gt;=2.3.0 版本</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">cat test_paramiko_cert_key.py</span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">依赖：</span></span><br><span class="line"><span class="string">    paramiko==2.3.3</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> paramiko</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> StringIO <span class="keyword">import</span> StringIO</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test_ssh_ca_key</span>():</span><br><span class="line">    key_file = <span class="string">&quot;&quot;&quot;&lt;PRIVATE KEY&gt;&quot;&quot;&quot;</span></span><br><span class="line">    cert_pub_file = <span class="string">&quot;&quot;&quot;&lt;*-cert.pub&gt;&quot;&quot;&quot;</span></span><br><span class="line">    ip = <span class="string">&quot;&lt;ip&gt;&quot;</span></span><br><span class="line">    port = <span class="number">22</span></span><br><span class="line">    pkey = paramiko.DSSKey.from_private_key(StringIO(key_file))</span><br><span class="line">    pkey.load_certificate(cert_pub_file)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Client setup</span></span><br><span class="line">    ssh = paramiko.SSHClient()</span><br><span class="line">    ssh.load_system_host_keys()</span><br><span class="line">    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())</span><br><span class="line">    ssh.connect(hostname=ip, port=port, username=<span class="string">&#x27;root&#x27;</span>, pkey=pkey)</span><br><span class="line"></span><br><span class="line">    stdin, stdout, stderr = ssh.exec_command(<span class="string">&quot;pwd&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span> stdin, stdout, stderr</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    test_ssh_ca_key()</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><a href="https://www.xiexianbin.cn/linux/ssh/2018-04-30-linux-ssh-ca-key-validate-hosts-and-clients/index.html">https://www.xiexianbin.cn/linux/ssh/2018-04-30-linux-ssh-ca-key-validate-hosts-and-clients/index.html</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>ssh</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>ssh</tag>
       </tags>
   </entry>
   <entry>
@@ -7664,73 +7731,6 @@ style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font
       </tags>
   </entry>
   <entry>
-    <title>Linux 采用 SSH CA 登陆验证</title>
-    <url>/2021/05/Linux-%E9%87%87%E7%94%A8-SSH-CA-%E7%99%BB%E9%99%86%E9%AA%8C%E8%AF%81/index.html</url>
-    <content><![CDATA[<h2 id="linux-采用 ssh ca 登陆验证">Linux 采用 SSH CA 登陆验证</h2>
-<p>当配置大量的服务器有很多用户，保持SSH访问在线的基础设施可以变得复杂，SSH实际上具有使用证书颁发机构来验证服务器和客户端的功能。</p>
-<p>这样的好处就是：</p>
-<ul>
-<li>可以控制登录的源ip</li>
-<li>限制登录的用户</li>
-<li>有新用户的时候不需要把客户机的pub公钥放到服务器上</li>
-</ul>
-<h2 id="步骤">步骤</h2>
-<ul>
-<li>生成 CA 证书</li>
-<li>为目标服务端配置 SSH 服务的 CA 公钥信任</li>
-<li>生产客户端 SSH 密钥对</li>
-<li>给客户端SSH公钥进行签名</li>
-<li>客户端采用客户端 SSH 私钥和签名公钥登陆目标主机</li>
-</ul>
-<h2 id="生成-ca 证书">生成 CA 证书</h2>
-<p>目的：配置客户端认证服务器的证书，该证书允许我们的客户端连接到我们的服务器，而不需要质疑服务器的真实性。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir ca</span><br><span class="line">ssh-keygen -C &quot;ssh_server_ca&quot; -b 4096 -f ca/server_ca</span><br></pre></td></tr></table></figure>
-<h2 id="为目标服务端配置-ssh 服务的 ca 公钥信任">为目标服务端配置 SSH 服务的 CA 公钥信任</h2>
-<p>修改目标机的/etc/ssh/sshd_config文件，添加刚生产的server_ca.pub信任</p>
-<p>将server_ca.pub复制到目标服务器的/etc/ssh/目录下，并修改sshd服务配置重启sshd</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp ca/server_ca.pub /etc/ssh/</span><br><span class="line">echo &quot;TrustedUserCAKeys /etc/ssh/server_ca.pub&quot; &gt;&gt;/etc/ssh/sshd_config</span><br><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
-<h2 id="生产客户端-ssh 密钥对">生产客户端 SSH 密钥对</h2>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir rsa</span><br><span class="line">ssh-keygen -t rsa -b 4096 -f rsa/id_rsa -C host_cert</span><br></pre></td></tr></table></figure>
-<h2 id="用刚才的ca给客户端ssh公钥进行签名">用刚才的ca给客户端SSH公钥进行签名</h2>
-<p>生成id_rsa-cert.pub公钥签名文件。这里只需要客户机的公钥文件，所以也可以直接签署客户机提供的公钥。签名时需要使用ca的私钥。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd rsa</span><br><span class="line">ssh-keygen -s ../ca/server_ca -I client  -O source-address=10.10.10.11,10.10.10.12 -n root,develop -V +52w id_rsa.pub</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>说明：</p>
-<ul>
-<li>-s：CA 证书私钥</li>
-<li>-I：识别证书的名称，相当于注释。 当证书用于认证时，它用于日志记录</li>
-<li>-n：识别与此证书关联的名称（用户或主机），表示证书仅对该域名有效。如果有多个，则使用逗号分隔。上例中只有root和develop用户能够登录到目标服务器。</li>
-<li>-V：指定证书的有效期。 在这种情况下，我们指定证书将在一年（52周）过期，默认情况下，证书是永远有效的。建议使用该参数指定有效期，并且有效期最好短一点，最长不超过 52 周。</li>
-<li>-O option：source-address=address_list ：允许用户证书使用的客户端的地址，多个地址用逗号分隔，可以时候CIDR， 我们将设置这个来限制用户证书的使用范围。如： -O source-address=10.10.10.11,10.10.10.12</li>
-</ul>
-</blockquote>
-<p>生成证书以后，可以使用下面的命令，查看证书的细节。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh-keygen -L -f id_rsa-cert.pub</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">大概如下</span></span><br><span class="line">id_rsa-cert.pub:</span><br><span class="line">        Type: ssh-rsa-cert-v01@openssh.com user certificate</span><br><span class="line">        Public key: RSA-CERT SHA256:HP71SBszAWUOgg1uOjkZCEkoeEaNgWU3eF9oCV0bctc</span><br><span class="line">        Signing CA: RSA SHA256:PpwLGScb0WQLDar94WyOD5DKkdTjzJohQS76wNRJQQg</span><br><span class="line">        Key ID: &quot;client&quot; # 此处则是 -I 指定的值</span><br><span class="line">        Serial: 0</span><br><span class="line">        Valid: from 2020-12-09T22:11:00 to 2021-12-08T22:12:27</span><br><span class="line">        Principals: # 此处则是 -n 指定的值</span><br><span class="line">                root</span><br><span class="line">                develop</span><br><span class="line">        Critical Options:  # 此处则是 -O 指定的值</span><br><span class="line">                source-address 10.10.10.11,10.10.10.12</span><br><span class="line">        Extensions: </span><br><span class="line">                permit-X11-forwarding</span><br><span class="line">                permit-agent-forwarding</span><br><span class="line">                permit-port-forwarding</span><br><span class="line">                permit-pty</span><br><span class="line">                permit-user-rc</span><br><span class="line">               </span><br></pre></td></tr></table></figure>
-<h2 id="登陆">登陆</h2>
-<p>将id_rsa、id_rsa-cert.pub、id_rsa.pub 全部上传到客户机</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh -i id_dsa root@ip  #即可登陆，默认会加载：id_dsa + id_dsa-cert.pub登陆测试机器</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>说明：</p>
-<ul>
-<li>-i 指定自己的私钥文件，默认会加载：id_dsa + id_dsa-cert.pub两个文件，默认读取 /root/.ssh/id_rsa</li>
-</ul>
-</blockquote>
-<h2 id="python-实现">Python 实现</h2>
-<p>依赖 paramiko&gt;=2.3.0 版本</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">cat test_paramiko_cert_key.py</span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">依赖：</span></span><br><span class="line"><span class="string">    paramiko==2.3.3</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> paramiko</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> StringIO <span class="keyword">import</span> StringIO</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test_ssh_ca_key</span>():</span><br><span class="line">    key_file = <span class="string">&quot;&quot;&quot;&lt;PRIVATE KEY&gt;&quot;&quot;&quot;</span></span><br><span class="line">    cert_pub_file = <span class="string">&quot;&quot;&quot;&lt;*-cert.pub&gt;&quot;&quot;&quot;</span></span><br><span class="line">    ip = <span class="string">&quot;&lt;ip&gt;&quot;</span></span><br><span class="line">    port = <span class="number">22</span></span><br><span class="line">    pkey = paramiko.DSSKey.from_private_key(StringIO(key_file))</span><br><span class="line">    pkey.load_certificate(cert_pub_file)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Client setup</span></span><br><span class="line">    ssh = paramiko.SSHClient()</span><br><span class="line">    ssh.load_system_host_keys()</span><br><span class="line">    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())</span><br><span class="line">    ssh.connect(hostname=ip, port=port, username=<span class="string">&#x27;root&#x27;</span>, pkey=pkey)</span><br><span class="line"></span><br><span class="line">    stdin, stdout, stderr = ssh.exec_command(<span class="string">&quot;pwd&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span> stdin, stdout, stderr</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    test_ssh_ca_key()</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><a href="https://www.xiexianbin.cn/linux/ssh/2018-04-30-linux-ssh-ca-key-validate-hosts-and-clients/index.html">https://www.xiexianbin.cn/linux/ssh/2018-04-30-linux-ssh-ca-key-validate-hosts-and-clients/index.html</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>ssh</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-        <tag>ssh</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Nginx配置之proxy_pass</title>
     <url>/2021/05/Nginx%E9%85%8D%E7%BD%AE%E4%B9%8Bproxy-pass/index.html</url>
     <content><![CDATA[<h2 id="nginx配置之proxy_pass">Nginx配置之proxy_pass</h2>
@@ -7825,6 +7825,43 @@ style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font
       <tags>
         <tag>Linux</tag>
         <tag>CentOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Typecho免插件实现文章浏览次数统计(Cookie Enabled)</title>
+    <url>/2021/05/Typecho%E5%85%8D%E6%8F%92%E4%BB%B6%E5%AE%9E%E7%8E%B0%E6%96%87%E7%AB%A0%E6%B5%8F%E8%A7%88%E6%AC%A1%E6%95%B0%E7%BB%9F%E8%AE%A1(Cookie%20Enabled)/index.html</url>
+    <content><![CDATA[<h2 id="typecho免插件实现文章浏览次数统计(cookie-enabled)">Typecho免插件实现文章浏览次数统计(Cookie Enabled)</h2>
+<p>最近在打造新主题，想给主题增加统计功能，为了不使用Views插件，撸了下面的代码，使用自定义字段保存数据，不会改动数据库结构</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 获取浏览次数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getViewsStr</span>(<span class="params"><span class="variable">$widget</span>, <span class="variable">$format</span> = <span class="string">&quot;&#123;views&#125; 次浏览&quot;</span></span>) </span>&#123;</span><br><span class="line">    <span class="variable">$fields</span> = <span class="title function_ invoke__">unserialize</span>(<span class="variable">$widget</span>-&gt;fields);</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">array_key_exists</span>(<span class="string">&#x27;views&#x27;</span>,<span class="variable">$fields</span>))</span><br><span class="line">        <span class="variable">$views</span> = (!<span class="keyword">empty</span>(<span class="variable">$fields</span>[<span class="string">&#x27;views&#x27;</span>])) ? <span class="title function_ invoke__">intval</span>(<span class="variable">$fields</span>[<span class="string">&#x27;views&#x27;</span>]) : <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="variable">$views</span> = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//增加浏览次数</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$widget</span>-&gt;<span class="title function_ invoke__">is</span>(<span class="string">&#x27;single&#x27;</span>)) &#123;</span><br><span class="line">        <span class="variable">$views</span> = <span class="variable">$views</span> + <span class="number">1</span>;</span><br><span class="line">        <span class="variable">$widget</span>-&gt;<span class="title function_ invoke__">setField</span>(<span class="string">&#x27;views&#x27;</span>, <span class="string">&#x27;str&#x27;</span>, <span class="title function_ invoke__">strval</span>(<span class="variable">$views</span>), <span class="variable">$widget</span>-&gt;cid);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;&#123;views&#125;&quot;</span>, <span class="variable">$views</span>, <span class="variable">$format</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>把以上代码放到functions.php最后，然后就可以在各个页面通过</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="title function_ invoke__">_e</span>(<span class="title function_ invoke__">getViewsStr</span>(<span class="variable">$this</span>)); <span class="comment">/* $this 是 Widget_Archive 对象 */</span> <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>输出统计次数。<br>
+应用到主题后发现不太好，每刷新一次都会重复统计浏览次数，数字大了没什么用。<br>
+所以我就通过Cookies“记住”浏览过的文章，下次再访问就部统计了，以下的代码也是放到functions.php最后</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 获取浏览次数(改进版)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getViewsStr</span>(<span class="params"><span class="variable">$widget</span>, <span class="variable">$format</span> = <span class="string">&quot;&#123;views&#125; 次浏览&quot;</span></span>) </span>&#123;</span><br><span class="line">    <span class="variable">$fields</span> = <span class="title function_ invoke__">unserialize</span>(<span class="variable">$widget</span>-&gt;fields);</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">array_key_exists</span>(<span class="string">&#x27;views&#x27;</span>, <span class="variable">$fields</span>))</span><br><span class="line">        <span class="variable">$views</span> = (!<span class="keyword">empty</span>(<span class="variable">$fields</span>[<span class="string">&#x27;views&#x27;</span>])) ? <span class="title function_ invoke__">intval</span>(<span class="variable">$fields</span>[<span class="string">&#x27;views&#x27;</span>]) : <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="variable">$views</span> = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//增加浏览次数</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$widget</span>-&gt;<span class="title function_ invoke__">is</span>(<span class="string">&#x27;single&#x27;</span>)) &#123;</span><br><span class="line">        <span class="variable">$vieweds</span> = <span class="title class_">Typecho_Cookie</span>::<span class="title function_ invoke__">get</span>(<span class="string">&#x27;contents_viewed&#x27;</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">empty</span>(<span class="variable">$vieweds</span>))</span><br><span class="line">            <span class="variable">$vieweds</span> = <span class="keyword">array</span>();</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="variable">$vieweds</span> = <span class="title function_ invoke__">explode</span>(<span class="string">&#x27;,&#x27;</span>, <span class="variable">$vieweds</span>);</span><br><span class="line">        <span class="keyword">if</span> (!<span class="title function_ invoke__">in_array</span>(<span class="variable">$widget</span>-&gt;cid, <span class="variable">$vieweds</span>)) &#123;</span><br><span class="line">            <span class="variable">$views</span> = <span class="variable">$views</span> + <span class="number">1</span>;</span><br><span class="line">            <span class="variable">$widget</span>-&gt;<span class="title function_ invoke__">setField</span>(<span class="string">&#x27;views&#x27;</span>, <span class="string">&#x27;str&#x27;</span>, <span class="title function_ invoke__">strval</span>(<span class="variable">$views</span>), <span class="variable">$widget</span>-&gt;cid);</span><br><span class="line">            <span class="variable">$vieweds</span>[] = <span class="variable">$widget</span>-&gt;cid;</span><br><span class="line">            <span class="variable">$vieweds</span> = <span class="title function_ invoke__">implode</span>(<span class="string">&#x27;,&#x27;</span>, <span class="variable">$vieweds</span>);</span><br><span class="line">            <span class="title class_">Typecho_Cookie</span>::<span class="title function_ invoke__">set</span>(<span class="string">&quot;contents_viewed&quot;</span>,<span class="variable">$vieweds</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;&#123;views&#125;&quot;</span>, <span class="variable">$views</span>, <span class="variable">$format</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>系统</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ansible的安装</title>
+    <url>/2021/09/ansible%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/index.html</url>
+    <content><![CDATA[<h1 id="ansible的安装">ansible的安装</h1>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum search epel</span><br><span class="line">yum install epel-release -y</span><br><span class="line">yum -y install ansible</span><br></pre></td></tr></table></figure>
+<p>编辑配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 核心配置</span><br><span class="line">vim /etc/ansible/ansible.cfg</span><br><span class="line">[defaults]</span><br><span class="line">inventory      = /etc/ansible/hosts</span><br><span class="line">library        = /usr/share/my_modules/</span><br><span class="line">remote_tmp     = /tmp/.ansible/tmp</span><br><span class="line">local_tmp      = /tmp/.ansible/tmp</span><br><span class="line">forks          = 50</span><br><span class="line">poll_interval  = 15</span><br><span class="line">remote_port    = 22</span><br><span class="line">module_lang    = C</span><br><span class="line">host_key_checking = False</span><br><span class="line">log_path = /var/log/ansible.log</span><br></pre></td></tr></table></figure>
+<p>使用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ansible all -m setup</span><br><span class="line">ansible all -m ping</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>系统</category>
+      </categories>
+      <tags>
+        <tag>ssh</tag>
       </tags>
   </entry>
   <entry>
@@ -8055,43 +8092,6 @@ style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font
         <tag>Nginx</tag>
         <tag>http</tag>
         <tag>Apache</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ansible的安装</title>
-    <url>/2021/09/ansible%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/index.html</url>
-    <content><![CDATA[<h1 id="ansible的安装">ansible的安装</h1>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum search epel</span><br><span class="line">yum install epel-release -y</span><br><span class="line">yum -y install ansible</span><br></pre></td></tr></table></figure>
-<p>编辑配置文件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 核心配置</span><br><span class="line">vim /etc/ansible/ansible.cfg</span><br><span class="line">[defaults]</span><br><span class="line">inventory      = /etc/ansible/hosts</span><br><span class="line">library        = /usr/share/my_modules/</span><br><span class="line">remote_tmp     = /tmp/.ansible/tmp</span><br><span class="line">local_tmp      = /tmp/.ansible/tmp</span><br><span class="line">forks          = 50</span><br><span class="line">poll_interval  = 15</span><br><span class="line">remote_port    = 22</span><br><span class="line">module_lang    = C</span><br><span class="line">host_key_checking = False</span><br><span class="line">log_path = /var/log/ansible.log</span><br></pre></td></tr></table></figure>
-<p>使用</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ansible all -m setup</span><br><span class="line">ansible all -m ping</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>系统</category>
-      </categories>
-      <tags>
-        <tag>ssh</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Typecho免插件实现文章浏览次数统计(Cookie Enabled)</title>
-    <url>/2021/05/Typecho%E5%85%8D%E6%8F%92%E4%BB%B6%E5%AE%9E%E7%8E%B0%E6%96%87%E7%AB%A0%E6%B5%8F%E8%A7%88%E6%AC%A1%E6%95%B0%E7%BB%9F%E8%AE%A1(Cookie%20Enabled)/index.html</url>
-    <content><![CDATA[<h2 id="typecho免插件实现文章浏览次数统计(cookie-enabled)">Typecho免插件实现文章浏览次数统计(Cookie Enabled)</h2>
-<p>最近在打造新主题，想给主题增加统计功能，为了不使用Views插件，撸了下面的代码，使用自定义字段保存数据，不会改动数据库结构</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 获取浏览次数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getViewsStr</span>(<span class="params"><span class="variable">$widget</span>, <span class="variable">$format</span> = <span class="string">&quot;&#123;views&#125; 次浏览&quot;</span></span>) </span>&#123;</span><br><span class="line">    <span class="variable">$fields</span> = <span class="title function_ invoke__">unserialize</span>(<span class="variable">$widget</span>-&gt;fields);</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">array_key_exists</span>(<span class="string">&#x27;views&#x27;</span>,<span class="variable">$fields</span>))</span><br><span class="line">        <span class="variable">$views</span> = (!<span class="keyword">empty</span>(<span class="variable">$fields</span>[<span class="string">&#x27;views&#x27;</span>])) ? <span class="title function_ invoke__">intval</span>(<span class="variable">$fields</span>[<span class="string">&#x27;views&#x27;</span>]) : <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="variable">$views</span> = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//增加浏览次数</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$widget</span>-&gt;<span class="title function_ invoke__">is</span>(<span class="string">&#x27;single&#x27;</span>)) &#123;</span><br><span class="line">        <span class="variable">$views</span> = <span class="variable">$views</span> + <span class="number">1</span>;</span><br><span class="line">        <span class="variable">$widget</span>-&gt;<span class="title function_ invoke__">setField</span>(<span class="string">&#x27;views&#x27;</span>, <span class="string">&#x27;str&#x27;</span>, <span class="title function_ invoke__">strval</span>(<span class="variable">$views</span>), <span class="variable">$widget</span>-&gt;cid);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;&#123;views&#125;&quot;</span>, <span class="variable">$views</span>, <span class="variable">$format</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>把以上代码放到functions.php最后，然后就可以在各个页面通过</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="title function_ invoke__">_e</span>(<span class="title function_ invoke__">getViewsStr</span>(<span class="variable">$this</span>)); <span class="comment">/* $this 是 Widget_Archive 对象 */</span> <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>输出统计次数。<br>
-应用到主题后发现不太好，每刷新一次都会重复统计浏览次数，数字大了没什么用。<br>
-所以我就通过Cookies“记住”浏览过的文章，下次再访问就部统计了，以下的代码也是放到functions.php最后</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 获取浏览次数(改进版)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getViewsStr</span>(<span class="params"><span class="variable">$widget</span>, <span class="variable">$format</span> = <span class="string">&quot;&#123;views&#125; 次浏览&quot;</span></span>) </span>&#123;</span><br><span class="line">    <span class="variable">$fields</span> = <span class="title function_ invoke__">unserialize</span>(<span class="variable">$widget</span>-&gt;fields);</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">array_key_exists</span>(<span class="string">&#x27;views&#x27;</span>, <span class="variable">$fields</span>))</span><br><span class="line">        <span class="variable">$views</span> = (!<span class="keyword">empty</span>(<span class="variable">$fields</span>[<span class="string">&#x27;views&#x27;</span>])) ? <span class="title function_ invoke__">intval</span>(<span class="variable">$fields</span>[<span class="string">&#x27;views&#x27;</span>]) : <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="variable">$views</span> = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//增加浏览次数</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$widget</span>-&gt;<span class="title function_ invoke__">is</span>(<span class="string">&#x27;single&#x27;</span>)) &#123;</span><br><span class="line">        <span class="variable">$vieweds</span> = <span class="title class_">Typecho_Cookie</span>::<span class="title function_ invoke__">get</span>(<span class="string">&#x27;contents_viewed&#x27;</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">empty</span>(<span class="variable">$vieweds</span>))</span><br><span class="line">            <span class="variable">$vieweds</span> = <span class="keyword">array</span>();</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="variable">$vieweds</span> = <span class="title function_ invoke__">explode</span>(<span class="string">&#x27;,&#x27;</span>, <span class="variable">$vieweds</span>);</span><br><span class="line">        <span class="keyword">if</span> (!<span class="title function_ invoke__">in_array</span>(<span class="variable">$widget</span>-&gt;cid, <span class="variable">$vieweds</span>)) &#123;</span><br><span class="line">            <span class="variable">$views</span> = <span class="variable">$views</span> + <span class="number">1</span>;</span><br><span class="line">            <span class="variable">$widget</span>-&gt;<span class="title function_ invoke__">setField</span>(<span class="string">&#x27;views&#x27;</span>, <span class="string">&#x27;str&#x27;</span>, <span class="title function_ invoke__">strval</span>(<span class="variable">$views</span>), <span class="variable">$widget</span>-&gt;cid);</span><br><span class="line">            <span class="variable">$vieweds</span>[] = <span class="variable">$widget</span>-&gt;cid;</span><br><span class="line">            <span class="variable">$vieweds</span> = <span class="title function_ invoke__">implode</span>(<span class="string">&#x27;,&#x27;</span>, <span class="variable">$vieweds</span>);</span><br><span class="line">            <span class="title class_">Typecho_Cookie</span>::<span class="title function_ invoke__">set</span>(<span class="string">&quot;contents_viewed&quot;</span>,<span class="variable">$vieweds</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;&#123;views&#125;&quot;</span>, <span class="variable">$views</span>, <span class="variable">$format</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>系统</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -8505,6 +8505,61 @@ ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2</p>
       </tags>
   </entry>
   <entry>
+    <title>Nginx 使用正则时配置反向代理</title>
+    <url>/2023/07/Nginx-%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E6%97%B6%E9%85%8D%E7%BD%AE%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/index.html</url>
+    <content><![CDATA[<p><strong>当nginx的location 使用正则时，proxy_pass 中就不能出现路径。</strong></p>
+<p>但有时候我们需要利用nginx去修改请求路径，比如：<br>
+访问  <code>/v1/api</code> 时，希望转发到后端是 <code>/api</code><br>
+这个时候要利用 <code>rewrite</code>  才能完成。</p>
+<p>示例如下：</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">location</span> <span class="regexp">~ &quot;^/v1/api/review/[0-9]+&quot;</span> &#123;</span><br><span class="line">    <span class="attribute">rewrite</span> <span class="regexp"> ^/v1/api/(.*)</span> /v1/<span class="variable">$1</span> <span class="literal">break</span>;</span><br><span class="line">    <span class="attribute">proxy_pass</span> http://10.10.10.13;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面配置中，比如客户端请求的接口是：<code>/v1/api/review/100</code> 	那转发的接口是<code>/api/review/100</code></p>
+<p>通过 <code>rewrite</code> 去掉了 <code>/v1</code> 前缀。</p>
+<p>其中 <code>$1</code> 是<code>rewrite</code>中的第一个圆括号</p>
+]]></content>
+      <categories>
+        <category>服务</category>
+        <category>Nginx</category>
+      </categories>
+      <tags>
+        <tag>Nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Nginx 使用证书进行双向校验</title>
+    <url>/2023/04/Nginx-%E4%BD%BF%E7%94%A8%E8%AF%81%E4%B9%A6%E8%BF%9B%E8%A1%8C%E5%8F%8C%E5%90%91%E6%A0%A1%E9%AA%8C/index.html</url>
+    <content><![CDATA[<p><strong>生成root CA证书时COMMON_NAME参数不能与生成server端和client端证书时的COMMON_NAME参数一样，其他参数随意、</strong></p>
+<h2 id="签发服务证书">签发服务证书</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat &lt;&lt; EOF &gt; nginx-csr.json</span><br><span class="line">&#123;</span><br><span class="line">    &quot;CN&quot;: &quot;Nginx&quot;,</span><br><span class="line">    &quot;hosts&quot;: [</span><br><span class="line">        &quot;127.0.0.1&quot;,</span><br><span class="line">        &quot;localhost&quot;,</span><br><span class="line">        &quot;139.224.75.128&quot;,</span><br><span class="line">        &quot;10.10.10.11&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;key&quot;: &#123;</span><br><span class="line">        &quot;algo&quot;: &quot;rsa&quot;,</span><br><span class="line">        &quot;size&quot;: 2048</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;names&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;C&quot;: &quot;CN&quot;,</span><br><span class="line">            &quot;L&quot;: &quot;ZJ&quot;,            </span><br><span class="line">            &quot;ST&quot;: &quot;HZ&quot;,</span><br><span class="line">            &quot;O&quot;: &quot;yonge server&quot;,</span><br><span class="line">            &quot;OU&quot;: &quot;IT&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cfssl gencert \</span><br><span class="line">  -ca=ca.pem \</span><br><span class="line">  -ca-key=ca-key.pem \</span><br><span class="line">  -config=ca-config.json \</span><br><span class="line">  -profile=www nginx-csr.json | cfssljson -bare nginx</span><br></pre></td></tr></table></figure>
+<h2 id="签发客户端证书">签发客户端证书</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat &lt;&lt; EOF &gt; client-csr.json</span><br><span class="line">&#123;</span><br><span class="line">    &quot;CN&quot;: &quot;Client&quot;,</span><br><span class="line">    &quot;hosts&quot;: [],</span><br><span class="line">    &quot;key&quot;: &#123;</span><br><span class="line">        &quot;algo&quot;: &quot;rsa&quot;,</span><br><span class="line">        &quot;size&quot;: 2048</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;names&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;O&quot;: &quot;My client&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cfssl gencert \</span><br><span class="line">  -ca=ca.pem \</span><br><span class="line">  -ca-key=ca-key.pem \</span><br><span class="line">  -config=ca-config.json \</span><br><span class="line">  -profile=www client-csr.json | cfssljson -bare client</span><br></pre></td></tr></table></figure>
+<h2 id="nginx-配置">nginx 配置</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen     443 ssl http2;</span><br><span class="line">        server_name  www.example.com;</span><br><span class="line">        ssl_certificate nginx.crt;            # 服务端证书</span><br><span class="line">        ssl_certificate_key nginx.key;        # 服务端证书</span><br><span class="line">        ssl_client_certificate client-ca.crt; # 客户端证书的CA</span><br><span class="line">        ssl_verify_client on;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="客户端证书转p12">客户端证书转p12</h2>
+<p>查看更多： <a href="/2023/04/%E6%99%AE%E9%80%9Ax509%E8%AF%81%E4%B9%A6%E8%BD%ACp12%E6%A0%BC%E5%BC%8F/index.html" title="普通x509证书转p12格式">普通x509证书转p12格式</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">openssl pkcs12 -export -clcerts -in client.crt -inkey client.key -out client.p12</span><br></pre></td></tr></table></figure>
+<h2 id="使用curl-命令测试">使用curl 命令测试</h2>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 这里一定要使用证书相对路径或绝对路径，不能写成 --cert client.crt ....这种形式</span><br><span class="line">curl -k --cert ./client.crt --key ./client.key https://10.10.10.11</span><br></pre></td></tr></table></figure>
+<h2 id="浏览器导入p12证书">浏览器导入p12证书</h2>
+<a href="/2023/04/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AF%BC%E5%85%A5p12%E8%AF%81%E4%B9%A6/index.html" title="浏览器导入p12证书">浏览器导入p12证书</a>
+<h1 id="附：">附：</h1>
+<blockquote>
+<ul>
+<li>经个人通过nginx验证，使用双向认证时，证书到期会导致认证不通过</li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>服务</category>
+        <category>Nginx</category>
+      </categories>
+      <tags>
+        <tag>SSL</tag>
+        <tag>TLS</tag>
+        <tag>Nginx</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Nginx location 匹配规则</title>
     <url>/2023/07/Nginx-location-%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99/index.html</url>
     <content><![CDATA[<h2 id="**语法规则：**"><strong>语法规则：</strong></h2>
@@ -8538,27 +8593,6 @@ ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2</p>
 <figure class="highlight text"><table><tr><td class="code"><pre><span class="line">location ^~ /index/ &#123;</span><br><span class="line">  .....</span><br><span class="line">&#125;</span><br><span class="line">#以 /index/ 开头的请求，都会匹配上</span><br><span class="line">#http://example.com/index/index.page  [匹配成功]</span><br><span class="line">#http://example.com/error/error.page [匹配失败]</span><br></pre></td></tr></table></figure>
 <p>不加任何规则时，默认是大小写敏感，前缀匹配，相当于加了 <code>~</code> 与 <code>^~</code></p>
 <figure class="highlight text"><table><tr><td class="code"><pre><span class="line">location /index/ &#123;</span><br><span class="line">  ......</span><br><span class="line">&#125;</span><br><span class="line">#http://example.com/index  [匹配成功]</span><br><span class="line">#http://example.com/index/index.page  [匹配成功]</span><br><span class="line">#http://example.com/test/index  [匹配失败]</span><br><span class="line">#http://example.com/Index  [匹配失败]</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>服务</category>
-        <category>Nginx</category>
-      </categories>
-      <tags>
-        <tag>Nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Nginx 使用正则时配置反向代理</title>
-    <url>/2023/07/Nginx-%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E6%97%B6%E9%85%8D%E7%BD%AE%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/index.html</url>
-    <content><![CDATA[<p><strong>当nginx的location 使用正则时，proxy_pass 中就不能出现路径。</strong></p>
-<p>但有时候我们需要利用nginx去修改请求路径，比如：<br>
-访问  <code>/v1/api</code> 时，希望转发到后端是 <code>/api</code><br>
-这个时候要利用 <code>rewrite</code>  才能完成。</p>
-<p>示例如下：</p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">location</span> <span class="regexp">~ &quot;^/v1/api/review/[0-9]+&quot;</span> &#123;</span><br><span class="line">    <span class="attribute">rewrite</span> <span class="regexp"> ^/v1/api/(.*)</span> /v1/<span class="variable">$1</span> <span class="literal">break</span>;</span><br><span class="line">    <span class="attribute">proxy_pass</span> http://10.10.10.13;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面配置中，比如客户端请求的接口是：<code>/v1/api/review/100</code> 	那转发的接口是<code>/api/review/100</code></p>
-<p>通过 <code>rewrite</code> 去掉了 <code>/v1</code> 前缀。</p>
-<p>其中 <code>$1</code> 是<code>rewrite</code>中的第一个圆括号</p>
 ]]></content>
       <categories>
         <category>服务</category>
@@ -8606,37 +8640,18 @@ ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2</p>
       </tags>
   </entry>
   <entry>
-    <title>Nginx 使用证书进行双向校验</title>
-    <url>/2023/04/Nginx-%E4%BD%BF%E7%94%A8%E8%AF%81%E4%B9%A6%E8%BF%9B%E8%A1%8C%E5%8F%8C%E5%90%91%E6%A0%A1%E9%AA%8C/index.html</url>
-    <content><![CDATA[<p><strong>生成root CA证书时COMMON_NAME参数不能与生成server端和client端证书时的COMMON_NAME参数一样，其他参数随意、</strong></p>
-<h2 id="签发服务证书">签发服务证书</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat &lt;&lt; EOF &gt; nginx-csr.json</span><br><span class="line">&#123;</span><br><span class="line">    &quot;CN&quot;: &quot;Nginx&quot;,</span><br><span class="line">    &quot;hosts&quot;: [</span><br><span class="line">        &quot;127.0.0.1&quot;,</span><br><span class="line">        &quot;localhost&quot;,</span><br><span class="line">        &quot;139.224.75.128&quot;,</span><br><span class="line">        &quot;10.10.10.11&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;key&quot;: &#123;</span><br><span class="line">        &quot;algo&quot;: &quot;rsa&quot;,</span><br><span class="line">        &quot;size&quot;: 2048</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;names&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;C&quot;: &quot;CN&quot;,</span><br><span class="line">            &quot;L&quot;: &quot;ZJ&quot;,            </span><br><span class="line">            &quot;ST&quot;: &quot;HZ&quot;,</span><br><span class="line">            &quot;O&quot;: &quot;yonge server&quot;,</span><br><span class="line">            &quot;OU&quot;: &quot;IT&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cfssl gencert \</span><br><span class="line">  -ca=ca.pem \</span><br><span class="line">  -ca-key=ca-key.pem \</span><br><span class="line">  -config=ca-config.json \</span><br><span class="line">  -profile=www nginx-csr.json | cfssljson -bare nginx</span><br></pre></td></tr></table></figure>
-<h2 id="签发客户端证书">签发客户端证书</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat &lt;&lt; EOF &gt; client-csr.json</span><br><span class="line">&#123;</span><br><span class="line">    &quot;CN&quot;: &quot;Client&quot;,</span><br><span class="line">    &quot;hosts&quot;: [],</span><br><span class="line">    &quot;key&quot;: &#123;</span><br><span class="line">        &quot;algo&quot;: &quot;rsa&quot;,</span><br><span class="line">        &quot;size&quot;: 2048</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;names&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;O&quot;: &quot;My client&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cfssl gencert \</span><br><span class="line">  -ca=ca.pem \</span><br><span class="line">  -ca-key=ca-key.pem \</span><br><span class="line">  -config=ca-config.json \</span><br><span class="line">  -profile=www client-csr.json | cfssljson -bare client</span><br></pre></td></tr></table></figure>
-<h2 id="nginx-配置">nginx 配置</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen     443 ssl http2;</span><br><span class="line">        server_name  www.example.com;</span><br><span class="line">        ssl_certificate nginx.crt;            # 服务端证书</span><br><span class="line">        ssl_certificate_key nginx.key;        # 服务端证书</span><br><span class="line">        ssl_client_certificate client-ca.crt; # 客户端证书的CA</span><br><span class="line">        ssl_verify_client on;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="客户端证书转p12">客户端证书转p12</h2>
-<p>查看更多： <a href="/2023/04/%E6%99%AE%E9%80%9Ax509%E8%AF%81%E4%B9%A6%E8%BD%ACp12%E6%A0%BC%E5%BC%8F/index.html" title="普通x509证书转p12格式">普通x509证书转p12格式</a></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">openssl pkcs12 -export -clcerts -in client.crt -inkey client.key -out client.p12</span><br></pre></td></tr></table></figure>
-<h2 id="使用curl-命令测试">使用curl 命令测试</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 这里一定要使用证书相对路径或绝对路径，不能写成 --cert client.crt ....这种形式</span><br><span class="line">curl -k --cert ./client.crt --key ./client.key https://10.10.10.11</span><br></pre></td></tr></table></figure>
-<h2 id="浏览器导入p12证书">浏览器导入p12证书</h2>
-<a href="/2023/04/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AF%BC%E5%85%A5p12%E8%AF%81%E4%B9%A6/index.html" title="浏览器导入p12证书">浏览器导入p12证书</a>
-<h1 id="附：">附：</h1>
-<blockquote>
-<ul>
-<li>经个人通过nginx验证，使用双向认证时，证书到期会导致认证不通过</li>
-</ul>
-</blockquote>
+    <title>git log 中文乱码的解决方案</title>
+    <url>/2023/05/git-log-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.html</url>
+    <content><![CDATA[<p>设置 Git 支持 utf-8 编码<br>
+在命令行下输入以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global core.quotepath false # 显示 status 编码</span><br><span class="line">git config --global gui.encoding utf-8 # 图形界面编码</span><br><span class="line">git config --global i18n.commit.encoding utf-8 # 提交信息编码</span><br><span class="line">git config --global i18n.logoutputencoding utf-8 # 输出 log 编码</span><br><span class="line">export LESSCHARSET=utf-8</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>服务</category>
-        <category>Nginx</category>
+        <category>系统</category>
+        <category>常用命令</category>
       </categories>
       <tags>
-        <tag>SSL</tag>
-        <tag>TLS</tag>
-        <tag>Nginx</tag>
+        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
@@ -8755,18 +8770,33 @@ ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2</p>
       </tags>
   </entry>
   <entry>
-    <title>git log 中文乱码的解决方案</title>
-    <url>/2023/05/git-log-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.html</url>
-    <content><![CDATA[<p>设置 Git 支持 utf-8 编码<br>
-在命令行下输入以下命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global core.quotepath false # 显示 status 编码</span><br><span class="line">git config --global gui.encoding utf-8 # 图形界面编码</span><br><span class="line">git config --global i18n.commit.encoding utf-8 # 提交信息编码</span><br><span class="line">git config --global i18n.logoutputencoding utf-8 # 输出 log 编码</span><br><span class="line">export LESSCHARSET=utf-8</span><br></pre></td></tr></table></figure>
+    <title>iptablse 配置DNAT转发</title>
+    <url>/2023/07/iptablse-%E9%85%8D%E7%BD%AEDNAT%E8%BD%AC%E5%8F%91/index.html</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">192.168.39.100 --------------&gt; 192.168.39.33:443</span><br><span class="line">                                   ||</span><br><span class="line">                               10.10.10.10   --------------&gt;   10.10.10.15:8443</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">iptables -t nat -A PREROUTING -d 192.168.39.33 -p tcp --dport 443 -j DNAT --to-destination 10.10.10.15:8443</span><br><span class="line">iptables -t nat -A OUTPUT -d 192.168.39.33 -p tcp --dport 443 -j DNAT --to-destination 10.10.10.15:8443  <span class="comment"># 实现本机访问</span></span><br><span class="line">iptables -t nat -A POSTROUTING -d 10.10.10.15/32 -o eth0 -j SNAT --to-source 10.10.10.10</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>系统</category>
-        <category>常用命令</category>
       </categories>
       <tags>
-        <tag>Git</tag>
+        <tag>iptables</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>kubectl - 如何列出Pod中运行的所有容器，包括初始化容器</title>
+    <url>/2023/07/kubectl-%E5%A6%82%E4%BD%95%E5%88%97%E5%87%BAPod%E4%B8%AD%E8%BF%90%E8%A1%8C%E7%9A%84%E6%89%80%E6%9C%89%E5%AE%B9%E5%99%A8%EF%BC%8C%E5%8C%85%E6%8B%AC%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AE%B9%E5%99%A8/index.html</url>
+    <content><![CDATA[<p>初始化容器存储在<code>spec.initContainers</code>中:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl get pods POD_NAME_HERE -o jsonpath=&#123;.spec.initContainers[*].name&#125;</span><br></pre></td></tr></table></figure>
+<p>运行的所有容器在<code>containers</code>中</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl get pods POD_NAME_HERE -o jsonpath=&#123;.spec.containers[*].name&#125;</span><br></pre></td></tr></table></figure>
+<p>可以使用<a href="https://kubernetes.io/zh-cn/docs/reference/kubectl/jsonpath/">JSONPath</a>来显示两者</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl get pod POD_NAME_HERE -o jsonpath=<span class="string">&quot;&#123;.spec[&#x27;containers&#x27;,&#x27;initContainers&#x27;][*].name&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>kubernetes</category>
+      </categories>
+      <tags>
+        <tag>kubernetes</tag>
       </tags>
   </entry>
   <entry>
@@ -9013,6 +9043,44 @@ ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2</p>
       </tags>
   </entry>
   <entry>
+    <title>openssl 签发服务端证书</title>
+    <url>/2023/04/openssl-%E7%AD%BE%E5%8F%91%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%AF%81%E4%B9%A6/index.html</url>
+    <content><![CDATA[<h1 id="签发服务端证书">签发服务端证书</h1>
+<blockquote>
+<p>创建CA，ca 可以使用之前生成的</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">openssl genrsa -out ca.key 2048</span><br><span class="line">openssl req -x509 -new -nodes -key ca.key -subj &quot;/CN=Root CA&quot; -days 10000 -out ca.crt</span><br></pre></td></tr></table></figure>
+</blockquote>
+<ul>
+<li>创建一个用于生成证书签名请求（CSR）的配置文件。 保存文件（例如：<code>csr.conf</code>）前，记得用真实值替换掉尖括号中的值（例如：<code>&lt;CN&gt;</code>）。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[ req ]</span><br><span class="line">default_bits = 2048</span><br><span class="line">prompt = no</span><br><span class="line">default_md = sha256</span><br><span class="line">req_extensions = req_ext</span><br><span class="line">distinguished_name = dn</span><br><span class="line"></span><br><span class="line">[ dn ]</span><br><span class="line">C = &lt;country&gt;</span><br><span class="line">ST = &lt;state&gt;</span><br><span class="line">L = &lt;city&gt;</span><br><span class="line">O = &lt;organization&gt;</span><br><span class="line">OU = &lt;organization unit&gt;</span><br><span class="line">CN = &lt;CN&gt;</span><br><span class="line"></span><br><span class="line">[ req_ext ]</span><br><span class="line">subjectAltName = @alt_names</span><br><span class="line"></span><br><span class="line">[ alt_names ]</span><br><span class="line">DNS.1 = localhost</span><br><span class="line">DNS.2 = *.blogs.top</span><br><span class="line">IP.1 = 127.0.0.1</span><br><span class="line">IP.2 = 192.168.1.2</span><br><span class="line"></span><br><span class="line">[ v3_ext ]</span><br><span class="line">authorityKeyIdentifier=keyid,issuer:always</span><br><span class="line">subjectKeyIdentifier=hash</span><br><span class="line">authorityKeyIdentifier=keyid,issuer</span><br><span class="line">basicConstraints=CA:FALSE</span><br><span class="line">keyUsage=keyEncipherment,dataEncipherment</span><br><span class="line">extendedKeyUsage=serverAuth,clientAuth</span><br><span class="line">subjectAltName=@alt_names</span><br></pre></td></tr></table></figure>
+<ul>
+<li>基于上面的配置文件生成证书签名请求：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">openssl req -new -key server.key -out server.csr -config csr.conf</span><br></pre></td></tr></table></figure>
+<ul>
+<li>基于 ca.key、ca.crt 和 server.csr 等三个文件生成服务端证书</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key \</span><br><span class="line">    -CAcreateserial -out server.crt -days 10000 \</span><br><span class="line">    -extensions v3_ext -extfile csr.conf -sha256</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看证书签名请求</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">openssl req  -noout -text -in server.csr</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看证书</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">openssl x509  -noout -text -in server.crt</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>系统</category>
+        <category>常用命令</category>
+      </categories>
+      <tags>
+        <tag>SSL</tag>
+        <tag>TLS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用image-syncer迁移镜像</title>
     <url>/2023/05/%E4%BD%BF%E7%94%A8image-syncer%E8%BF%81%E7%A7%BB%E9%95%9C%E5%83%8F/index.html</url>
     <content><![CDATA[<h1 id="使用image-syncer迁移镜像">使用image-syncer迁移镜像</h1>
@@ -9052,41 +9120,31 @@ ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2</p>
       </tags>
   </entry>
   <entry>
-    <title>openssl 签发服务端证书</title>
-    <url>/2023/04/openssl-%E7%AD%BE%E5%8F%91%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%AF%81%E4%B9%A6/index.html</url>
-    <content><![CDATA[<h1 id="签发服务端证书">签发服务端证书</h1>
-<blockquote>
-<p>创建CA，ca 可以使用之前生成的</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">openssl genrsa -out ca.key 2048</span><br><span class="line">openssl req -x509 -new -nodes -key ca.key -subj &quot;/CN=Root CA&quot; -days 10000 -out ca.crt</span><br></pre></td></tr></table></figure>
-</blockquote>
-<ul>
-<li>创建一个用于生成证书签名请求（CSR）的配置文件。 保存文件（例如：<code>csr.conf</code>）前，记得用真实值替换掉尖括号中的值（例如：<code>&lt;CN&gt;</code>）。</li>
+    <title>使用yum安装nginx</title>
+    <url>/2023/04/%E4%BD%BF%E7%94%A8yum%E5%AE%89%E8%A3%85nginx/index.html</url>
+    <content><![CDATA[<ul>
+<li><strong>添加CentOS 7 Nginx yum资源库</strong></li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[ req ]</span><br><span class="line">default_bits = 2048</span><br><span class="line">prompt = no</span><br><span class="line">default_md = sha256</span><br><span class="line">req_extensions = req_ext</span><br><span class="line">distinguished_name = dn</span><br><span class="line"></span><br><span class="line">[ dn ]</span><br><span class="line">C = &lt;country&gt;</span><br><span class="line">ST = &lt;state&gt;</span><br><span class="line">L = &lt;city&gt;</span><br><span class="line">O = &lt;organization&gt;</span><br><span class="line">OU = &lt;organization unit&gt;</span><br><span class="line">CN = &lt;CN&gt;</span><br><span class="line"></span><br><span class="line">[ req_ext ]</span><br><span class="line">subjectAltName = @alt_names</span><br><span class="line"></span><br><span class="line">[ alt_names ]</span><br><span class="line">DNS.1 = localhost</span><br><span class="line">DNS.2 = *.blogs.top</span><br><span class="line">IP.1 = 127.0.0.1</span><br><span class="line">IP.2 = 192.168.1.2</span><br><span class="line"></span><br><span class="line">[ v3_ext ]</span><br><span class="line">authorityKeyIdentifier=keyid,issuer:always</span><br><span class="line">subjectKeyIdentifier=hash</span><br><span class="line">authorityKeyIdentifier=keyid,issuer</span><br><span class="line">basicConstraints=CA:FALSE</span><br><span class="line">keyUsage=keyEncipherment,dataEncipherment</span><br><span class="line">extendedKeyUsage=serverAuth,clientAuth</span><br><span class="line">subjectAltName=@alt_names</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rpm -Uvh  http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</span><br></pre></td></tr></table></figure>
 <ul>
-<li>基于上面的配置文件生成证书签名请求：</li>
+<li><strong>安装nginx</strong></li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">openssl req -new -key server.key -out server.csr -config csr.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum -y install nginx</span><br></pre></td></tr></table></figure>
 <ul>
-<li>基于 ca.key、ca.crt 和 server.csr 等三个文件生成服务端证书</li>
+<li><strong>启动nginx</strong></li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key \</span><br><span class="line">    -CAcreateserial -out server.crt -days 10000 \</span><br><span class="line">    -extensions v3_ext -extfile csr.conf -sha256</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl start nginx</span><br></pre></td></tr></table></figure>
 <ul>
-<li>查看证书签名请求</li>
+<li>rpm方式升级并安装某个版本的Nginx</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">openssl req  -noout -text -in server.csr</span><br></pre></td></tr></table></figure>
-<ul>
-<li>查看证书</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">openssl x509  -noout -text -in server.crt</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rpm -Uvh http://nginx.org/packages/centos/7/x86_64/RPMS/nginx-1.18.0-1.el7.ngx.x86_64.rpm</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>系统</category>
-        <category>常用命令</category>
+        <category>服务</category>
+        <category>Nginx</category>
       </categories>
       <tags>
-        <tag>SSL</tag>
-        <tag>TLS</tag>
+        <tag>Nginx</tag>
       </tags>
   </entry>
   <entry>
@@ -9117,34 +9175,6 @@ ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2</p>
       <tags>
         <tag>SSL</tag>
         <tag>TLS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用yum安装nginx</title>
-    <url>/2023/04/%E4%BD%BF%E7%94%A8yum%E5%AE%89%E8%A3%85nginx/index.html</url>
-    <content><![CDATA[<ul>
-<li><strong>添加CentOS 7 Nginx yum资源库</strong></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rpm -Uvh  http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>安装nginx</strong></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum -y install nginx</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>启动nginx</strong></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">systemctl start nginx</span><br></pre></td></tr></table></figure>
-<ul>
-<li>rpm方式升级并安装某个版本的Nginx</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rpm -Uvh http://nginx.org/packages/centos/7/x86_64/RPMS/nginx-1.18.0-1.el7.ngx.x86_64.rpm</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>服务</category>
-        <category>Nginx</category>
-      </categories>
-      <tags>
-        <tag>Nginx</tag>
       </tags>
   </entry>
   <entry>
