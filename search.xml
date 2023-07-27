@@ -1179,30 +1179,6 @@ net<span class="hljs-selector-class">.ipv4</span><span class="hljs-selector-clas
 ]]></content>
   </entry>
   <entry>
-    <title>VIM编辑器</title>
-    <url>/2019/05/VIM%E7%BC%96%E8%BE%91%E5%99%A8/index.html</url>
-    <content><![CDATA[<h2 id="vim编辑器">vim编辑器</h2>
-<span id="more"></span>
-<h4 id="配置介绍">配置介绍</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-rw-r--r--. 1 root root 1982 8月   2 2017 /etc/virc        vi 配置文件</span><br><span class="line">-rw-r--r--. 1 root root 1982 8月   2 2017 /etc/vimrc       vim 全局配置文件</span><br><span class="line">-rw-r--r--. 1 root root 1982 8月   2 2017 ~/.vimrc         vim 用户配置文件，默认没有，需要手工建立</span><br><span class="line">source ~/.vimrc 让配置文件立即生效，source 可用（.）代替，如 . /etc/vimrc</span><br><span class="line">:q!   放弃修改，所用用户可用</span><br><span class="line">:wq!  当没有写入权限时强制写入，只有 root 可用。</span><br><span class="line">:wq   保存退出</span><br><span class="line">ZZ    保存退出</span><br></pre></td></tr></table></figure>
-<h4 id="插入快捷键">插入快捷键</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">a  在光标所在字符后插入</span><br><span class="line">A  插入光标所在行行尾</span><br><span class="line">i  在光标所在字符前插入</span><br><span class="line">I  插入光标所在行行首</span><br><span class="line">o  在光标下插入新行</span><br><span class="line">O  在光标上插入新行</span><br></pre></td></tr></table></figure>
-<h4 id="光标移动快捷键">光标移动快捷键</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">H  向左     gg 移动到文件头</span><br><span class="line">L  向右     G  移动到文件尾</span><br><span class="line">J  向下     ^  移到行首</span><br><span class="line">K  向上     $  移到行尾</span><br></pre></td></tr></table></figure>
-<h4 id="删除操作">删除操作</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">x      删除单个字符</span><br><span class="line">nx     删除 n 个字符 dw 删除光标后一个字符串</span><br><span class="line">dd     删除单行 D  光标后删除到行尾</span><br><span class="line">ndd    删除单行</span><br><span class="line">:m,nd  从 m 行删除到 n 行</span><br><span class="line">dG     从光标所在行删除到文件尾</span><br><span class="line">C      当前位置删除到行尾，且打开编辑模式</span><br><span class="line">dw     当前位置删除一个字符串</span><br></pre></td></tr></table></figure>
-<h4 id="粘贴复制">粘贴复制</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yy         复制</span><br><span class="line">nyy        复制 n 行</span><br><span class="line">p          粘贴到光标下一行</span><br><span class="line">P          粘贴到光标上一行</span><br><span class="line">u          撤销</span><br><span class="line">ctrl+r     反撤销</span><br><span class="line">r          替换当前光标位置字符</span><br><span class="line">R          从光标位置开始替换，ESC 键结束</span><br><span class="line">/          查找，n 下一个，N 上一个，</span><br><span class="line">:noh       取消查找后的高亮</span><br><span class="line">:r! 命令   把命令结果写在光标所在行</span><br><span class="line">:r /etc/passwd 把/etc/passwd 文件内容载入到当前编辑的文件中</span><br></pre></td></tr></table></figure>
-<h4 id="替换">替换</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">:1,10s/old/new/g      把 1 到 10 行的 old 替换为 new</span><br><span class="line">:%s/old/new/g         把全文的 old 替换为 new（%代表全文）</span><br><span class="line">:1,10s/^/#/g          在 1 到 10 行的行首加入#</span><br></pre></td></tr></table></figure>
-<h4 id="辅助操作">辅助操作</h4>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1) 显示行号  :set nu</span><br><span class="line">:set nonu</span><br><span class="line">2) 颜色开关 :syntax off</span><br><span class="line">:syntax on</span><br><span class="line">3) 快捷键 :map ^P I#&lt;ESC&gt; 当按下 ctrl+p，在行首加入“#” “^P”需要 ctrl+V+P 输入</span><br><span class="line">:map ^B ^x 当按下 ctrl+b，删除行首的一个字母，用于删除注释</span><br><span class="line">4) 替换</span><br><span class="line">:ab 原字符  目标字符</span><br><span class="line">:ab abc ABC1234@qq.com</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>系统</category>
-      </categories>
-  </entry>
-  <entry>
     <title>TCP血案</title>
     <url>/2019/08/TCP%E8%A1%80%E6%A1%88/index.html</url>
     <content><![CDATA[<h2 id="tcp血案">TCP血案</h2>
@@ -1378,39 +1354,28 @@ b 、Zabbix 配置文件中查找”Alert”查看告警脚本存放路径：</p
       </tags>
   </entry>
   <entry>
-    <title>使用hexo新建文章</title>
-    <url>/2019/04/%E4%BD%BF%E7%94%A8hexo%E6%96%B0%E5%BB%BA%E6%96%87%E7%AB%A0/index.html</url>
-    <content><![CDATA[<h2 id="hexo-新建文章">HEXO 新建文章</h2>
-<p>使用命令如下命令新建，最好使用引号将文章名字引起来</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo new &quot;使用hexo新建文章&quot;</span><br></pre></td></tr></table></figure>
-<p>上面命令执行后会生成md类型的文章：source/_posts/xxx.md</p>
-<h3 id="编辑文章">编辑文章</h3>
-<ul>
-<li>使用markdown编辑器编写文章，放到生成的xxx.md即可。</li>
-</ul>
-<blockquote>
-<p>注意不要将文章最上面的类容删掉</p>
-</blockquote>
-<h3 id="清除缓存">清除缓存</h3>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ohexo clean</span><br></pre></td></tr></table></figure>
-<h3 id="编译文章">编译文章</h3>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo generate</span><br><span class="line">hexo g # 简写</span><br></pre></td></tr></table></figure>
-<h3 id="启动本地服务测试文章">启动本地服务测试文章</h3>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo server</span><br><span class="line">hexo s # 简写</span><br></pre></td></tr></table></figure>
-<h3 id="上传到github">上传到github</h3>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo deploy</span><br><span class="line">hexo d # 简写</span><br></pre></td></tr></table></figure>
-<h3 id="快捷命令">快捷命令</h3>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo s</span><br></pre></td></tr></table></figure>
-<h2 id="快速发布命令（资源压缩）">快速发布命令（资源压缩）</h2>
-<a href="/2022/11/Hexo%E4%BD%BF%E7%94%A8gulp%E5%8E%8B%E7%BC%A9%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90/index.html" title="Hexo使用gulp压缩静态资源">Hexo使用gulp压缩静态资源</a>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; gulp &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+    <title>VIM编辑器</title>
+    <url>/2019/05/VIM%E7%BC%96%E8%BE%91%E5%99%A8/index.html</url>
+    <content><![CDATA[<h2 id="vim编辑器">vim编辑器</h2>
+<span id="more"></span>
+<h4 id="配置介绍">配置介绍</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-rw-r--r--. 1 root root 1982 8月   2 2017 /etc/virc        vi 配置文件</span><br><span class="line">-rw-r--r--. 1 root root 1982 8月   2 2017 /etc/vimrc       vim 全局配置文件</span><br><span class="line">-rw-r--r--. 1 root root 1982 8月   2 2017 ~/.vimrc         vim 用户配置文件，默认没有，需要手工建立</span><br><span class="line">source ~/.vimrc 让配置文件立即生效，source 可用（.）代替，如 . /etc/vimrc</span><br><span class="line">:q!   放弃修改，所用用户可用</span><br><span class="line">:wq!  当没有写入权限时强制写入，只有 root 可用。</span><br><span class="line">:wq   保存退出</span><br><span class="line">ZZ    保存退出</span><br></pre></td></tr></table></figure>
+<h4 id="插入快捷键">插入快捷键</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">a  在光标所在字符后插入</span><br><span class="line">A  插入光标所在行行尾</span><br><span class="line">i  在光标所在字符前插入</span><br><span class="line">I  插入光标所在行行首</span><br><span class="line">o  在光标下插入新行</span><br><span class="line">O  在光标上插入新行</span><br></pre></td></tr></table></figure>
+<h4 id="光标移动快捷键">光标移动快捷键</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">H  向左     gg 移动到文件头</span><br><span class="line">L  向右     G  移动到文件尾</span><br><span class="line">J  向下     ^  移到行首</span><br><span class="line">K  向上     $  移到行尾</span><br></pre></td></tr></table></figure>
+<h4 id="删除操作">删除操作</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">x      删除单个字符</span><br><span class="line">nx     删除 n 个字符 dw 删除光标后一个字符串</span><br><span class="line">dd     删除单行 D  光标后删除到行尾</span><br><span class="line">ndd    删除单行</span><br><span class="line">:m,nd  从 m 行删除到 n 行</span><br><span class="line">dG     从光标所在行删除到文件尾</span><br><span class="line">C      当前位置删除到行尾，且打开编辑模式</span><br><span class="line">dw     当前位置删除一个字符串</span><br></pre></td></tr></table></figure>
+<h4 id="粘贴复制">粘贴复制</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yy         复制</span><br><span class="line">nyy        复制 n 行</span><br><span class="line">p          粘贴到光标下一行</span><br><span class="line">P          粘贴到光标上一行</span><br><span class="line">u          撤销</span><br><span class="line">ctrl+r     反撤销</span><br><span class="line">r          替换当前光标位置字符</span><br><span class="line">R          从光标位置开始替换，ESC 键结束</span><br><span class="line">/          查找，n 下一个，N 上一个，</span><br><span class="line">:noh       取消查找后的高亮</span><br><span class="line">:r! 命令   把命令结果写在光标所在行</span><br><span class="line">:r /etc/passwd 把/etc/passwd 文件内容载入到当前编辑的文件中</span><br></pre></td></tr></table></figure>
+<h4 id="替换">替换</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">:1,10s/old/new/g      把 1 到 10 行的 old 替换为 new</span><br><span class="line">:%s/old/new/g         把全文的 old 替换为 new（%代表全文）</span><br><span class="line">:1,10s/^/#/g          在 1 到 10 行的行首加入#</span><br></pre></td></tr></table></figure>
+<h4 id="辅助操作">辅助操作</h4>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1) 显示行号  :set nu</span><br><span class="line">:set nonu</span><br><span class="line">2) 颜色开关 :syntax off</span><br><span class="line">:syntax on</span><br><span class="line">3) 快捷键 :map ^P I#&lt;ESC&gt; 当按下 ctrl+p，在行首加入“#” “^P”需要 ctrl+V+P 输入</span><br><span class="line">:map ^B ^x 当按下 ctrl+b，删除行首的一个字母，用于删除注释</span><br><span class="line">4) 替换</span><br><span class="line">:ab 原字符  目标字符</span><br><span class="line">:ab abc ABC1234@qq.com</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>帮助</category>
+        <category>系统</category>
       </categories>
-      <tags>
-        <tag>Readme</tag>
-      </tags>
   </entry>
   <entry>
     <title>不同的时间格式</title>
@@ -1454,6 +1419,41 @@ b 、Zabbix 配置文件中查找”Alert”查看告警脚本存放路径：</p
       </categories>
       <tags>
         <tag>时间</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用hexo新建文章</title>
+    <url>/2019/04/%E4%BD%BF%E7%94%A8hexo%E6%96%B0%E5%BB%BA%E6%96%87%E7%AB%A0/index.html</url>
+    <content><![CDATA[<h2 id="hexo-新建文章">HEXO 新建文章</h2>
+<p>使用命令如下命令新建，最好使用引号将文章名字引起来</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo new &quot;使用hexo新建文章&quot;</span><br></pre></td></tr></table></figure>
+<p>上面命令执行后会生成md类型的文章：source/_posts/xxx.md</p>
+<h3 id="编辑文章">编辑文章</h3>
+<ul>
+<li>使用markdown编辑器编写文章，放到生成的xxx.md即可。</li>
+</ul>
+<blockquote>
+<p>注意不要将文章最上面的类容删掉</p>
+</blockquote>
+<h3 id="清除缓存">清除缓存</h3>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ohexo clean</span><br></pre></td></tr></table></figure>
+<h3 id="编译文章">编译文章</h3>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo generate</span><br><span class="line">hexo g # 简写</span><br></pre></td></tr></table></figure>
+<h3 id="启动本地服务测试文章">启动本地服务测试文章</h3>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo server</span><br><span class="line">hexo s # 简写</span><br></pre></td></tr></table></figure>
+<h3 id="上传到github">上传到github</h3>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo deploy</span><br><span class="line">hexo d # 简写</span><br></pre></td></tr></table></figure>
+<h3 id="快捷命令">快捷命令</h3>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo s</span><br></pre></td></tr></table></figure>
+<h2 id="快速发布命令（资源压缩）">快速发布命令（资源压缩）</h2>
+<a href="/2022/11/Hexo%E4%BD%BF%E7%94%A8gulp%E5%8E%8B%E7%BC%A9%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90/index.html" title="Hexo使用gulp压缩静态资源">Hexo使用gulp压缩静态资源</a>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; gulp &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>帮助</category>
+      </categories>
+      <tags>
+        <tag>Readme</tag>
       </tags>
   </entry>
   <entry>
@@ -1597,45 +1597,6 @@ RUN 指令最常见的用法是安装包用的<code> apt-get</code>。因为 <co
       </categories>
       <tags>
         <tag>Docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux 配置 Git 命令提示符</title>
-    <url>/2020/07/Linux-%E9%85%8D%E7%BD%AE-Git-%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6/index.html</url>
-    <content><![CDATA[<h2 id="linux-配置 git 命令提示符">Linux 配置 Git 命令提示符</h2>
-<h3 id="git-命令补全设置">Git 命令补全设置</h3>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这个目录是源码包解压后的目录</span></span><br><span class="line">cd ./contrib/completion</span><br><span class="line">cp git-completion.bash git-prompt.sh /etc/profile.d/</span><br><span class="line">cd /etc/profile.d/ &amp;&amp; ln -s git-completion.bash git-completion.sh</span><br></pre></td></tr></table></figure>
-<h3 id="定制git命令提示符">定制git命令提示符</h3>
-<blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat &lt;&lt; &#x27;EOF&#x27; &gt; /etc/profile.d/git.sh</span><br><span class="line">export GIT_PS1_SHOWDIRTYSTATE=1</span><br><span class="line">export GIT_PS1_SHOWSTASHSTATE=1</span><br><span class="line">export GIT_PS1_SHOWUNTRACKEDFILES=1</span><br><span class="line">export GIT_PS1_SHOWUPSTREAM=&quot;verbose git svn&quot;</span><br><span class="line">export GIT_HOME=/usr/local/git</span><br><span class="line">export PATH=$PATH:$GIT_HOME/bin</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-<p>主要是 $(__git_ps1 “(%s)”)</p>
-<p>写法一</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat &lt;&lt; &#x27;EOF&#x27; &gt;&gt; /etc/bashrc</span><br><span class="line">export PS1=&#x27;\[\e[1;32m\][\u@\h \W\[\033[1;31m\]$(__git_ps1 &quot;(%s)&quot;)\[\e[1;32m\]]\$ \[\e[0m\]&#x27;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-<p><img src="/images/2022-07/1.png" alt=""></p>
-<p>写法二</p>
-<p>最好自定义的这些参数都写在if里面，避免非登陆时的bash中变量多次叠加。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if shopt -q login_shell ; then</span><br><span class="line">    export PS1=&#x27;\[\e[1;32m\][\u@\h \W]\$ \[\e[0m\]&#x27;</span><br><span class="line">    export PS1=&#x27;$(__git_ps1 &quot;(%s)&quot;)&#x27;$PS1</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<p>这个每次执行bash都会叠加命令提示符号<br>
-<img src="/images/2022-07/2.png" alt=""><br>
-这个便不会，主要是写在了if里面 ：if shopt -q login_shell ; then<br>
-<img src="/images/2022-07/3.png" alt=""><br>
-写法三</p>
-<p>个人更喜欢这种写法，有git和无git按个人环境配置即可</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if shopt -q login_shell ; then</span><br><span class="line">    # export PS1=&#x27;\[\e[1;32m\][\u@\h \W]\$ \[\e[0m\]&#x27;  # 无Git环境</span><br><span class="line">    export PS1=&#x27;\[\e[1;32m\][\u@\h \W\[\033[1;31m\]$(__git_ps1 &quot;(%s)&quot;)\[\e[1;32m\]]\$ \[\e[0m\]&#x27;  # 有Git环境</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<p><img src="/images/2022-07/4.png" alt=""></p>
-</blockquote>
-<h4 id="附：">附：</h4>
-<blockquote>
-<p>CentOS 默认PS1变量</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">PS1=[\u@\h \W]\$</span><br></pre></td></tr></table></figure>
-</blockquote>
-]]></content>
-      <categories>
-        <category>服务</category>
-        <category>Git</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
@@ -1799,58 +1760,42 @@ RUN 指令最常见的用法是安装包用的<code> apt-get</code>。因为 <co
       </tags>
   </entry>
   <entry>
-    <title>iptablse服务管理</title>
-    <url>/2020/07/iptables%E6%93%8D%E4%BD%9C/index.html</url>
-    <content><![CDATA[<p>iptablse服务管理</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">service iptables start|stop|restart|status</span><br><span class="line">service iptables save   //定义的所有内容，在重启时都会失效。调用save命令可以把规则保存到文件/etc/sysconfig/iptables中。</span><br><span class="line">iptables-save           //保存规则</span><br><span class="line">iptables-restore        //加载规则。开机的时候，会自动加载/etc/sysconfig/iptables</span><br><span class="line">iptables-restore &lt; /etc/sysconfig/iptables2     //加载自定义的规则文件</span><br><span class="line">//iptables服务配置文件：   /etc/sysconfig/iptables-config</span><br><span class="line">//iptables规则文件：       /etc/sysconfig/iptables</span><br><span class="line">echo &quot;1&quot;&gt;/proc/sys/net/ipv4/ip_forward   //打开iptables转发：</span><br></pre></td></tr></table></figure>
-<p>COMMAND 命令选项</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-A|--append  CHAIN                                 //链尾添加新规则</span><br><span class="line">-D|--delete  CHAIN [RULENUM]                       //删除链中规则，按需序号或内容确定要删除的规则</span><br><span class="line">-I|--insert  CHAIN [RULENUM]                       //在链中插入一条新的规则，默认插在开头</span><br><span class="line">-R|--replace CHAIN  RULENUM                        //替换、修改一条规则，按序号或内容确定</span><br><span class="line">-L|--list   [CHAIN [RULENUM]]                      //列出指定链或所有链中指定规则或所有规则</span><br><span class="line">-S|--list-urles [CHAIN [RULENUM]]                  //显示链中规则</span><br><span class="line">-F|--flush [CHAIN]                                 //清空指定链或所有链中规则</span><br><span class="line">-Z|--zero [CHAIN [RULENUM]]                        //重置指定链或所有链的计数器(匹配的数据包数和流量字节数)</span><br><span class="line">-N|--new-chain CHAIN                               //新建自定义规则链</span><br><span class="line">-X|--delete-cahin [CHAIN]                          //删除指定表中用户自定义的规则链</span><br><span class="line">-E|--rename-chain OLDCHAIN NEWCHAIN                //重命名链，移动任何引用</span><br><span class="line">-P|-policy CHAIN TARGET                            //设置链的默认策略，数据包未匹配任意一条规则就按此策略处理</span><br></pre></td></tr></table></figure>
-<p>CRETIRIA 条件匹配</p>
-<p>分为基本匹配和扩展匹配，扩展匹配又分为隐式匹配和显示匹配</p>
-<p>基本匹配</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-p|--proto  PROTO                      //按协议匹配，如tcp、udp、icmp，all表示所有协议。 （/etc/protocols中的协议名）</span><br><span class="line">-s|--source ADDRESS[/mask]...          //按数据包的源地址匹配，可使用IP地址、网络地址、主机名、域名</span><br><span class="line">-d|--destination ADDRESS[/mask]...     //按目标地址匹配，可使用IP地址、网络地址、主机名、域名</span><br><span class="line">-i|--in-interface INPUTNAME[ +]        //按入站接口(网卡)名匹配，+用于通配。如 eth0, eth+ 。一般用在INPUT和PREROUTING链</span><br><span class="line">-o|--out-interface OUTPUTNAME[+]       //按出站接口(网卡)名匹配，+用于通配。如 eth0, eth+ 。一般用在OUTPUT和POSTROUTING链</span><br><span class="line">可使用 ! 可以否定一个子句，如-p !tcp</span><br></pre></td></tr></table></figure>
-<p>扩展匹配</p>
-<p>-m|–match MATCHTYPE  EXTENSIONMATCH…    //扩展匹配，可能加载extension</p>
-<p>如: -p tcp  -m tcp  --dport 80</p>
-<p>隐式扩展匹配(对-p PROTO的扩展，或者说是-p PROTO的附加匹配条件)</p>
-<p>-m PROTO 可以省略，所以叫隐式</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-m tcp   //-p tcp的扩展</span><br><span class="line">　　　　--sport  [!]N[:M]                      //源端口, 服务名、端口、端口范围。</span><br><span class="line">　　　　--dport  [!]N[:M]                      //目标端口，服务名、端口、端口范围</span><br><span class="line">　　　　--tcp-flags CHECKFLAGS FLAGSOFTRUE  //TCP标志位:SYN(同步),ACK(应答),RST(重置),FIN(结束),URG(紧急),PSH(强迫推送)。多个标志位逗号分隔。</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　　//CHECKFLAGS为要检查的标志位，FLAGSOFTRUE为必须为1的标志位（其余的应该为0）</span><br><span class="line">　　　　--syn                               //第一次握手。 等效于 --tcpflags syn,ack,fin,rst syn   四个标志中只有syn为1</span><br><span class="line">-m udp   //-p udp的扩展</span><br><span class="line">　　　　--sport N[-M] </span><br><span class="line">　　　　--dport N[-M]</span><br><span class="line">-m icmp  //隐含条件为-p icmp</span><br><span class="line">　　　　--icmp-type  N             //8:echo-request  0:echo-reply</span><br></pre></td></tr></table></figure>
-<p>显示扩展匹配</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-m state</span><br><span class="line">　　　　--state    //连接状态检测，NEW,ESTABLISHED,RELATED,INVALID</span><br><span class="line">-m multiport </span><br><span class="line">　　　　--source-ports   PORT[,PORT]...|N:M            //多个源端口，多个端口用逗号分隔，</span><br><span class="line">　　　　--destination-ports PORT[,PORT]...|N:M         //多个目的端口</span><br><span class="line">　　　　--ports     　　　　　　　　　　　　　　　　　　　　 //多个端口，每个包的源端口和目的端口相同才会匹配</span><br><span class="line">-m limit</span><br><span class="line">　　　　--limit   N/UNIT    //速率，如3/minute, 1/s, n/second , n/day</span><br><span class="line">　　　　--limit-burst N     //峰值速率，如100，表示最大不能超过100个数据包</span><br><span class="line">-m connlimit</span><br><span class="line">　　　　--connlimit-above N  //多于n个，前面加!取反</span><br><span class="line">-m iprange</span><br><span class="line">　　　　--src-range IP-IP</span><br><span class="line">　　　　--dst-range IP-IP</span><br><span class="line">-m mac                    </span><br><span class="line">　　　　--mac-source         //mac地址限制，不能用在OUTPUT和POSTROUTING规则链上，因为封包要送到网卡后，才能由网卡驱动程序透过ARP 通讯协议查出目的地的MAC 地址</span><br><span class="line">-m string</span><br><span class="line">　　　　--algo [bm|kmp]      //匹配算法</span><br><span class="line">　　　　--string &quot;PATTERN&quot;   //匹配字符模式</span><br><span class="line">-m recent</span><br><span class="line">　　　　--name               //设定列表名称，默认为DEFAULT</span><br><span class="line">　　　　--rsource            //源地址</span><br><span class="line">　　　　--rdest              //目的地址</span><br><span class="line">　　　　--set                //添加源地址的包到列表中</span><br><span class="line">　　　　--update             //每次建立连接都更新列表</span><br><span class="line">　　　　--rcheck             //检查地址是否在列表</span><br><span class="line">　　　　--seconds            //指定时间。必须与--rcheck或--update配合使用</span><br><span class="line">　　　　--hitcount           //命中次数。必须和--rcheck或--update配合使用</span><br><span class="line">　　　　--remove             //在列表中删除地址</span><br><span class="line">-m time</span><br><span class="line">　　　　--timestart h:mm</span><br><span class="line">　　　　--timestop  hh:mm</span><br><span class="line">　　　　--days DAYS          //Mon,Tue,Wed,Thu,Fri,Sat,Sun; 逗号分隔</span><br><span class="line">-m mark</span><br><span class="line">　　　　--mark N            //是否包含标记号N</span><br><span class="line">-m owner </span><br><span class="line">　　　　--uid-owner 500   //用来匹配来自本机的封包，是否为某特定使用者所产生的,可以避免服务器使用root或其它身分将敏感数据传送出</span><br><span class="line">　　　　--gid-owner O     //用来匹配来自本机的封包，是否为某特定使用者群组所产生的</span><br><span class="line">　　　　--pid-owner 78    //用来匹配来自本机的封包，是否为某特定进程所产生的</span><br><span class="line">　　　　--sid-owner 100   //用来匹配来自本机的封包，是否为某特定连接（Session ID）的响应封包</span><br></pre></td></tr></table></figure>
-<p>ACTION 目标策略(TARGET)</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-j|--jump TARGET                //跳转到目标规则，可能加载target extension</span><br><span class="line">-g|--goto  CHAIN                //跳转到指定链，不再返回</span><br><span class="line">ACCEPT             规则验证通过，不再检查当前链的后续规则，直接跳到下一个规则链。</span><br><span class="line">DROP                直接丢弃数据包，不给任何回应。中断过滤。</span><br><span class="line">REJECT             拒绝数据包通过，会返回响应信息。中断过滤。</span><br><span class="line">--reject-with  tcp-reset|port-unreachable|echo-reply</span><br><span class="line">LOG                  在/var/log/messages文件中记录日志，然后将数据包传递给下一条规则。详细位置可查看/etc/syslog.conf配置文件</span><br><span class="line">--log-prefix &quot;INPUT packets&quot;</span><br><span class="line">ULOG                更广范围的日志记录信息</span><br><span class="line">QUEUE              防火墙将数据包移交到用户空间，通过一个内核模块把包交给本地用户程序。中断过滤。</span><br><span class="line">RETURN            防火墙停止执行当前链中的后续规则，并返回到调用链。主要用在自定义链中。</span><br><span class="line">custom_chain    转向自定义规则链</span><br><span class="line">DNAT                目标地址转换，改变数据包的目标地址。外网访问内网资源，主要用在PREROUTING。完成后跳到下一个规则链</span><br><span class="line">--to-destination ADDRESS[-ADDRESS][:PORT[-PORT]]</span><br><span class="line">SNAT                源地址转换，改变数据包的源地址。内网访问外网资源。主机的IP地址必须是静态的，主要用在POSTROUTING。完成后跳到下一个规则链。</span><br><span class="line">--to-source ADDRESS[-ADDRESS][:PORT[-PORT]]</span><br><span class="line">MASQUERADE   源地址伪装，用于主机IP是ISP动态分配的情况，会从网卡读取主机IP。直接跳到下一个规则链。</span><br><span class="line">--to-ports 1024-31000</span><br><span class="line">REDIRECT        数据包重定向，主要是端口重定向，把包分流。处理完成后继续匹配其他规则。能会用这个功能来迫使站点上的所有Web流量都通过一个Web高速缓存，比如Squid。</span><br><span class="line">--to-ports 8080</span><br><span class="line">MARK                 打防火墙标记。继续匹配规则。</span><br><span class="line">--set-mark 2</span><br><span class="line">MIRROR           发送包之前交换IP源和目的地址，将数据包返回。中断过滤。</span><br></pre></td></tr></table></figure>
-<p>辅助选项</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-t|--table TABLE     //指定操作的表，默认的表为filter</span><br><span class="line">-n|--numeric         //用数字形式显示地址和端口，显示主机IP地址而不是主机名</span><br><span class="line">-x|--exact           //计数器显示精确值，不做单位换算</span><br><span class="line">-v|--verbose  (x3)   //查看规则列表时，显示更详细的信息</span><br><span class="line">-line-numbers        //查看规则表时，显示在链中的序号</span><br><span class="line">-V|--version </span><br><span class="line">-h|--help   </span><br><span class="line">[option]  --help     //查看特定选项的帮助，如iptables -p icmp --help</span><br><span class="line">--fragment -f               //match second or further fragments only</span><br><span class="line">--modprobe=&lt;command&gt;        //try to insert modules using this command</span><br><span class="line">--set-counters PKTS BYTES   //set the counter during insert/append</span><br></pre></td></tr></table></figure>
-<p>state  TCP链接状态</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">NEW                 第一次握手，要起始一个连接（重设连接或将连接重导向） </span><br><span class="line">ESTABLISHED   数据包属于某个已经建立的连接。第二次和第三次握手   (ack=1)</span><br><span class="line">INVALID           数据包的连接编号（Session ID）无法辨识或编号不正确。如SYN=1 ACK=1 RST=1   </span><br><span class="line">RELATED          表示该封包是属于某个已经建立的连接，所建立的新连接。如有些服务使用两个相关的端口，如FTP，21和20端口一去一回，FTP数据传输(上传/下载)还会使用特殊的端口</span><br><span class="line">只允许NEW和ESTABLISHED进，只允许ESTABLISHED出可以阻止反弹式木马。</span><br></pre></td></tr></table></figure>
-<p>使用示例</p>
-<h2 id=""><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">iptables -F           //删除iptables现有规则</span><br><span class="line">iptables -L [-v[vv] -n]   //查看iptables规则</span><br><span class="line">iptables -A INPUT -i eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT       //在INPUT链尾添加一条规则</span><br><span class="line">iptables -I INPUT 2 -i eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT     //在INPUT链中插入为第2条规则</span><br><span class="line">iptables -D  INPUT 2      //删除INPUT链中第2条规则</span><br><span class="line">iptables -R INPUT 3 -i eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT    //替换修改第三条规则</span><br><span class="line">iptables -P INPUT DROP    //设置INPUT链的默认策略为DROP</span><br><span class="line">//允许远程主机进行SSH连接</span><br><span class="line">iptables -A INPUT -i eth0 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT </span><br><span class="line">iptables -A OUTPUT -o eth0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT </span><br><span class="line">//允许本地主机进行SSH连接</span><br><span class="line">iptables -A OUTPUT -o eth0 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT </span><br><span class="line">iptables -A INTPUT -i eth0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT </span><br><span class="line">//允许HTTP请求</span><br><span class="line">iptables -A INPUT -i eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT </span><br><span class="line">iptables -A OUTPUT -o eth0 -p tcp --sport 80 -m state --state ESTABLISHED -j ACCEPT </span><br><span class="line">//限制ping 192.168.146.3主机的数据包数，平均2/s个，最多不能超过3个</span><br><span class="line">iptables -A INPUT -i eth0 -d 192.168.146.3 -p icmp --icmp-type 8 -m limit --limit 2/second --limit-burst 3 -j ACCEPT </span><br><span class="line">//限制SSH连接速率（默认策略是DROP）</span><br><span class="line">iptables -I INPUT 1 -p tcp --dport 22 -d 192.168.146.3 -m state --state ESTABLISHED -j ACCEPT  </span><br><span class="line">iptables -I INPUT 2 -p tcp --dport 22 -d 192.168.146.3 -m limit --limit 2/minute --limit-burst 2 -m state --state NEW -j ACCEPT </span><br><span class="line"> </span><br><span class="line">//防止syn攻击（限制syn的请求速度）</span><br><span class="line">iptables -N syn-flood </span><br><span class="line">iptables -A INPUT -p tcp --syn -j syn-flood </span><br><span class="line">iptables -A syn-flood -m limit --limit 1/s --limit-burst 4 -j RETURN </span><br><span class="line">iptables -A syn-flood -j DROP </span><br><span class="line">//防止syn攻击（限制单个ip的最大syn连接数）</span><br><span class="line">iptables –A INPUT –i eth0 –p tcp --syn -m connlimit --connlimit-above 15 -j DROP </span><br><span class="line"> </span><br><span class="line">iptables -I INPUT -p tcp -dport 22 -m connlimit --connlimit-above 3 -j DROP   //利用recent模块抵御DOS攻击</span><br><span class="line">iptables -I INPUT -p tcp --dport 22 -m state --state NEW -m recent --set --name SSH   //单个IP最多连接3个会话</span><br><span class="line">Iptables -I INPUT -p tcp --dport 22 -m state NEW -m recent --update --seconds 300 --hitcount 3 --name SSH -j DROP  //只要是新的连接请求，就把它加入到SSH列表中。5分钟内你的尝试次数达到3次，就拒绝提供SSH列表中的这个IP服务。被限制5分钟后即可恢复访问。</span><br><span class="line"> </span><br><span class="line">iptables -I INPUT -p tcp --dport 80 -m connlimit --connlimit-above 30 -j DROP    //防止单个IP访问量过大</span><br><span class="line">iptables –A OUTPUT –m state --state NEW –j DROP  //阻止反弹木马</span><br><span class="line">iptables -A INPUT -p icmp --icmp-type echo-request -m limit --limit 1/m -j ACCEPT   //防止ping攻击</span><br><span class="line"> </span><br><span class="line">//只允许自己ping别人，不允许别人ping自己</span><br><span class="line">iptables -A OUTPUT -p icmp --icmp-type 8 -j ACCEPT</span><br><span class="line">iptables -A INPUT -p icmp --icmp-type 0 -j ACCEPT</span><br><span class="line">//对于127.0.0.1比较特殊，我们需要明确定义它</span><br><span class="line">iptables -A INPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT</span><br><span class="line"> </span><br><span class="line">//SNAT 基于原地址转换。许多内网用户通过一个外网 口上网的情况。将我们内网的地址转换为一个外网的IP，共用外网IP访问外网资源。</span><br><span class="line">iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -j SNAT --to-source 172.16.100.1</span><br><span class="line">//当外网地址不是固定的时候。将外网地址换成 MASQUERADE(动态伪装):它可以实现自动读取外网网卡获取的IP地址。</span><br><span class="line">iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -j MASQUERADE</span><br><span class="line">//DNAT 目标地址转换。目标地址转换要做在到达网卡之前进行转换,所以要做在PREROUTING这个位置上</span><br><span class="line">iptables -t nat -A PREROUTING -d 192.168.10.18 -p tcp --dport 80 -j DNAT --to-destination 172.16.100.2</span><br></pre></td></tr></table></figure></h2>
-<h3 id="linux-开启独立iptables日志">linux 开启独立iptables日志</h3>
-<ul>
-<li>在rsyslog.conf 添加配置，添加不同的日志级别（默认warn(=4））</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi /etc/rsyslog.conf</span><br><span class="line">kern.warning     /var/log/iptables.log</span><br><span class="line">kern.debug       /var/log/iptables.log</span><br><span class="line">kern.info        /var/log/iptables.log</span><br><span class="line">不过推荐全部日志都记录：  kern.*     /var/log/iptables.log</span><br></pre></td></tr></table></figure>
-<ul>
-<li>重启日志配置：</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/etc/init.d/rsyslogd restart</span><br></pre></td></tr></table></figure>
-<ul>
-<li>让日志滚动，这一步是可选的</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/logrotate.d/syslog</span><br><span class="line">加入/var/log/iptables</span><br></pre></td></tr></table></figure>
-<ul>
-<li>在iptables添加日志选项</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">记录所有的记录了，只要通过了防火墙都会记录到日志里</span><br><span class="line">iptables -A INPUT  -j LOG --log-prefix &quot;iptables&quot;</span><br><span class="line">只记录tcp日志</span><br><span class="line">iptables -A INPUT  -p tcp -j LOG --log-prefix &quot;iptables icmp warn&quot;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>然后保存并重启防火墙配置</li>
-</ul>
+    <title>Linux 配置 Git 命令提示符</title>
+    <url>/2020/07/Linux-%E9%85%8D%E7%BD%AE-Git-%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6/index.html</url>
+    <content><![CDATA[<h2 id="linux-配置 git 命令提示符">Linux 配置 Git 命令提示符</h2>
+<h3 id="git-命令补全设置">Git 命令补全设置</h3>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这个目录是源码包解压后的目录</span></span><br><span class="line">cd ./contrib/completion</span><br><span class="line">cp git-completion.bash git-prompt.sh /etc/profile.d/</span><br><span class="line">cd /etc/profile.d/ &amp;&amp; ln -s git-completion.bash git-completion.sh</span><br></pre></td></tr></table></figure>
+<h3 id="定制git命令提示符">定制git命令提示符</h3>
+<blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat &lt;&lt; &#x27;EOF&#x27; &gt; /etc/profile.d/git.sh</span><br><span class="line">export GIT_PS1_SHOWDIRTYSTATE=1</span><br><span class="line">export GIT_PS1_SHOWSTASHSTATE=1</span><br><span class="line">export GIT_PS1_SHOWUNTRACKEDFILES=1</span><br><span class="line">export GIT_PS1_SHOWUPSTREAM=&quot;verbose git svn&quot;</span><br><span class="line">export GIT_HOME=/usr/local/git</span><br><span class="line">export PATH=$PATH:$GIT_HOME/bin</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<p>主要是 $(__git_ps1 “(%s)”)</p>
+<p>写法一</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat &lt;&lt; &#x27;EOF&#x27; &gt;&gt; /etc/bashrc</span><br><span class="line">export PS1=&#x27;\[\e[1;32m\][\u@\h \W\[\033[1;31m\]$(__git_ps1 &quot;(%s)&quot;)\[\e[1;32m\]]\$ \[\e[0m\]&#x27;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2022-07/1.png" alt=""></p>
+<p>写法二</p>
+<p>最好自定义的这些参数都写在if里面，避免非登陆时的bash中变量多次叠加。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if shopt -q login_shell ; then</span><br><span class="line">    export PS1=&#x27;\[\e[1;32m\][\u@\h \W]\$ \[\e[0m\]&#x27;</span><br><span class="line">    export PS1=&#x27;$(__git_ps1 &quot;(%s)&quot;)&#x27;$PS1</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p>这个每次执行bash都会叠加命令提示符号<br>
+<img src="/images/2022-07/2.png" alt=""><br>
+这个便不会，主要是写在了if里面 ：if shopt -q login_shell ; then<br>
+<img src="/images/2022-07/3.png" alt=""><br>
+写法三</p>
+<p>个人更喜欢这种写法，有git和无git按个人环境配置即可</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">if shopt -q login_shell ; then</span><br><span class="line">    # export PS1=&#x27;\[\e[1;32m\][\u@\h \W]\$ \[\e[0m\]&#x27;  # 无Git环境</span><br><span class="line">    export PS1=&#x27;\[\e[1;32m\][\u@\h \W\[\033[1;31m\]$(__git_ps1 &quot;(%s)&quot;)\[\e[1;32m\]]\$ \[\e[0m\]&#x27;  # 有Git环境</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<p><img src="/images/2022-07/4.png" alt=""></p>
+</blockquote>
+<h4 id="附：">附：</h4>
+<blockquote>
+<p>CentOS 默认PS1变量</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">PS1=[\u@\h \W]\$</span><br></pre></td></tr></table></figure>
+</blockquote>
 ]]></content>
       <categories>
-        <category>系统</category>
+        <category>服务</category>
+        <category>Git</category>
       </categories>
       <tags>
-        <tag>iptables</tag>
+        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
@@ -1958,6 +1903,61 @@ RUN 指令最常见的用法是安装包用的<code> apt-get</code>。因为 <co
       </categories>
       <tags>
         <tag>shell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>iptablse服务管理</title>
+    <url>/2020/07/iptables%E6%93%8D%E4%BD%9C/index.html</url>
+    <content><![CDATA[<p>iptablse服务管理</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">service iptables start|stop|restart|status</span><br><span class="line">service iptables save   //定义的所有内容，在重启时都会失效。调用save命令可以把规则保存到文件/etc/sysconfig/iptables中。</span><br><span class="line">iptables-save           //保存规则</span><br><span class="line">iptables-restore        //加载规则。开机的时候，会自动加载/etc/sysconfig/iptables</span><br><span class="line">iptables-restore &lt; /etc/sysconfig/iptables2     //加载自定义的规则文件</span><br><span class="line">//iptables服务配置文件：   /etc/sysconfig/iptables-config</span><br><span class="line">//iptables规则文件：       /etc/sysconfig/iptables</span><br><span class="line">echo &quot;1&quot;&gt;/proc/sys/net/ipv4/ip_forward   //打开iptables转发：</span><br></pre></td></tr></table></figure>
+<p>COMMAND 命令选项</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-A|--append  CHAIN                                 //链尾添加新规则</span><br><span class="line">-D|--delete  CHAIN [RULENUM]                       //删除链中规则，按需序号或内容确定要删除的规则</span><br><span class="line">-I|--insert  CHAIN [RULENUM]                       //在链中插入一条新的规则，默认插在开头</span><br><span class="line">-R|--replace CHAIN  RULENUM                        //替换、修改一条规则，按序号或内容确定</span><br><span class="line">-L|--list   [CHAIN [RULENUM]]                      //列出指定链或所有链中指定规则或所有规则</span><br><span class="line">-S|--list-urles [CHAIN [RULENUM]]                  //显示链中规则</span><br><span class="line">-F|--flush [CHAIN]                                 //清空指定链或所有链中规则</span><br><span class="line">-Z|--zero [CHAIN [RULENUM]]                        //重置指定链或所有链的计数器(匹配的数据包数和流量字节数)</span><br><span class="line">-N|--new-chain CHAIN                               //新建自定义规则链</span><br><span class="line">-X|--delete-cahin [CHAIN]                          //删除指定表中用户自定义的规则链</span><br><span class="line">-E|--rename-chain OLDCHAIN NEWCHAIN                //重命名链，移动任何引用</span><br><span class="line">-P|-policy CHAIN TARGET                            //设置链的默认策略，数据包未匹配任意一条规则就按此策略处理</span><br></pre></td></tr></table></figure>
+<p>CRETIRIA 条件匹配</p>
+<p>分为基本匹配和扩展匹配，扩展匹配又分为隐式匹配和显示匹配</p>
+<p>基本匹配</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-p|--proto  PROTO                      //按协议匹配，如tcp、udp、icmp，all表示所有协议。 （/etc/protocols中的协议名）</span><br><span class="line">-s|--source ADDRESS[/mask]...          //按数据包的源地址匹配，可使用IP地址、网络地址、主机名、域名</span><br><span class="line">-d|--destination ADDRESS[/mask]...     //按目标地址匹配，可使用IP地址、网络地址、主机名、域名</span><br><span class="line">-i|--in-interface INPUTNAME[ +]        //按入站接口(网卡)名匹配，+用于通配。如 eth0, eth+ 。一般用在INPUT和PREROUTING链</span><br><span class="line">-o|--out-interface OUTPUTNAME[+]       //按出站接口(网卡)名匹配，+用于通配。如 eth0, eth+ 。一般用在OUTPUT和POSTROUTING链</span><br><span class="line">可使用 ! 可以否定一个子句，如-p !tcp</span><br></pre></td></tr></table></figure>
+<p>扩展匹配</p>
+<p>-m|–match MATCHTYPE  EXTENSIONMATCH…    //扩展匹配，可能加载extension</p>
+<p>如: -p tcp  -m tcp  --dport 80</p>
+<p>隐式扩展匹配(对-p PROTO的扩展，或者说是-p PROTO的附加匹配条件)</p>
+<p>-m PROTO 可以省略，所以叫隐式</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-m tcp   //-p tcp的扩展</span><br><span class="line">　　　　--sport  [!]N[:M]                      //源端口, 服务名、端口、端口范围。</span><br><span class="line">　　　　--dport  [!]N[:M]                      //目标端口，服务名、端口、端口范围</span><br><span class="line">　　　　--tcp-flags CHECKFLAGS FLAGSOFTRUE  //TCP标志位:SYN(同步),ACK(应答),RST(重置),FIN(结束),URG(紧急),PSH(强迫推送)。多个标志位逗号分隔。</span><br><span class="line">　　　　　　　　　　　　　　　　　　　　　　　　　//CHECKFLAGS为要检查的标志位，FLAGSOFTRUE为必须为1的标志位（其余的应该为0）</span><br><span class="line">　　　　--syn                               //第一次握手。 等效于 --tcpflags syn,ack,fin,rst syn   四个标志中只有syn为1</span><br><span class="line">-m udp   //-p udp的扩展</span><br><span class="line">　　　　--sport N[-M] </span><br><span class="line">　　　　--dport N[-M]</span><br><span class="line">-m icmp  //隐含条件为-p icmp</span><br><span class="line">　　　　--icmp-type  N             //8:echo-request  0:echo-reply</span><br></pre></td></tr></table></figure>
+<p>显示扩展匹配</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-m state</span><br><span class="line">　　　　--state    //连接状态检测，NEW,ESTABLISHED,RELATED,INVALID</span><br><span class="line">-m multiport </span><br><span class="line">　　　　--source-ports   PORT[,PORT]...|N:M            //多个源端口，多个端口用逗号分隔，</span><br><span class="line">　　　　--destination-ports PORT[,PORT]...|N:M         //多个目的端口</span><br><span class="line">　　　　--ports     　　　　　　　　　　　　　　　　　　　　 //多个端口，每个包的源端口和目的端口相同才会匹配</span><br><span class="line">-m limit</span><br><span class="line">　　　　--limit   N/UNIT    //速率，如3/minute, 1/s, n/second , n/day</span><br><span class="line">　　　　--limit-burst N     //峰值速率，如100，表示最大不能超过100个数据包</span><br><span class="line">-m connlimit</span><br><span class="line">　　　　--connlimit-above N  //多于n个，前面加!取反</span><br><span class="line">-m iprange</span><br><span class="line">　　　　--src-range IP-IP</span><br><span class="line">　　　　--dst-range IP-IP</span><br><span class="line">-m mac                    </span><br><span class="line">　　　　--mac-source         //mac地址限制，不能用在OUTPUT和POSTROUTING规则链上，因为封包要送到网卡后，才能由网卡驱动程序透过ARP 通讯协议查出目的地的MAC 地址</span><br><span class="line">-m string</span><br><span class="line">　　　　--algo [bm|kmp]      //匹配算法</span><br><span class="line">　　　　--string &quot;PATTERN&quot;   //匹配字符模式</span><br><span class="line">-m recent</span><br><span class="line">　　　　--name               //设定列表名称，默认为DEFAULT</span><br><span class="line">　　　　--rsource            //源地址</span><br><span class="line">　　　　--rdest              //目的地址</span><br><span class="line">　　　　--set                //添加源地址的包到列表中</span><br><span class="line">　　　　--update             //每次建立连接都更新列表</span><br><span class="line">　　　　--rcheck             //检查地址是否在列表</span><br><span class="line">　　　　--seconds            //指定时间。必须与--rcheck或--update配合使用</span><br><span class="line">　　　　--hitcount           //命中次数。必须和--rcheck或--update配合使用</span><br><span class="line">　　　　--remove             //在列表中删除地址</span><br><span class="line">-m time</span><br><span class="line">　　　　--timestart h:mm</span><br><span class="line">　　　　--timestop  hh:mm</span><br><span class="line">　　　　--days DAYS          //Mon,Tue,Wed,Thu,Fri,Sat,Sun; 逗号分隔</span><br><span class="line">-m mark</span><br><span class="line">　　　　--mark N            //是否包含标记号N</span><br><span class="line">-m owner </span><br><span class="line">　　　　--uid-owner 500   //用来匹配来自本机的封包，是否为某特定使用者所产生的,可以避免服务器使用root或其它身分将敏感数据传送出</span><br><span class="line">　　　　--gid-owner O     //用来匹配来自本机的封包，是否为某特定使用者群组所产生的</span><br><span class="line">　　　　--pid-owner 78    //用来匹配来自本机的封包，是否为某特定进程所产生的</span><br><span class="line">　　　　--sid-owner 100   //用来匹配来自本机的封包，是否为某特定连接（Session ID）的响应封包</span><br></pre></td></tr></table></figure>
+<p>ACTION 目标策略(TARGET)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-j|--jump TARGET                //跳转到目标规则，可能加载target extension</span><br><span class="line">-g|--goto  CHAIN                //跳转到指定链，不再返回</span><br><span class="line">ACCEPT             规则验证通过，不再检查当前链的后续规则，直接跳到下一个规则链。</span><br><span class="line">DROP                直接丢弃数据包，不给任何回应。中断过滤。</span><br><span class="line">REJECT             拒绝数据包通过，会返回响应信息。中断过滤。</span><br><span class="line">--reject-with  tcp-reset|port-unreachable|echo-reply</span><br><span class="line">LOG                  在/var/log/messages文件中记录日志，然后将数据包传递给下一条规则。详细位置可查看/etc/syslog.conf配置文件</span><br><span class="line">--log-prefix &quot;INPUT packets&quot;</span><br><span class="line">ULOG                更广范围的日志记录信息</span><br><span class="line">QUEUE              防火墙将数据包移交到用户空间，通过一个内核模块把包交给本地用户程序。中断过滤。</span><br><span class="line">RETURN            防火墙停止执行当前链中的后续规则，并返回到调用链。主要用在自定义链中。</span><br><span class="line">custom_chain    转向自定义规则链</span><br><span class="line">DNAT                目标地址转换，改变数据包的目标地址。外网访问内网资源，主要用在PREROUTING。完成后跳到下一个规则链</span><br><span class="line">--to-destination ADDRESS[-ADDRESS][:PORT[-PORT]]</span><br><span class="line">SNAT                源地址转换，改变数据包的源地址。内网访问外网资源。主机的IP地址必须是静态的，主要用在POSTROUTING。完成后跳到下一个规则链。</span><br><span class="line">--to-source ADDRESS[-ADDRESS][:PORT[-PORT]]</span><br><span class="line">MASQUERADE   源地址伪装，用于主机IP是ISP动态分配的情况，会从网卡读取主机IP。直接跳到下一个规则链。</span><br><span class="line">--to-ports 1024-31000</span><br><span class="line">REDIRECT        数据包重定向，主要是端口重定向，把包分流。处理完成后继续匹配其他规则。能会用这个功能来迫使站点上的所有Web流量都通过一个Web高速缓存，比如Squid。</span><br><span class="line">--to-ports 8080</span><br><span class="line">MARK                 打防火墙标记。继续匹配规则。</span><br><span class="line">--set-mark 2</span><br><span class="line">MIRROR           发送包之前交换IP源和目的地址，将数据包返回。中断过滤。</span><br></pre></td></tr></table></figure>
+<p>辅助选项</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-t|--table TABLE     //指定操作的表，默认的表为filter</span><br><span class="line">-n|--numeric         //用数字形式显示地址和端口，显示主机IP地址而不是主机名</span><br><span class="line">-x|--exact           //计数器显示精确值，不做单位换算</span><br><span class="line">-v|--verbose  (x3)   //查看规则列表时，显示更详细的信息</span><br><span class="line">-line-numbers        //查看规则表时，显示在链中的序号</span><br><span class="line">-V|--version </span><br><span class="line">-h|--help   </span><br><span class="line">[option]  --help     //查看特定选项的帮助，如iptables -p icmp --help</span><br><span class="line">--fragment -f               //match second or further fragments only</span><br><span class="line">--modprobe=&lt;command&gt;        //try to insert modules using this command</span><br><span class="line">--set-counters PKTS BYTES   //set the counter during insert/append</span><br></pre></td></tr></table></figure>
+<p>state  TCP链接状态</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">NEW                 第一次握手，要起始一个连接（重设连接或将连接重导向） </span><br><span class="line">ESTABLISHED   数据包属于某个已经建立的连接。第二次和第三次握手   (ack=1)</span><br><span class="line">INVALID           数据包的连接编号（Session ID）无法辨识或编号不正确。如SYN=1 ACK=1 RST=1   </span><br><span class="line">RELATED          表示该封包是属于某个已经建立的连接，所建立的新连接。如有些服务使用两个相关的端口，如FTP，21和20端口一去一回，FTP数据传输(上传/下载)还会使用特殊的端口</span><br><span class="line">只允许NEW和ESTABLISHED进，只允许ESTABLISHED出可以阻止反弹式木马。</span><br></pre></td></tr></table></figure>
+<p>使用示例</p>
+<h2 id=""><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">iptables -F           //删除iptables现有规则</span><br><span class="line">iptables -L [-v[vv] -n]   //查看iptables规则</span><br><span class="line">iptables -A INPUT -i eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT       //在INPUT链尾添加一条规则</span><br><span class="line">iptables -I INPUT 2 -i eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT     //在INPUT链中插入为第2条规则</span><br><span class="line">iptables -D  INPUT 2      //删除INPUT链中第2条规则</span><br><span class="line">iptables -R INPUT 3 -i eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT    //替换修改第三条规则</span><br><span class="line">iptables -P INPUT DROP    //设置INPUT链的默认策略为DROP</span><br><span class="line">//允许远程主机进行SSH连接</span><br><span class="line">iptables -A INPUT -i eth0 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT </span><br><span class="line">iptables -A OUTPUT -o eth0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT </span><br><span class="line">//允许本地主机进行SSH连接</span><br><span class="line">iptables -A OUTPUT -o eth0 -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT </span><br><span class="line">iptables -A INTPUT -i eth0 -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT </span><br><span class="line">//允许HTTP请求</span><br><span class="line">iptables -A INPUT -i eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT </span><br><span class="line">iptables -A OUTPUT -o eth0 -p tcp --sport 80 -m state --state ESTABLISHED -j ACCEPT </span><br><span class="line">//限制ping 192.168.146.3主机的数据包数，平均2/s个，最多不能超过3个</span><br><span class="line">iptables -A INPUT -i eth0 -d 192.168.146.3 -p icmp --icmp-type 8 -m limit --limit 2/second --limit-burst 3 -j ACCEPT </span><br><span class="line">//限制SSH连接速率（默认策略是DROP）</span><br><span class="line">iptables -I INPUT 1 -p tcp --dport 22 -d 192.168.146.3 -m state --state ESTABLISHED -j ACCEPT  </span><br><span class="line">iptables -I INPUT 2 -p tcp --dport 22 -d 192.168.146.3 -m limit --limit 2/minute --limit-burst 2 -m state --state NEW -j ACCEPT </span><br><span class="line"> </span><br><span class="line">//防止syn攻击（限制syn的请求速度）</span><br><span class="line">iptables -N syn-flood </span><br><span class="line">iptables -A INPUT -p tcp --syn -j syn-flood </span><br><span class="line">iptables -A syn-flood -m limit --limit 1/s --limit-burst 4 -j RETURN </span><br><span class="line">iptables -A syn-flood -j DROP </span><br><span class="line">//防止syn攻击（限制单个ip的最大syn连接数）</span><br><span class="line">iptables –A INPUT –i eth0 –p tcp --syn -m connlimit --connlimit-above 15 -j DROP </span><br><span class="line"> </span><br><span class="line">iptables -I INPUT -p tcp -dport 22 -m connlimit --connlimit-above 3 -j DROP   //利用recent模块抵御DOS攻击</span><br><span class="line">iptables -I INPUT -p tcp --dport 22 -m state --state NEW -m recent --set --name SSH   //单个IP最多连接3个会话</span><br><span class="line">Iptables -I INPUT -p tcp --dport 22 -m state NEW -m recent --update --seconds 300 --hitcount 3 --name SSH -j DROP  //只要是新的连接请求，就把它加入到SSH列表中。5分钟内你的尝试次数达到3次，就拒绝提供SSH列表中的这个IP服务。被限制5分钟后即可恢复访问。</span><br><span class="line"> </span><br><span class="line">iptables -I INPUT -p tcp --dport 80 -m connlimit --connlimit-above 30 -j DROP    //防止单个IP访问量过大</span><br><span class="line">iptables –A OUTPUT –m state --state NEW –j DROP  //阻止反弹木马</span><br><span class="line">iptables -A INPUT -p icmp --icmp-type echo-request -m limit --limit 1/m -j ACCEPT   //防止ping攻击</span><br><span class="line"> </span><br><span class="line">//只允许自己ping别人，不允许别人ping自己</span><br><span class="line">iptables -A OUTPUT -p icmp --icmp-type 8 -j ACCEPT</span><br><span class="line">iptables -A INPUT -p icmp --icmp-type 0 -j ACCEPT</span><br><span class="line">//对于127.0.0.1比较特殊，我们需要明确定义它</span><br><span class="line">iptables -A INPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT</span><br><span class="line"> </span><br><span class="line">//SNAT 基于原地址转换。许多内网用户通过一个外网 口上网的情况。将我们内网的地址转换为一个外网的IP，共用外网IP访问外网资源。</span><br><span class="line">iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -j SNAT --to-source 172.16.100.1</span><br><span class="line">//当外网地址不是固定的时候。将外网地址换成 MASQUERADE(动态伪装):它可以实现自动读取外网网卡获取的IP地址。</span><br><span class="line">iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -j MASQUERADE</span><br><span class="line">//DNAT 目标地址转换。目标地址转换要做在到达网卡之前进行转换,所以要做在PREROUTING这个位置上</span><br><span class="line">iptables -t nat -A PREROUTING -d 192.168.10.18 -p tcp --dport 80 -j DNAT --to-destination 172.16.100.2</span><br></pre></td></tr></table></figure></h2>
+<h3 id="linux-开启独立iptables日志">linux 开启独立iptables日志</h3>
+<ul>
+<li>在rsyslog.conf 添加配置，添加不同的日志级别（默认warn(=4））</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi /etc/rsyslog.conf</span><br><span class="line">kern.warning     /var/log/iptables.log</span><br><span class="line">kern.debug       /var/log/iptables.log</span><br><span class="line">kern.info        /var/log/iptables.log</span><br><span class="line">不过推荐全部日志都记录：  kern.*     /var/log/iptables.log</span><br></pre></td></tr></table></figure>
+<ul>
+<li>重启日志配置：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/etc/init.d/rsyslogd restart</span><br></pre></td></tr></table></figure>
+<ul>
+<li>让日志滚动，这一步是可选的</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/logrotate.d/syslog</span><br><span class="line">加入/var/log/iptables</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在iptables添加日志选项</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">记录所有的记录了，只要通过了防火墙都会记录到日志里</span><br><span class="line">iptables -A INPUT  -j LOG --log-prefix &quot;iptables&quot;</span><br><span class="line">只记录tcp日志</span><br><span class="line">iptables -A INPUT  -p tcp -j LOG --log-prefix &quot;iptables icmp warn&quot;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>然后保存并重启防火墙配置</li>
+</ul>
+]]></content>
+      <categories>
+        <category>系统</category>
+      </categories>
+      <tags>
+        <tag>iptables</tag>
       </tags>
   </entry>
   <entry>
@@ -2384,6 +2384,34 @@ RUN 指令最常见的用法是安装包用的<code> apt-get</code>。因为 <co
       </categories>
   </entry>
   <entry>
+    <title>ssh 代理-缓存ssh私钥</title>
+    <url>/2022/11/ssh-%E4%BB%A3%E7%90%86-%E7%BC%93%E5%AD%98ssh%E7%A7%81%E9%92%A5/index.html</url>
+    <content><![CDATA[<h2 id="ssh-代理-缓存ssh私钥">ssh 代理-缓存ssh私钥</h2>
+<h4 id="ssh-代理介绍">ssh 代理介绍</h4>
+<p>当把私钥交给 ssh agent 管理的好处</p>
+<p>当 其他程序 需要身份验证的时候 可以将验证申请交给 ssh-agent 来完成整个认证过程。使用不同的密钥连接到不同的主机时，需要要手动指定对应的密钥，而ssh代理可以自动帮助我们选择对应的密钥进行认证。</p>
+<p>避免重复输入密码：如果您的私钥使用密码短语来加密了的话，每一次使用 SSH 密钥对进行登录的时候，您都必须输入正确的密码短语。而 SSH agent 程序能够将您的已解密的私钥缓存起来，在需要的时候提供给您的 SSH 客户端。这样子，您就只需要在使用 ssh-add 时将私钥加入 SSH agent 缓存的时候，输入一次密码短语就可以了。这为经常使用 SSH 连接用户提供了不少便利。</p>
+<p><code>sh-agent</code> 命令：是客户端ssh的默认代理</p>
+<p><code>ssh-agent $SHELL</code> ：它会在当前 shell 中启动一个默认 shell，作为当前 shell 的子 shell，ssh-agent 会在子shell中运行；也可以明确指定 $SHELL ，比如 ssh-agent bash ， ssh-agent 会随者当前 ssh 会话的结束而结束，这是一种安全机制。</p>
+<p>但是测试发现，如果连接突然中断，ssh-agent会被1号进程接管</p>
+<p>运行 ssh agent 以后，会加载默认的私钥</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh-agent $SHELL</span><br></pre></td></tr></table></figure>
+<p>如果有多个密钥，则需要在 ~/.ssh/config 中进行配置：</p>
+<ul>
+<li>一般来说 ssh agent 程序可以根据配置自动加载并管理这些密钥；但如果发现某个密钥没有加载则</li>
+<li>也可以手动使用 ssh-add 命令将某个私钥交给 ssh-agent 保管，<br>
+运行 ssh-add 时， 如果提示 “Could not open a connection to your authentication agent.” 说明你的ssh-agent并没有运行；使用下面的命令运行ssh agent，再使用ssh-add命令添加你的ssh key。</li>
+</ul>
+<h4 id="配置ssh-agent">配置ssh-agent</h4>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动agent代理</span></span><br><span class="line">ssh-agent $SHELL</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">加载</span></span><br><span class="line">ssh-add .ssh/id_rsa</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看</span></span><br><span class="line">ssh-add -l</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除</span></span><br><span class="line">ssh-add -d</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>系统</category>
+      </categories>
+      <tags>
+        <tag>ssh</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux安装docker</title>
     <url>/2022/11/linux%E5%AE%89%E8%A3%85docker/index.html</url>
     <content><![CDATA[<h2 id="安装-docker">安装 docker</h2>
@@ -2420,34 +2448,6 @@ RUN 指令最常见的用法是安装包用的<code> apt-get</code>。因为 <co
       </categories>
       <tags>
         <tag>Docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ssh 代理-缓存ssh私钥</title>
-    <url>/2022/11/ssh-%E4%BB%A3%E7%90%86-%E7%BC%93%E5%AD%98ssh%E7%A7%81%E9%92%A5/index.html</url>
-    <content><![CDATA[<h2 id="ssh-代理-缓存ssh私钥">ssh 代理-缓存ssh私钥</h2>
-<h4 id="ssh-代理介绍">ssh 代理介绍</h4>
-<p>当把私钥交给 ssh agent 管理的好处</p>
-<p>当 其他程序 需要身份验证的时候 可以将验证申请交给 ssh-agent 来完成整个认证过程。使用不同的密钥连接到不同的主机时，需要要手动指定对应的密钥，而ssh代理可以自动帮助我们选择对应的密钥进行认证。</p>
-<p>避免重复输入密码：如果您的私钥使用密码短语来加密了的话，每一次使用 SSH 密钥对进行登录的时候，您都必须输入正确的密码短语。而 SSH agent 程序能够将您的已解密的私钥缓存起来，在需要的时候提供给您的 SSH 客户端。这样子，您就只需要在使用 ssh-add 时将私钥加入 SSH agent 缓存的时候，输入一次密码短语就可以了。这为经常使用 SSH 连接用户提供了不少便利。</p>
-<p><code>sh-agent</code> 命令：是客户端ssh的默认代理</p>
-<p><code>ssh-agent $SHELL</code> ：它会在当前 shell 中启动一个默认 shell，作为当前 shell 的子 shell，ssh-agent 会在子shell中运行；也可以明确指定 $SHELL ，比如 ssh-agent bash ， ssh-agent 会随者当前 ssh 会话的结束而结束，这是一种安全机制。</p>
-<p>但是测试发现，如果连接突然中断，ssh-agent会被1号进程接管</p>
-<p>运行 ssh agent 以后，会加载默认的私钥</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh-agent $SHELL</span><br></pre></td></tr></table></figure>
-<p>如果有多个密钥，则需要在 ~/.ssh/config 中进行配置：</p>
-<ul>
-<li>一般来说 ssh agent 程序可以根据配置自动加载并管理这些密钥；但如果发现某个密钥没有加载则</li>
-<li>也可以手动使用 ssh-add 命令将某个私钥交给 ssh-agent 保管，<br>
-运行 ssh-add 时， 如果提示 “Could not open a connection to your authentication agent.” 说明你的ssh-agent并没有运行；使用下面的命令运行ssh agent，再使用ssh-add命令添加你的ssh key。</li>
-</ul>
-<h4 id="配置ssh-agent">配置ssh-agent</h4>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动agent代理</span></span><br><span class="line">ssh-agent $SHELL</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">加载</span></span><br><span class="line">ssh-add .ssh/id_rsa</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看</span></span><br><span class="line">ssh-add -l</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">删除</span></span><br><span class="line">ssh-add -d</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>系统</category>
-      </categories>
-      <tags>
-        <tag>ssh</tag>
       </tags>
   </entry>
   <entry>
@@ -2538,6 +2538,19 @@ RUN 指令最常见的用法是安装包用的<code> apt-get</code>。因为 <co
       <tags>
         <tag>linux</tag>
         <tag>ssh</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Nginx配置之proxy_pass</title>
+    <url>/2021/05/Nginx%E9%85%8D%E7%BD%AE%E4%B9%8Bproxy-pass/index.html</url>
+    <content><![CDATA[<h2 id="nginx配置之proxy_pass">Nginx配置之proxy_pass</h2>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen      80;</span><br><span class="line">    server_name www.test.com;</span><br><span class="line"> </span><br><span class="line">    # 情形A</span><br><span class="line">    # 访问 http://www.test.com/testa/aaaa</span><br><span class="line">    # 后端的request_uri为: /testa/aaaa</span><br><span class="line">    location ^~ /testa/ &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    # 情形B</span><br><span class="line">    # 访问 http://www.test.com/testb/bbbb</span><br><span class="line">    # 后端的request_uri为: /bbbb</span><br><span class="line">    location ^~ /testb/ &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801/;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    # 情形C</span><br><span class="line">    # 下面这段location是正确的</span><br><span class="line">    location ~ /testc &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    # 情形D</span><br><span class="line">    # 下面这段location是错误的</span><br><span class="line">    #</span><br><span class="line">    # nginx -t 时，会报如下错误: </span><br><span class="line">    #</span><br><span class="line">    # nginx: [emerg] &quot;proxy_pass&quot; cannot have URI part in location given by regular </span><br><span class="line">    # expression, or inside named location, or inside &quot;if&quot; statement, or inside </span><br><span class="line">    # &quot;limit_except&quot; block in /opt/app/nginx/conf/vhost/test.conf:17</span><br><span class="line">    # </span><br><span class="line">    # 当location为正则表达式时，proxy_pass 不能包含URI部分。本例中包含了&quot;/&quot;</span><br><span class="line">    location ~ /testd &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801/;   # 记住，location为正则表达式时，最后不能有斜杠，不能这样写！！！</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    # 情形E</span><br><span class="line">    # 访问 http://www.test.com/ccc/bbbb</span><br><span class="line">    # 后端的request_uri为: /aaa/ccc/bbbb</span><br><span class="line">    location /ccc/ &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801/aaa$request_uri;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    # 情形F</span><br><span class="line">    # 访问 http://www.test.com/namea/ddd</span><br><span class="line">    # 后端的request_uri为: /yongfu?namea=ddd</span><br><span class="line">    location /namea/ &#123;</span><br><span class="line">        rewrite    /namea/([^/]+) /yongfu?namea=$1 break;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    # 情形G</span><br><span class="line">    # 访问 http://www.test.com/nameb/eee</span><br><span class="line">    # 后端的request_uri为: /yongfu?nameb=eee</span><br><span class="line">    location /nameb/ &#123;</span><br><span class="line">        rewrite    /nameb/([^/]+) /yongfu?nameb=$1 break;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801/;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>服务</category>
+      </categories>
+      <tags>
+        <tag>Nginx</tag>
       </tags>
   </entry>
   <entry>
@@ -7731,19 +7744,6 @@ style='font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font
       </tags>
   </entry>
   <entry>
-    <title>Nginx配置之proxy_pass</title>
-    <url>/2021/05/Nginx%E9%85%8D%E7%BD%AE%E4%B9%8Bproxy-pass/index.html</url>
-    <content><![CDATA[<h2 id="nginx配置之proxy_pass">Nginx配置之proxy_pass</h2>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen      80;</span><br><span class="line">    server_name www.test.com;</span><br><span class="line"> </span><br><span class="line">    # 情形A</span><br><span class="line">    # 访问 http://www.test.com/testa/aaaa</span><br><span class="line">    # 后端的request_uri为: /testa/aaaa</span><br><span class="line">    location ^~ /testa/ &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    # 情形B</span><br><span class="line">    # 访问 http://www.test.com/testb/bbbb</span><br><span class="line">    # 后端的request_uri为: /bbbb</span><br><span class="line">    location ^~ /testb/ &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801/;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    # 情形C</span><br><span class="line">    # 下面这段location是正确的</span><br><span class="line">    location ~ /testc &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    # 情形D</span><br><span class="line">    # 下面这段location是错误的</span><br><span class="line">    #</span><br><span class="line">    # nginx -t 时，会报如下错误: </span><br><span class="line">    #</span><br><span class="line">    # nginx: [emerg] &quot;proxy_pass&quot; cannot have URI part in location given by regular </span><br><span class="line">    # expression, or inside named location, or inside &quot;if&quot; statement, or inside </span><br><span class="line">    # &quot;limit_except&quot; block in /opt/app/nginx/conf/vhost/test.conf:17</span><br><span class="line">    # </span><br><span class="line">    # 当location为正则表达式时，proxy_pass 不能包含URI部分。本例中包含了&quot;/&quot;</span><br><span class="line">    location ~ /testd &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801/;   # 记住，location为正则表达式时，最后不能有斜杠，不能这样写！！！</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    # 情形E</span><br><span class="line">    # 访问 http://www.test.com/ccc/bbbb</span><br><span class="line">    # 后端的request_uri为: /aaa/ccc/bbbb</span><br><span class="line">    location /ccc/ &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801/aaa$request_uri;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    # 情形F</span><br><span class="line">    # 访问 http://www.test.com/namea/ddd</span><br><span class="line">    # 后端的request_uri为: /yongfu?namea=ddd</span><br><span class="line">    location /namea/ &#123;</span><br><span class="line">        rewrite    /namea/([^/]+) /yongfu?namea=$1 break;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    # 情形G</span><br><span class="line">    # 访问 http://www.test.com/nameb/eee</span><br><span class="line">    # 后端的request_uri为: /yongfu?nameb=eee</span><br><span class="line">    location /nameb/ &#123;</span><br><span class="line">        rewrite    /nameb/([^/]+) /yongfu?nameb=$1 break;</span><br><span class="line">        proxy_pass http://127.0.0.1:8801/;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>服务</category>
-      </categories>
-      <tags>
-        <tag>Nginx</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Selinux安全上下文详解</title>
     <url>/2021/05/Selinux%E5%AE%89%E5%85%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E8%AF%A6%E8%A7%A3/index.html</url>
     <content><![CDATA[<h1 id="selinux安全上下文详解">Selinux安全上下文详解</h1>
@@ -8505,6 +8505,49 @@ ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2</p>
       </tags>
   </entry>
   <entry>
+    <title>Nginx location 匹配规则</title>
+    <url>/2023/07/Nginx-location-%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99/index.html</url>
+    <content><![CDATA[<h2 id="**语法规则：**"><strong>语法规则：</strong></h2>
+<ul>
+<li><code>=</code> 开头表示精确匹配</li>
+<li><code>^~</code> 开头表示uri以某个常规字符串开头，理解为匹配url路径即可(非正则)</li>
+<li><code>~</code> 开头表示区分大小写的正则匹配</li>
+<li><code>~*</code> 开头表示不区分大小写的正则匹配</li>
+<li><code>!~</code>和<code>!~*</code>分别为区分大小写不匹配及不区分大小写不匹配的正则</li>
+<li><code>/</code> 通用匹配，任何请求都会匹配到</li>
+</ul>
+<p>优先级：</p>
+<blockquote>
+<p><code>=</code>  &gt;  <code>^~</code>  &gt; <code>~ | ~*</code>  &gt;  <code>最长前缀匹配  </code> &gt; <code>/</code></p>
+</blockquote>
+<ul>
+<li>等号类型 <code>=</code> 的优先级最高。一旦匹配成功，则不再查找其他location的匹配项</li>
+<li><code>^~</code> 和通用匹配。使用前缀匹配，不支持正则表达式，如果有多个location匹配成功的话，不会终止匹配过程，会匹配表达式最长的那个</li>
+<li>如果上一步得到的最长的location为<code>^~</code>类型，则表示阻断正则表达式，不再匹配正则表达式</li>
+<li>如果上一步得到的最长的location不是<code>^~</code>类型，继续匹配正则表达式，只要有一个正则成功，则使用这个正则的location，立即返回结果，并结束解析过程</li>
+</ul>
+<h2 id="**location匹配参数实例：**"><strong>location匹配参数实例：</strong></h2>
+<p><code>=</code>  精确匹配</p>
+<p>内容要同表达式完全一致才匹配成功</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">location = /abc/ &#123;</span><br><span class="line">  .....</span><br><span class="line"> &#125;</span><br><span class="line">        </span><br><span class="line"># 只匹配http://abc.com/abc</span><br><span class="line">#http://example.com/abc [匹配成功]</span><br><span class="line">#http://example.com/abc/index [匹配失败]</span><br></pre></td></tr></table></figure>
+<p><code>~</code>  执行正则匹配，区分大小写。</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">location ~ /Abc/ &#123;</span><br><span class="line">  .....</span><br><span class="line">&#125;</span><br><span class="line">#http://example.com/Abc/ [匹配成功]</span><br><span class="line">#http://example.com/abc/ [匹配失败]</span><br></pre></td></tr></table></figure>
+<p><code>~* </code> 执行正则匹配，忽略大小写</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">location ~* /Abc/ &#123;</span><br><span class="line">  .....</span><br><span class="line">&#125;</span><br><span class="line"># 则会忽略 uri 部分的大小写</span><br><span class="line">#http://example.com/Abc/ [匹配成功]</span><br><span class="line">#http://example.com/abc/ [匹配成功]</span><br></pre></td></tr></table></figure>
+<p><code>^~ </code> 表示普通字符串匹配上以后不再进行正则匹配。</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">location ^~ /index/ &#123;</span><br><span class="line">  .....</span><br><span class="line">&#125;</span><br><span class="line">#以 /index/ 开头的请求，都会匹配上</span><br><span class="line">#http://example.com/index/index.page  [匹配成功]</span><br><span class="line">#http://example.com/error/error.page [匹配失败]</span><br></pre></td></tr></table></figure>
+<p>不加任何规则时，默认是大小写敏感，前缀匹配，相当于加了 <code>~</code> 与 <code>^~</code></p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">location /index/ &#123;</span><br><span class="line">  ......</span><br><span class="line">&#125;</span><br><span class="line">#http://example.com/index  [匹配成功]</span><br><span class="line">#http://example.com/index/index.page  [匹配成功]</span><br><span class="line">#http://example.com/test/index  [匹配失败]</span><br><span class="line">#http://example.com/Index  [匹配失败]</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>服务</category>
+        <category>Nginx</category>
+      </categories>
+      <tags>
+        <tag>Nginx</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Nginx 使用正则时配置反向代理</title>
     <url>/2023/07/Nginx-%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E6%97%B6%E9%85%8D%E7%BD%AE%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/index.html</url>
     <content><![CDATA[<p><strong>当nginx的location 使用正则时，proxy_pass 中就不能出现路径。</strong></p>
@@ -8557,101 +8600,6 @@ ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2</p>
         <tag>SSL</tag>
         <tag>TLS</tag>
         <tag>Nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Nginx location 匹配规则</title>
-    <url>/2023/07/Nginx-location-%E5%8C%B9%E9%85%8D%E8%A7%84%E5%88%99/index.html</url>
-    <content><![CDATA[<h2 id="**语法规则：**"><strong>语法规则：</strong></h2>
-<ul>
-<li><code>=</code> 开头表示精确匹配</li>
-<li><code>^~</code> 开头表示uri以某个常规字符串开头，理解为匹配url路径即可(非正则)</li>
-<li><code>~</code> 开头表示区分大小写的正则匹配</li>
-<li><code>~*</code> 开头表示不区分大小写的正则匹配</li>
-<li><code>!~</code>和<code>!~*</code>分别为区分大小写不匹配及不区分大小写不匹配的正则</li>
-<li><code>/</code> 通用匹配，任何请求都会匹配到</li>
-</ul>
-<p>优先级：</p>
-<blockquote>
-<p><code>=</code>  &gt;  <code>^~</code>  &gt; <code>~ | ~*</code>  &gt;  <code>最长前缀匹配  </code> &gt; <code>/</code></p>
-</blockquote>
-<ul>
-<li>等号类型 <code>=</code> 的优先级最高。一旦匹配成功，则不再查找其他location的匹配项</li>
-<li><code>^~</code> 和通用匹配。使用前缀匹配，不支持正则表达式，如果有多个location匹配成功的话，不会终止匹配过程，会匹配表达式最长的那个</li>
-<li>如果上一步得到的最长的location为<code>^~</code>类型，则表示阻断正则表达式，不再匹配正则表达式</li>
-<li>如果上一步得到的最长的location不是<code>^~</code>类型，继续匹配正则表达式，只要有一个正则成功，则使用这个正则的location，立即返回结果，并结束解析过程</li>
-</ul>
-<h2 id="**location匹配参数实例：**"><strong>location匹配参数实例：</strong></h2>
-<p><code>=</code>  精确匹配</p>
-<p>内容要同表达式完全一致才匹配成功</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">location = /abc/ &#123;</span><br><span class="line">  .....</span><br><span class="line"> &#125;</span><br><span class="line">        </span><br><span class="line"># 只匹配http://abc.com/abc</span><br><span class="line">#http://example.com/abc [匹配成功]</span><br><span class="line">#http://example.com/abc/index [匹配失败]</span><br></pre></td></tr></table></figure>
-<p><code>~</code>  执行正则匹配，区分大小写。</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">location ~ /Abc/ &#123;</span><br><span class="line">  .....</span><br><span class="line">&#125;</span><br><span class="line">#http://example.com/Abc/ [匹配成功]</span><br><span class="line">#http://example.com/abc/ [匹配失败]</span><br></pre></td></tr></table></figure>
-<p><code>~* </code> 执行正则匹配，忽略大小写</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">location ~* /Abc/ &#123;</span><br><span class="line">  .....</span><br><span class="line">&#125;</span><br><span class="line"># 则会忽略 uri 部分的大小写</span><br><span class="line">#http://example.com/Abc/ [匹配成功]</span><br><span class="line">#http://example.com/abc/ [匹配成功]</span><br></pre></td></tr></table></figure>
-<p><code>^~ </code> 表示普通字符串匹配上以后不再进行正则匹配。</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">location ^~ /index/ &#123;</span><br><span class="line">  .....</span><br><span class="line">&#125;</span><br><span class="line">#以 /index/ 开头的请求，都会匹配上</span><br><span class="line">#http://example.com/index/index.page  [匹配成功]</span><br><span class="line">#http://example.com/error/error.page [匹配失败]</span><br></pre></td></tr></table></figure>
-<p>不加任何规则时，默认是大小写敏感，前缀匹配，相当于加了 <code>~</code> 与 <code>^~</code></p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">location /index/ &#123;</span><br><span class="line">  ......</span><br><span class="line">&#125;</span><br><span class="line">#http://example.com/index  [匹配成功]</span><br><span class="line">#http://example.com/index/index.page  [匹配成功]</span><br><span class="line">#http://example.com/test/index  [匹配失败]</span><br><span class="line">#http://example.com/Index  [匹配失败]</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>服务</category>
-        <category>Nginx</category>
-      </categories>
-      <tags>
-        <tag>Nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Nginx 反向代理之神奇的斜线</title>
-    <url>/2023/06/Nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B9%8B%E7%A5%9E%E5%A5%87%E7%9A%84%E6%96%9C%E7%BA%BF/index.html</url>
-    <content><![CDATA[<h1 id="nginx-反向代理之神奇的斜线">Nginx 反向代理之神奇的斜线</h1>
-<h3 id="**代理模式**"><strong>代理模式</strong></h3>
-<p>在客户端中请求服务器A，反向代理到服务器B，对于如下4组配置的代理效果如下。</p>
-<blockquote>
-<p>效果1</p>
-</blockquote>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="comment"># A实际发起的请求路劲 -&gt; B收到的请求</span></span><br><span class="line"><span class="comment"># localhost/v1/api -&gt; /api</span></span><br><span class="line"><span class="section">location</span> /v1/ &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12/;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># localhost/v2/api -&gt; //api</span></span><br><span class="line"><span class="section">location</span> /v2 &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>效果2</p>
-</blockquote>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="comment"># localhost/v3/api -&gt; /v3/api</span></span><br><span class="line"><span class="section">location</span> /v3/ &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># localhost/v4/api -&gt; /v4/api</span></span><br><span class="line"><span class="section">location</span> /v4 &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>效果3</p>
-</blockquote>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="comment"># localhost/v5/api -&gt; /on/api</span></span><br><span class="line"><span class="section">location</span> /v5/ &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12/on/;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># localhost/v6/api -&gt; /on//api</span></span><br><span class="line"><span class="section">location</span> /v6 &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12/on/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>效果4</p>
-</blockquote>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="comment"># localhost/v7/api -&gt; /onapi</span></span><br><span class="line"><span class="section">location</span> /v7/ &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12/on;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># localhost/v8/api -&gt; /on/api</span></span><br><span class="line"><span class="section">location</span> /v8 &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12/on;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>只要proxy_pass后面新制定的路由地址带有/开头的字符串，那么请求后面的地址信息将会从location中匹配到的部分去除，将剩余的地址信息部分追加到proxy_pass拼接到地址后面，构建成一个全新的请求url。如下图：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl 10.10.10.11/v1/api    # /v1/  被匹配到了，会去掉 “/v1/”， 所以只剩下api</span><br><span class="line">       location /v1/ &#123;</span><br><span class="line">           proxy_pass http://10.10.10.12/;</span><br><span class="line">       &#125;</span><br><span class="line">                      http://10.10.10.12/api   # 将api 拼接在proxy_pass后面，形成新的url</span><br><span class="line">------------------------------------------------------------------------------------------------------------------</span><br><span class="line">curl 10.10.10.11/v3/api    # /v1/  被匹配到了，因为proxy_pass里面没有路劲，所以请求路径会被全部拼接</span><br><span class="line">       location /v3/ &#123;</span><br><span class="line">           proxy_pass http://10.10.10.12;</span><br><span class="line">       &#125;</span><br><span class="line">                      http://10.10.10.12/v3/api   # 将 /v3/api 拼接在proxy_pass后面，形成新的url</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h4 id="**本地资源模式**"><strong>本地资源模式</strong></h4>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">location</span> / &#123;</span><br><span class="line">    <span class="attribute">root</span>   /usr/share/nginx/html;</span><br><span class="line">    <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># curl localhost/s1/api/index.html  -&gt; /usr/local/s1/api/index.html</span></span><br><span class="line"><span class="section">location</span> /s1/ &#123;</span><br><span class="line">  <span class="attribute">root</span> /usr/local/;</span><br><span class="line">  <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># curl localhost/s2/api/index.html  -&gt; /usr/local/s2/api/index.html</span></span><br><span class="line"><span class="section">location</span> /s2/ &#123;</span><br><span class="line">  <span class="attribute">root</span> /usr/local;</span><br><span class="line">  <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># curl localhost/s3/api/index.html  -&gt; /usr/local/s3/api/index.html</span></span><br><span class="line"><span class="section">location</span> /s3 &#123;</span><br><span class="line">  <span class="attribute">root</span> /usr/local/;</span><br><span class="line">  <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># curl localhost/s4/api/index.html  -&gt; /usr/local/s4/api/index.html</span></span><br><span class="line"><span class="section">location</span> /s4 &#123;</span><br><span class="line">  <span class="attribute">root</span> /usr/local;</span><br><span class="line">  <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># curl localhost/a1/api/index.html  -&gt; /usr/local/api/index.html</span></span><br><span class="line"><span class="section">location</span> /a1/ &#123;</span><br><span class="line">  <span class="attribute">alias</span> /usr/local/;</span><br><span class="line">  <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># curl localhost/a2/api/index.html  -&gt; /usr/local//api/index.html</span></span><br><span class="line"><span class="section">location</span> /a2 &#123;</span><br><span class="line">  <span class="attribute">alias</span> /usr/local/;</span><br><span class="line">  <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># curl localhost/hostname/  -&gt; /etc/hostname</span></span><br><span class="line"><span class="section">location</span> /hostname &#123;</span><br><span class="line">  <span class="attribute">alias</span> /etc;</span><br><span class="line">  <span class="attribute">index</span> hostname;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>服务</category>
-        <category>Nginx</category>
-      </categories>
-      <tags>
-        <tag>Nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git log 中文乱码的解决方案</title>
-    <url>/2023/05/git-log-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.html</url>
-    <content><![CDATA[<p>设置 Git 支持 utf-8 编码<br>
-在命令行下输入以下命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global core.quotepath false # 显示 status 编码</span><br><span class="line">git config --global gui.encoding utf-8 # 图形界面编码</span><br><span class="line">git config --global i18n.commit.encoding utf-8 # 提交信息编码</span><br><span class="line">git config --global i18n.logoutputencoding utf-8 # 输出 log 编码</span><br><span class="line">export LESSCHARSET=utf-8</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>系统</category>
-        <category>常用命令</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
@@ -8770,6 +8718,21 @@ ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2</p>
       </tags>
   </entry>
   <entry>
+    <title>git log 中文乱码的解决方案</title>
+    <url>/2023/05/git-log-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.html</url>
+    <content><![CDATA[<p>设置 Git 支持 utf-8 编码<br>
+在命令行下输入以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global core.quotepath false # 显示 status 编码</span><br><span class="line">git config --global gui.encoding utf-8 # 图形界面编码</span><br><span class="line">git config --global i18n.commit.encoding utf-8 # 提交信息编码</span><br><span class="line">git config --global i18n.logoutputencoding utf-8 # 输出 log 编码</span><br><span class="line">export LESSCHARSET=utf-8</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>系统</category>
+        <category>常用命令</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>iptablse 配置DNAT转发</title>
     <url>/2023/07/iptablse-%E9%85%8D%E7%BD%AEDNAT%E8%BD%AC%E5%8F%91/index.html</url>
     <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">192.168.39.100 --------------&gt; 192.168.39.33:443</span><br><span class="line">                                   ||</span><br><span class="line">                               10.10.10.10   --------------&gt;   10.10.10.15:8443</span><br></pre></td></tr></table></figure>
@@ -8797,6 +8760,57 @@ ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2</p>
       </categories>
       <tags>
         <tag>kubernetes</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Nginx 反向代理之神奇的斜线</title>
+    <url>/2023/06/Nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B9%8B%E7%A5%9E%E5%A5%87%E7%9A%84%E6%96%9C%E7%BA%BF/index.html</url>
+    <content><![CDATA[<h1 id="nginx-反向代理之神奇的斜线">Nginx 反向代理之神奇的斜线</h1>
+<h3 id="**代理模式**"><strong>代理模式</strong></h3>
+<p>在客户端中请求服务器A，反向代理到服务器B，对于如下4组配置的代理效果如下。</p>
+<blockquote>
+<p>效果1</p>
+</blockquote>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="comment"># A实际发起的请求路劲 -&gt; B收到的请求</span></span><br><span class="line"><span class="comment"># localhost/v1/api -&gt; /api</span></span><br><span class="line"><span class="section">location</span> /v1/ &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12/;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># localhost/v2/api -&gt; //api</span></span><br><span class="line"><span class="section">location</span> /v2 &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>效果2</p>
+</blockquote>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="comment"># localhost/v3/api -&gt; /v3/api</span></span><br><span class="line"><span class="section">location</span> /v3/ &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># localhost/v4/api -&gt; /v4/api</span></span><br><span class="line"><span class="section">location</span> /v4 &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>效果3</p>
+</blockquote>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="comment"># localhost/v5/api -&gt; /on/api</span></span><br><span class="line"><span class="section">location</span> /v5/ &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12/on/;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># localhost/v6/api -&gt; /on//api</span></span><br><span class="line"><span class="section">location</span> /v6 &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12/on/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>效果4</p>
+</blockquote>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="comment"># localhost/v7/api -&gt; /onapi</span></span><br><span class="line"><span class="section">location</span> /v7/ &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12/on;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># localhost/v8/api -&gt; /on/api</span></span><br><span class="line"><span class="section">location</span> /v8 &#123;</span><br><span class="line">  <span class="attribute">proxy_pass</span> http://10.10.10.12/on;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>只要proxy_pass后面新制定的路由地址带有/开头的字符串，那么请求后面的地址信息将会从location中匹配到的部分去除，将剩余的地址信息部分追加到proxy_pass拼接到地址后面，构建成一个全新的请求url。如下图：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl 10.10.10.11/v1/api    # /v1/  被匹配到了，会去掉 “/v1/”， 所以只剩下api</span><br><span class="line">       location /v1/ &#123;</span><br><span class="line">           proxy_pass http://10.10.10.12/;</span><br><span class="line">       &#125;</span><br><span class="line">                      http://10.10.10.12/api   # 将api 拼接在proxy_pass后面，形成新的url</span><br><span class="line">------------------------------------------------------------------------------------------------------------------</span><br><span class="line">curl 10.10.10.11/v3/api    # /v1/  被匹配到了，因为proxy_pass里面没有路劲，所以请求路径会被全部拼接</span><br><span class="line">       location /v3/ &#123;</span><br><span class="line">           proxy_pass http://10.10.10.12;</span><br><span class="line">       &#125;</span><br><span class="line">                      http://10.10.10.12/v3/api   # 将 /v3/api 拼接在proxy_pass后面，形成新的url</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="**本地资源模式**"><strong>本地资源模式</strong></h4>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">location</span> / &#123;</span><br><span class="line">    <span class="attribute">root</span>   /usr/share/nginx/html;</span><br><span class="line">    <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># curl localhost/s1/api/index.html  -&gt; /usr/local/s1/api/index.html</span></span><br><span class="line"><span class="section">location</span> /s1/ &#123;</span><br><span class="line">  <span class="attribute">root</span> /usr/local/;</span><br><span class="line">  <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># curl localhost/s2/api/index.html  -&gt; /usr/local/s2/api/index.html</span></span><br><span class="line"><span class="section">location</span> /s2/ &#123;</span><br><span class="line">  <span class="attribute">root</span> /usr/local;</span><br><span class="line">  <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># curl localhost/s3/api/index.html  -&gt; /usr/local/s3/api/index.html</span></span><br><span class="line"><span class="section">location</span> /s3 &#123;</span><br><span class="line">  <span class="attribute">root</span> /usr/local/;</span><br><span class="line">  <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># curl localhost/s4/api/index.html  -&gt; /usr/local/s4/api/index.html</span></span><br><span class="line"><span class="section">location</span> /s4 &#123;</span><br><span class="line">  <span class="attribute">root</span> /usr/local;</span><br><span class="line">  <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># curl localhost/a1/api/index.html  -&gt; /usr/local/api/index.html</span></span><br><span class="line"><span class="section">location</span> /a1/ &#123;</span><br><span class="line">  <span class="attribute">alias</span> /usr/local/;</span><br><span class="line">  <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># curl localhost/a2/api/index.html  -&gt; /usr/local//api/index.html</span></span><br><span class="line"><span class="section">location</span> /a2 &#123;</span><br><span class="line">  <span class="attribute">alias</span> /usr/local/;</span><br><span class="line">  <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># curl localhost/hostname/  -&gt; /etc/hostname</span></span><br><span class="line"><span class="section">location</span> /hostname &#123;</span><br><span class="line">  <span class="attribute">alias</span> /etc;</span><br><span class="line">  <span class="attribute">index</span> hostname;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>服务</category>
+        <category>Nginx</category>
+      </categories>
+      <tags>
+        <tag>Nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux 获取随机数</title>
+    <url>/2023/07/linux-%E8%8E%B7%E5%8F%96%E9%9A%8F%E6%9C%BA%E6%95%B0/index.html</url>
+    <content><![CDATA[<p>要获取一个随机数，可以使用系统环境变量</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$RANDOM</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>系统</category>
+        <category>常用命令</category>
+      </categories>
+      <tags>
+        <tag>tar</tag>
       </tags>
   </entry>
   <entry>
@@ -8925,20 +8939,6 @@ ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2</p>
 <li>解压可以直接使用<code>tar xf</code>命令</li>
 </ul>
 </blockquote>
-]]></content>
-      <categories>
-        <category>系统</category>
-        <category>常用命令</category>
-      </categories>
-      <tags>
-        <tag>tar</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>linux 获取随机数</title>
-    <url>/2023/07/linux-%E8%8E%B7%E5%8F%96%E9%9A%8F%E6%9C%BA%E6%95%B0/index.html</url>
-    <content><![CDATA[<p>要获取一个随机数，可以使用系统环境变量</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$RANDOM</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>系统</category>
@@ -9146,6 +9146,16 @@ ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2</p>
       <tags>
         <tag>Nginx</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>使用简单的命令测试端口的连通性</title>
+    <url>/2023/07/%E4%BD%BF%E7%94%A8%E7%AE%80%E5%8D%95%E7%9A%84%E5%91%BD%E4%BB%A4%E6%B5%8B%E8%AF%95%E7%AB%AF%E5%8F%A3%E7%9A%84%E8%BF%9E%E9%80%9A%E6%80%A7/index.html</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">timeout</span> 1 bash -c <span class="string">&quot;cat &lt; /dev/null &gt; /dev/tcp/127.0.0.1/80&quot;</span> &amp;&gt;/dev/null &amp;&amp; <span class="built_in">echo</span> <span class="string">&#x27;端口正常&#x27;</span> || <span class="built_in">echo</span> <span class="string">&#x27;端口错误&#x27;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>系统</category>
+        <category>常用命令</category>
+      </categories>
   </entry>
   <entry>
     <title>普通x509证书转p12格式</title>
