@@ -1,0 +1,591 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>计算机基础 | Outsrkem</title><meta name="generator" content="hexo-theme-ayer"><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/dist/main.css"><link rel="stylesheet" href="/css/fonts/remixicon.css"><link rel="stylesheet" href="/css/custom.css"><script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script><script src="https://cdn.staticfile.org/mermaid/8.14.0/mermaid.min.js"></script><style>.swal2-styled.swal2-confirm{font-size:1.6rem}</style></head></html><body><div id="app"><main class="content on"><section class="outer"><article id="post-计算机基础" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal><div class="article-inner"><header class="article-header"><h1 class="article-title sea-center" style="border-left:0" itemprop="name"> 计算机基础</h1></header><div class="article-meta"> <a href="/2018/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/index.html" class="article-date"><time datetime="2018-10-13T03:08:12.000Z" itemprop="datePublished">2018-10-13 11:08:12 +08:00</time></a><div class="article-category"> <a class="article-category-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></div><div class="word_count"><span class="post-time"><span class="post-meta-item-icon"><i class="ri-quill-pen-line"></i> <span class="post-meta-item-text">字数统计:</span> <span class="post-count">7.9k</span></span></span> <span class="post-time">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="ri-book-open-line"></i> <span class="post-meta-item-text">阅读时长≈</span> <span class="post-count">30 分钟</span></span></span></div></div><div class="article-entry" itemprop="articleBody"><p>计算机基础简介</p><p>云计算：</p><div class="highlight"><pre class="code"><code><span class="hljs-code">    IaaS    基础设施即服务
+</span>
+<span class="hljs-code">    SaaS    软件即服务
+</span>
+<span class="hljs-code">    PaaS    平台即服务
+</span></code></pre></div><p>存储单位</p><p>比特位 ( bit ) 1 Byte=8 bit Byte K M G T P E Z</p><p>Z　 E P T G M K Byte bit<br> 1024 1024 1024 1024 1024 1024 1024 1024 8</p><p>ASCII码：计算机字符编码：</p><p>英文：每个字母占8个二进制位，即8bit，共计28=256个。</p><p>中文：每个汉字占16个二进制位，即16bit，共计216=65536个。</p><div class="highlight"><pre class="code"><code>中文编码：   简体     GB2312
+
+<span class="hljs-code">            繁体     Big5   
+</span>
+<span class="hljs-code">            统一汉字编码      UTF-8
+</span></code></pre></div><p>摩尔定律：每过18个月，集成电路的密度增加一倍。</p><p>网速换算：单位：Mbps=Mbit/s 如：100Mbps的宽带，下载速度为100÷8≈12.5Mb/s.</p><p>主板插槽</p><p>（CPU运算速度=频率<em>CPU位数/8</em>线程数=2.5GHz<em>64/8B</em>4）</p><p>插槽速度： PCI 66Mb/s 老式插槽</p><div class="highlight"><pre class="code"><code>        <span class="hljs-attribute">IDE</span>     <span class="hljs-number">133</span> Mb/s                老式硬盘插槽
+
+        <span class="hljs-attribute">SCSI</span>    <span class="hljs-number">200</span> Mb/s                老式服务器硬盘插槽
+
+        <span class="hljs-attribute">SATA</span>    <span class="hljs-number">500</span> Mb/s                硬盘接口
+
+        <span class="hljs-attribute">PCI</span>-E   <span class="hljs-number">1000</span> Mb/s—<span class="hljs-number">2000</span> Mb/s    主要用显卡接口
+
+        <span class="hljs-attribute">DDR3</span>    &lt;<span class="hljs-number">2400</span> Mb/s              内存插槽
+
+        <span class="hljs-attribute">DDR4</span>    &gt;=<span class="hljs-number">2400</span> Mb/s             <span class="hljs-number">3</span>代和<span class="hljs-number">4</span>代接口不一样
+</code></pre></div><p>BIOS：基本输入输出系统</p><p>COMS：互补金属氧化物半导体存储器（一块芯片，存储BIOS系统）</p><p>分区及系统安装</p><p>分区表形式</p><div class="highlight"><pre class="code"><code><span class="hljs-attribute">MBR</span>分区表（主引导记录）：最大支持<span class="hljs-number">2</span>.<span class="hljs-number">1</span>Tb硬盘，最多支持<span class="hljs-number">4</span>个分区。
+
+<span class="hljs-attribute">GTP</span> 分区表（全局唯一标识分区表）：最大支持<span class="hljs-number">9</span>.<span class="hljs-number">4</span>Zb硬盘，理论分区无限制（Windows限制<span class="hljs-number">128</span>个）
+</code></pre></div><p>分区类型：</p><div class="highlight"><pre class="code"><code>MBR分区类型
+
+主分区：最多只能有4个。
+
+扩展分区：
+
+<span class="hljs-code">    最多只能有一个。
+</span>
+<span class="hljs-code">    主分区和扩展分区最多只能有4个。
+</span>
+<span class="hljs-code">    扩展分区能不能写入数据，只能包含逻辑分区。
+</span>
+逻辑分区：
+
+<span class="hljs-code">    格式化：主要目的是为了写入文件系统。
+</span>
+<span class="hljs-code">    FAT16：最大支持2Gb分区。
+</span>
+<span class="hljs-code">    FAT32： 最大支持4Gb单个文件，（32Gb分区。注：不准确）
+</span>
+<span class="hljs-code">    NTFS：  最大支持64Gb单个文件，（2Tb分区。注：不准确）
+</span></code></pre></div><p>文件系统： Inode文件索引，128Byte（大小有限，可能会写满，每个文件只能占用一个）</p><div class="highlight"><pre class="code"><code>            <span class="hljs-attribute">Inode</span>里面存储有：Inode号，文件时间，权限，保存位置，称之为文件元数据。
+
+        <span class="hljs-attribute">block</span>：文件系统的小分区块，每个默认<span class="hljs-number">4</span>Kb（最大<span class="hljs-number">4</span>Kb）。
+</code></pre></div><p>Windows分区：</p><div class="highlight"><pre class="code"><code><span class="hljs-attribute">1</span>、分区      <span class="hljs-number">2</span>、格式化    <span class="hljs-number">3</span>、分配盘符
+</code></pre></div><p>Windows版本分类：</p><div class="highlight"><pre class="code"><code><span class="hljs-attribute">1</span>、个人版
+
+<span class="hljs-attribute">2</span>、服务器版（Windows Server <span class="hljs-number">2000</span>、<span class="hljs-number">2003</span>、<span class="hljs-number">2008</span>、<span class="hljs-number">2012</span>）
+</code></pre></div><p>防火墙：数据包过滤。可以根据以下5个参数过滤：</p><div class="highlight"><pre class="code"><code><span class="hljs-code">                    IP地址
+</span>
+<span class="hljs-code">                    MAC地址
+</span>
+<span class="hljs-code">                    端口号
+</span>
+<span class="hljs-code">                    协议类型
+</span>
+<span class="hljs-code">                    数据包数据（只有在应用层的软防火墙才能生效）
+</span></code></pre></div><p>Windows安装：（可能需要好几天的安装）</p><div class="highlight"><pre class="code"><code>1、拔网线
+
+2、安装操作系统
+
+3、安装驱动
+
+4、安装杀毒软件和配置防火墙
+
+5、插网线
+
+6、更新（补丁，杀毒软件，防火墙。需要从官网下载安装）
+
+7、安装常用办公软件
+
+8、服务器常规优化
+</code></pre></div><p>注：Windows防火墙ISA，不免费提供。</p><p>Windows操作系统的安装：</p><div class="highlight"><pre class="code"><code><span class="hljs-number">1</span>、光盘安装
+
+<span class="hljs-number">2</span>、U盘安装
+
+<span class="hljs-number">3</span>、磁盘对考（Windows用Ghost，Linux用<span class="hljs-selector-tag">dd</span>命令）
+
+    Ghost：快，操作简单，但不稳定（Ghost <span class="hljs-number">9</span>以后只能在Windows系统中运行）
+
+    <span class="hljs-selector-tag">dd</span>命令：慢，但稳定。
+
+<span class="hljs-number">4</span>、网络批量安装（服务器操作系统的安装）
+</code></pre></div><p>虚拟机使用：</p><div class="highlight"><pre class="code"><code>VMware Workstation（清理工具：VMware clear）
+
+<span class="hljs-code">    Linux 6（安装时内存不可小于628Mb）
+</span>
+<span class="hljs-code">    Server R2（安装时内存不可小于1024Mb）
+</span>
+虚拟机网络连接：
+
+<span class="hljs-code">    桥接：   用物理机真实网卡通信
+</span>
+<span class="hljs-code">    NAT：   用net8虚拟网卡通信
+</span>
+<span class="hljs-code">    仅主机： 用net1虚拟网卡通信
+</span></code></pre></div><p>通信方法 网卡 能否和物理机通信 能否和局域网通信 能否和公网通信</p><p>桥接 真实网卡 可以 可以 可以</p><p>NAT VMnet8 可以 不能 可以</p><p>仅主机 VMnet1 可以 不能 不能</p><p>数据库简介及健康监控</p><p>SQL：结构化查询语句</p><p>数据库分类：</p><div class="highlight"><pre class="code"><code><span class="hljs-keyword">SQL</span> sever（只能在Windows下运行）
+
+My <span class="hljs-keyword">SQL</span>  （最常用数据库）
+
+ORACLE（性能最好）
+</code></pre></div><p>MMC： Windows管理控制台（可以自定义管理工具）</p><p>定时任务：让计算机在特定的时间完成指定的操作。</p><p>网上令居：关闭服务，则停止共享</p><div class="highlight"><pre class="code"><code><span class="hljs-code">    端口 TCP     139 445
+</span>
+<span class="hljs-code">        UDP     137 138
+</span></code></pre></div><p>健康监控：70/90原则 （内存/CPU）</p><div class="highlight"><pre class="code"><code>正常进程：增加设备，搭建集群
+
+非法进程：查明原因，终止进程，不能正常关闭是杀死进程
+</code></pre></div><p>密码三原则</p><div class="highlight"><pre class="code"><code>复杂性： 大于8位，至少包含数字、大写、小写、特殊符号其中三种。
+
+<span class="hljs-code">        不能使用现有的英文单词。
+</span>
+<span class="hljs-code">        不能使用和个人身份信息相关的内容
+</span>
+易记忆性：
+
+时效性： 理论180要更换一次密码。
+</code></pre></div><p>权限原则</p><p>FAT16和FAT32文件系统中文件没有最高权限，其实就代表有最高权限。</p><p>注：大部分操作系统都一样。</p><div class="highlight"><pre class="code"><code>1、本地访问：本地权限生效。
+
+<span class="hljs-code">    网络访问：本地和网络权限都生效。
+</span>
+2、权限的累加：（Windows特有）
+
+<span class="hljs-code">    如果一个用户属于多个组，则该用户的权限是多个组权限的累加。
+</span>
+3、拒绝权限优先（Windows和Linux通用）
+
+4、权限的继承（Windows特有）
+
+<span class="hljs-code">    为了让新建的用户和目录都有默认的权限。
+</span></code></pre></div><p>高级分区简介</p><p>·基本分区不支持大小调整</p><div class="highlight"><pre class="code"><code>注：软件调整是强制调整分区，有崩溃风险。
+</code></pre></div><p>·动态磁盘管理（对分区有更高级操作时，动态调整分区）</p><div class="highlight"><pre class="code"><code>1、简单卷：  只能在一块磁盘上扩容，无磁盘容错功能。
+
+2、跨区卷：  可以使用2块或2块以上的磁盘
+
+<span class="hljs-code">            每块磁盘提供空间大小可以不一致
+</span>
+<span class="hljs-code">            拥有动态扩容功能，没有磁盘容错功能
+</span>
+3、带区卷（Raid 0）：  可以使用2块或2块以上的磁盘
+
+<span class="hljs-code">                    每块硬盘提供的空间大小必须一样
+</span>
+<span class="hljs-code">                    读写速度最快，无磁盘容错功能，无动态扩容
+</span>
+4、镜像卷（Raid 1）：  只能使用2块硬盘
+
+<span class="hljs-code">                    每块硬盘提供的空间大小必须一致
+</span>
+<span class="hljs-code">                    磁盘利用率只有50%，有磁盘容错功能，无动态扩容。
+</span>
+5、Raid 5： 可以使用3块或3块以上硬盘组成
+
+<span class="hljs-code">            每块磁盘提供空间大小必须一致
+</span>
+<span class="hljs-code">            磁盘的可用空间只有n-1块（n为磁盘个数）
+</span>
+<span class="hljs-code">            拥有磁盘容错功能，无动态扩容。
+</span></code></pre></div><p>注：实际工作中软Raid并不常用，因为恢复数据时必须保证操作系统开机，所以常用的时硬件Raid卡。</p><p>卷名 磁盘数量 磁盘容量 读写速度 动态扩容 磁盘容错 存储空间</p><p>简单卷 n=1 —— —— 是 否 100%</p><p>跨区卷 n&gt;=2 可以不一样 —— 是 否 100%</p><p>带区卷Raid 0 n&gt;=2 必须一样 最快 否 否 100%</p><p>镜像卷Raid 1 n=2 必须一样 最慢 否 是 50%</p><p>Raid 5 n&gt;=3 必须一样 较快 否 是 n-1</p><p>Windows之DHCP搭建</p><p>DHCP（动态主机配置协议)</p><div class="highlight"><pre class="code"><code><span class="hljs-symbol">DHCP</span>功能：  ①<span class="hljs-built_in">IP</span>②上网所需东西都能分配（<span class="hljs-built_in">IP</span>、掩码、网关、DNS）③DHCP本机要有固定<span class="hljs-built_in">IP</span>
+
+<span class="hljs-symbol">DHCP</span>好处：  提高<span class="hljs-built_in">IP</span>的利用率、减少管理员的工作量、避免<span class="hljs-built_in">IP</span>输入错误的可能、避免<span class="hljs-built_in">IP</span>的冲突
+
+<span class="hljs-symbol">DHCP</span>缺点：  不可控--当有多个DHCP服务器出现时，选择一个回复最快的获取<span class="hljs-built_in">IP</span>，对局域网干扰较大。
+
+租约过程：   客户机请求<span class="hljs-built_in">IP</span>
+
+            服务器响应
+
+            客户机选择<span class="hljs-built_in">IP</span>
+
+            服务器确定租约
+
+续租过程：   租期到<span class="hljs-number">50</span>%天时候，客户端会找服务器继续续租<span class="hljs-number">8</span>天，若此时连不上服务器，则会继续使用，到<span class="hljs-number">87</span>.<span class="hljs-number">5</span>%天时候，会再次去找服务器继续续租<span class="hljs-number">8</span>天，若连不上，则继续用直到到期，此时客户机则会寻找新的服务器重新发送请求，连接新的服务器。
+
+    默认租约为<span class="hljs-number">8</span>天（协议为<span class="hljs-number">8</span>天）Windows系统在Server2008及以后将其改为<span class="hljs-number">6</span>天。
+</code></pre></div><p>续租过程：</p><div class="highlight"><pre class="code"><code>！主机必须要有固定<span class="hljs-built_in">IP</span>
+
+如果局域网没有DHCP服务器，在XP以前系统下，客户机会一直发送请求，Win7以后系统会发送一轮请求，然后给一个以<span class="hljs-number">169</span>开头的假<span class="hljs-built_in">IP</span>。
+</code></pre></div><p>客户端重启： ①能连上服务器，若租期未到则继续用，若到期则重新发送请求</p><div class="highlight"><pre class="code"><code><span class="hljs-code">        ②若连不上，则继续用，直到租期到期，重新发送请求。
+</span></code></pre></div><p>主机释放已获取IP：release</p><p>主机重新获取IP：renew</p><p>客户机请求IP</p><div class="highlight"><pre class="code"><code>当一个DHCP客户机启动时，客户机还没有<span class="hljs-built_in">IP</span>地址，所以客户机要通过DHCP获取一个合法的地址。此时DHCP客户机以广播方式（因为DHCP服务器的<span class="hljs-built_in">IP</span>地址对客户机来说是未知的）发送DHCP Discover发现信息来寻找DHCP服务器。广播信息中包含DHCP客户机的MAC地址和计算机名，以便DHCP服务器确定是哪个客户机发送的请求。
+</code></pre></div><p>服务器响应</p><div class="highlight"><pre class="code"><code>当DHCP服务器接收到来自客户机请求<span class="hljs-built_in">IP</span>地址的信息时，它就在自己的<span class="hljs-built_in">IP</span>地址池中查找是否有合法的<span class="hljs-built_in">IP</span>地址提供给客户机，如果有，DHCP服务器就将此<span class="hljs-built_in">IP</span>地址做上标记，加入到DHCP Offer的消息中，然后DHCP服务器就广播一则包含下列信息的DHCP Offer消息。
+</code></pre></div><p>客户机选择IP</p><div class="highlight"><pre class="code"><code><span class="hljs-symbol">DHCP</span>客户机从接收到的第一个DHCP Offer消息中提取<span class="hljs-built_in">IP</span>地址，发出<span class="hljs-built_in">IP</span>地址的DHCP服务器将该地址保留，这样该地址就不能提供给另一个DHCP客户机。当客户机从第一个DHCP服务器接收DHCP Offer消息并提取了<span class="hljs-built_in">IP</span>地址后，客户机将DHCP Request消息广播到所有的DHCP服务器，表明它接受提供的内容，DHCP Request消息包括为客户机提供<span class="hljs-built_in">IP</span>配置的服务器的服务标示符（服务器<span class="hljs-built_in">IP</span>地址），DHCP服务器查看服务器标识符字段，以确定提供的<span class="hljs-built_in">IP</span>地址是否被接受，如果DHCP Offer被拒绝，则DHCP服务器将会取消并保留其<span class="hljs-built_in">IP</span>地址以提供给下一个<span class="hljs-built_in">IP</span>租约的请求。
+</code></pre></div><p>服务器确定租约</p><div class="highlight"><pre class="code"><code><span class="hljs-symbol">DHCP</span>服务器接收到DHCP Request消息后，以DHCP ACK消息的形式向客户机广播成功的确认。该消息包含有<span class="hljs-built_in">IP</span>地址的有效租约和其他可配置的信息，虽然服务器确认了客户机的租约请求，但是客户机还没有接收到服务器的DHCP ACK消息。当客户机收到DHCP ACK消息时，它就配置了<span class="hljs-built_in">IP</span>地址，完成TCP/<span class="hljs-built_in">IP</span>的初始化。
+</code></pre></div><p>重新登录</p><div class="highlight"><pre class="code"><code><span class="hljs-symbol">DHCP</span>客户机每次重新登录网络时，不需要再发送DHCP Discover信息，而是直接发送包含前一次所分配的<span class="hljs-built_in">IP</span>地址的DHCP Request请求信息。当DHCP服务器接收到这一信息后，它会尝试让DHCP客户机继续使用原来的<span class="hljs-built_in">IP</span>地址，并回答一个DHCP ACK确认信息。如果此<span class="hljs-built_in">IP</span>地址已无法再分配给原来的DHCP客户机使用时（比如<span class="hljs-built_in">IP</span>已经分配给其他的DHCP客户机使用），DHCP服务器给DHCP客户机回答一个DHCP Nack否认信息。当原来的DHCP客户机收到此DHCP Nack否认信息后，它就必须重新发送DHCP Discover发现信息来请求新的<span class="hljs-built_in">IP</span>地址。
+
+当DHCP服务器向客户机出租的<span class="hljs-built_in">IP</span>地址租期达到<span class="hljs-number">50</span>%时，就需要重新更新租约，客户机直接向提供租约的服务器发送DHCP Request包，要求更新现有的地址租约。
+</code></pre></div><p>Windows之DNS搭建</p><p>DNS（域名系统）</p><p>主要特点：分布式，层次式</p><div class="highlight"><pre class="code"><code>主要用来域名的解析
+
+hosts域名解析文件
+
+    Windows目录：C:<span class="hljs-symbol">\W</span>indows<span class="hljs-symbol">\S</span>ystem32<span class="hljs-symbol">\d</span>rivers<span class="hljs-symbol">\e</span>tc<span class="hljs-symbol">\h</span>osts
+
+    Linux目录：/etc/hosts
+
+    hosts文件的优先级高于DNS（①主机名重复，②主机维护空难）
+</code></pre></div><p>域名分级</p><div class="highlight"><pre class="code"><code>根域：FQDN（完全合格域名）全球部署了<span class="hljs-number">13</span>台
+
+    用点（.）代表根域
+
+一级域名：有国际域名组织分配
+
+        组织一级域   <span class="hljs-selector-class">.com</span>        <span class="hljs-selector-class">.org</span>
+
+        地区一级域   <span class="hljs-selector-class">.cn</span>         <span class="hljs-selector-class">.us</span>
+
+二级域名：由个人或组织申请，二级域 + 一级域必须全球唯一
+
+        itxdl<span class="hljs-selector-class">.cn</span>            qq<span class="hljs-selector-class">.com</span>
+
+三级域名：由个人或组织自定义
+
+        www<span class="hljs-selector-class">.itxdl</span><span class="hljs-selector-class">.cn</span>
+</code></pre></div><p>北京网通DNS 202.106.0.20</p><p>DNS默认缓存3天，IP是网络通信的唯一标识。</p><p>递归查询：客户端向首选DNS查询，必须返回准确（正/误）结果</p><p>迭代查询：首选DNS向其他DNS查询，可以返回近似结果</p><p>正向查询：由域名查找IP</p><p>反向查询：由IP查找域名</p><p>FQDN（完全合格域名）：[<a target="_blank" rel="noopener" href="http://www.itxdl.cn">www.itxdl.cn</a>.]</p><p><a target="_blank" rel="noopener" href="http://xn--www-bp0g441f5oyoyf.souhu.com">查询过程www.souhu.com</a></p><p>资源记录类型 存放的东西</p><p>SOA（起始授权机构） FQDN（完全合格域名）、时间</p><p>NS（名称服务器） FQDN（完全合格域名）</p><p>A（主机） 正向解析记录</p><p>PTR（指针） 反向解析记录</p><p>MX（邮件交叉记录） 用于标识邮件的等级</p><p>SRV（服务）</p><p>CNAME（别名）</p><p>！在Linux系统中，域名需要统一，二级域和三级域都可以，不可一个二级域一个三级域，否则Linux会报错</p><p>Windows之IIS搭建</p><p>IIS（Internet信息服务）</p><div class="highlight"><pre class="code"><code>互联网的典型应用：WWW      FTP     Email
+</code></pre></div><p>URL：统一资源定位符，标准写法：协议://域名或IP:端口号/路径/网页文件名http://www.bjy.com:80/pub/indtx.html</p><p>1、WWW：万维网 端口：80</p><div class="highlight"><pre class="code"><code>注：端口号不建议修改，特殊情况除外。
+</code></pre></div><p>2、FTP：文件传输协议 端口：20 21</p><div class="highlight"><pre class="code"><code>文件服务器，可以指定共享权限
+</code></pre></div><p>3、Email：电子邮件端口：【SMTP（发信）简单邮件传输协议25 、 POP3（收信）邮件协议3代 110】</p><div class="highlight"><pre class="code"><code>邮箱客户端：
+
+<span class="hljs-code">    (1)网页邮箱
+</span>
+<span class="hljs-code">        优点：简单易用，不需要配置
+</span>
+<span class="hljs-code">        缺点：没有邮件实时提醒功能，邮件保存在对方服务器
+</span>
+<span class="hljs-code">    (2)客户端邮箱（Outlook  Foxmail）
+</span>
+<span class="hljs-code">        优点：有实时提醒功能，邮件可存在服务器，亦可下载到本地
+</span>
+<span class="hljs-code">        缺点：配置相对较复杂
+</span>
+<span class="hljs-code">    (3)手机邮箱
+</span>
+<span class="hljs-code">        优点：实时性更好
+</span></code></pre></div><p>常见网页平台</p><div class="highlight"><pre class="code"><code>Linux       Linux + Apache + MySQL + PHP       LAMP
+
+            Linux + Nginx + MySQL + PHP        LNMP
+
+Unix        Unix + Apache + <span class="hljs-keyword">Oracle </span>+ <span class="hljs-keyword">JSP
+</span>
+Windows     Windows + IIS + SQLServer + ASP
+</code></pre></div><p>网络简介及接入方式</p><div class="highlight"><pre class="code"><code>1、拨号网络
+
+<span class="hljs-code">    优点：能上网，使用电话线，不需要重新布线
+</span>
+<span class="hljs-code">    缺点：价格昂贵4+4元，网速慢，56Kbps  约为7KB/s
+</span>
+2、ADSL非对称数字用户环路
+
+<span class="hljs-code">    优点：使用电话线，不用重新布线，网速快8Mbps（ADSL2，24Mbps）价格相对合理
+</span>
+<span class="hljs-code">    缺点：使用电话线，极限速度低，动态IP，不能搭建服务器。
+</span>
+3、FTTH光纤入户
+
+<span class="hljs-code">    优点：使用光纤，价格合理，网速更快
+</span>
+<span class="hljs-code">    缺点：使用光纤，需要重新布线，动态IP
+</span>
+4、固定IP光纤接入
+
+<span class="hljs-code">    优点：固定IP地址（可以搭建服务器），网速快
+</span>
+<span class="hljs-code">    缺点：价格昂贵
+</span></code></pre></div><p>网络设备：</p><div class="highlight"><pre class="code"><code>路由器router：用于不同网段通信
+
+交换机<span class="hljs-keyword">switch</span>：用于同一个网段通信
+</code></pre></div><p>网段：</p><div class="highlight"><pre class="code"><code>逻辑网段：（指的就是<span class="hljs-built_in">IP</span>网段）
+
+物理网段：（指的就是物理连线）
+
+在同一个物理网段，应使用相同的逻辑网段
+
+在不同的物理网段，应使用不同的逻辑网段
+</code></pre></div><p>局域网：在同一个路由器节点之内的网络是一个局域网</p><p>协议：协议就是规定</p><div class="highlight"><pre class="code"><code>语法、语义、同步
+</code></pre></div><p>标准：</p><div class="highlight"><pre class="code"><code>ISO（国际标准化组织）：广域网标准
+
+IEEE（美国电气和电子工程师协会）：局域网标准
+
+<span class="hljs-code">    IEEE 802.3      有线局域网标准
+</span>
+<span class="hljs-code">    IEEE 802.11     无线局域网标准
+</span>
+网络设备：
+
+<span class="hljs-code">    Cisco（思科）        华为     华三
+</span></code></pre></div><p>网络拓扑</p><div class="highlight"><pre class="code"><code>服务器和网络设备的网络连接示意图
+
+星型拓扑：
+
+<span class="hljs-code">    优点：易于实现、易于网络扩展、易于故障排查
+</span>
+<span class="hljs-code">    缺点：中心节点压力大、组网成本高
+</span></code></pre></div><p>OSI模型简介</p><p>数制转换：二进制，八进制，十进制，十六进制之间的相互转换</p><div class="highlight"><pre class="code"><code>十进制转二进制：除2取余
+
+二进制转十进制：乘2取幂
+</code></pre></div><p>水桶法：</p><p>27</p><p>26</p><p>25</p><p>24</p><p>23</p><p>22</p><p>21</p><p>20</p><p>128</p><p>64</p><p>32</p><p>16</p><p>8</p><p>4</p><p>2</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>1</p><p>ISO/OSI七层模型（实验室模型，实际使用的是TCP/IP五层模型，但是在四层模型中数据链路层和物理层合称为网络接口层）</p><div class="highlight"><pre class="code"><code>ISO（国际标准化组织）
+
+OSI（开放系统互联）
+</code></pre></div><p>ARP：地址解析协议 IP—&gt;MAC</p><p>ARP：是电脑用于查询未知MAC地址的协议</p><p>泛洪：在数据链路层，泛洪MAC地址，是交换机用于查询未知MAC地址的协议。MAC：硬件地址</p><p>广播：在网络层，广播的是IP地址。</p><p>交换机：交换机用于同一个网段通信，不能分割广播域，能分割冲突域。</p><p>路由器：用于不同网段通信，会分割广播域，也会分割冲突域。</p><p>集线器：不能分割冲突域</p><p>中继器：信号还原</p><p>网桥：分割冲突域</p><p>广播域：广播能到达的区域，</p><p>冲突域：交换机接收到多台电脑同时发送的数据包的冲突的范围。</p><p>注意事项：</p><p>1、上三层是为用户提供服务的，下四层负责实际数据传输</p><p>2、下四层的传输单位：</p><div class="highlight"><pre class="code"><code>传输层： 数据段（报文）
+
+网络层： 数据包（报文分组）
+
+数据链路层：数据帧
+
+物理层： 比特（位）
+</code></pre></div><p>3、越是上层，越智能，可以识别所有当前层以下的数据，越贴近用户。越是下层，越傻瓜，越贴近硬件</p><p>4、数据发送时，数据从上层向下层传输，数据接收时，数据从下层向上层传输</p><p>5、数据不能跨层传递，每层之间通过逻辑的接口传递</p><p>6、物理层负责实际数据传递，其它层只是逻辑对应</p><p>7、OSI模型只是理论模型，不能对应实际协议或硬件</p><p>每层功能：</p><p>应用层<br> 为用户提供服务，给用户一个操作界面</p><p>表示层<br> 为数据提供表示、加密、压缩</p><p>会话层<br> 确定数据是否需要进行网络传递</p><p>传输层<br> 对报文进行分组、和组装</p><div class="highlight"><pre class="code"><code><span class="hljs-code">    提供传输协议的选择：   TCP（传输控制协议）：可靠的，面向连接的传输协议（可靠，准确）（慢）
+</span>
+<span class="hljs-code">                        UDP（用户数据报协议）：不可靠的，面向无连接的传输协议（不可靠）（快）
+</span>
+<span class="hljs-code">    端口封装
+</span>
+<span class="hljs-code">    差错校验
+</span></code></pre></div><p>网络层<br> IP地址编址</p><div class="highlight"><pre class="code"><code><span class="hljs-code">    路由选择
+</span></code></pre></div><p>数据链路层<br> MAC地址编址</p><p>物理层<br> 数据实际传输</p><div class="highlight"><pre class="code"><code><span class="hljs-code">    电气特性定义
+</span></code></pre></div><p>OSI模型和TCP/IP实际模型</p><p>TCP/IP四层模型</p><p>TCP/IP五层模型</p><p>OSI七层模型</p><p>数据封装结构</p><p>数据类型</p><p>应用层</p><p>应用层</p><p>应用层</p><p>上层数据</p><p>表示层</p><p>会话层</p><p>传输层</p><p>传输层</p><p>传输层</p><p>TCP头部|上层数据</p><p>数据段</p><p>网络层</p><p>网络层</p><p>网络层</p><p>IP头部TCP头部|上层数据</p><p>数据报</p><p>网络接口层</p><p>数据链路层</p><p>数据链路层</p><p>MAC头部|IP头部|TCP头部|上层数据</p><p>数据帧</p><p>物理层</p><p>物理层</p><p>┌┐_┌┐_┌┐_┌┐_┌┐_┌┐_┌┐</p><p>比特流</p><p>TCP/IP模型对应的协议：</p><div class="highlight"><pre class="code"><code>应用层：
+
+<span class="hljs-code">    HTTP：  （80）超文本传输协议       （网站访问web）（Apache、Nginx）（IIS）
+</span>
+<span class="hljs-code">    FTP:    （20、21）文件传输协议     （网络文件传输）
+</span>
+<span class="hljs-code">    TFTP：  （69）简单文件传输协议     （交换机和路由器系统重装）
+</span>
+<span class="hljs-code">    SMTP：  （25）简单邮件传输协议     （发信）
+</span>
+<span class="hljs-code">    POP3：  （110）邮局协议3代       （收信）
+</span>
+<span class="hljs-code">    SNMP：  （161）简单网络管理协议    （服务器监控）
+</span>
+<span class="hljs-code">    DNS：   （53）域名系统            （域名与IP解析）
+</span>
+传输层：
+
+<span class="hljs-code">    TCP：   （139、445）传输控制协议   （面向连接的、可靠的传输协议）
+</span>
+<span class="hljs-code">    UDP：   （137、138）用户数据报协议 （面向无连接的、不可靠的传输协议）
+</span>
+网络层协议：
+
+<span class="hljs-code">    IP：    网际协议
+</span>
+<span class="hljs-code">    ICMP：  互联网控制消息协议     （网络探测，ping命令协议）
+</span>
+<span class="hljs-code">    IGMP：  互联网组管理协议
+</span>
+<span class="hljs-code">    ARP：   地址解析协议          （IP  --à  MAC）
+</span>
+<span class="hljs-code">    RARP：  反向地址解析协议      （MAC  --à  IP）
+</span>
+数据链路层：
+
+物理层：
+
+<span class="hljs-code">    PPP：点对点协议
+</span>
+<span class="hljs-code">    PPPOE：点对点拨号协议
+</span></code></pre></div><p>注：理论上传输层硬件防火墙不能对数据进行</p><p>拆包过滤（数据包数据过滤），但是安装在应用层的</p><p>软防火墙可以进行数据包数据过滤。有很多攻击是</p><p>协议本身漏洞造成的，所以防火墙也没有用，造成</p><p>很多公司不用硬件防火墙。</p><p>TCP/IP模型与OSI模型的比较</p><p>共同点</p><div class="highlight"><pre class="code"><code><span class="hljs-comment">(1)</span>OSI参考模型和TCP/IP参考模型都采用了层次结构的概念。
+
+<span class="hljs-comment">(2)</span>都能够提供面向连接和无连接两种通信服务机制；
+</code></pre></div><p>不同点</p><div class="highlight"><pre class="code"><code><span class="hljs-comment">(1)</span>前者是七层模型，后者是四层结构
+
+<span class="hljs-comment">(2)</span>对可靠性要求不同（后者更高）
+
+<span class="hljs-comment">(3)</span> OSI模型是在协议开发前设计的, 具有通用性.TCP/IP是先有协议集然后建立模型, 不适用于非TCP/IP网络。
+
+<span class="hljs-comment">(4)</span>实际市场应用不同（OSI模型只是理论上的模型，并没有成熟的产品，而TCP/IP已经成为“实际上的国际标准”）
+</code></pre></div><p>网络通信</p><p>IP简介</p><p>对等网络通信：公有IP—公有IP，私有IP—私有IP</p><div class="highlight"><pre class="code"><code>网关：①首先是路由器   ②默认路由
+</code></pre></div><p>非对等网络通信：私有IP—公有IP</p><div class="highlight"><pre class="code"><code>网关：①首先是路由器   ②默认路由   ③NAT转换（网络地址转换，实际使用PAT）
+</code></pre></div><p>注：电脑通过网关IP连接到路由器。</p><p>网关：首先是路由器，或是拥有路由器功能的电脑，（跨网段通信）。</p><p>广播和泛洪是局域网查找IP的方法</p><p>对等网络通信中，IP地址永不变，MAC地址每经过一个路由，需要重新计算。</p><p>包头 PC-a S1 0【R1】1 0【R2】1 S1 PC-b</p><p>原始IP A A A A</p><p>目标IP B B B B</p><p>原始MAC B R11 R21 R21</p><p>目标MAC R10 R20 B B</p><p>注：PC-a通过配置的网关地址找到路由器R1</p><p>交换机环路会造成教室电脑一片一片的网不通（布线时给网线贴标签）</p><p>路由表查看：route print</p><p>MAC地址查看：arp -a</p><p>全网段广播255.255.255.255</p><p>单网段广播192.168.28.255</p><p>泛洪地址：FF-FF-FF-FF-FF-FF</p><p>CSMA/CD载波监听多路访问</p><p>IP协议：IP范围：232 = 42亿9千万多（如下）</p><div class="highlight"><pre class="code"><code><span class="hljs-number">00000000</span>.<span class="hljs-number">00000000</span>.<span class="hljs-number">00000000</span>.<span class="hljs-number">00000000</span>            <span class="hljs-number">0.0.0.0</span>
+
+<span class="hljs-number">11111111</span>.<span class="hljs-number">11111111</span>.<span class="hljs-number">11111111</span>.<span class="hljs-number">11111111</span>            <span class="hljs-number">255.255.255.255</span>
+</code></pre></div><p>1、IP地址分类</p><div class="highlight"><pre class="code"><code><span class="hljs-keyword">A</span>类：必须以<span class="hljs-number">0</span>开头
+
+    <span class="hljs-number">00000001</span>.<span class="hljs-number">00000000</span>.<span class="hljs-number">00000000</span>.<span class="hljs-number">00000000</span>            <span class="hljs-number">1.0.0.0</span>
+
+    <span class="hljs-number">01111111</span>.<span class="hljs-number">11111111</span>.<span class="hljs-number">11111111</span>.<span class="hljs-number">11111111</span>            <span class="hljs-number">126.255.255.255</span>
+
+        IP地址必须从<span class="hljs-number">1</span>开始                排除<span class="hljs-number">0.0.0.0</span> ——<span class="hljs-number">0.255.255.255</span>
+
+        <span class="hljs-number">127.0.0.1</span>       本地回环IP       排除<span class="hljs-number">127.0.0.2</span>——<span class="hljs-number">127.255.255.255</span>
+
+B类：必须以<span class="hljs-number">10</span>开头
+
+    <span class="hljs-number">10000000</span>.<span class="hljs-number">00000000</span>.<span class="hljs-number">00000000</span>.<span class="hljs-number">00000000</span>            <span class="hljs-number">128.0.0.0</span>
+
+    <span class="hljs-number">10111111</span>.<span class="hljs-number">11111111</span>.<span class="hljs-number">11111111</span>.<span class="hljs-number">11111111</span>            <span class="hljs-number">191.255.255.255</span>
+
+C类：必须<span class="hljs-number">110</span>开头
+
+    <span class="hljs-number">11000000</span>.<span class="hljs-number">00000000</span>.<span class="hljs-number">00000000</span>.<span class="hljs-number">00000000</span>            <span class="hljs-number">192.0.0.0</span>
+
+    <span class="hljs-number">11011111</span>.<span class="hljs-number">11111111</span>.<span class="hljs-number">11111111</span>.<span class="hljs-number">11111111</span>            <span class="hljs-number">223.255.255.255</span>
+
+D类：必须<span class="hljs-number">1110</span>开头（不允许使用，组播地址）
+
+    <span class="hljs-number">11100000</span>.<span class="hljs-number">00000000</span>.<span class="hljs-number">00000000</span>.<span class="hljs-number">00000000</span>            <span class="hljs-number">224.0.0.0</span>
+
+    <span class="hljs-number">11101111</span>.<span class="hljs-number">11111111</span>.<span class="hljs-number">11111111</span>.<span class="hljs-number">11111111</span>            <span class="hljs-number">239.255.255.255</span>
+
+E类：必须<span class="hljs-number">1111</span>开头（不允许使用，保留，<span class="hljs-number">255.255.255.255</span> 全网段广播）
+
+    <span class="hljs-number">11110000</span>.<span class="hljs-number">00000000</span>.<span class="hljs-number">00000000</span>.<span class="hljs-number">00000000</span>            <span class="hljs-number">240.0.0.0</span>
+
+    <span class="hljs-number">11111111</span>.<span class="hljs-number">11111111</span>.<span class="hljs-number">11111111</span>.<span class="hljs-number">11111111</span>            <span class="hljs-number">255.255.255.255</span>
+</code></pre></div><p>2、私有IP</p><div class="highlight"><pre class="code"><code><span class="hljs-number">10.0.0.0</span>    —  <span class="hljs-number">10</span>.<span class="hljs-number">255</span>.<span class="hljs-number">255</span>.<span class="hljs-number">255</span>
+
+<span class="hljs-number">172.16.0.0</span>  —  <span class="hljs-number">172</span>.<span class="hljs-number">31</span>.<span class="hljs-number">255</span>.<span class="hljs-number">255</span>
+
+<span class="hljs-number">192.168.0.0</span> —  <span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">255</span>.<span class="hljs-number">255</span>
+</code></pre></div><p>3、IP地址和主机位</p><div class="highlight"><pre class="code"><code>A类：前8位代表网络地址，后24位代表主机地址
+
+    网段数27<span class="hljs-string">-2</span>       主机数224<span class="hljs-string">-2</span>
+
+B类：前16位代表网络地址，后16位代表主机地址
+
+    网段数214        主机数216<span class="hljs-string">-2</span>
+
+C类：前24位代表网络地址，后8位代表主机地址
+
+    网段数221        主机数28<span class="hljs-string">-2</span>
+
+    分类     网络位       主机位       网段数       主机数
+
+    A类     前8位       后24位      27<span class="hljs-string">-2</span>        224<span class="hljs-string">-2</span>
+
+    B类     前16位      后16位      214          216<span class="hljs-string">-2</span>
+
+    C类     前24位      后8位       221          28<span class="hljs-string">-2</span>                           
+</code></pre></div><p>子网掩码简介</p><div class="highlight"><pre class="code"><code>划分子网的目的是为了节省公有<span class="hljs-built_in">IP</span>，降低<span class="hljs-built_in">IP</span>使用费用。
+</code></pre></div><p>A类255.0.0.0 B类255.255.0.0 C类255.255.255.0</p><p>IP地址中和掩码1对应的IP地址位是网络位</p><p>IP地址中和掩码0对应的IP地址位是主机位</p><p>注：①IP要和掩码同时出现，否则没有意义</p><div class="highlight"><pre class="code"><code>②子网掩码中的1必须是连续的，否则没有意义
+
+③子网掩码中只要1是连续的，就是合理子网掩码
+</code></pre></div><p>常规写法：A类1.0.0.0 /8 B类128.0.0.0 /16 C类192.0.0.0 /24 斜杠后面数字代表子网掩码中1的数量</p><p>子网划分越多，浪费的IP地址越多。</p><p>计算公式：</p><div class="highlight"><pre class="code"><code>网络地址：把<span class="hljs-built_in">IP</span>地址和子网掩码的二进制，按位进行逻辑与运算
+
+广播地址：有效子网掩码中，有几个<span class="hljs-number">0</span>，就把<span class="hljs-built_in">IP</span>地址中后几位换成<span class="hljs-number">1</span>
+
+子网数：有效子网掩码中，有几个<span class="hljs-number">1</span>，子网数就是<span class="hljs-number">2</span>的几次方
+
+主机数：有效子网掩码中，有几个<span class="hljs-number">0</span>，主机数就是<span class="hljs-number">2</span>的几次方减<span class="hljs-number">2</span>
+</code></pre></div><p>通用原则：在能实现功能的情况下，用到的技术越简单，出问题的机率就越小。</p><p>私有IP不需要做子网划分，（因为私有IP不要钱，随便用就行）</p><p>VLSM：可变长子网掩码划分</p><p>逻辑运算：</p><p>与 0与0=0，1与0=1，0与1=1，1与1=1（都为1时才为1，有0则为0）</p><p>或 0或0=1，1或0=0，0或1=0，1或1=1（都为0时才为0，有1则为1）</p><p>例：</p><p>192.168.1.215 11000000.10101000.00000001.11010111</p><p>255.255.255.252 11111111.11111111.11111111.11111100</p><p>网络地址： 11000000.10101000.00000001.11010100 192.168.1.212</p><p>广播地址： 11000000.10101000.00000001.11010111 192.168.1.215</p><p>子网数： 26=64</p><p>主机数： 22-2=2</p><p>说明：该IP地址是广播地址，不能正常使用，且只有1个IP可用，因为主机数中还有一个做为网关地址</p><p>192.168.1.0 11000000.10101000.00000001.00000000</p><p>255.255.254.0 11111111.11111111.11111110.00000000</p><p>网络地址： 11000000.10101000.00000000.00000000 192.168.0.0</p><p>广播地址： 11000000.10101000.00000001.11111111 192.168.1.255</p><p>子网数： 27=128</p><p>主机数： 29-2=510</p><p>说明：只要IP有效，子网掩码合理，那么只需要按公式计算即可。</p><p>C类IP子网掩码划分：</p><div class="highlight"><pre class="code"><code>子网掩码             二进制位数       子网数           主机数           备注
+
+<span class="hljs-number">255.255.255.0</span>           /<span class="hljs-number">24</span>             <span class="hljs-number">1</span>           <span class="hljs-number">256</span>-<span class="hljs-number">2</span>          
+
+<span class="hljs-number">255.255.255.128</span>         /<span class="hljs-number">25</span>             <span class="hljs-number">2</span>           <span class="hljs-number">128</span>-<span class="hljs-number">2</span>          
+
+<span class="hljs-number">255.255.255.192</span>         /<span class="hljs-number">26</span>             <span class="hljs-number">4</span>           <span class="hljs-number">64</span>-<span class="hljs-number">2</span>           
+
+<span class="hljs-number">255.255.255.224</span>         /<span class="hljs-number">27</span>             <span class="hljs-number">8</span>           <span class="hljs-number">32</span>-<span class="hljs-number">2</span>           
+
+<span class="hljs-number">255.255.255.240</span>         /<span class="hljs-number">28</span>             <span class="hljs-number">18</span>          <span class="hljs-number">16</span>-<span class="hljs-number">2</span>           
+
+<span class="hljs-number">255.255.255.248</span>         /<span class="hljs-number">29</span>             <span class="hljs-number">32</span>          <span class="hljs-number">8</span>-<span class="hljs-number">2</span>        
+
+<span class="hljs-number">255.255.255.252</span>         /<span class="hljs-number">30</span>             <span class="hljs-number">64</span>          <span class="hljs-number">4</span>-<span class="hljs-number">2</span>        
+
+<span class="hljs-number">255.255.255.254</span>         /<span class="hljs-number">31</span>             <span class="hljs-number">128</span>         <span class="hljs-number">2</span>-<span class="hljs-number">2</span>         特殊情况下也可以使用
+</code></pre></div><p>TCP/UDP 协议</p><p>TCP 包头：20-60 字节，可选项 40 字节，序列号 32 位，确认号 32 位，标志 6 位（ACK、SYN 等）</p><p>SYN：发起信息包 ACK：回复信息包</p><p>TCP三次握手机制</p><p>SYN：发起连接包 ACK：回复连接包</p><p>第一次握手：建立连接时，客户端发送 syn 包（syn=j）到服务器，并进入 SYN_SENT 状态，等待服务器确认；</p><p>第二次握手： 服务器收到 syn 包， 必须确认客户的 SYN （ack=j+1） ， 同时自己也发送一个 SYN 包 （syn=k），</p><p>即 SYN+ACK 包，此时服务器进入 SYN_RECV 状态；</p><p>第三次握手：客户端收到服务器的 SYN+ACK 包，向服务器发送确认包 ACK(ack=k+1） ，此包发送完毕，客户端和服务器进入 ESTABLISHED（TCP 连接成功）状态，完成三次握手。</p><p>TCP四次挥手机制</p><p>第一次挥手：Client 发送一个 FIN，用来关闭 Client 到 Server 的数据传送，Client 进入 FIN_WAIT_1 状态</p><p>第二次挥手：Server 收到 FIN 后，发送一个 ACK 给 Client，确认序号为收到序号+1（与 SYN 相同，一个FIN 占用一个序号） ，Server 进入 CLOSE_WAIT 状态</p><p>第三次挥手：Server 发送一个 FIN，用来关闭 Server 到 Client 的数据传送，Server 进入 LAST_ACK 状态</p><p>第四次挥手：Client 收到 FIN 后，Client 进入 TIME_WAIT 状态，接着发送一个 ACK 给 Server，确认序号为收到序号+1，Server 进入 CLOSED 状态，完成四次挥手</p><p>针对 TCP 的三次握手，会出现以下两种攻击方式;</p><p>攻击手段： SYNDOS 拒绝服务攻击</p><div class="highlight"><pre class="code"><code><span class="hljs-code">        SYNDDOS     分布式拒绝服务攻击
+</span></code></pre></div><p>防御措施：①购买临时带宽 ②用2个IP，被攻击时切换IP。</p><p>端口：计算机服务对外访问的接口</p><p>telnet远程管理服务（端口23）</p><div class="highlight"><pre class="code"><code>注：服务器端禁止使用（明文无加密，不安全，23端口不能开）客户端可正常使用
+</code></pre></div><p>netsat -an（查看本机开启端口）</p><div class="highlight"><pre class="code"><code><span class="hljs-symbol">telnet</span>  对方<span class="hljs-built_in">IP</span> 端口（查看对方端口是否打开），退出：ctrl+]，输入quit
+</code></pre></div><p>Liunx，交换机，路由器都使用SSH服务进行远程管理（端口22）（加密的服务，安全）</p><p>Windows使用终端服务管理（端口3389）</p><p>SSL：安全套接层（用于https加密）</p><p>NFS：Linux专用文件传输协议 FTP：不限平台</p><p>网线接头类别</p><p>交叉线：一头A线序，一头B线序，连接相同设备</p><p>直通线：两头B线序，连接不同设备</p><p>全反线：两头相反，用于路由器，交换机本地管理。</p><p>以太网：工作在数据链路层的网络</p><p>VLAN：虚拟局域网（实现交换机分割广播域）</p><p>VLAN间路由：实现全网段分割广播域并实现通信</p><p>数据链路层在定义是分为LLC，MAC两块，但实际并没有使用</p><p>双绞线</p><p>双绞线的连接规范</p><div class="highlight"><pre class="code"><code><span class="hljs-attribute">EIA</span>/TIA <span class="hljs-number">568</span>A和<span class="hljs-number">568</span>B
+
+    <span class="hljs-attribute">T568B</span>：白橙、橙、白绿、蓝、白蓝、绿、白棕、棕
+
+    <span class="hljs-attribute">T568A</span>：白绿、绿、白橙、蓝、白蓝、橙、白棕、棕
+</code></pre></div><p>双绞线标准</p><div class="highlight"><pre class="code"><code>EIA/TIA-568——“商用建筑物电信布线标准”
+
+Cat 5
+
+<span class="hljs-code">    主要用于100Base-T和10Base-T网络
+</span>
+Cat 5e
+
+<span class="hljs-code">    衰减更小，串扰更少，性能优于5类线
+</span>
+Cat 6
+
+<span class="hljs-code">    传输频率为200MHz
+</span>
+Cat 7
+
+<span class="hljs-code">    传输频率为600MHz
+</span></code></pre></div><p>双绞线分类</p><div class="highlight"><pre class="code"><code>屏蔽双绞线
+
+<span class="hljs-code">    铜线外包裹一层金属网膜
+</span>
+<span class="hljs-code">    用于电磁环境非常复杂的工业环境中
+</span>
+非屏蔽双绞线
+
+<span class="hljs-code">    用于电磁干扰相对较弱的环境
+</span></code></pre></div><p>光纤</p><p>光纤分类</p><p>分类</p><p>单模光纤</p><p>多模光纤</p><p>传输特性</p><p>用于高速度、长距离</p><p>用于低速度、短距离</p><p>成本</p><p>成本高</p><p>成本低</p><p>安装</p><p>端接较难</p><p>端接较易</p><p>物理特性</p><p>窄芯线，需要激光源</p><p>宽芯线，聚光好，光源可采用激光或发光二极管</p><p>损耗</p><p>耗散极小，高效</p><p>耗散大，低效</p><p>光纤接口</p><div class="highlight"><pre class="code"><code>光纤接口分类
+
+<span class="hljs-code">    FC 圆形带螺纹光纤接头
+</span>
+<span class="hljs-code">    ST 卡接式圆形光纤接头
+</span>
+<span class="hljs-code">    SC 方型光纤接头
+</span>
+<span class="hljs-code">    LC 窄体方形光纤接头
+</span>
+<span class="hljs-code">    MT-RJ 收发一体的方型光纤接头
+</span></code></pre></div><p>补充</p><div class="highlight"><pre class="code"><code>1、一般情况下为向光信号传输系统的模型，以此说明光纤需要成对使用，一根用于收，一根用于发。单纤光收发器可以实现在一根光纤上收发信号，不再需要使用一对光纤。单纤收发器采用光复用技术，使光的发射和接收在同一根光纤中完成，节省了光纤开销，主要用于光纤资源紧张、租用别人的光纤或两芯光纤有一根出现故障不能正常工作的情况下
+
+2、光缆按铺设方式可分为：自承重架空光缆、管道光缆、铠装地埋光缆和海底光缆。不同的光缆其结构不同。
+</code></pre></div><p>多模光纤</p><p>单模光纤</p><div id="reword-out"><div id="reward-btn"> 打赏</div></div></div><div class="declare"><ul class="post-copyright"><li><i class="ri-copyright-line"></i> <strong>版权声明：</strong> 本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！</li></ul></div><footer class="article-footer"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul></footer></div><nav class="article-nav"> <a href="/2019/04/%E4%BD%BF%E7%94%A8hexo%E6%96%B0%E5%BB%BA%E6%96%87%E7%AB%A0/index.html" class="article-nav-link"><strong class="article-nav-caption">上一篇</strong><div class="article-nav-title"> 使用hexo新建文章</div></a></nav><script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script><div id="twikoo" class="twikoo"></div><script>twikoo.init({envId:""})</script></article></section><footer class="footer"><div class="outer"><ul><li> Copyrights &copy; 2018-2024<i class="ri-heart-fill heart_icon"></i> Outsrkem</li></ul><ul><li></li></ul><ul><li><span><span><i class="ri-user-3-fill"></i> 访问人数:<span id="busuanzi_value_site_uv"></span></span> <span class="division">|</span><span><i class="ri-eye-fill"></i> 浏览次数:<span id="busuanzi_value_page_pv"></span></span></span></li></ul><ul></ul><ul></ul><ul><li><script type="text/javascript" src="https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914"></script></li></ul></div></footer></main><div class="float_btns"><div class="totop" id="totop"><i class="ri-arrow-up-line"></i></div><div class="todark" id="todark"><i class="ri-moon-line"></i></div></div><aside class="sidebar on"> <button class="navbar-toggle"></button><nav class="navbar"><div class="logo"> <a href="/"><img src="/images/ayer-side.svg" alt="Outsrkem"></a></div><ul class="nav nav-main"><li class="nav-item"> <a class="nav-item-link" href="/index.html">主页</a></li><li class="nav-item"> <a class="nav-item-link" href="/archives/index.html">归档</a></li><li class="nav-item"> <a class="nav-item-link" href="/categories/index.html">分类</a></li><li class="nav-item"> <a class="nav-item-link" href="/tags/index.html">标签</a></li><li class="nav-item"> <a class="nav-item-link" href="/friends/index.html">友链</a></li><li class="nav-item"> <a class="nav-item-link" href="/about/index.html">关于</a></li></ul></nav><nav class="navbar navbar-bottom"><ul class="nav"><li class="nav-item"><a class="nav-item-link nav-item-search" title="搜索"><i class="ri-search-line"></i></a></li></ul></nav><div class="search-form-wrap"><div class="local-search local-search-plugin"> <input type="search" id="local-search-input" class="local-search-input" placeholder="Search..."><div id="local-search-result" class="local-search-result"></div></div></div></aside><div id="mask"></div> <div id="reward"><span class="close"><i class="ri-close-line"></i></span><p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p><div class="reward-box"><div class="reward-item"> <img class="reward-img" src="/images/alipay.jpg"> <span class="reward-type">支付宝</span></div><div class="reward-item"> <img class="reward-img" src="/images/wechat.jpg"> <span class="reward-type">微信</span></div></div></div><script src="/js/jquery-3.6.0.min.js"></script><script src="/js/lazyload.min.js"></script><script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"><script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script><script src="/dist/main.js"></script><div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div> <button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div> <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div><link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css"><script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script><script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script><script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script><script src="/js/busuanzi-2.3.pure.min.js"></script><link rel="stylesheet" href="/css/clipboard.css"><script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script><script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script><script>window.mermaid&&mermaid.initialize({theme:"forest"})</script></div></body>

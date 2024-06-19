@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>如何使用yum来下载RPM包而不进行安装 | Outsrkem</title><meta name="generator" content="hexo-theme-ayer"><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/dist/main.css"><link rel="stylesheet" href="/css/fonts/remixicon.css"><link rel="stylesheet" href="/css/custom.css"><script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script><script src="https://cdn.staticfile.org/mermaid/8.14.0/mermaid.min.js"></script><style>.swal2-styled.swal2-confirm{font-size:1.6rem}</style></head></html><body><div id="app"><main class="content on"><section class="outer"><article id="post-如何使用yum来下载RPM包而不进行安装" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal><div class="article-inner"><header class="article-header"><h1 class="article-title sea-center" style="border-left:0" itemprop="name"> 如何使用yum来下载RPM包而不进行安装</h1></header><div class="article-meta"> <a href="/2021/05/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8yum%E6%9D%A5%E4%B8%8B%E8%BD%BDRPM%E5%8C%85%E8%80%8C%E4%B8%8D%E8%BF%9B%E8%A1%8C%E5%AE%89%E8%A3%85/index.html" class="article-date"><time datetime="2021-05-23T13:40:42.000Z" itemprop="datePublished">2021-05-23 21:40:42 +08:00</time></a><div class="article-category"> <a class="article-category-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></div><div class="word_count"><span class="post-time"><span class="post-meta-item-icon"><i class="ri-quill-pen-line"></i> <span class="post-meta-item-text">字数统计:</span> <span class="post-count">581</span></span></span> <span class="post-time">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="ri-book-open-line"></i> <span class="post-meta-item-text">阅读时长≈</span> <span class="post-count">2 分钟</span></span></span></div></div><div class="tocbot"></div><div class="article-entry" itemprop="articleBody"><h2 id="如何使用yum来下载rpm包而不进行安装">如何使用yum来下载RPM包而不进行安装</h2><p>yum是基于Red Hat的系统(如CentOS、Fedora、RHEl)上的默认包管理器。使用yum，你可以安装或者更新一个RPM包，并且他会自动解决包依赖关系。但是如果你只想将一个RPM包下载到你的系统上该怎么办呢? 例如，你可能想要获取一些RPM包在以后使用，或者将他们安装在另外的机器上。</p><h2 id="下载">下载</h2><h3 id="方法一:yum">方法一:yum</h3><p>yum命令本身就可以用来下载一个RPM包，标准的yum命令提供了–downloadonly(只下载)的选项来达到这个目的。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install --downloadonly &lt;package-name&gt; </span><br></pre></td></tr></table></figure><p>默认情况下，一个下载的RPM包会保存在下面的目录中:</p><p>/var/cache/yum/x86_64/[centos/fedora-version]/[repository]/packages</p><p>以上的[repository]表示下载包的来源仓库的名称(例如：base、fedora、updates)</p><p>如果你想要将一个包下载到一个指定的目录(如/tmp)：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install --downloadonly --downloaddir=/tmp/yumpackage &lt;package-name&gt; </span><br></pre></td></tr></table></figure><p>注意，如果下载的包包含了任何没有满足的依赖关系，yum将会把所有的依赖关系包下载，但是都不会被安装。</p><p>另外一个重要的事情是，在CentOS/RHEL 6或更早期的版本中，你需要安装一个单独yum插件(名称为 yum-plugin-downloadonly)才能使用–downloadonly命令选项：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install yum-plugin-downloadonly</span><br></pre></td></tr></table></figure><p>如果没有该插件，你会在使用yum时得到以下错误：</p><p>Command line error: no such option: --downloadonl</p><h3 id="方法二:-yumdownloader">方法二: Yumdownloader</h3><p>另外一个下载RPM包的方法就是通过一个专门的包下载工具–yumdownloader。 这个工具是yum工具包(包含了用来进行yum包管理的帮助工具套件)的子集。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install yum-utils </span><br></pre></td></tr></table></figure><p>下载一个RPM包：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yumdownloader &lt;package-name&gt;</span><br></pre></td></tr></table></figure><p>下载的包会被保存在当前目录中。你需要使用root权限，因为yumdownloader会在下载过程中更新包索引文件。与yum命令不同的是，任何依赖包不会被下载。</p><p>下载lsof示例：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yumdownloader lsof --resolve --destdir=/data/mydepot/　　#resolve下载依赖</span><br></pre></td></tr></table></figure><h2 id="安装">安装</h2><p>上面我们下载了rpm软件包，安装的时候可以使用如下命令，这种方式可以解决依赖问题并自动安装。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum localinstall /tmp/yumpackage/&lt;package-name&gt;.rpm </span><br></pre></td></tr></table></figure><div id="reword-out"><div id="reward-btn"> 打赏</div></div></div><div class="declare"><ul class="post-copyright"><li><i class="ri-copyright-line"></i> <strong>版权声明：</strong> 本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！</li></ul></div><footer class="article-footer"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul></footer></div><nav class="article-nav"> <a href="/2021/05/nginx%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE/index.html" class="article-nav-link"><strong class="article-nav-caption">上一篇</strong><div class="article-nav-title"> nginx安全配置</div></a> <a href="/2021/05/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html" class="article-nav-link"><strong class="article-nav-caption">下一篇</strong><div class="article-nav-title">常用命令</div></a></nav><script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script><div id="twikoo" class="twikoo"></div><script>twikoo.init({envId:""})</script></article></section><footer class="footer"><div class="outer"><ul><li> Copyrights &copy; 2018-2024<i class="ri-heart-fill heart_icon"></i> Outsrkem</li></ul><ul><li></li></ul><ul><li><span><span><i class="ri-user-3-fill"></i> 访问人数:<span id="busuanzi_value_site_uv"></span></span> <span class="division">|</span><span><i class="ri-eye-fill"></i> 浏览次数:<span id="busuanzi_value_page_pv"></span></span></span></li></ul><ul></ul><ul></ul><ul><li><script type="text/javascript" src="https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914"></script></li></ul></div></footer></main><div class="float_btns"><div class="totop" id="totop"><i class="ri-arrow-up-line"></i></div><div class="todark" id="todark"><i class="ri-moon-line"></i></div></div><aside class="sidebar on"> <button class="navbar-toggle"></button><nav class="navbar"><div class="logo"> <a href="/"><img src="/images/ayer-side.svg" alt="Outsrkem"></a></div><ul class="nav nav-main"><li class="nav-item"> <a class="nav-item-link" href="/index.html">主页</a></li><li class="nav-item"> <a class="nav-item-link" href="/archives/index.html">归档</a></li><li class="nav-item"> <a class="nav-item-link" href="/categories/index.html">分类</a></li><li class="nav-item"> <a class="nav-item-link" href="/tags/index.html">标签</a></li><li class="nav-item"> <a class="nav-item-link" href="/friends/index.html">友链</a></li><li class="nav-item"> <a class="nav-item-link" href="/about/index.html">关于</a></li></ul></nav><nav class="navbar navbar-bottom"><ul class="nav"><li class="nav-item"><a class="nav-item-link nav-item-search" title="搜索"><i class="ri-search-line"></i></a></li></ul></nav><div class="search-form-wrap"><div class="local-search local-search-plugin"> <input type="search" id="local-search-input" class="local-search-input" placeholder="Search..."><div id="local-search-result" class="local-search-result"></div></div></div></aside><div id="mask"></div> <div id="reward"><span class="close"><i class="ri-close-line"></i></span><p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p><div class="reward-box"><div class="reward-item"> <img class="reward-img" src="/images/alipay.jpg"> <span class="reward-type">支付宝</span></div><div class="reward-item"> <img class="reward-img" src="/images/wechat.jpg"> <span class="reward-type">微信</span></div></div></div><script src="/js/jquery-3.6.0.min.js"></script><script src="/js/lazyload.min.js"></script><script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"><script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script><script src="/dist/main.js"></script><div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div> <button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div> <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div><link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css"><script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script><script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script><script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script><script src="/js/busuanzi-2.3.pure.min.js"></script><link rel="stylesheet" href="/css/clipboard.css"><script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script><script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script><script>window.mermaid&&mermaid.initialize({theme:"forest"})</script></div></body>

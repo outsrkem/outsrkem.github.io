@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>TCP血案 | Outsrkem</title><meta name="generator" content="hexo-theme-ayer"><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/dist/main.css"><link rel="stylesheet" href="/css/fonts/remixicon.css"><link rel="stylesheet" href="/css/custom.css"><script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script><script src="https://cdn.staticfile.org/mermaid/8.14.0/mermaid.min.js"></script><style>.swal2-styled.swal2-confirm{font-size:1.6rem}</style></head></html><body><div id="app"><main class="content on"><section class="outer"><article id="post-TCP血案" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal><div class="article-inner"><header class="article-header"><h1 class="article-title sea-center" style="border-left:0" itemprop="name"> TCP血案</h1></header><div class="article-meta"> <a href="/2019/08/TCP%E8%A1%80%E6%A1%88/index.html" class="article-date"><time datetime="2019-08-23T13:40:42.000Z" itemprop="datePublished">2019-08-23 21:40:42 +08:00</time></a><div class="article-category"> <a class="article-category-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></div><div class="word_count"><span class="post-time"><span class="post-meta-item-icon"><i class="ri-quill-pen-line"></i> <span class="post-meta-item-text">字数统计:</span> <span class="post-count">1k</span></span></span> <span class="post-time">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="ri-book-open-line"></i> <span class="post-meta-item-text">阅读时长≈</span> <span class="post-count">3 分钟</span></span></span></div></div><div class="tocbot"></div><div class="article-entry" itemprop="articleBody"><h2 id="tcp血案">TCP血案</h2><p>传输控制协议（TCP，Transmission Control Protocol）是一种面向连接的、可靠的、基于字节流的传输层通信协议，由IETF的RFC 793 [1] 定义。<br> TCP旨在适应支持多网络应用的分层协议层次结构。 连接到不同但互连的计算机通信网络的主计算机中的成对进程之间依靠TCP提供可靠的通信服务。TCP假设它可以从较低级别的协议获得简单的，可能不可靠的数据报服务。 原则上，TCP应该能够在从硬线连接到分组交换或电路交换网络的各种通信系统之上操作。<br> 在拥塞控制上，采用广受好评的TCP拥塞控制算法（也称AIMD算法）。该算法主要包括四个主要部分：<br> （1）慢启动<br> 每当建立一个TCP连接时或一个TCP连接发生超时重传后，该连接便进入慢启动阶段。进入慢启动后，TCP实体将拥塞窗口的大小初始化为一个报文段，即：cwnd=1。此后，每收到一个报文段的确认（ACK），cwnd值加1，即拥塞窗口按指数增加。当cwnd值超过慢启动阐值（sshterhs）或发生报文段丢失重传时，慢启动阶段结束。前者进入拥塞避免阶段，后者重新进入慢启动阶段。<br> （2）拥塞避免<br> 在慢启阶段，当cwnd值超过慢启动阐值（ssthresh）后，慢启动过程结束，TCP连接进入拥塞避免阶段。在拥塞避免阶段，每一次发送的cwnd个报文段被完全确认后，才将cwnd值加1。在此阶段，cwnd值线性增加。<br> （3）快速重传<br> 快速重传是对超时重传的改进。当源端收到对同一个报文的三个重复确认时，就确定一个报文段已经丢失，因此立刻重传丢失的报文段，而不必等到重传定时器（RTO）超时。以此减少不必要的等待时间。<br> （4）快速恢复<br> 快速恢复是对丢失恢复机制的改进。在快速重传之后，不经过慢启动过程而直接进入拥塞避免阶段。每当快速重传后，置sshtesrh=cwnd/2、ewnd=ssthresh+3。此后，每收到一个重复确认，将cwnd值加1，直至收到对丢失报文段和其后若干报文段的累积确认后，置cwnd=ssthesrh，进入拥塞避免阶段。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">TCP三次握手的过程如下：</span><br><span class="line">客户端发送SYN（SEQ=x）报文给服务器端，进入SYN_SEND状态。</span><br><span class="line">服务器端收到SYN报文，回应一个SYN （SEQ=y）ACK（ACK=x+1）报文，进入SYN_RECV状态。</span><br><span class="line">客户端收到服务器端的SYN报文，回应一个ACK（ACK=y+1）报文，进入Established状态。</span><br><span class="line">三次握手完成，TCP客户端和服务器端成功地建立连接，可以开始传输数据了。</span><br></pre></td></tr></table></figure><p><img src="https://gss2.bdstatic.com/9fo3dSag_xI4khGkpoWK1HF6hhy/baike/s%3D220/sign=aaa66b7aad4bd11300cdb0306aafa488/29381f30e924b899cb32f6316e061d950a7bf6a9.jpg" alt=""></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">连接终止</span><br><span class="line">建立一个连接需要三次握手，而终止一个连接要经过四次握手，这是由TCP的半关闭（half-close）造成的。 </span><br><span class="line">（1） 某个应用进程首先调用close，称该端执行“主动关闭”（activeclose）。该端的TCP于是发送一个FIN分节，表示数据发送完毕。</span><br><span class="line">（2） 接收到这个FIN的对端执行 “被动关闭”（passive close），这个FIN由TCP确认。注意：FIN的接收也作为一个文件结束符（end-of-file）传递给接收端应用进程，放在已排队等候该应用进程接收的任何其他数据之后，因为，FIN的接收意味着接收端应用进程在相应连接上再无额外数据可接收。</span><br><span class="line">（3） 一段时间后，接收到这个文件结束符的应用进程将调用close关闭它的套接字。这导致它的TCP也发送一个FIN。</span><br><span class="line">（4） 接收这个最终FIN的原发送端TCP（即执行主动关闭的那一端）确认这个FIN。既然每个方向都需要一个FIN和一个ACK，因此通常需要4个分节。</span><br></pre></td></tr></table></figure><p><img src="https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/s%3D220/sign=b7dea42e8a82b90139adc431438da97e/a1ec08fa513d269721cc875455fbb2fb4316d898.jpg" alt=""></p><div id="reword-out"><div id="reward-btn"> 打赏</div></div></div><div class="declare"><ul class="post-copyright"><li><i class="ri-copyright-line"></i> <strong>版权声明：</strong> 本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！</li></ul></div><footer class="article-footer"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul></footer></div><nav class="article-nav"> <a href="/2019/09/CentOS%E9%85%8D%E7%BD%AE%E7%BD%91%E5%8D%A1%E5%AD%90%E6%8E%A5%E5%8F%A3/index.html" class="article-nav-link"><strong class="article-nav-caption">上一篇</strong><div class="article-nav-title"> CentOS配置网卡子接口</div></a> <a href="/2019/06/%E4%B8%8D%E5%90%8C%E7%9A%84%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F/index.html" class="article-nav-link"><strong class="article-nav-caption">下一篇</strong><div class="article-nav-title">不同的时间格式</div></a></nav><script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script><div id="twikoo" class="twikoo"></div><script>twikoo.init({envId:""})</script></article></section><footer class="footer"><div class="outer"><ul><li> Copyrights &copy; 2018-2024<i class="ri-heart-fill heart_icon"></i> Outsrkem</li></ul><ul><li></li></ul><ul><li><span><span><i class="ri-user-3-fill"></i> 访问人数:<span id="busuanzi_value_site_uv"></span></span> <span class="division">|</span><span><i class="ri-eye-fill"></i> 浏览次数:<span id="busuanzi_value_page_pv"></span></span></span></li></ul><ul></ul><ul></ul><ul><li><script type="text/javascript" src="https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914"></script></li></ul></div></footer></main><div class="float_btns"><div class="totop" id="totop"><i class="ri-arrow-up-line"></i></div><div class="todark" id="todark"><i class="ri-moon-line"></i></div></div><aside class="sidebar on"> <button class="navbar-toggle"></button><nav class="navbar"><div class="logo"> <a href="/"><img src="/images/ayer-side.svg" alt="Outsrkem"></a></div><ul class="nav nav-main"><li class="nav-item"> <a class="nav-item-link" href="/index.html">主页</a></li><li class="nav-item"> <a class="nav-item-link" href="/archives/index.html">归档</a></li><li class="nav-item"> <a class="nav-item-link" href="/categories/index.html">分类</a></li><li class="nav-item"> <a class="nav-item-link" href="/tags/index.html">标签</a></li><li class="nav-item"> <a class="nav-item-link" href="/friends/index.html">友链</a></li><li class="nav-item"> <a class="nav-item-link" href="/about/index.html">关于</a></li></ul></nav><nav class="navbar navbar-bottom"><ul class="nav"><li class="nav-item"><a class="nav-item-link nav-item-search" title="搜索"><i class="ri-search-line"></i></a></li></ul></nav><div class="search-form-wrap"><div class="local-search local-search-plugin"> <input type="search" id="local-search-input" class="local-search-input" placeholder="Search..."><div id="local-search-result" class="local-search-result"></div></div></div></aside><div id="mask"></div> <div id="reward"><span class="close"><i class="ri-close-line"></i></span><p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p><div class="reward-box"><div class="reward-item"> <img class="reward-img" src="/images/alipay.jpg"> <span class="reward-type">支付宝</span></div><div class="reward-item"> <img class="reward-img" src="/images/wechat.jpg"> <span class="reward-type">微信</span></div></div></div><script src="/js/jquery-3.6.0.min.js"></script><script src="/js/lazyload.min.js"></script><script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"><script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script><script src="/dist/main.js"></script><div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div> <button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div> <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div><link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css"><script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script><script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script><script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script><script src="/js/busuanzi-2.3.pure.min.js"></script><link rel="stylesheet" href="/css/clipboard.css"><script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script><script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script><script>window.mermaid&&mermaid.initialize({theme:"forest"})</script></div></body>

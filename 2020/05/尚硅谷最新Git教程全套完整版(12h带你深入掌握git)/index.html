@@ -1,0 +1,297 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>尚硅谷最新Git教程全套完整版(12h带你深入掌握git) | Outsrkem</title><meta name="generator" content="hexo-theme-ayer"><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/dist/main.css"><link rel="stylesheet" href="/css/fonts/remixicon.css"><link rel="stylesheet" href="/css/custom.css"><script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script><script src="https://cdn.staticfile.org/mermaid/8.14.0/mermaid.min.js"></script><style>.swal2-styled.swal2-confirm{font-size:1.6rem}</style></head></html><body><div id="app"><main class="content on"><section class="outer"><article id="post-尚硅谷最新Git教程全套完整版(12h带你深入掌握git)" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal><div class="article-inner"><header class="article-header"><h1 class="article-title sea-center" style="border-left:0" itemprop="name"> 尚硅谷最新Git教程全套完整版(12h带你深入掌握git)</h1></header><div class="article-meta"> <a href="/2020/05/%E5%B0%9A%E7%A1%85%E8%B0%B7%E6%9C%80%E6%96%B0Git%E6%95%99%E7%A8%8B%E5%85%A8%E5%A5%97%E5%AE%8C%E6%95%B4%E7%89%88(12h%E5%B8%A6%E4%BD%A0%E6%B7%B1%E5%85%A5%E6%8E%8C%E6%8F%A1git)/index.html" class="article-date"><time datetime="2020-05-23T13:40:42.000Z" itemprop="datePublished">2020-05-23 21:40:42 +08:00</time></a><div class="article-category"> <a class="article-category-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></div><div class="word_count"><span class="post-time"><span class="post-meta-item-icon"><i class="ri-quill-pen-line"></i> <span class="post-meta-item-text">字数统计:</span> <span class="post-count">3.3k</span></span></span> <span class="post-time">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="ri-book-open-line"></i> <span class="post-meta-item-text">阅读时长≈</span> <span class="post-count">12 分钟</span></span></span></div></div><div class="tocbot"></div><div class="article-entry" itemprop="articleBody"><h2 id=""></h2><h3 id="git基础概念">git基础概念</h3><div class="highlight"><pre class="code"><code><span class="hljs-bullet">* </span>客户端并不只是提取最新版本的文件快照，而是把代码仓库完整的镜像下来
+<span class="hljs-bullet">* </span>git核心本质上是一个键值对数据库。可以向该数据库插入任意类型的内容，
+<span class="hljs-code">  他会返回一个键值，通过该值可以在任意时刻再次检索该内容。</span>
+</code></pre></div><h3 id="区域">区域</h3><div class="highlight"><pre class="code"><code><span class="hljs-bullet">* </span>工作区 （沙箱环境 git不会管理 随便更改操作）
+
+<span class="hljs-bullet">* </span>暂存区  （记录文件的操作）
+
+<span class="hljs-bullet">* </span>版本库   （最终的代码实现提交到这里 .git目录就是版本库）
+</code></pre></div><h3 id="git目录下文件的介绍">.git目录下文件的介绍</h3><div class="highlight"><pre class="code"><code><span class="hljs-bullet">* </span>hooks (钩子函数的一个库 类似于回调函数)
+<span class="hljs-bullet">* </span>info (包含一个全局性的排除文件)
+<span class="hljs-bullet">* </span>objects (目录存储所有数据内容)
+<span class="hljs-bullet">* </span>refs (目录存储指向数据（分支）的提交对象的指针)
+<span class="hljs-bullet">* </span>config (文件包含项目特有的配置选项)
+<span class="hljs-bullet">* </span>description (显示对仓库的描述信息)
+<span class="hljs-bullet">* </span>HEAD (文件目前被检出的分支)
+<span class="hljs-bullet">* </span>logs (日志信息)
+<span class="hljs-bullet">* </span>index (文件保存暂存区的信息)
+</code></pre></div><h3 id="基础linux命令">基础Linux命令</h3><div class="highlight"><pre class="code"><code><span class="hljs-comment">* clear 清除屏幕</span>
+<span class="hljs-comment">* echo &#x27;hello word &#x27;&gt;test.tet 命令台书写内容</span>
+<span class="hljs-comment">* ll 将当前目录下的子目录展现出来</span>
+<span class="hljs-comment">* find ./ 将当前目录下的子目录以及文件也展现出来</span>
+<span class="hljs-comment">* find ./ -type f 只讲文件展现出来</span>
+<span class="hljs-comment">* rm text.txt 删除文件</span>
+<span class="hljs-comment">* MV a.txt b.txt 更名字</span>
+<span class="hljs-comment">* cat a.txt 查看文件内容</span>
+<span class="hljs-comment">* vim a.txt 编辑内容 i 插入 ese : wq 保存退出 :set nu 设置行号 q! 强制退出不保存</span>
+</code></pre></div><h3 id="对象">对象</h3><div class="highlight"><pre class="code"><code><span class="hljs-bullet">*</span> Git对象
+<span class="hljs-bullet">    -</span> echo &quot;hello&quot; | git hash-object --stdin 
+<span class="hljs-bullet">     -</span> 这句命令返回一个hash值用来标识这句话 但是并没有写到数据库中  
+<span class="hljs-bullet">     -</span> 内容不一样对应的hash值不一样
+
+<span class="hljs-bullet">    -</span> echo &quot;hello&quot; | git hash-object -w --stdin
+<span class="hljs-bullet">     -</span> 这句命令返回一个hash值用来标识这句话 并写到数据库中  
+<span class="hljs-bullet">     -</span> 查看有没有存在 可以通过 find ./ -type f 找对应hash的文件
+<span class="hljs-bullet">     -</span> 里面的内容是压缩的 通过 git cat-file -p hash注意前面的那两个字母也加上
+<span class="hljs-bullet">     -</span> git cat-file -t hash 查看git对象的类型 blob
+
+<span class="hljs-bullet">    -</span> 将新创建的文件添加到git数据库中即生成一个git对象
+<span class="hljs-bullet">     -</span> git hash-object -w ./a.txt
+
+<span class="hljs-bullet">    -</span> 如果文件更改git数据库里面不会自动的添加要手动添加过去 这时会在添加一个git对象
+<span class="hljs-bullet">     -</span> git hash-object -w ./a.txt
+
+<span class="hljs-bullet">    -</span> 实质上Git对象是一个KYE：VALUE hash/value    
+<span class="hljs-bullet">    -</span> git对象不能当作项目的一次快照 只是组成项目的一部分
+
+<span class="hljs-bullet">    -</span> 存在的问题？
+<span class="hljs-bullet">     -</span> 记住文件的每一个（版本）对应的hash值并不现实
+<span class="hljs-bullet">     -</span> 在git中，文件名并没有被保存，只能通过hash
+
+<span class="hljs-bullet">    -</span> 注意：此时的操作只是针对本地数据库进行操作，不涉及暂存区。
+
+
+<span class="hljs-bullet">*</span> 树对象
+<span class="hljs-bullet">    *</span> 树对象能够解决文件名保存的问题，也允许我们将多个文件组织到一起。
+
+<span class="hljs-bullet">    *</span> 构建树对象
+<span class="hljs-bullet">     -</span> git update-index --add --cacheinfo 100644 915c628f360b2d8c3edbe1ac65cf575b69029b61 test.txt
+<span class="hljs-bullet">     -</span> 文件模式为100644 表明这是一个普通文件
+<span class="hljs-bullet">     -</span> 文件模式为100755 表明这是一个可执行文件
+<span class="hljs-bullet">     -</span> 文件模式为120000 表明这是一个符号连接
+<span class="hljs-bullet">     -</span>  --add 因为此前该文件并没有在暂存区中 首次要加add
+<span class="hljs-bullet">     -</span>  --cacheinfo 因为要添加的文件在git数据库中,没有位于当前目录下
+
+<span class="hljs-bullet">    *</span> 暂存区做一个快照生成一个对象放到git数据库中
+<span class="hljs-bullet">     -</span> git write-tree
+<span class="hljs-code">        对象类型是一个树对象
+        树对象里面的内容是暂存区的快照（项目的快照）
+    * 暂存区中文件名字不变 如果改变文件的内容，就会重新生成一个hash
+</span>
+<span class="hljs-bullet">    *</span> 存在的问题？
+<span class="hljs-bullet">     -</span> 不知道hash值对应的是哪一个版本
+<span class="hljs-bullet">     -</span> 不知道这个版本的一些基础信息    
+
+<span class="hljs-bullet">*</span> 提交对象    
+<span class="hljs-bullet">    -</span> 提交对象完美的解决了上面的问题
+<span class="hljs-bullet">    -</span> 本质就是给树对象做一层包裹包含项目的基础信息
+<span class="hljs-bullet">    -</span> commit-tree创建一个提交对象，为此需要指定一个树对象的hash值,以及该提交的父提交对象  
+<span class="hljs-bullet">    -</span> echo &quot;second commit&quot; | git commit-tree     019fb2c522b604cd94929085bbac93d60e2f2063 -p  d248eb19a125c
+
+<span class="hljs-bullet">    -</span> 真正代表一个项目的是一个提交对象（数据和基本信息）这是一个链式的！！ 
+</code></pre></div><hr><h3 id="初始化git">初始化git</h3><div class="highlight"><pre class="code"><code>* git init （初始化仓库 生成.git文件）
+* git <span class="hljs-built_in">config</span> <span class="hljs-comment">--global user.name &quot;Is zyd&quot;</span>
+* git <span class="hljs-built_in">config</span> <span class="hljs-comment">--global user.email 1426593075@qq.com</span>
+* git <span class="hljs-built_in">config</span> <span class="hljs-comment">--list</span>
+</code></pre></div><h3 id="添加到暂存区">添加到暂存区</h3><div class="highlight"><pre class="code"><code>* git <span class="hljs-built_in">add</span> ./   首先将工作区（文件）做成git对象放到版本库 然后再放到暂存区 但是这里没    有生成树对象
+* git <span class="hljs-keyword">ls</span>-<span class="hljs-keyword">files</span> -s  查看暂存区的当前状态
+</code></pre></div><h3 id="添加到版本库">添加到版本库</h3><div class="highlight"><pre class="code"><code>* git <span class="hljs-keyword">commit</span> -m <span class="hljs-string">&#x27;提交的信息&#x27;</span>
+</code></pre></div><h3 id="结论">结论</h3><div class="highlight"><pre class="code"><code><span class="hljs-bullet">*</span> 一次完整的项目提交 包括至少一个提交对象 一个树对象 0或多个git对象
+<span class="hljs-bullet">*</span> 工作目录中文件只有两种状态 已跟踪（只要第一次add就跟踪上了） 未跟踪
+<span class="hljs-bullet">*</span> 已经跟踪的文件还有三种状态 已提交 已修改 已暂存
+<span class="hljs-bullet">*</span> 如果一个已经提交的文件再次修改要重新添加到暂存区否则显示已修改状态
+<span class="hljs-bullet">*</span> 如果一个文件暂存完了没有提交前还要在修改 这时会出现一个暂存一个已修改的情况需要重新add
+<span class="hljs-bullet">*</span> 
+<span class="hljs-bullet">*</span> 分支就是为了保护代码方便更改存在的 假如master里面的提交对象完美了就可以在创建一个分支   添加功能如果可以就可以master合并 不行的话就可以删除这个分支 这样对于master没有影响
+
+<span class="hljs-bullet">*</span> 新建一个分支到一个提交对象上面 这样做的好处是实现版本回推但是不改边主仓库的东西 用完    删除这个分支就可以了特别方便
+
+<span class="hljs-bullet">*</span> 合并分支一定要注意顺序 后面的可能会过期还会存在bug 会产生冲突
+<span class="hljs-bullet">    -</span> 快速合并 一条分支
+<span class="hljs-bullet">    -</span> 典型合并 多条分支 会有冲突（打开冲突文件看哪里要留 然后暂存提交）
+<span class="hljs-bullet">    -</span> 同事之间的冲突才是最麻烦的
+</code></pre></div><hr><h3 id="高级命令（crud）">高级命令（crud）</h3><div class="highlight"><pre class="code"><code><span class="hljs-comment">* git init               初始化</span>
+<span class="hljs-comment">* git add ./             添加暂存区   </span>
+<span class="hljs-comment">* git commit -m &quot;注释&quot;     提交项目</span>
+<span class="hljs-comment">* git status              查看当前状态</span>
+<span class="hljs-comment">* git diff                查看当先做的哪些更新没有暂存</span>
+<span class="hljs-comment">* git diff -cached        查看哪些已经更新好了准备下次提交</span>
+<span class="hljs-comment">* git commit -a -m        git自动将已经跟踪过的文件暂存起来一并提交</span>
+<span class="hljs-comment">* rm yd.txt               删除文件 暂存区里没有文集 版本库多了一个提交对象不过没有内容</span>
+<span class="hljs-comment">* 删除文件属于修改操作 跟上面的提交步骤一样</span>
+<span class="hljs-comment">* mv z.txt zx.txt         重新起名字跟已修改一样的操作</span>
+<span class="hljs-comment">* git add ./</span>
+<span class="hljs-comment">* git commit -m &quot;rename zx&quot;</span>
+<span class="hljs-comment">* git log --oneline      查看提交历史记录</span>
+</code></pre></div><h3 id="分支">分支</h3><div class="highlight"><pre class="code"><code><span class="hljs-bullet">* </span>每一个功能都可以开一个分支，不影响主线的分支
+<span class="hljs-bullet">* </span>分支就是一个活动的指针就在提交对象的前面指向最新提交
+<span class="hljs-bullet">* </span>master默认是主分支
+<span class="hljs-bullet">* </span>git branch test    会在当前的提交对象上创建一个分支
+<span class="hljs-bullet">* </span>git checkout test  将分支转到test上面来
+<span class="hljs-bullet">* </span>git branch -D test  删除分支 不能自己删自己 
+<span class="hljs-bullet">* </span>git log --oneline --decorate --graph --all  查看完整的分支图（没删除前）
+<span class="hljs-bullet">* </span>git config --global alias.all <span class="hljs-emphasis">&#x27;log --oneline --decorate --graph --all&#x27;</span> 配置别名
+<span class="hljs-bullet">* </span>git branch -v  查看分支的最后一个提交
+<span class="hljs-bullet">* </span>git branch test hash  新建一个分支到hash所对应的提交对象上去 很重要
+<span class="hljs-bullet">* </span>git checkout -b test  创建分支并且切换过去
+<span class="hljs-bullet">* </span>git checkout name     切换分支的时候一定要提交完的时候再切否则会出现问题
+<span class="hljs-code">  每次切换分支前当前分支一定要是已提交状态 否则会污染主分支 如果第一次提交了再修改的时候没有提交他就不让切换分支了</span>
+<span class="hljs-bullet">* </span>git merge hotbug(分支名)
+<span class="hljs-bullet">* </span>git config --list 查看配置
+</code></pre></div><h3 id="存储">存储</h3><div class="highlight"><pre class="code"><code><span class="hljs-bullet">* </span>解决的问题 不想过多的创建提交比如iss53那个分支
+<span class="hljs-bullet">* </span>git stash list 查看存储
+<span class="hljs-bullet">* </span>git stash apply  拿出栈顶的元素 但是不会消除
+<span class="hljs-bullet">* </span>git stash drop 名字
+</code></pre></div><hr><h3 id="后悔药">后悔药</h3><div class="highlight"><pre class="code"><code><span class="hljs-bullet">*</span> 工作区撤回在工作目录中的修改
+<span class="hljs-bullet">  *</span> git checkout -- filename  本质是相当于重置
+<span class="hljs-bullet">*</span> 暂存区撤回自己的暂存
+<span class="hljs-bullet">  *</span> git reset HEAD filename
+<span class="hljs-bullet">*</span> 提交区注释写错了修改注释
+<span class="hljs-bullet">  *</span> git commit --amend   
+</code></pre></div><h3 id="项目经理远程操作github仓库步骤">项目经理远程操作github仓库步骤</h3><div class="highlight"><pre class="code"><code><span class="hljs-bullet">1.</span> 先在github上创建一个空的仓库new repository 注意不要有readme.md文件
+<span class="hljs-bullet">2.</span> 创建本地仓库然后基础设置   git init
+<span class="hljs-bullet">3.</span> 然后给github上面的地址起别名和用户别名
+<span class="hljs-bullet">  *</span> git remote add use https://github.com/zhaoyuanmeng/git<span class="hljs-emphasis">_to_</span>use.git
+<span class="hljs-bullet">  *</span> git config --list
+<span class="hljs-bullet">4.</span> 注意如果是复制别人的github 要把.git删掉只复制项目部分代码到自己的本地仓库
+<span class="hljs-bullet">5.</span> 注意凭据 本人是可以直接上传的
+<span class="hljs-bullet">6.</span> 检查完毕后推送到远地仓库  git push use(别名) master（分支）
+<span class="hljs-bullet">7.</span> 给员工开放权限通过github里面的manage access contributor
+<span class="hljs-bullet">8.</span> 获取员工上传的代码 git fetch use(别名)
+<span class="hljs-bullet">9.</span> 切换成远程跟踪分支 git checkout use/master
+<span class="hljs-bullet">10.</span> 合并远程跟踪分支 git merge use/master 
+<span class="hljs-bullet">11.</span> git pull  获取数据并合并
+</code></pre></div><h3 id="员工拉取项目经理的仓库代码">员工拉取项目经理的仓库代码</h3><div class="highlight"><pre class="code"><code><span class="hljs-number">1</span>. 本地不用创建仓库 直接克隆下来
+  * git <span class="hljs-keyword">clone</span> <span class="hljs-title">https</span>://github.com/zhaoyuanmeng/git_to_use.git
+<span class="hljs-number">2</span>. 它自动创建一个别名; 查看别名git remote -v       
+<span class="hljs-number">3</span>. 创建新的文件 echo <span class="hljs-string">&quot;hello world&quot;</span>&gt;test.txt
+<span class="hljs-number">4</span>. git add ./   
+<span class="hljs-number">5</span>. git commit -m <span class="hljs-string">&quot;tijiao&quot;</span>
+<span class="hljs-number">6</span>. git push origin <span class="hljs-keyword">master</span>
+<span class="hljs-title"></span></code></pre></div><h3 id="本地分支-远程分支 远程跟踪分支">本地分支 远程分支 远程跟踪分支</h3><div class="highlight"><pre class="code"><code><span class="hljs-bullet">* </span>本地分支是本机电脑的
+<span class="hljs-bullet">* </span>远程分支是github上对应的分支
+<span class="hljs-bullet">* </span>远程跟踪分支是本地与远程分支的一个映射
+<span class="hljs-bullet">* </span>成员克隆远程仓库以后默认本地分支和对应的远程跟踪分支有同步关系
+<span class="hljs-bullet">* </span>在push的时候会生成对应的远程跟踪分支
+<span class="hljs-bullet">* </span>在fetch的时候把数据下载到远程跟踪分支里面
+<span class="hljs-bullet">* </span>注意成员开辟新分支提交的时候 经理在fetch的时候要创建对应的分支不用加别名
+<span class="hljs-bullet">* </span>主分支和远程跟踪分支自动绑定的功能(默认情况下push的时候)
+<span class="hljs-bullet">* </span>建立同步关系 git branch -u (远程跟踪分支) 注意要在那个分支里面输入这个命令
+<span class="hljs-bullet">* </span>git checkout --track remote别名/分支名  最自动创建本地分支并且与远程跟踪分支绑定
+<span class="hljs-bullet">* </span>git checkout -b 分支名 remote别名/分支名 效果与上面一样     
+</code></pre></div><h3 id="删除远程分支">删除远程分支</h3><div class="highlight"><pre class="code"><code>* git <span class="hljs-keyword">push</span> <span class="hljs-keyword">use</span>(别名) --<span class="hljs-keyword">delete</span> (分支名)  删除远程分支
+* git remote prune <span class="hljs-keyword">use</span> --dry-<span class="hljs-keyword">run</span>  列出仍在远程跟踪但是远程分支已经被删除的无用分支
+* git remote prune <span class="hljs-keyword">use</span>    清除上面的命令列出来的远程跟宗
+</code></pre></div><h3 id="冲突">冲突</h3><div class="highlight"><pre class="code"><code><span class="hljs-comment">* git本地操作的冲突</span>
+<span class="hljs-comment">    * 典型合并的时候</span>
+    
+<span class="hljs-comment">* git远程协作的时候</span>
+<span class="hljs-comment">    * push</span>
+<span class="hljs-comment">        * 两个人同时推（更改同一个文件）解决办法只能先把远程仓库拉下来 然后再更改那个    文件然后再add commit push  </span>
+<span class="hljs-comment">    * pull</span>
+<span class="hljs-comment">        * 更改完以后不push 直接pull会报错 远程仓库会覆盖更改的内容建议push 不过push还会出错就是上面那个错误</span>
+</code></pre></div><h3 id="参加开源项目的步骤-（pull request）">参加开源项目的步骤 （pull request）</h3><div class="highlight"><pre class="code"><code>* 如果参加某个项目时，但是没有推送权限，这时候可以通过对这个项目进行fork。这会在
+  你的空间中创建一个完全属于你的项目副本，且你对其具有推送权限。通过这个方式项目的
+  管理者不用忙着添加贡献者，人们可以fork这个项目将修改推送到项目副本上，并通过pull 
+  request来将他们的改动进入源版本库
+
+1. 先将源仓库fork到自己的仓库
+2. 然后clone到本地仓库
+3. 更改后提交到自己的远程仓库
+4. pull request
+5. 管理人审核 然后merge
+
+* 不重新fork怎么解决
+  * git 支持同时跟踪多个仓库
+    git remote add 别名2 地址
+    <span class="hljs-comment">&lt;!-- git remote rm 别名1 --&gt;</span>
+    git fetch 别名2
+    git branch -u 远程跟踪分支
+    git merge 对应的远程跟踪分支
+    git push (这里还是会提交到自己上面)
+    然后pull request
+</code></pre></div><h3 id="ssh">SSH</h3><div class="highlight"><pre class="code"><code><span class="hljs-bullet">*</span> github特有的一种协议 走的不是验证密码的道路而是密匙
+<span class="hljs-bullet">*</span> 配置步骤
+<span class="hljs-bullet">  *</span> ssh -keygen -t rsa -C 邮箱名
+<span class="hljs-bullet">  *</span> 在c:\users\Adminstor\.ssh下生成公私密匙
+<span class="hljs-bullet">  *</span> ssh -T git@github.com 测试一下
+<span class="hljs-bullet">  *</span> 把公共的密匙复制到github账户里面setting下
+<span class="hljs-bullet">  *</span> 好处是不用每次输密码 而且项目经理不用设置贡献者 直接把他们的公共密匙复制到自己账户    就可以了
+</code></pre></div><h3 id="gitnore文件">.gitnore文件</h3><div class="highlight"><pre class="code"><code><span class="hljs-bullet">* </span>这个文件可以直接从github上下载
+<span class="hljs-bullet">* </span>目的是不在git仓库上传不必要的文件
+</code></pre></div><h3 id="视屏地址">视屏地址</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.bilibili.com/video/BV15J411973T?p=1</span><br></pre></td></tr></table></figure><div id="reword-out"><div id="reward-btn"> 打赏</div></div></div><div class="declare"><ul class="post-copyright"><li><i class="ri-copyright-line"></i> <strong>版权声明：</strong> 本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！</li></ul></div><footer class="article-footer"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li></ul></footer></div><nav class="article-nav"> <a href="/2020/05/psutil%E5%BA%93%E4%BD%BF%E7%94%A8/index.html" class="article-nav-link"><strong class="article-nav-caption">上一篇</strong><div class="article-nav-title"> psutil库使用</div></a> <a href="/2020/05/%E8%84%9A%E6%9C%AC%E5%B8%B8%E7%94%A8%E9%80%BB%E8%BE%91%E5%92%8C%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html" class="article-nav-link"><strong class="article-nav-caption">下一篇</strong><div class="article-nav-title">脚本常用逻辑和表达式</div></a></nav><script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script><div id="twikoo" class="twikoo"></div><script>twikoo.init({envId:""})</script></article></section><footer class="footer"><div class="outer"><ul><li> Copyrights &copy; 2018-2024<i class="ri-heart-fill heart_icon"></i> Outsrkem</li></ul><ul><li></li></ul><ul><li><span><span><i class="ri-user-3-fill"></i> 访问人数:<span id="busuanzi_value_site_uv"></span></span> <span class="division">|</span><span><i class="ri-eye-fill"></i> 浏览次数:<span id="busuanzi_value_page_pv"></span></span></span></li></ul><ul></ul><ul></ul><ul><li><script type="text/javascript" src="https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914"></script></li></ul></div></footer></main><div class="float_btns"><div class="totop" id="totop"><i class="ri-arrow-up-line"></i></div><div class="todark" id="todark"><i class="ri-moon-line"></i></div></div><aside class="sidebar on"> <button class="navbar-toggle"></button><nav class="navbar"><div class="logo"> <a href="/"><img src="/images/ayer-side.svg" alt="Outsrkem"></a></div><ul class="nav nav-main"><li class="nav-item"> <a class="nav-item-link" href="/index.html">主页</a></li><li class="nav-item"> <a class="nav-item-link" href="/archives/index.html">归档</a></li><li class="nav-item"> <a class="nav-item-link" href="/categories/index.html">分类</a></li><li class="nav-item"> <a class="nav-item-link" href="/tags/index.html">标签</a></li><li class="nav-item"> <a class="nav-item-link" href="/friends/index.html">友链</a></li><li class="nav-item"> <a class="nav-item-link" href="/about/index.html">关于</a></li></ul></nav><nav class="navbar navbar-bottom"><ul class="nav"><li class="nav-item"><a class="nav-item-link nav-item-search" title="搜索"><i class="ri-search-line"></i></a></li></ul></nav><div class="search-form-wrap"><div class="local-search local-search-plugin"> <input type="search" id="local-search-input" class="local-search-input" placeholder="Search..."><div id="local-search-result" class="local-search-result"></div></div></div></aside><div id="mask"></div> <div id="reward"><span class="close"><i class="ri-close-line"></i></span><p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p><div class="reward-box"><div class="reward-item"> <img class="reward-img" src="/images/alipay.jpg"> <span class="reward-type">支付宝</span></div><div class="reward-item"> <img class="reward-img" src="/images/wechat.jpg"> <span class="reward-type">微信</span></div></div></div><script src="/js/jquery-3.6.0.min.js"></script><script src="/js/lazyload.min.js"></script><script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"><script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script><script src="/dist/main.js"></script><div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div> <button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div> <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div><link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css"><script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script><script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script><script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script><script src="/js/busuanzi-2.3.pure.min.js"></script><link rel="stylesheet" href="/css/clipboard.css"><script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script><script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script><script>window.mermaid&&mermaid.initialize({theme:"forest"})</script></div></body>
