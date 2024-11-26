@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>yum history 命令示例： 显示、回滚、重做、撤消 yum 事务 | Outsrkem</title><meta name="generator" content="hexo-theme-ayer"><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/dist/main.css"><link rel="stylesheet" href="/css/fonts/remixicon.css"><link rel="stylesheet" href="/css/custom.css"><script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script><script src="https://cdn.staticfile.org/mermaid/8.14.0/mermaid.min.js"></script><style>.swal2-styled.swal2-confirm{font-size:1.6rem}</style></head></html><body><div id="app"><main class="content on"><section class="outer"><article id="post-yum-history-命令示例：-显示、回滚、重做、撤消-yum-事务" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal><div class="article-inner"><header class="article-header"><h1 class="article-title sea-center" style="border-left:0" itemprop="name"> yum history 命令示例： 显示、回滚、重做、撤消 yum 事务</h1></header><div class="article-meta"> <a href="/2022/09/yum-history-%E5%91%BD%E4%BB%A4%E7%A4%BA%E4%BE%8B%EF%BC%9A-%E6%98%BE%E7%A4%BA%E3%80%81%E5%9B%9E%E6%BB%9A%E3%80%81%E9%87%8D%E5%81%9A%E3%80%81%E6%92%A4%E6%B6%88-yum-%E4%BA%8B%E5%8A%A1/index.html" class="article-date"><time datetime="2022-09-04T11:28:54.000Z" itemprop="datePublished">2022-09-04 19:28:54 +08:00</time></a><div class="article-category"> <a class="article-category-link" href="/categories/yum/">yum</a></div><div class="word_count"><span class="post-time"><span class="post-meta-item-icon"><i class="ri-quill-pen-line"></i> <span class="post-meta-item-text">字数统计:</span> <span class="post-count">846</span></span></span> <span class="post-time">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="ri-book-open-line"></i> <span class="post-meta-item-text">阅读时长≈</span> <span class="post-count">3 分钟</span></span></span></div></div><div class="tocbot"></div><div class="article-entry" itemprop="articleBody"><h2 id="yum-history 命令示例： 显示、回滚、重做、撤消 yum 事务">yum history 命令示例： 显示、回滚、重做、撤消 yum 事务</h2><p>yum 的<code>yum history</code>功能是 Linux 中一个经常被忽视但非常强大的实用程序。<br> 它可用于将 <code>yum</code> 事务回滚/重做/撤消到一切正常的状态。</p><h2 id="yum-history">yum history</h2><p><code>yum history list</code>命令在不带任何参数的情况下运行时会产生类似于下图所示的输出。<br> <code>yum history</code>或者<code>yum history list</code>默认显示最近 20 个 yum 交易。</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="built_in">history</span> list</span><br></pre></td></tr></table></figure><p>其中：<br> ID ：唯一标识一个 yum 事务。</p><p>命令行 ：日期和时间：交易的日期和时间。</p><p>Action(s) ：在事务中执行的操作，如安装、更新等。<br> 详细列表如下。</p><table><thead><tr><th>Action</th><th>Abbreviation</th><th>Description</th></tr></thead><tbody><tr><td>Downgrade</td><td>D</td><td>At least one package has been downgraded to an older version.</td></tr><tr><td>Erase</td><td>E</td><td>At least one package has been removed.</td></tr><tr><td>Install</td><td>I</td><td>At least one new package has been installed.</td></tr><tr><td>Obsoleting</td><td>O</td><td>At least one package has been marked as obsolete.</td></tr><tr><td>Reinstall</td><td>R</td><td>At least one package has been reinstalled.</td></tr><tr><td>Update</td><td>U</td><td>At least one package has been updated to a newer version.</td></tr></tbody></table><table><thead><tr><th>Action</th><th>缩写</th><th>描述</th></tr></thead><tbody><tr><td>Downgrade</td><td>D</td><td>至少有一个软件包已降级到旧版本。</td></tr><tr><td>Erase</td><td>E</td><td>至少删除了一个包。</td></tr><tr><td>Install</td><td>I</td><td>至少安装了一个新软件包。</td></tr><tr><td>Obsoleting</td><td>O</td><td>至少有一个包被标记为过时。</td></tr><tr><td>Reinstall</td><td>R</td><td>至少已重新安装了一个软件包。</td></tr><tr><td>Update</td><td>U</td><td>至少有一个软件包已更新到较新的版本。</td></tr></tbody></table><p>Altered : 受事务影响的包数和添加信息，例如 rpmdb 数据库是否在事务之后更改等。<br> 详细列表如下。</p><table><thead><tr><th>Symbol</th><th>描述</th></tr></thead><tbody><tr><td>&lt;</td><td>在事务完成之前，rpmdb 数据库在 Yum 之外发生了变化。</td></tr><tr><td>&gt;</td><td>交易完成后，rpmdb 数据库在 Yum 之外发生了变化。</td></tr><tr><td>*</td><td>交易未能完成。</td></tr><tr><td>#</td><td>交易成功完成，但 yum 返回了非零退出代码。</td></tr><tr><td>E</td><td>事务成功完成，但显示错误或者警告。</td></tr><tr><td>P</td><td>事务成功完成，但 rpmdb 数据库中已经存在问题。</td></tr><tr><td>s</td><td>事务成功完成，但使用了 -skip-broken 命令行选项并跳过了某些包。</td></tr></tbody></table><p>要显示所有交易，请使用 all 选项。</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="built_in">history</span> list all</span><br></pre></td></tr></table></figure><h2 id="有关特定交易的信息">有关特定交易的信息</h2><p>如果我们知道 yum 事务的事务 ID，则可以使用以下命令获得详细视图。</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="built_in">history</span> info 1</span><br></pre></td></tr></table></figure><p>我们还可以在 yum history 命令中使用包名称。</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="built_in">history</span> info vsftpd</span><br></pre></td></tr></table></figure><p>上面的命令将显示所有事务，如安装、更新、删除 vsftpd 包。</p><p>我们还可以使用摘要选项获取特定软件包的交易历史摘要。</p><h2 id="回滚或者重做-yum 事务">回滚或者重做 yum 事务</h2><p>我们可以使用以下语法命令撤消特定的 yum 事务：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="built_in">history</span> rollback [transaction_ID]</span><br></pre></td></tr></table></figure><p>同样，我们也可以重做 yum 事务。</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="built_in">history</span> redo [transaction ID]</span><br></pre></td></tr></table></figure><p>我们将使用下图所示的命令重做移除的 sysstat 包移除。</p><p>在我们指定事务之前，重做子命令还可以采用一些可选参数：<br> <code>force-reinstall</code> - 重新安装在该事务中安装的所有软件包（通过 <code>yum install、upgrade</code> 或者 <code>downgrade</code>）。</p><p><code>force-remove</code> - 删除所有更新或者降级的包。</p><h2 id="将-yum 事务回滚到某个点">将 yum 事务回滚到某个点</h2><p>使用 <code>yum history</code> 命令，我们可以回滚所有事务，直到特定事务 ID。<br> 例如，如果我们指定事务 ID 为 16，则将回滚从最新到事务 ID 16 的所有事务。<br> 例如 ：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="built_in">history</span> rollback 16</span><br></pre></td></tr></table></figure><blockquote><p><a target="_blank" rel="noopener" href="https://www.onitroad.com/jc/linux/other/yum-history-command-examples.html">“yum history”命令示例： 显示、回滚、重做、撤消 yum 事务-之路教程 (onitroad.com)</a></p></blockquote><div id="reword-out"><div id="reward-btn"> 打赏</div></div></div><div class="declare"><ul class="post-copyright"><li><i class="ri-copyright-line"></i> <strong>版权声明：</strong> 本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！</li></ul></div><footer class="article-footer"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/yum/" rel="tag">yum</a></li></ul></footer></div><nav class="article-nav"> <a href="/2022/10/logrotate%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86/index.html" class="article-nav-link"><strong class="article-nav-caption">上一篇</strong><div class="article-nav-title"> logrotate日志管理</div></a> <a href="/2022/08/linux-reboot-%E6%97%A0%E6%B3%95%E9%87%8D%E5%90%AF/index.html" class="article-nav-link"><strong class="article-nav-caption">下一篇</strong><div class="article-nav-title">linux reboot 无法重启</div></a></nav><script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script><div id="twikoo" class="twikoo"></div><script>twikoo.init({envId:""})</script></article></section><footer class="footer"><div class="outer"><ul><li> Copyrights &copy; 2018-2024<i class="ri-heart-fill heart_icon"></i> Outsrkem</li></ul><ul><li></li></ul><ul><li><span><span><i class="ri-user-3-fill"></i> 访问人数:<span id="busuanzi_value_site_uv"></span></span> <span class="division">|</span><span><i class="ri-eye-fill"></i> 浏览次数:<span id="busuanzi_value_page_pv"></span></span></span></li></ul><ul></ul><ul></ul><ul><li><script type="text/javascript" src="https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914"></script></li></ul></div></footer></main><div class="float_btns"><div class="totop" id="totop"><i class="ri-arrow-up-line"></i></div><div class="todark" id="todark"><i class="ri-moon-line"></i></div></div><aside class="sidebar on"> <button class="navbar-toggle"></button><nav class="navbar"><div class="logo"> <a href="/"><img src="/images/ayer-side.svg" alt="Outsrkem"></a></div><ul class="nav nav-main"><li class="nav-item"> <a class="nav-item-link" href="/index.html">主页</a></li><li class="nav-item"> <a class="nav-item-link" href="/archives/index.html">归档</a></li><li class="nav-item"> <a class="nav-item-link" href="/categories/index.html">分类</a></li><li class="nav-item"> <a class="nav-item-link" href="/tags/index.html">标签</a></li><li class="nav-item"> <a class="nav-item-link" href="/friends/index.html">友链</a></li><li class="nav-item"> <a class="nav-item-link" href="/about/index.html">关于</a></li></ul></nav><nav class="navbar navbar-bottom"><ul class="nav"><li class="nav-item"><a class="nav-item-link nav-item-search" title="搜索"><i class="ri-search-line"></i></a></li></ul></nav><div class="search-form-wrap"><div class="local-search local-search-plugin"> <input type="search" id="local-search-input" class="local-search-input" placeholder="Search..."><div id="local-search-result" class="local-search-result"></div></div></div></aside><div id="mask"></div> <div id="reward"><span class="close"><i class="ri-close-line"></i></span><p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p><div class="reward-box"><div class="reward-item"> <img class="reward-img" src="/images/alipay.jpg"> <span class="reward-type">支付宝</span></div><div class="reward-item"> <img class="reward-img" src="/images/wechat.jpg"> <span class="reward-type">微信</span></div></div></div><script src="/js/jquery-3.6.0.min.js"></script><script src="/js/lazyload.min.js"></script><script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"><script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script><script src="/dist/main.js"></script><div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div> <button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div> <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div><link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css"><script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script><script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script><script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script><script src="/js/busuanzi-2.3.pure.min.js"></script><link rel="stylesheet" href="/css/clipboard.css"><script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script><script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script><script>window.mermaid&&mermaid.initialize({theme:"forest"})</script></div></body>
