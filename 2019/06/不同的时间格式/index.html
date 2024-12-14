@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>不同的时间格式 | Outsrkem</title><meta name="generator" content="hexo-theme-ayer"><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/dist/main.css"><link rel="stylesheet" href="/css/fonts/remixicon.css"><link rel="stylesheet" href="/css/custom.css"><script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script><script src="https://cdn.staticfile.org/mermaid/8.14.0/mermaid.min.js"></script><style>.swal2-styled.swal2-confirm{font-size:1.6rem}</style></head></html><body><div id="app"><main class="content on"><section class="outer"><article id="post-不同的时间格式" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal><div class="article-inner"><header class="article-header"><h1 class="article-title sea-center" style="border-left:0" itemprop="name"> 不同的时间格式</h1></header><div class="article-meta"> <a href="/2019/06/%E4%B8%8D%E5%90%8C%E7%9A%84%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F/index.html" class="article-date"><time datetime="2019-06-11T01:12:15.000Z" itemprop="datePublished">2019-06-11 09:12:15 +08:00</time></a><div class="article-category"> <a class="article-category-link" href="/categories/%E7%B3%BB%E7%BB%9F/">系统</a></div><div class="word_count"><span class="post-time"><span class="post-meta-item-icon"><i class="ri-quill-pen-line"></i> <span class="post-meta-item-text">字数统计:</span> <span class="post-count">869</span></span></span> <span class="post-time">&nbsp; | &nbsp;<span class="post-meta-item-icon"><i class="ri-book-open-line"></i> <span class="post-meta-item-text">阅读时长≈</span> <span class="post-count">3 分钟</span></span></span></div></div><div class="tocbot"></div><div class="article-entry" itemprop="articleBody"><h2 id="不同的时间格式">不同的时间格式</h2><h5 id="iso-8601">ISO 8601</h5><p>这是一种国际标准的日期和时间表示方式，格式为YYYY-MM-DDTHH:mm:ss.sssZ，其中 YYYY代表四位数年份，MM 代表月份，DD 代表天数，T 作为日期和时间的分隔符，HH 代表小时，mm 代表分钟，ss.sss代表秒和毫秒，Z 代表时区。例如：2019-04-24T05:49:10Z 、2019-04-24T13:49:10+0800</p><h5 id="rfc-3339">RFC 3339</h5><p>这是一种在互联网上广泛使用的日期和时间表示方式，它基于 ISO 8601格式，但对其进行了一些扩展，例如允许使用非零开头的小时、分钟和秒。例如：2019-04-13T15:30:00Z</p><h5 id="rfc-2822">RFC 2822</h5><p>这是一种用于电子邮件日期和时间表示的格式，例如：Sat, 13 Apr 2019 15:30:00 +0000</p><h5 id="unix-时间戳">Unix 时间戳</h5><p>这是一种用于表示自 1970 年 1 月 1 日 00:00:00 UTC（世界协调时间）以来的秒数。例如：1678882200</p><h5 id="自然语言表示">自然语言表示</h5><p>这种格式以人类易读的方式表示日期和时间，例如：April 13, 2019, 3:30 PM</p><h5 id="中文日期表示">中文日期表示</h5><p>这种格式用汉字表示日期和时间，例如：2019年4月13日 15:30</p><h5 id="美国习惯用法">美国习惯用法</h5><p>美国常见的日期表示方式为 MM/DD/YYYY，例如：04/13/2019。时间表示方式通常为 12小时制，例如：3:30 PM。</p><h5 id="欧洲习惯用法">欧洲习惯用法</h5><p>欧洲常见的日期表示方式为 DD.MM.YYYY，例如：13.04.2019。时间表示方式通常为 24小时制，例如：15:30。</p><h5 id="iso-8601 的扩展表示">ISO 8601 的扩展表示</h5><p>在 ISO 8601基础上，还可以表示更详细的时间信息，如时区偏移、周数、季度等。例如：2019-W15-4 表示 2019 年第 15周的星期四，2019-Q2 表示 2019 年第二季度。</p><h5 id="julian-日期">Julian 日期</h5><p>这种格式以公元前 4713 年 1 月 1 日为起点，表示从起点到指定日期的连续天数。例如，儒略日数（JulianDay Number，简写为 JDN）表示某一天，而儒略日期（Julian Date，简写为JD）表示某一天的某一时刻。儒略日期的格式为：JD 2459589.3125。</p><h5 id="microsoft-excel 日期序数">Microsoft Excel 日期序数</h5><p>在 Microsoft Excel 中，日期表示为一个序数值，该值表示自 1900 年 1月 1 日（或 1904 年 1 月 1 日，取决于所使用的日期系统）以来的天数。例如，2019-04-13 在 Excel 中表示为45800（基于 1900 年系统）。</p><h5 id="swatch-internet time">Swatch Internet Time</h5><p>这是一种基于比耶尔时间（Biel Mean Time，BMT）的全球统一时间单位，以.beat 为单位，一天被划分为 1000 个 beats。例如：@500 表示一天过去了一半。</p><h5 id="posix-时间（又称 unix 时间）">POSIX 时间（又称 Unix 时间）</h5><p>这是一种用于表示自 1970 年 1 月 1 日 00:00:00 UTC 以来的秒数，不包括闰秒。与 Unix 时间戳类似，但 POSIX 时间会明确排除闰秒。例如：1678882200</p><h5 id="tai-时间">TAI 时间</h5><p>这是国际原子时（International Atomic Time，TAI），它是一种基于原子钟的时间系统，用于表示自1958 年 1 月 1 日 00:00:00 以来的秒数。例如：TAI 2,142,231,200</p><h5 id="gps-时间">GPS 时间</h5><p>这是全球定位系统（Global Positioning System，GPS）使用的时间系统，用于表示自 1980 年1 月 6 日 00:00:00 以来的周数和秒数。例如：GPS Week 2244, Seconds 302400</p><h5 id="自定义格式">自定义格式</h5><p>许多软件、库和程序允许用户自定义日期和时间的表示方式。例如：%Y-%m-%d %H:%M:%S %z 表示 2019-04-13 15:30:00 +0800。</p><div id="reword-out"><div id="reward-btn"> 打赏</div></div></div><div class="declare"><ul class="post-copyright"><li><i class="ri-copyright-line"></i> <strong>版权声明：</strong> 本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！</li></ul></div><footer class="article-footer"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%B6%E9%97%B4/" rel="tag">时间</a></li></ul></footer></div><nav class="article-nav"> <a href="/2019/08/TCP%E8%A1%80%E6%A1%88/index.html" class="article-nav-link"><strong class="article-nav-caption">上一篇</strong><div class="article-nav-title"> TCP血案</div></a> <a href="/2019/06/%E7%AC%94%E8%AE%B0%E6%9C%AC%E5%AE%89%E8%A3%85CentOS-%E8%AE%BE%E7%BD%AE%E5%85%B3%E9%97%AD%E7%9B%96%E5%AD%90%E4%B8%8D%E4%BC%91%E7%9C%A0/index.html" class="article-nav-link"><strong class="article-nav-caption">下一篇</strong><div class="article-nav-title">笔记本安装CentOS 设置关闭盖子不休眠</div></a></nav><script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script><div id="twikoo" class="twikoo"></div><script>twikoo.init({envId:""})</script></article></section><footer class="footer"><div class="outer"><ul><li> Copyrights &copy; 2018-2024<i class="ri-heart-fill heart_icon"></i> Outsrkem</li></ul><ul><li></li></ul><ul><li><span><span><i class="ri-user-3-fill"></i> 访问人数:<span id="busuanzi_value_site_uv"></span></span> <span class="division">|</span><span><i class="ri-eye-fill"></i> 浏览次数:<span id="busuanzi_value_page_pv"></span></span></span></li></ul><ul></ul><ul></ul><ul><li><script type="text/javascript" src="https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914"></script></li></ul></div></footer></main><div class="float_btns"><div class="totop" id="totop"><i class="ri-arrow-up-line"></i></div><div class="todark" id="todark"><i class="ri-moon-line"></i></div></div><aside class="sidebar on"> <button class="navbar-toggle"></button><nav class="navbar"><div class="logo"> <a href="/"><img src="/images/ayer-side.svg" alt="Outsrkem"></a></div><ul class="nav nav-main"><li class="nav-item"> <a class="nav-item-link" href="/index.html">主页</a></li><li class="nav-item"> <a class="nav-item-link" href="/archives/index.html">归档</a></li><li class="nav-item"> <a class="nav-item-link" href="/categories/index.html">分类</a></li><li class="nav-item"> <a class="nav-item-link" href="/tags/index.html">标签</a></li><li class="nav-item"> <a class="nav-item-link" href="/friends/index.html">友链</a></li><li class="nav-item"> <a class="nav-item-link" href="/about/index.html">关于</a></li></ul></nav><nav class="navbar navbar-bottom"><ul class="nav"><li class="nav-item"><a class="nav-item-link nav-item-search" title="搜索"><i class="ri-search-line"></i></a></li></ul></nav><div class="search-form-wrap"><div class="local-search local-search-plugin"> <input type="search" id="local-search-input" class="local-search-input" placeholder="Search..."><div id="local-search-result" class="local-search-result"></div></div></div></aside><div id="mask"></div> <div id="reward"><span class="close"><i class="ri-close-line"></i></span><p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p><div class="reward-box"><div class="reward-item"> <img class="reward-img" src="/images/alipay.jpg"> <span class="reward-type">支付宝</span></div><div class="reward-item"> <img class="reward-img" src="/images/wechat.jpg"> <span class="reward-type">微信</span></div></div></div><script src="/js/jquery-3.6.0.min.js"></script><script src="/js/lazyload.min.js"></script><script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"><script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script><script src="/dist/main.js"></script><div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"><div class="pswp__bg"></div><div class="pswp__scroll-wrap"><div class="pswp__container"><div class="pswp__item"></div><div class="pswp__item"></div><div class="pswp__item"></div></div><div class="pswp__ui pswp__ui--hidden"><div class="pswp__top-bar"><div class="pswp__counter"></div> <button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class="pswp__preloader"><div class="pswp__preloader__icn"><div class="pswp__preloader__cut"><div class="pswp__preloader__donut"></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class="pswp__share-tooltip"></div></div> <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class="pswp__caption"><div class="pswp__caption__center"></div></div></div></div></div><link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css"><script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script><script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script><script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script><script src="/js/busuanzi-2.3.pure.min.js"></script><link rel="stylesheet" href="/css/clipboard.css"><script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script><script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script><script>window.mermaid&&mermaid.initialize({theme:"forest"})</script></div></body>
