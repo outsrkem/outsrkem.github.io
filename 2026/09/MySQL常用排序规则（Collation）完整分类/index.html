@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8">
+        
+      <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+      <title>MySQL常用排序规则（Collation）完整分类 |  Outsrkem</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico">
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css">
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      
+      
+      <script src="https://cdn.staticfile.org/mermaid/8.14.0/mermaid.min.js"></script>
+      
+      <style>.swal2-styled.swal2-confirm{font-size:1.6rem}</style>
+    </head>
+  </html>
+
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article id="post-MySQL常用排序规则（Collation）完整分类" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  MySQL常用排序规则（Collation）完整分类
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2026/09/MySQL%E5%B8%B8%E7%94%A8%E6%8E%92%E5%BA%8F%E8%A7%84%E5%88%99%EF%BC%88Collation%EF%BC%89%E5%AE%8C%E6%95%B4%E5%88%86%E7%B1%BB/index.html" class="article-date">
+  <time datetime="2026-09-16T07:50:53.000Z" itemprop="datePublished">2026-09-16 15:50:53 +08:00</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">668</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">2 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="mysql-常用排序规则（collation）完整分类">MySQL 常用排序规则（Collation）完整分类</h1>
+<h2 id="一、命名规则">一、命名规则</h2>
+<p>格式：<code>字符集_语言_类型</code>，例 <code>utf8mb4_unicode_ci</code></p>
+<ol>
+<li>
+<p><strong>字符集</strong>：<code>utf8mb4</code>（推荐）/ <code>utf8</code> / <code>latin1</code></p>
+</li>
+<li>
+<p>语言基准</p>
+<ul>
+<li><code>general</code>：通用简易排序，无严格 Unicode 标准</li>
+<li><code>unicode</code>：遵循官方 Unicode UCA 标准，多国语言友好</li>
+<li><code>gbk</code>/<code>gb2312</code>：中文专用拼音排序</li>
+<li><code>bin</code>：二进制逐字节对比，区分大小写</li>
+</ul>
+</li>
+<li>
+<p>后缀标识（核心区分）</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">后缀</th>
+<th style="text-align:center">含义</th>
+<th style="text-align:center">特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>ci</code></td>
+<td style="text-align:center">Case Insensitive</td>
+<td style="text-align:center">不区分大小写，<code>A=a</code>、<code>AB=ab</code>（业务最常用）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>cs</code></td>
+<td style="text-align:center">Case Sensitive</td>
+<td style="text-align:center">区分大小写，<code>A≠a</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>bin</code></td>
+<td style="text-align:center">Binary</td>
+<td style="text-align:center">二进制比对，区分大小写、全半角，无语义排序</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<hr>
+<h2 id="二、utf8mb4-主流排序规则（你的业务使用）">二、utf8mb4 主流排序规则（你的业务使用）</h2>
+<h3 id="1-utf8mb4_general_ci">1. utf8mb4_general_ci</h3>
+<ul>
+<li>优点：计算速度快，逻辑简单</li>
+<li>缺点：中文拼音排序错乱，德语、法语、多音字排序不标准</li>
+<li>适用：仅存储 ID 编码、无需文本排序的老旧项目</li>
+</ul>
+<h3 id="2-utf8mb4_unicode_ci（新项目推荐）">2. utf8mb4_unicode_ci（新项目推荐）</h3>
+<ul>
+<li>遵循 Unicode 国际排序标准，中文、少数民族文字、外文排序正常</li>
+<li>性能损耗极小，业务完全无感知</li>
+<li>适配人员姓名、支部名称、台账类系统</li>
+</ul>
+<h3 id="3-utf8mb4_unicode_520_ci">3. utf8mb4_unicode_520_ci</h3>
+<p>基于 Unicode 5.2 版本标准，比 <code>unicode_ci</code> 修正更多生僻字符排序，生僻字多的场景用。</p>
+<h3 id="4-utf8mb4_bin">4. utf8mb4_bin</h3>
+<p>二进制排序：<code>A</code> 和 <code>a</code> 不相等，区分大小写、空格、符号</p>
+<p>适用场景：密码、验证码、大小写敏感编码存储，绝对不能用于外键关联。</p>
+<h3 id="5-utf8mb4_general_cs / utf8mb4_unicode_cs">5. utf8mb4_general_cs / utf8mb4_unicode_cs</h3>
+<p>区分大小写的通用 / Unicode 规则，极少业务使用。</p>
+<h3 id="6-utf8mb4_zh_0900_as_ci（mysql8.0+ 中文拼音专用）">6. utf8mb4_zh_0900_as_ci（MySQL8.0+ 中文拼音专用）</h3>
+<p>纯中文拼音精准排序，对汉字姓名排序效果最优，仅 8.0 及以上版本支持。</p>
+<hr>
+<h2 id="三、中文专用排序规则（gbk-字符集）">三、中文专用排序规则（GBK 字符集）</h2>
+<p>仅表字符集为 <code>gbk</code>/<code>gb2312</code> 时使用：</p>
+<ol>
+<li><code>gbk_chinese_ci</code>：GBK 中文拼音排序，不区分大小写</li>
+<li><code>gb2312_chinese_ci</code>：老国标中文排序，兼容性差，不推荐新项目</li>
+</ol>
+<blockquote>
+<p>注意：现代项目统一使用 <code>utf8mb4_unicode_ci</code>，不再使用 GBK 字符集。</p>
+</blockquote>
+<hr>
+<h2 id="四、其他小众字符集规则（了解即可）">四、其他小众字符集规则（了解即可）</h2>
+<ol>
+<li><code>latin1_swedish_ci</code>：MySQL 历史默认字符集，仅西欧语言，不支持中文</li>
+<li><code>utf8_general_ci</code>：旧 utf8（3 字节，不支持 emoji），已淘汰，统一替换 utf8mb4</li>
+</ol>
+<hr>
+<h2 id="五、快速查询当前数据库支持的全部排序规则">五、快速查询当前数据库支持的全部排序规则</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW COLLATION;</span><br></pre></td></tr></table></figure>
+<p>筛选 utf8mb4 相关规则：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW COLLATION LIKE &#x27;utf8mb4%&#x27;;</span><br></pre></td></tr></table></figure>
+<h2 id="六、选型结论">六、选型结论</h2>
+<ol>
+<li>人员姓名，名称、展示文本：<strong>utf8mb4_unicode_ci</strong>（统一全库所有关联字段）</li>
+<li>外键关联 ID：统一为 <code>utf8mb4_unicode_ci</code>，混用会报 1215/1267 错误</li>
+<li>密码、大小写敏感编码：单独字段使用 <code>utf8mb4_bin</code>，且不要用来 JOIN / 外键关联</li>
+<li>MySQL8.0 以上，大量中文姓名展示：可升级为 <code>utf8mb4_zh_0900_as_ci</code></li>
+</ol>
+ 
+      
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2026/09/Windows10-%E4%B8%AA%E4%BA%BA%E7%BB%88%E7%AB%AF%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA%E5%AE%9E%E6%88%98/index.html" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Windows10 个人终端安全加固实战
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2024/08/acme%E7%94%B3%E8%AF%B7ssl%E5%85%8D%E8%B4%B9%E8%AF%81%E4%B9%A6/index.html" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">acme申请ssl免费证书</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>twikoo.init({envId:""})</script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2018-2026
+        <i class="ri-heart-fill heart_icon"></i> Outsrkem
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <script type="text/javascript" src="https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914"></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Outsrkem"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/index.html">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives/index.html">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/index.html">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/index.html">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends/index.html">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about/index.html">关于</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>tocbot.init({tocSelector:".tocbot",contentSelector:".article-entry",headingSelector:"h1, h2, h3, h4, h5, h6",hasInnerContainers:!0,scrollSmooth:!0,scrollContainer:"main",positionFixedSelector:".tocbot",positionFixedClass:"is-position-fixed",fixedSidebarOffset:"auto"})</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css">
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+
+ 
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+
+
+
+
+
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+
+
+
+
+
+
+
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+
+
+<script>window.mermaid&&mermaid.initialize({theme:"forest"})</script>
+
+
+    
+    
+
+  </div>
+</body>
+
