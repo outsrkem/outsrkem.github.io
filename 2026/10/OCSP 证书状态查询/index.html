@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8">
+        
+      <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+      <title>OCSP 证书状态查询 |  Outsrkem</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico">
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css">
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      
+      
+      <script src="https://cdn.staticfile.org/mermaid/8.14.0/mermaid.min.js"></script>
+      
+      <style>.swal2-styled.swal2-confirm{font-size:1.6rem}</style>
+    </head>
+  </html>
+
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article id="post-OCSP 证书状态查询" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  OCSP 证书状态查询
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2026/10/OCSP%20%E8%AF%81%E4%B9%A6%E7%8A%B6%E6%80%81%E6%9F%A5%E8%AF%A2/index.html" class="article-date">
+  <time datetime="2026-10-19T07:50:53.000Z" itemprop="datePublished">2026-10-19 15:50:53 +08:00</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">706</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">3 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="ocsp-证书状态查询">OCSP 证书状态查询</h1>
+<h2 id="1-概览">1. 概览</h2>
+<ul>
+<li>终端实体证书：<code>vpn.example.com</code></li>
+<li>签发 CA：<code>AAA Issuing CA 01</code></li>
+<li>OCSP 请求方式：<code>openssl ocsp</code> 生成 DER 请求，<code>curl</code> POST 到 OCSP 服务</li>
+<li>OCSP 地址：<code>http://10.0.0.5:8080/spki/ocsp</code></li>
+<li>请求特点：<code>-no_nonce</code></li>
+<li>响应结果：
+<ul>
+<li>有效响应：<code>Cert Status: good</code></li>
+<li>吊销后响应：<code>Cert Status: revoked</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="2-终端实体证书">2. 终端实体证书</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"># 证书</span><br><span class="line">-----BEGIN CERTIFICATE-----</span><br><span class="line">MIIEADCCA6agAwIBAgIQfJ3udSuwCms7NU5DDgyvNTAKBggqhkjOPQQDBDBRMQsw</span><br><span class="line">CQYDVQQGEwJDTjEUMBIGA1UEChMLUHJpdmF0ZVNpZ24xEDAOBgNVBAsTB0lzc3Vp</span><br><span class="line">bmcxGjAYBgNVBAMTEUFBQSBJc3N1aW5nIENBIDAxMB4XDTI2MTAxNjE0NDYzM1oX</span><br><span class="line">DTI3MTAxNjE0NTEzM1owSzELMAkGA1UEBhMCQ04xFDASBgNVBAoTC1ByaXZhdGVT</span><br><span class="line">aWduMQwwCgYDVQQLEwNXZWIxGDAWBgNVBAMTD3Zwbi5leGFtcGxlLmNvbTCCASIw</span><br><span class="line">DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALJGuDBqHh3EXYgMnxru9WplG6bz</span><br><span class="line">U5G2eu8c4cQs7pkuKAOFrWt2+0DAccRPvsfRQKXSLyoGvCfsbf9IB0iY01ph6+0x</span><br><span class="line">1D6VWEabd99zaLMxw3cEmcE2f3ZIKg8DcrhFgnYh1UuiPfJfu2+EHlf65VyGjAiA</span><br><span class="line">q/DXsTsmF1G9evYHRl7WvySfvwOSohNvZFT2eASDt4ecb0y3PuGJ9OlrM1EusC1V</span><br><span class="line">tTmM8ozjSdgCLCuWUjvvNI1IPetqidHPtTKONaJ/s+D41YicoIKI0CuKapHmzcVP</span><br><span class="line">crmyAUXw8UW1RQl23ZroExmOWiMAJ65gZoV3N/CU89xD6B+NK3xYYCoTzmsCAwEA</span><br><span class="line">AaOCAZkwggGVMA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYI</span><br><span class="line">KwYBBQUHAwIwDAYDVR0TAQH/BAIwADApBgNVHQ4EIgQgzih83azmLDIB7sArUXXM</span><br><span class="line">fXvSID5P8TAQOsSVDD7wtHkwKwYDVR0jBCQwIoAgQ5ZS1a1GA7jtEAvhDpizjN7V</span><br><span class="line">RjjtfZppKa9x9oRWktQwYwYIKwYBBQUHAQEEVzBVMCMGCCsGAQUFBzABhhdodHRw</span><br><span class="line">Oi8vb2NzcC5leGFtcGxlLmNvbTAuBggrBgEFBQcwAoYiaHR0cDovL2NhLmV4YW1w</span><br><span class="line">bGUuY29tL2ludGVyMDAxLmNydDBjBgNVHREEXDBagg92cG4uZXhhbXBsZS5jb22C</span><br><span class="line">D3d3dy5leGFtcGxlLmNvbYERYWRtaW5AZXhhbXBsZS5jb22HBMCoAQqGHXNwaWZm</span><br><span class="line">ZTovL2V4YW1wbGUub3JnL3dvcmtsb2FkMDQGA1UdHwQtMCswKaAnoCWGI2h0dHA6</span><br><span class="line">Ly9jcmwuZXhhbXBsZS5jb20vaW50ZXIwMDEuY3JsMAoGCCqGSM49BAMEA0gAMEUC</span><br><span class="line">IQD6+MbSuT/4QNCySB1I281pOpFyIkboqs9KzLY5YBQ1+wIgBdDIPpl2cakDBnEi</span><br><span class="line">LaTQaTP+oyDB3AMrFAZPBGOTRlc=</span><br><span class="line">-----END CERTIFICATE-----</span><br></pre></td></tr></table></figure>
+<h2 id="3-签发 ca 证书">3. 签发 CA 证书</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># CA</span><br><span class="line">-----BEGIN CERTIFICATE-----</span><br><span class="line">MIIC6jCCAdKgAwIBAgIRAKkXJo9jJ4jKlHaD8Lcsr54wDQYJKoZIhvcNAQELBQAw</span><br><span class="line">WzELMAkGA1UEBhMCQ04xFDASBgNVBAoTC1ByaXZhdGVTaWduMRQwEgYDVQQLEwtQ</span><br><span class="line">cml2YXRlU2lnbjEgMB4GA1UEAxMXQUFBIFByaXZhdGUgU2lnbiBSb290IENBMB4X</span><br><span class="line">DTI2MTAxNjE1MDQwMFoXDTI3MTAxNjE1MDkwMFowUTELMAkGA1UEBhMCQ04xFDAS</span><br><span class="line">BgNVBAoTC1ByaXZhdGVTaWduMRAwDgYDVQQLEwdJc3N1aW5nMRowGAYDVQQDExFB</span><br><span class="line">QUEgSXNzdWluZyBDQSAwMTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABCTvYi6f</span><br><span class="line">UwcATw7SAV51tgUww1+M4CKiK/xFHnIAyJ3+gUwyANH5mD97quSYbhYBoqXRk7FH</span><br><span class="line">z2sXk8ExexEQNvyjfjB8MA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/</span><br><span class="line">AgEAMCkGA1UdDgQiBCBDllLVrUYDuO0QC+EOmLOM3tVGOO19mmkpr3H2hFaS1DAr</span><br><span class="line">BgNVHSMEJDAigCCHbHXgvOkfVFNYYb1TuFq8k/bEk3zAQkIUQazXnp+MfjANBgkq</span><br><span class="line">hkiG9w0BAQsFAAOCAQEArgC1ZcZI8Xp891f4fvc6F7msPvCizgut+baPzdLbn8Bc</span><br><span class="line">avB0TT8xcMbWSoNlkLTT0bJNuzTjkqLK2ALjLF7wzNZJ4bloup3bdeytR0KYQGED</span><br><span class="line">IDJ/uHK0YXl1faSbTJb3ngi1dIKH6XZMEGvllARn0qc4wyGl9aRAc57JXxzWwygv</span><br><span class="line">VLRIAgtrtwbh3Sw5cXKE/ggEL+rgX0WvkX/IyEC4B/MJZoTqyphxcRR0KLBx0htn</span><br><span class="line">bRHw3gWrk1Lj/sfrmCoHWYlcLzL6gacZzetUzDXPO6stbUki+iT+VGox5qVqpEhk</span><br><span class="line">TXuERqkjltOAAshtLS72/QfxT+oRmnRTC8AXJLGW</span><br><span class="line">-----END CERTIFICATE-----</span><br></pre></td></tr></table></figure>
+<h2 id="4-生成 ocsp 请求">4. 生成 OCSP 请求</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl ocsp -issuer issuer.pem -cert cert.pem -reqout ocsp_req.der -no_nonce</span><br></pre></td></tr></table></figure>
+<h2 id="5-查看 ocsp 请求内容">5. 查看 OCSP 请求内容</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@iZ2ze19ijurr8l2qu7546kZ ~]# openssl ocsp -reqin ocsp_req.der -text -noverify</span><br><span class="line">OCSP Request Data:</span><br><span class="line">    Version: 1 (0x0)</span><br><span class="line">    Requestor List:</span><br><span class="line">        Certificate ID:</span><br><span class="line">          Hash Algorithm: sha1</span><br><span class="line">          Issuer Name Hash: D7F4A2D773F4E017FBDBA17CA86C6E8682ECDF47</span><br><span class="line">          Issuer Key Hash: 2AA03A60D867641D91179A50FE5F9FE886312612</span><br><span class="line">          Serial Number: 7C9DEE752BB00A6B3B354E430E0CAF35</span><br></pre></td></tr></table></figure>
+<h2 id="6-发送 ocsp 请求">6. 发送 OCSP 请求</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST \</span><br><span class="line">  --data-binary @ocsp_req.der \</span><br><span class="line">  -H <span class="string">&quot;Content-Type: application/ocsp-request&quot;</span> \</span><br><span class="line">  http://10.0.0.5:8080/spki/ocsp \</span><br><span class="line">  -o ocsp_resp.der</span><br></pre></td></tr></table></figure>
+<h2 id="7-der 响应转 pem">7. DER 响应转 PEM</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 转pem</span></span><br><span class="line">(<span class="built_in">echo</span> <span class="string">&quot;-----BEGIN OCSP RESPONSE-----&quot;</span>; <span class="built_in">base64</span> --wrap=64 ocsp_resp.der; <span class="built_in">echo</span> <span class="string">&quot;-----END OCSP RESPONSE-----&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="8-证书有效时的 ocsp 响应">8. 证书有效时的 OCSP 响应</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># 证书有效</span><br><span class="line">[root@iZ2ze19ijurr8l2qu7546kZ ~]# openssl ocsp -respin ocsp_resp.der -resp_text -noverify</span><br><span class="line">OCSP Response Data:</span><br><span class="line">    OCSP Response Status: successful (0x0)</span><br><span class="line">    Response Type: Basic OCSP Response</span><br><span class="line">    Version: 1 (0x0)</span><br><span class="line">    Responder Id: C = CN, O = PrivateSign, OU = Issuing, CN = AAA Issuing CA 01</span><br><span class="line">    Produced At: Oct 19 04:43:00 2026 GMT</span><br><span class="line">    Responses:</span><br><span class="line">    Certificate ID:</span><br><span class="line">      Hash Algorithm: sha1</span><br><span class="line">      Issuer Name Hash: D7F4A2D773F4E017FBDBA17CA86C6E8682ECDF47</span><br><span class="line">      Issuer Key Hash: 2AA03A60D867641D91179A50FE5F9FE886312612</span><br><span class="line">      Serial Number: 7C9DEE752BB00A6B3B354E430E0CAF35</span><br><span class="line">    Cert Status: good</span><br><span class="line">    This Update: Oct 19 04:43:15 2026 GMT</span><br><span class="line">    Next Update: Oct 20 04:43:15 2026 GMT</span><br><span class="line"></span><br><span class="line">    Signature Algorithm: ecdsa-with-SHA256</span><br><span class="line">         30:46:02:21:00:f1:4b:01:aa:0b:13:fe:03:c6:93:28:6a:17:</span><br><span class="line">         ff:a7:14:96:00:88:d9:6e:d8:2a:0c:c7:14:e8:a6:33:2b:d6:</span><br><span class="line">         61:02:21:00:d9:70:84:f0:97:98:37:f9:7c:cb:27:42:6a:90:</span><br><span class="line">         ee:53:2d:d5:fc:85:d8:e8:f5:04:98:dc:bf:63:ee:51:d2:33</span><br></pre></td></tr></table></figure>
+<h2 id="9-证书吊销后的 ocsp 响应">9. 证书吊销后的 OCSP 响应</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># 吊销后</span><br><span class="line">[root@iZ2ze19ijurr8l2qu7546kZ ~]# openssl ocsp -respin r_ocsp_resp.der -resp_text -noverify</span><br><span class="line">OCSP Response Data:</span><br><span class="line">    OCSP Response Status: successful (0x0)</span><br><span class="line">    Response Type: Basic OCSP Response</span><br><span class="line">    Version: 1 (0x0)</span><br><span class="line">    Responder Id: C = CN, O = PrivateSign, OU = Issuing, CN = AAA Issuing CA 01</span><br><span class="line">    Produced At: Oct 19 05:01:00 2026 GMT</span><br><span class="line">    Responses:</span><br><span class="line">    Certificate ID:</span><br><span class="line">      Hash Algorithm: sha1</span><br><span class="line">      Issuer Name Hash: D7F4A2D773F4E017FBDBA17CA86C6E8682ECDF47</span><br><span class="line">      Issuer Key Hash: 2AA03A60D867641D91179A50FE5F9FE886312612</span><br><span class="line">      Serial Number: 7C9DEE752BB00A6B3B354E430E0CAF35</span><br><span class="line">    Cert Status: revoked</span><br><span class="line">    Revocation Time: Oct 19 04:47:31 2026 GMT</span><br><span class="line">    This Update: Oct 19 05:01:21 2026 GMT</span><br><span class="line">    Next Update: Oct 20 05:01:21 2026 GMT</span><br><span class="line"></span><br><span class="line">    Signature Algorithm: ecdsa-with-SHA256</span><br><span class="line">         30:45:02:21:00:9c:5c:96:6b:f6:ee:36:60:55:49:97:41:68:</span><br><span class="line">         c6:b4:0a:eb:fc:27:7e:bd:74:b3:ef:99:ad:b7:33:6d:05:d3:</span><br><span class="line">         5a:02:20:48:09:21:6d:ef:fc:dd:30:6b:01:cf:db:07:7c:05:</span><br><span class="line">         4e:df:d3:61:87:70:5d:c1:13:13:86:41:b7:52:cb:3a:8e</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>OCSP响应，本身为二进制流，此处转换后保留学习，将其分别保存成文件，使用命令转回二进制流</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl <span class="built_in">base64</span> -d -<span class="keyword">in</span> ocsp_resp.pem -out ocsp_resp.der</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 证书有效</span></span><br><span class="line">-----BEGIN OCSP RESPONSE-----</span><br><span class="line">MIIBUwoBAKCCAUwwggFIBgkrBgEFBQcwAQEEggE5MIIBNTCB26FTMFExCzAJBgNV</span><br><span class="line">BAYTAkNOMRQwEgYDVQQKEwtQcml2YXRlU2lnbjEQMA4GA1UECxMHSXNzdWluZzEa</span><br><span class="line">MBgGA1UEAxMRQUFBIElzc3VpbmcgQ0EgMDEYDzIwMjYxMDE5MDQ0MzAwWjBzMHEw</span><br><span class="line">STAJBgUrDgMCGgUABBTX9KLXc/TgF/vboXyobG6GguzfRwQUKqA6YNhnZB2RF5pQ</span><br><span class="line">/l+f6IYxJhICEHyd7nUrsAprOzVOQw4MrzWAABgPMjAyNjEwMTkwNDQzMTVaoBEY</span><br><span class="line">DzIwMjYxMDIwMDQ0MzE1WjAKBggqhkjOPQQDAgNJADBGAiEA8UsBqgsT/gPGkyhq</span><br><span class="line">F/+nFJYAiNlu2CoMxxTopjMr1mECIQDZcITwl5g3+XzLJ0JqkO5TLdX8hdjo9QSY</span><br><span class="line">3L9j7lHSMw==</span><br><span class="line">-----END OCSP RESPONSE-----</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这是吊销后的响应PEM内容</span></span><br><span class="line">-----BEGIN OCSP RESPONSE-----</span><br><span class="line">MIIBZQoBAKCCAV4wggFaBgkrBgEFBQcwAQEEggFLMIIBRzCB7qFTMFExCzAJBgNV</span><br><span class="line">BAYTAkNOMRQwEgYDVQQKEwtQcml2YXRlU2lnbjEQMA4GA1UECxMHSXNzdWluZzEa</span><br><span class="line">MBgGA1UEAxMRQUFBIElzc3VpbmcgQ0EgMDEYDzIwMjYxMDE5MDUwMTAwWjCBhTCB</span><br><span class="line">gjBJMAkGBSsOAwIaBQAEFNf0otdz9OAX+9uhfKhsboaC7N9HBBQqoDpg2GdkHZEX</span><br><span class="line">mlD+X5/ohjEmEgIQfJ3udSuwCms7NU5DDgyvNaERGA8yMDI2MTAxOTA0NDczMVoY</span><br><span class="line">DzIwMjYxMDE5MDUwMTIxWqARGA8yMDI2MTAyMDA1MDEyMVowCgYIKoZIzj0EAwID</span><br><span class="line">SAAwRQIhAJxclmv27jZgVUmXQWjGtArr/Cd+vXSz75mttzNtBdNaAiBICSFt7/zd</span><br><span class="line">MGsBz9sHfAVO39Nhh3BdwRMThkG3Uss6jg==</span><br><span class="line">-----END OCSP RESPONSE-----</span><br></pre></td></tr></table></figure>
+</blockquote>
+ 
+      
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openssl/" rel="tag">openssl</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2026/09/PowerShell%E5%AE%9E%E6%97%B6%E7%BD%91%E9%80%9F%E7%9B%91%E6%8E%A7/index.html" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">PowerShell实时网速监控</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>twikoo.init({envId:""})</script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2018-2026
+        <i class="ri-heart-fill heart_icon"></i> Outsrkem
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <script type="text/javascript" src="https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914"></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Outsrkem"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/index.html">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives/index.html">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories/index.html">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/index.html">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends/index.html">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about/index.html">关于</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>tocbot.init({tocSelector:".tocbot",contentSelector:".article-entry",headingSelector:"h1, h2, h3, h4, h5, h6",hasInnerContainers:!0,scrollSmooth:!0,scrollContainer:"main",positionFixedSelector:".tocbot",positionFixedClass:"is-position-fixed",fixedSidebarOffset:"auto"})</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css">
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+
+ 
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+
+
+
+
+
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+
+
+
+
+
+
+
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+
+
+<script>window.mermaid&&mermaid.initialize({theme:"forest"})</script>
+
+
+    
+    
+
+  </div>
+</body>
+
